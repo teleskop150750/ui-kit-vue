@@ -1,0 +1,12 @@
+@layer components {
+  .n-header {
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+
+    /* height: var(--n-sys-container-header-height); */
+
+    /* padding: var(--n-sys-container-header-padding); */
+    border-bottom: 1px solid var(--theme-navbar-border-color);
+  }
+}

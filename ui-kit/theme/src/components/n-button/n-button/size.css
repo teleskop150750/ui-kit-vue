@@ -1,0 +1,60 @@
+@layer components {
+  .n-button {
+    --n-comp-button-container-height: var(--n-sys-component-size-base);
+    --n-comp-button-container-label-size: var(--n-sys-text-size-base);
+    --n-comp-button-icon-size: 14px;
+    --n-comp-button-padding-y: 0;
+    --n-comp-button-padding-x: calc(16px - 1px);
+  }
+
+  .n-button:not(.n-button--is-round) {
+    --n-comp-button-container-border-radius: var(--n-sys-border-radius-base);
+  }
+
+  .n-button--size-small {
+    --n-comp-button-container-height: var(--n-sys-component-size-small);
+    --n-comp-button-container-label-size: var(--n-sys-text-size-small);
+    --n-comp-button-icon-size: 12px;
+    --n-comp-button-padding-x: calc(12px - 1px);
+  }
+
+  .n-button--size-small:not(.n-button--is-round) {
+    --n-comp-button-container-border-radius: var(--n-sys-border-radius-small);
+  }
+
+  .n-button--size-large {
+    --n-comp-button-container-height: var(--n-sys-component-size-large);
+    --n-comp-button-container-label-size: var(--n-sys-text-size-large);
+    --n-comp-button-icon-size: 14px;
+    --n-comp-button-padding-x: calc(20px - 1px);
+  }
+
+  .n-button--size-large:not(.n-button--is-round) {
+    --n-comp-button-container-border-radius: var(--n-sys-border-radius-base);
+  }
+
+  .n-button--size-small .n-button__icon--left {
+    margin-right: 3px;
+    margin-left: -7px;
+  }
+
+  .n-button--size-large .n-button__icon--left {
+    margin-right: 8px;
+    margin-left: -7px;
+  }
+
+  .n-button--size-small .n-button__icon--right {
+    margin-right: -7.2px;
+    margin-left: 8px;
+  }
+
+  .n-button--size-large .n-button__icon--right {
+    margin-right: -7.2px;
+    margin-left: 8px;
+  }
+
+  .n-button--size-large .n-button__icon:not(.n-button__icon--left, .n-button__icon--right) {
+    margin-right: -6px;
+    margin-left: -6px;
+  }
+}

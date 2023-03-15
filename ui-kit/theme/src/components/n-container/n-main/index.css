@@ -1,0 +1,12 @@
+@layer components {
+  .n-main {
+    display: block;
+    flex: 1;
+    flex-basis: auto;
+
+    padding: var(--n-sys-container-padding);
+    box-sizing: border-box;
+
+    overflow: auto;
+  }
+}

@@ -1,0 +1,101 @@
+@layer components {
+  .n-button--mode-solid.n-button--appearance-secondary {
+    /* container-color-outline */
+    --n-comp-button-outline: var(--n-sys-outline-secondary);
+
+    /* container-bg-color */
+    --n-comp-button-container-bg-color: var(--n-sys-color-secondary);
+    --n-comp-button-container-bg-color-hovered: var(--n-sys-color-secondary-light);
+    --n-comp-button-container-bg-color-pressed: var(--n-sys-color-secondary-dark);
+
+    /* container-border-color */
+    --n-comp-button-container-border-color: var(--n-sys-color-secondary);
+    --n-comp-button-container-border-color-hovered: var(--n-sys-color-secondary-light);
+    --n-comp-button-container-border-color-pressed: var(--n-sys-color-secondary-dark);
+
+    /* container-text-color */
+    --n-comp-button-container-text-color: var(--n-sys-color-white);
+    --n-comp-button-container-text-color-hovered: var(--n-sys-color-white);
+    --n-comp-button-container-text-color-pressed: var(--n-sys-color-white);
+  }
+
+  .n-button--mode-soft.n-button--appearance-secondary {
+    /* container-color-outline */
+    --n-comp-button-outline: var(--n-sys-outline-secondary);
+
+    /* container-bg-color */
+    --n-comp-button-container-bg-color: var(--n-sys-color-secondary-50);
+    --n-comp-button-container-bg-color-hovered: var(--n-sys-color-secondary-100);
+    --n-comp-button-container-bg-color-pressed: var(--n-sys-color-secondary-150);
+
+    /* container-border-color */
+    --n-comp-button-container-border-color: var(--n-sys-color-secondary-50);
+    --n-comp-button-container-border-color-hovered: var(--n-sys-color-secondary-100);
+    --n-comp-button-container-border-color-pressed: var(--n-sys-color-secondary-150);
+
+    /* container-text-color */
+    --n-comp-button-container-text-color: var(--n-sys-color-secondary);
+    --n-comp-button-container-text-color-hovered: var(--n-sys-color-secondary);
+    --n-comp-button-container-text-color-pressed: var(--n-sys-color-secondary);
+  }
+
+  .n-button--mode-outline.n-button--appearance-secondary {
+    /* container-color-outline */
+    --n-comp-button-outline: var(--n-sys-outline-secondary);
+
+    /* container-bg-color */
+    --n-comp-button-container-bg-color: var(--n-sys-color-white);
+    --n-comp-button-container-bg-color-hovered: var(--n-sys-color-secondary-50);
+    --n-comp-button-container-bg-color-pressed: var(--n-sys-color-secondary-100);
+
+    /* container-border-color */
+    --n-comp-button-container-border-color: var(--n-sys-color-secondary);
+    --n-comp-button-container-border-color-hovered: var(--n-sys-color-secondary-light);
+    --n-comp-button-container-border-color-pressed: var(--n-sys-color-secondary-dark);
+
+    /* container-text-color */
+    --n-comp-button-container-text-color: var(--n-sys-color-secondary);
+    --n-comp-button-container-text-color-hovered: var(--n-sys-color-secondary);
+    --n-comp-button-container-text-color-pressed: var(--n-sys-color-secondary);
+  }
+
+  .n-button--mode-text.n-button--appearance-secondary {
+    /* container-color-outline */
+    --n-comp-button-outline: var(--n-sys-outline-secondary);
+
+    /* container-bg-color */
+    --n-comp-button-container-bg-color: var(--n-sys-color-white);
+    --n-comp-button-container-bg-color-hovered: var(--n-sys-color-secondary-50);
+    --n-comp-button-container-bg-color-pressed: var(--n-sys-color-secondary-100);
+
+    /* container-border-color */
+    --n-comp-button-container-border-color: var(--n-sys-color-white);
+    --n-comp-button-container-border-color-hovered: var(--n-sys-color-secondary-50);
+    --n-comp-button-container-border-color-pressed: var(--n-sys-color-secondary-100);
+
+    /* container-text-color */
+    --n-comp-button-container-text-color: var(--n-sys-color-secondary);
+    --n-comp-button-container-text-color-hovered: var(--n-sys-color-secondary);
+    --n-comp-button-container-text-color-pressed: var(--n-sys-color-secondary);
+  }
+
+  .n-button--mode-link.n-button--appearance-secondary {
+    /* container-color-outline */
+    --n-comp-button-outline: var(--n-sys-outline-primary);
+
+    /* container-bg-color */
+    --n-comp-button-container-bg-color: transparent;
+    --n-comp-button-container-bg-color-hovered: transparent;
+    --n-comp-button-container-bg-color-pressed: transparent;
+
+    /* container-border-color */
+    --n-comp-button-container-border-color: transparent;
+    --n-comp-button-container-border-color-hovered: transparent;
+    --n-comp-button-container-border-color-pressed: transparent;
+
+    /* container-text-color */
+    --n-comp-button-container-text-color: var(--n-sys-color-secondary);
+    --n-comp-button-container-text-color-hovered: var(--n-sys-color-secondary);
+    --n-comp-button-container-text-color-pressed: var(--n-sys-color-secondary);
+  }
+}

@@ -1,0 +1,39 @@
+@layer components {
+  .n-card {
+    --n-comp-card-container-border-color: var(--n-sys-border-color-info);
+    --n-comp-card-container-border-radius: 4px;
+    --n-comp-card-container-padding: 20px;
+    --n-comp-card-container-bg-color: var(--n-sys-color-white);
+
+    color: var(--n-sys-text-color-default);
+
+    border: 1px solid var(--n-comp-card-container-border-color);
+    border-radius: var(--n-comp-card-container-border-radius);
+
+    background-color: var(--n-comp-card-container-bg-color);
+
+    overflow: hidden;
+
+    transition: var(--n-sys-transition-duration);
+  }
+
+  .n-card--has-always-shadow {
+    box-shadow: var(--n-sys-box-shadow-light);
+  }
+
+  .n-card--has-hover-shadow:focus,
+  .n-card--has-hover-shadow:hover {
+    box-shadow: var(--n-sys-box-shadow-light);
+  }
+
+  .n-card__header {
+    padding: calc(var(--n-comp-card-container-padding) - 2px) var(--n-comp-card-container-padding);
+    box-sizing: border-box;
+
+    border-bottom: 1px solid var(--n-comp-card-container-border-color);
+  }
+
+  .n-card__body {
+    padding: var(--n-comp-card-container-padding);
+  }
+}

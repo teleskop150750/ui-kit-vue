@@ -1,0 +1,42 @@
+@layer components {
+  .n-avatar {
+    --n-comp-avatar-container-text-color: var(--n-sys-color-white);
+    --n-comp-avatar-container-bg-color: var(--n-ref-palette-gray-200);
+    --n-comp-avatar-container-text-size: 14px;
+    --n-comp-avatar-container-icon-size: 18px;
+    --n-comp-avatar-container-border-radius: var(--n-sys-border-radius-base);
+    --n-comp-avatar-container-size-large: 56px;
+    --n-comp-avatar-container-size-small: 24px;
+    --n-comp-avatar-container-size: 40px;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: var(--n-comp-avatar-container-size);
+    height: var(--n-comp-avatar-container-size);
+    box-sizing: border-box;
+
+    color: var(--n-comp-avatar-container-text-color);
+    font-size: var(--n-comp-avatar-container-text-size);
+    text-align: center;
+
+    background: var(--n-comp-avatar-container-bg-color);
+
+    overflow: hidden;
+  }
+
+  .n-avatar--shape-square {
+    border-radius: var(--n-comp-avatar-container-border-radius);
+  }
+
+  .n-avatar--shape-circle {
+    border-radius: 50%;
+  }
+
+  .n-avatar img {
+    display: block;
+
+    height: 100%;
+  }
+}

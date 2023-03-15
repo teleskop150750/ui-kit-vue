@@ -1,0 +1,9 @@
+@layer components {
+  .n-footer {
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+
+    border-top: 1px solid var(--theme-navbar-border-color);
+  }
+}

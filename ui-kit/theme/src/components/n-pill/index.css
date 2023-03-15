@@ -1,0 +1,17 @@
+@layer components {
+  .n-pill {
+    border-radius: var(--n-sys-border-radius-base);
+
+    cursor: pointer;
+  }
+
+  .n-pill:hover {
+    background-color: var(--n-ref-palette-white-200);
+  }
+
+  .n-pill--is-active {
+    font-weight: 600;
+
+    background-color: var(--n-ref-palette-white-200);
+  }
+}

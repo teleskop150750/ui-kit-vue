@@ -1,0 +1,18 @@
+@layer components {
+  .n-textarea--is-disabled {
+    --n-comp-textarea-container-text-color: var(--n-sys-on-container-color-disabled);
+    --n-comp-textarea-container-bg-color: var(--n-sys-container-color-disabled);
+
+    cursor: not-allowed;
+  }
+
+  .n-textarea--is-disabled .n-textarea__inner {
+    cursor: default;
+  }
+
+  .n-textarea--is-focused .n-textarea__native {
+    --n-comp-textarea-container-border-color: var(--n-sys-border-color-primary);
+
+    outline: var(--n-sys-outline-primary);
+  }
+}

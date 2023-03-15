@@ -1,0 +1,25 @@
+@layer components {
+  .n-button--align-left .n-button__content {
+    justify-content: flex-start;
+  }
+
+  .n-button--align-right .n-button__content {
+    justify-content: flex-end;
+  }
+
+  .n-button--align-center .n-button__content {
+    justify-content: center;
+  }
+
+  .n-button--align-around .n-button__content {
+    justify-content: space-around;
+  }
+
+  .n-button--align-between .n-button__content {
+    justify-content: space-between;
+  }
+
+  .n-button--align-evenly .n-button__content {
+    justify-content: space-evenly;
+  }
+}

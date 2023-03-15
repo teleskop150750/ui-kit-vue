@@ -1,0 +1,22 @@
+@layer components {
+  @layer defaults {
+    .n-input--is-disabled {
+      --n-comp-input-container-text-color: var(--n-sys-on-container-color-disabled);
+      --n-comp-input-container-bg-color: var(--n-sys-container-color-disabled);
+      --n-comp-input-container-placeholder-color: var(--n-ref-palette-gray-400);
+
+      cursor: default;
+    }
+
+    .n-input--is-disabled .n-input__prefix,
+    .n-input--is-disabled .n-input__suffix {
+      --n-comp-input-icon-color: var(--n-sys-on-container-color-disabled);
+    }
+
+    .n-input--is-focused .n-input__wrapper {
+      --n-comp-input-container-border-color: var(--n-sys-border-color-primary);
+
+      outline: var(--n-sys-outline-primary);
+    }
+  }
+}

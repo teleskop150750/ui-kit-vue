@@ -1,0 +1,41 @@
+@layer components {
+  .n-button-group {
+    display: inline-block;
+  }
+
+  .n-button-group > .n-button-group__item:not(:first-child) {
+    margin-left: -1px;
+
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .n-button-group > .n-button-group__item:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .n-button-group > .n-button--appearance-primary:not(:first-child, .n-button--mode-outline) {
+    border-left-color: var(--n-sys-color-primary-200);
+  }
+
+  .n-button-group > .n-button--appearance-secondary:not(:first-child, .n-button--mode-outline) {
+    border-left-color: var(--n-sys-color-secondary-200);
+  }
+
+  .n-button-group > .n-button--appearance-success:not(:first-child, .n-button--mode-outline) {
+    border-left-color: var(--n-sys-color-success-200);
+  }
+
+  .n-button-group > .n-button--appearance-danger:not(:first-child, .n-button--mode-outline) {
+    border-left-color: var(--n-sys-color-danger-200);
+  }
+
+  .n-button-group > .n-button--appearance-warning:not(:first-child, .n-button--mode-outline) {
+    border-left-color: var(--n-sys-color-warning-200);
+  }
+
+  .n-button-group > .n-button--appearance-info:not(:first-child, .n-button--mode-outline) {
+    border-left-color: var(--n-sys-color-info-200);
+  }
+}

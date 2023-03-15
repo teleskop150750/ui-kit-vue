@@ -1,0 +1,5 @@
+@layer reset, default, themes, patterns, layouts, components, utilities;
+
+@layer components {
+  @layer defaults, structures, themes, utilities;
+}

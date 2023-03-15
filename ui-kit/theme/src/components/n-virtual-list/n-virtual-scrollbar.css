@@ -1,0 +1,85 @@
+@layer components {
+  @layer defaults {
+    .n-virtual-scrollbar {
+      --n-comp-scrollbar-opacity: 0.3;
+      --n-comp-scrollbar-opacity-hover: 0.5;
+      --n-comp-scrollbar-color-bg: var(--n-sys-color-primary-500);
+      --n-comp-scrollbar-color-bg-hover: var(--n-sys-color-primary-600);
+      --n-comp-scrollbar-bar-offset: 2px;
+      --n-comp-scrollbar-bar-size: 12px;
+
+      opacity: 0;
+
+      transition: opacity 0.34s ease-out;
+    }
+
+    .n-virtual-scrollbar--always-on {
+      opacity: 1;
+    }
+
+    .n-virtual-scrollbar__thumb {
+      position: relative;
+
+      display: block;
+
+      width: 0;
+      height: 0;
+
+      border-radius: inherit;
+
+      cursor: pointer;
+
+      transition: var(--n-sys-transition-duration) background-color;
+    }
+
+    .n-virtual-scrollbar__thumb::before {
+      position: absolute;
+      top: var(--n-comp-scrollbar-bar-offset);
+      left: var(--n-comp-scrollbar-bar-offset);
+      bottom: var(--n-comp-scrollbar-bar-offset);
+      right: var(--n-comp-scrollbar-bar-offset);
+      content: '';
+
+      border-radius: inherit;
+
+      background-color: var(--n-comp-scrollbar-color-bg);
+
+      opacity: var(--n-comp-scrollbar-opacity);
+    }
+
+    .n-virtual-scrollbar__thumb:hover::before {
+      background-color: var(--n-comp-scrollbar-color-bg-hover);
+
+      opacity: var(--n-comp-scrollbar-opacity-hover);
+    }
+
+    .n-virtual-scrollbar__bar {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      z-index: 1;
+
+      border-radius: var(--n-comp-scrollbar-bar-size);
+    }
+
+    .n-virtual-scrollbar__bar--is-vertical {
+      top: 0;
+
+      width: var(--n-comp-scrollbar-bar-size);
+    }
+
+    .n-virtual-scrollbar__bar--is-vertical > div {
+      width: 100%;
+    }
+
+    .n-virtual-scrollbar__bar--is-horizontal {
+      left: 0;
+
+      height: var(--n-comp-scrollbar-bar-size);
+    }
+
+    .n-virtual-scrollbar__bar--is-horizontal > div {
+      height: 100%;
+    }
+  }
+}

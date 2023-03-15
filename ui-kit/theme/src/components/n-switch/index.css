@@ -1,0 +1,263 @@
+.n-switch {
+  --n-comp-switch-on-color: var(--n-sys-color-primary);
+  --n-comp-switch-off-color: var(--n-sys-border-color-primary);
+
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+
+  height: 32px;
+
+  font-size: 14px;
+  line-height: 20px;
+  vertical-align: middle;
+}
+
+.n-switch__label {
+  display: inline-block;
+
+  height: 20px;
+
+  color: var(--n-text-color-primary);
+  font-weight: 500;
+  font-size: 14px;
+  vertical-align: middle;
+
+  cursor: pointer;
+
+  transition: var(--n-sys-transition-duration-fast);
+}
+
+.n-switch--is-disabled .n-switch__label {
+  cursor: not-allowed;
+}
+
+.n-switch__label--is-active {
+  color: var(--n-color-primary);
+}
+
+.n-switch__labn--left {
+  margin-right: 10px;
+}
+
+.n-switch__labn--right {
+  margin-left: 10px;
+}
+
+.n-switch__label * {
+  display: inline-block;
+
+  font-size: 14px;
+  line-height: 1;
+}
+
+.n-switch__label .n-icon {
+  height: inherit;
+
+  vertical-align: middle;
+}
+
+.n-switch__input {
+  position: absolute;
+
+  width: 0;
+  height: 0;
+  margin: 0;
+
+  opacity: 0;
+}
+
+.n-switch__core {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+
+  height: 20px;
+  min-width: 40px;
+  box-sizing: border-box;
+
+  border: 1px solid var(--n-comp-switch-border-color, var(--n-comp-switch-off-color));
+  border-radius: 10px;
+
+  background: var(--n-comp-switch-off-color);
+
+  outline: 0;
+
+  cursor: pointer;
+
+  transition: border-color var(--n-sys-transition-duration), background-color var(--n-sys-transition-duration);
+}
+
+.n-switch--large .n-switch__core {
+  height: 24px;
+  min-width: 50px;
+
+  border-radius: 12px;
+}
+
+.n-switch--small .n-switch__core {
+  height: 16px;
+  min-width: 30px;
+
+  border-radius: 8px;
+}
+
+.n-switch--is-disabled .n-switch__core {
+  cursor: not-allowed;
+}
+
+.n-switch--is-checked .n-switch__core {
+  border-color: var(--n-comp-switch-border-color, var(--n-comp-switch-on-color));
+
+  background-color: var(--n-comp-switch-on-color);
+}
+
+.n-switch__input:focus-visible ~ .n-switch__core {
+  outline: 2px solid var(--n-comp-switch-on-color);
+  outline-offset: 1px;
+}
+
+.n-switch__core .n-switch__inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 16px;
+  padding: 0 4px 0 calc(16px + 2px);
+
+  overflow: hidden;
+
+  transition: all var(--n-sys-transition-duration);
+}
+
+.n-switch__core .n-switch__inner .is-icon,
+.n-switch__core .n-switch__inner .is-text {
+  color: var(--n-color-white);
+  font-size: 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  overflow: hidden;
+
+  user-select: none;
+}
+
+.n-switch__core .n-switch__action {
+  position: absolute;
+  left: 1px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 16px;
+  height: 16px;
+
+  color: var(--n-comp-switch-off-color);
+
+  border-radius: var(--n-border-radius-circle);
+
+  background-color: var(--n-color-white);
+
+  transition: all var(--n-sys-transition-duration);
+}
+
+.n-switch--is-checked .n-switch__core .n-switch__action {
+  left: calc(100% - 17px);
+
+  color: var(--n-comp-switch-on-color);
+}
+
+.n-switch--is-checked .n-switch__core .n-switch__inner {
+  padding: 0 calc(16px + 2px) 0 4px;
+}
+
+.n-switch--is-disabled {
+  opacity: 0.6;
+}
+
+.n-switch--wide .n-switch__label.n-switch__labn--left span {
+  left: 10px;
+}
+
+.n-switch--wide .n-switch__label.n-switch__labn--right span {
+  right: 10px;
+}
+
+.n-switch .labn-fade-enter-from,
+.n-switch .labn-fade-leave-active {
+  opacity: 0;
+}
+
+.n-switch--large {
+  height: 40px;
+
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.n-switch--large .n-switch__label {
+  height: 24px;
+
+  font-size: 14px;
+}
+
+.n-switch--large .n-switch__label * {
+  font-size: 14px;
+}
+
+.n-switch--large .n-switch__core .n-switch__inner {
+  height: 20px;
+  padding: 0 6px 0 calc(20px + 2px);
+}
+
+.n-switch--large .n-switch__core .n-switch__action {
+  width: 20px;
+  height: 20px;
+}
+
+.n-switch--large--is-checked .n-switch__core .n-switch__action {
+  left: calc(100% - 21px);
+}
+
+.n-switch--large--is-checked .n-switch__core .n-switch__inner {
+  padding: 0 calc(20px + 2px) 0 6px;
+}
+
+.n-switch--small {
+  height: 24px;
+
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.n-switch--small .n-switch__label {
+  height: 16px;
+
+  font-size: 12px;
+}
+
+.n-switch--small .n-switch__label * {
+  font-size: 12px;
+}
+
+.n-switch--small .n-switch__core .n-switch__inner {
+  height: 12px;
+  padding: 0 2px 0 calc(12px + 2px);
+}
+
+.n-switch--small .n-switch__core .n-switch__action {
+  width: 12px;
+  height: 12px;
+}
+
+.n-switch--small--is-checked .n-switch__core .n-switch__action {
+  left: calc(100% - 13px);
+}
+
+.n-switch--small--is-checked .n-switch__core .n-switch__inner {
+  padding: 0 calc(12px + 2px) 0 2px;
+}

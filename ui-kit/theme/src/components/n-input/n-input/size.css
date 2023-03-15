@@ -1,0 +1,29 @@
+@layer components {
+  @layer defaults {
+    .n-input {
+      --n-comp-input-container-text-size: var(--n-sys-text-size-base);
+      --n-comp-input-container-height: var(--n-sys-component-size-base);
+      --n-comp-input-container-border-radius: var(--n-sys-border-radius-base);
+      --n-comp-input-container-padding-x: 11px;
+      --n-comp-input-icon-size: 14px;
+    }
+
+    .n-input--size-small {
+      --n-comp-input-container-text-size: var(--n-sys-text-size-small);
+      --n-comp-input-container-height: var(--n-sys-component-size-small);
+      --n-comp-input-container-border-radius: var(--n-sys-border-radius-small);
+      --n-comp-input-container-padding-x: 7px;
+      --n-comp-input-icon-size: 12px;
+
+      font-size: 12px;
+    }
+
+    .n-input--size-large {
+      --n-comp-input-container-text-size: var(--n-sys-text-size-large);
+      --n-comp-input-container-height: var(--n-sys-component-size-large);
+      --n-comp-input-container-border-radius: var(--n-sys-border-radius-base);
+      --n-comp-input-container-padding-x: 15px;
+      --n-comp-input-icon-size: 14px;
+    }
+  }
+}

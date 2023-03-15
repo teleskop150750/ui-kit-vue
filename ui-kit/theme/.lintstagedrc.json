@@ -1,0 +1,5 @@
+{
+  "*.{js,cjs}": ["pnpx prettier --write", "pnpx eslint --fix"],
+  "*.json": ["pnpx prettier --write", "pnpx eslint --fix"],
+  "*.css": ["pnpx prettier --write", "pnpx stylelint --fix"]
+}

@@ -1,5 +1,5 @@
 {
-  "name": "@nado/icons-vue",
+  "name": "@nado/ui-kit-icons-vue",
   "type": "module",
   "version": "0.0.0",
   "private": true,
@@ -18,15 +18,19 @@
     "build": "run-p type-check build-only",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "generate": "tsx build-icons/generate.ts"
+    "generate": "tsx build-icons/generate.ts",
+    "prettier": "prettier --check --ignore-unknown \"**/*\"",
+    "prettier:fix": "prettier --write --ignore-unknown \"**/*\"",
+    "eslint": "eslint \"**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,json,vue}\"",
+    "eslint:fix": "eslint --fix \"**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,json,vue}\" --fix"
   },
   "peerDependencies": {
     "vue": "^3.2.0"
   },
   "devDependencies": {
     "@nado/eslint-config-vue": "workspace:*",
-    "@nado/icons-svg": "workspace:*",
     "@nado/prettier-config": "workspace:*",
+    "@nado/ui-kit-icons-svg": "workspace:*",
     "@pnpm/find-workspace-dir": "^4.0.3",
     "@pnpm/find-workspace-packages": "^4.0.41",
     "@pnpm/logger": "^4.0.0",

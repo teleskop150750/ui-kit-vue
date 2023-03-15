@@ -1,0 +1,15 @@
+@layer themes {
+  .nado-theme {
+    /* Size */
+
+    /* Component */
+    --n-sys-component-size-small: 24px;
+    --n-sys-component-size-base: 32px;
+    --n-sys-component-size-large: 40px;
+
+    /* Radios */
+    --n-sys-border-radius-small: 2px;
+    --n-sys-border-radius-base: 4px;
+    --n-sys-border-radius-round: 20px;
+  }
+}

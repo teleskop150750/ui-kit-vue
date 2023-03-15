@@ -1,0 +1,177 @@
+/* stylelint-disable comment-empty-line-before */
+@layer themes {
+  .nado-theme {
+    /* TODO: определиться что с этим делать */
+
+    /* Disabled */
+    --n-sys-container-color-disabled: var(--n-ref-palette-gray-100);
+    --n-sys-container-color-disabled-hovered: var(--n-ref-palette-gray-200);
+    --n-sys-container-color-disabled-pressed: var(--n-ref-palette-gray-200);
+
+    /* On container */
+
+    /* Disabled */
+    --n-sys-on-container-color-disabled: var(--n-ref-palette-gray-500);
+    --n-sys-on-container-color-disabled-hovered: var(--n-ref-palette-gray-500);
+    --n-sys-on-container-color-disabled-pressed: var(--n-ref-palette-gray-500);
+
+    /* Primary */
+    /* --n-sys-container-color-primary: var(--n-sys-color-primary-500); */
+    /* --n-sys-container-color-primary-hovered: var(--n-sys-color-primary-400); */
+    /* --n-sys-container-color-primary-pressed: var(--n-sys-color-primary-600); */
+
+    /* Primary variant */
+    /* --n-sys-container-color-primary-variant: var(--n-sys-color-primary-50); */
+    /* --n-sys-container-color-primary-variant-hovered: var(--n-sys-color-primary-500); */
+    /* --n-sys-container-color-primary-variant-pressed: var(--n-sys-color-primary-700); */
+
+    /* Secondary */
+    /* --n-sys-container-color-secondary: var(--n-sys-color-white); */
+    /* --n-sys-container-color-secondary-hovered: var(--n-sys-color-primary-50); */
+    /* --n-sys-container-color-secondary-pressed: var(--n-sys-color-primary-100); */
+
+    /* Secondary variant */
+    /* --n-sys-container-color-secondary-variant: var(--n-sys-color-white); */
+    /* --n-sys-container-color-secondary-variant-hovered: var(--n-sys-color-white); */
+    /* --n-sys-container-color-secondary-variant-pressed: var(--n-sys-color-primary-100); */
+
+    /* Info */
+    /* --n-sys-container-color-info: var(--n-sys-color-info-500); */
+    /* --n-sys-container-color-info-hovered: var(--n-sys-color-info-400); */
+    /* --n-sys-container-color-info-pressed: var(--n-sys-color-info-600); */
+
+    /* Info variant */
+    /* --n-sys-container-color-info-variant: var(--n-sys-color-info-100); */
+    /* --n-sys-container-color-info-variant-hovered: var(--n-sys-color-info-400); */
+    /* --n-sys-container-color-info-variant-pressed: var(--n-sys-color-info-600); */
+
+    /* Danger */
+    /* --n-sys-container-color-danger: var(--n-sys-color-danger-500); */
+    /* --n-sys-container-color-danger-hovered: var(--n-sys-color-danger-400); */
+    /* --n-sys-container-color-danger-pressed: var(--n-sys-color-danger-600); */
+
+    /* Danger variant */
+    /* --n-sys-container-color-danger-variant: var(--n-sys-color-danger-50); */
+    /* --n-sys-container-color-danger-variant-hovered: var(--n-sys-color-danger-400); */
+    /* --n-sys-container-color-danger-variant-pressed: var(--n-sys-color-danger-600); */
+
+    /* Success */
+    /* --n-sys-container-color-success: var(--n-sys-color-success-500); */
+    /* --n-sys-container-color-success-hovered: var(--n-sys-color-success-400); */
+    /* --n-sys-container-color-success-pressed: var(--n-sys-color-success-600); */
+
+    /* Success variant */
+    /* --n-sys-container-color-success-variant: var(--n-sys-color-success-50); */
+    /* --n-sys-container-color-success-variant-hovered: var(--n-sys-color-success-400); */
+    /* --n-sys-container-color-success-variant-pressed: var(--n-sys-color-success-600); */
+
+    /* Warning */
+    /* --n-sys-container-color-warning: var(--n-sys-color-warning-500); */
+    /* --n-sys-container-color-warning-hovered: var(--n-sys-color-warning-400); */
+    /* --n-sys-container-color-warning-pressed: var(--n-sys-color-warning-600); */
+
+    /* Warning variant */
+    /* --n-sys-container-color-warning-variant: var(--n-sys-color-warning-50); */
+    /* --n-sys-container-color-warning-variant-hovered: var(--n-sys-color-warning-400); */
+    /* --n-sys-container-color-warning-variant-pressed: var(--n-sys-color-warning-600); */
+
+    /* On container */
+
+    /* Primary */
+    /* --n-sys-on-container-color-primary: var(--n-sys-color-white); */
+    /* --n-sys-on-container-color-primary-hovered: var(--n-sys-color-white); */
+    /* --n-sys-on-container-color-primary-pressed: var(--n-sys-color-white); */
+
+    /* Primary variant */
+    /* --n-sys-on-container-color-primary-variant: var(--n-sys-color-primary-700); */
+    /* --n-sys-on-container-color-primary-variant-hovered: var(--n-sys-color-white); */
+    /* --n-sys-on-container-color-primary-variant-pressed: var(--n-sys-color-white); */
+
+    /* Secondary */
+    /* --n-sys-on-container-color-secondary: var(--n-sys-color-secondary-700); */
+    /* --n-sys-on-container-color-secondary-hovered: var(--n-sys-color-primary-700); */
+    /* --n-sys-on-container-color-secondary-pressed: var(--n-sys-color-primary-700); */
+
+    /* Secondary variant */
+    /* --n-sys-on-container-color-secondary-variant: var(--n-sys-color-secondary-700); */
+    /* --n-sys-on-container-color-secondary-variant-hovered: var(--n-sys-color-primary-700); */
+    /* --n-sys-on-container-color-secondary-variant-pressed: var(--n-sys-color-primary-700); */
+
+    /* Info */
+    /* --n-sys-on-container-color-info: var(--n-sys-color-white); */
+    /* --n-sys-on-container-color-info-hovered: var(--n-sys-color-white); */
+    /* --n-sys-on-container-color-info-pressed: var(--n-sys-color-white); */
+
+    /* Info variant */
+    /* --n-sys-on-container-color-info-variant: var(--n-sys-color-info-500); */
+    /* --n-sys-on-container-color-info-variant-hovered: var(--n-sys-color-white); */
+    /* --n-sys-on-container-color-info-variant-pressed: var(--n-sys-color-white); */
+
+    /* Danger */
+    /* --n-sys-on-container-color-danger: var(--n-sys-color-white); */
+    /* --n-sys-on-container-color-danger-hovered: var(--n-sys-color-white); */
+    /* --n-sys-on-container-color-danger-pressed: var(--n-sys-color-white); */
+
+    /* Danger variant */
+    /* --n-sys-on-container-color-danger-variant: var(--n-sys-color-danger-500); */
+    /* --n-sys-on-container-color-danger-variant-hovered: var(--n-sys-color-white); */
+    /* --n-sys-on-container-color-danger-variant-pressed: var(--n-sys-color-white); */
+
+    /* Success */
+    /* --n-sys-on-container-color-success: var(--n-sys-color-white); */
+    /* --n-sys-on-container-color-success-hovered: var(--n-sys-color-white); */
+    /* --n-sys-on-container-color-success-pressed: var(--n-sys-color-white); */
+
+    /* Success variant */
+    /* --n-sys-on-container-color-success-variant: var(--n-sys-color-success-600); */
+    /* --n-sys-on-container-color-success-variant-hovered: var(--n-sys-color-white); */
+    /* --n-sys-on-container-color-success-variant-pressed: var(--n-sys-color-white); */
+
+    /* Warning */
+    /* --n-sys-on-container-color-warning: var(--n-sys-color-white); */
+    /* --n-sys-on-container-color-warning-hovered: var(--n-sys-color-white); */
+    /* --n-sys-on-container-color-warning-pressed: var(--n-sys-color-white); */
+
+    /* Warning variant */
+    /* --n-sys-on-container-color-warning-variant: var(--n-sys-color-warning-600); */
+    /* --n-sys-on-container-color-warning-variant-hovered: var(--n-sys-color-white); */
+    /* --n-sys-on-container-color-warning-variant-pressed: var(--n-sys-color-white); */
+
+    /* Border */
+
+    /* Default */
+    /* --n-sys-border-color-base: var(--n-ref-palette-gray-400); */
+    /* --n-sys-border-color-base-hovered: var(--n-ref-palette-gray-400); */
+    /* --n-sys-border-color-base-pressed: var(--n-ref-palette-gray-400); */
+
+    /* Primary */
+    /* --n-sys-border-color-primary: var(--n-sys-color-primary-500); */
+    /* --n-sys-border-color-primary-hovered: var(--n-sys-color-primary-500); */
+    /* --n-sys-border-color-primary-pressed: var(--n-sys-color-primary-500); */
+
+    /* Secondary */
+    /* --n-sys-border-color-secondary: var(--n-sys-color-gray-100); */
+    /* --n-sys-border-color-secondary-hovered: var(--n-sys-color-primary-600); */
+    /* --n-sys-border-color-secondary-pressed: var(--n-sys-color-primary-600); */
+
+    /* Info */
+    /* --n-sys-border-color-info: var(--n-sys-color-info-500); */
+    /* --n-sys-border-color-info-hovered: var(--n-sys-color-info-500); */
+    /* --n-sys-border-color-info-pressed: var(--n-sys-color-info-500); */
+
+    /* Danger */
+    /* --n-sys-border-color-danger: var(--n-sys-color-danger-500); */
+    /* --n-sys-border-color-danger-hovered: var(--n-sys-color-danger-500); */
+    /* --n-sys-border-color-danger-pressed: var(--n-sys-color-danger-500); */
+
+    /* Success */
+    /* --n-sys-border-color-success: var(--n-sys-color-success-500); */
+    /* --n-sys-border-color-success-hovered: var(--n-sys-color-success-500); */
+    /* --n-sys-border-color-success-pressed: var(--n-sys-color-success-500); */
+
+    /* Warning */
+    /* --n-sys-border-color-warning: var(--n-sys-color-warning-500); */
+    /* --n-sys-border-color-warning-hovered: var(--n-sys-color-warning-500); */
+    /* --n-sys-border-color-warning-pressed: var(--n-sys-color-warning-500); */
+  }
+}

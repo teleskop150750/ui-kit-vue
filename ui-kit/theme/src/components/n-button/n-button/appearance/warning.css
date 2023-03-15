@@ -1,0 +1,101 @@
+@layer components {
+  .n-button--mode-solid.n-button--appearance-warning {
+    /* container-color-outline */
+    --n-comp-button-outline: var(--n-sys-outline-warning);
+
+    /* container-bg-color */
+    --n-comp-button-container-bg-color: var(--n-sys-color-warning);
+    --n-comp-button-container-bg-color-hovered: var(--n-sys-color-warning-light);
+    --n-comp-button-container-bg-color-pressed: var(--n-sys-color-warning-dark);
+
+    /* container-border-color */
+    --n-comp-button-container-border-color: var(--n-sys-color-warning);
+    --n-comp-button-container-border-color-hovered: var(--n-sys-color-warning-light);
+    --n-comp-button-container-border-color-pressed: var(--n-sys-color-warning-dark);
+
+    /* container-text-color */
+    --n-comp-button-container-text-color: var(--n-sys-color-white);
+    --n-comp-button-container-text-color-hovered: var(--n-sys-color-white);
+    --n-comp-button-container-text-color-pressed: var(--n-sys-color-white);
+  }
+
+  .n-button--mode-soft.n-button--appearance-warning {
+    /* container-color-outline */
+    --n-comp-button-outline: var(--n-sys-outline-warning);
+
+    /* container-bg-color */
+    --n-comp-button-container-bg-color: var(--n-sys-color-warning-50);
+    --n-comp-button-container-bg-color-hovered: var(--n-sys-color-warning-100);
+    --n-comp-button-container-bg-color-pressed: var(--n-sys-color-warning-150);
+
+    /* container-border-color */
+    --n-comp-button-container-border-color: var(--n-sys-color-warning-50);
+    --n-comp-button-container-border-color-hovered: var(--n-sys-color-warning-100);
+    --n-comp-button-container-border-color-pressed: var(--n-sys-color-warning-150);
+
+    /* container-text-color */
+    --n-comp-button-container-text-color: var(--n-sys-color-warning);
+    --n-comp-button-container-text-color-hovered: var(--n-sys-color-warning);
+    --n-comp-button-container-text-color-pressed: var(--n-sys-color-warning);
+  }
+
+  .n-button--mode-outline.n-button--appearance-warning {
+    /* container-color-outline */
+    --n-comp-button-outline: var(--n-sys-outline-warning);
+
+    /* container-bg-color */
+    --n-comp-button-container-bg-color: var(--n-sys-color-white);
+    --n-comp-button-container-bg-color-hovered: var(--n-sys-color-warning-50);
+    --n-comp-button-container-bg-color-pressed: var(--n-sys-color-warning-100);
+
+    /* container-border-color */
+    --n-comp-button-container-border-color: var(--n-sys-color-warning);
+    --n-comp-button-container-border-color-hovered: var(--n-sys-color-warning-light);
+    --n-comp-button-container-border-color-pressed: var(--n-sys-color-warning-dark);
+
+    /* container-text-color */
+    --n-comp-button-container-text-color: var(--n-sys-color-warning);
+    --n-comp-button-container-text-color-hovered: var(--n-sys-color-warning);
+    --n-comp-button-container-text-color-pressed: var(--n-sys-color-warning);
+  }
+
+  .n-button--mode-text.n-button--appearance-warning {
+    /* container-color-outline */
+    --n-comp-button-outline: var(--n-sys-outline-warning);
+
+    /* container-bg-color */
+    --n-comp-button-container-bg-color: var(--n-sys-color-white);
+    --n-comp-button-container-bg-color-hovered: var(--n-sys-color-warning-50);
+    --n-comp-button-container-bg-color-pressed: var(--n-sys-color-warning-100);
+
+    /* container-border-color */
+    --n-comp-button-container-border-color: var(--n-sys-color-white);
+    --n-comp-button-container-border-color-hovered: var(--n-sys-color-warning-50);
+    --n-comp-button-container-border-color-pressed: var(--n-sys-color-warning-100);
+
+    /* container-text-color */
+    --n-comp-button-container-text-color: var(--n-sys-color-warning);
+    --n-comp-button-container-text-color-hovered: var(--n-sys-color-warning);
+    --n-comp-button-container-text-color-pressed: var(--n-sys-color-warning);
+  }
+
+  .n-button--mode-link.n-button--appearance-warning {
+    /* container-color-outline */
+    --n-comp-button-outline: var(--n-sys-outline-primary);
+
+    /* container-bg-color */
+    --n-comp-button-container-bg-color: transparent;
+    --n-comp-button-container-bg-color-hovered: transparent;
+    --n-comp-button-container-bg-color-pressed: transparent;
+
+    /* container-border-color */
+    --n-comp-button-container-border-color: transparent;
+    --n-comp-button-container-border-color-hovered: transparent;
+    --n-comp-button-container-border-color-pressed: transparent;
+
+    /* container-text-color */
+    --n-comp-button-container-text-color: var(--n-sys-color-warning);
+    --n-comp-button-container-text-color-hovered: var(--n-sys-color-warning);
+    --n-comp-button-container-text-color-pressed: var(--n-sys-color-warning);
+  }
+}

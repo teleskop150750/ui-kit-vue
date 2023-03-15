@@ -1,0 +1,15 @@
+@layer themes {
+  .nado-theme {
+    /* z-index */
+    --n-sys-z-index-normal: 1;
+    --n-sys-z-index-top: 1000;
+    --n-sys-z-index-popper: 2000;
+
+    /* box-shadow */
+    --n-sys-box-shadow: 0px 12px 32px 4px rgb(0 0 0 / 4%), 0px 8px 20px rgb(0 0 0 / 8%);
+    --n-sys-box-shadow-light: 0px 0px 12px rgb(0 0 0 / 12%);
+    --n-sys-box-shadow-lighter: 0px 0px 6px rgb(0 0 0 / 12%);
+    --n-sys-box-shadow-dark: 0px 16px 48px 16px rgb(0 0 0 / 8%), 0px 12px 32px rgb(0 0 0 / 12%),
+      0px 8px 16px -8px rgb(0 0 0 / 16%);
+  }
+}

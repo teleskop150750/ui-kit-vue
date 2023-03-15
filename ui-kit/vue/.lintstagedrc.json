@@ -1,10 +1,15 @@
 {
-  "*.{js,cjs,ts,cts}": ["pnpx prettier --write", "pnpx eslint --fix"],
+  "*.{js,cjs,ts,cts}": [
+    "pnpx prettier --write",
+    "pnpx eslint --fix",
+    "pnpx tsc-files --noEmit -p tsconfig.vitest.json --composite false"
+  ],
   "*.vue": [
     "pnpx prettier --write",
     "pnpx stylelint --fix",
     "pnpx eslint --fix",
     "pnpx vue-tsc --noEmit -p tsconfig.vitest.json --composite false"
   ],
-  "*.json": ["pnpx prettier --write", "pnpx eslint --fix"]
+  "*.json": ["pnpx prettier --write", "pnpx eslint --fix"],
+  "*.css": ["pnpx prettier --write", "pnpx stylelint --fix"]
 }

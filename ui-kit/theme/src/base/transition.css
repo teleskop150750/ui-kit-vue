@@ -1,0 +1,152 @@
+@layer themes {
+  .nado-theme {
+    /* duration */
+    --n-sys-transition-duration: 0.3s;
+    --n-sys-transition-duration-fast: 0.2s;
+    --n-sys-transition-duration-quick: 0.1s;
+
+    /* bezier */
+    --n-sys-transition-function-ease-in-out-bezier: cubic-bezier(0.645, 0.045, 0.355, 1);
+    --n-sys-transition-function-fast-bezier: cubic-bezier(0.23, 1, 0.32, 1);
+
+    /* fade */
+    --n-sys-transition-md-fade: transform var(--n-sys-transition-duration) var(--n-sys-transition-function-fast-bezier),
+      opacity var(--n-sys-transition-duration) var(--n-sys-transition-function-fast-bezier);
+    --n-sys-transition-fade-linear: opacity var(--n-sys-transition-duration-fast) linear;
+
+    /* color */
+    --n-sys-transition-color: color var(--n-sys-transition-duration-fast)
+      var(--n-sys-transition-function-ease-in-out-bezier);
+  }
+}
+
+@layer themes {
+  /* n-fade-in-linear */
+  .n-fade-in-linear-enter-active,
+  .n-fade-in-linear-leave-active {
+    transition: var(--n-sys-transition-fade-linear);
+  }
+
+  .n-fade-in-linear-enter-from,
+  .n-fade-in-linear-leave-to {
+    opacity: 0;
+  }
+
+  /* n-fade-in */
+  .n-fade-in-enter-active,
+  .n-fade-in-leave-active {
+    transition: all var(--n-sys-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
+  }
+
+  .n-fade-in-enter-from,
+  .n-fade-in-leave-active {
+    opacity: 0;
+  }
+
+  /* n-zoom-in-center */
+  .n-zoom-in-center-enter-active,
+  .n-zoom-in-center-leave-active {
+    transition: all var(--n-sys-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
+  }
+
+  .n-zoom-in-center-enter-from,
+  .n-zoom-in-center-leave-active {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  /* n-zoom-in-top */
+  .n-zoom-in-top-enter-active,
+  .n-zoom-in-top-leave-active {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: center top;
+
+    transition: var(--n-sys-transition-md-fade);
+  }
+
+  .n-zoom-in-top-enter-active[data-popper-placement^='top'],
+  .n-zoom-in-top-leave-active[data-popper-placement^='top'] {
+    transform-origin: center bottom;
+  }
+
+  .n-zoom-in-top-enter-from,
+  .n-zoom-in-top-leave-active {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  /* n-zoom-in-bottom */
+  .n-zoom-in-bottom-enter-active,
+  .n-zoom-in-bottom-leave-active {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: center bottom;
+
+    transition: var(--n-sys-transition-md-fade);
+  }
+
+  .n-zoom-in-bottom-enter-from,
+  .n-zoom-in-bottom-leave-active {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  /* n-zoom-in-left */
+  .n-zoom-in-left-enter-active,
+  .n-zoom-in-left-leave-active {
+    opacity: 1;
+    transform: scale(1, 1);
+    transform-origin: top left;
+
+    transition: var(--n-sys-transition-md-fade);
+  }
+
+  .n-zoom-in-left-enter-from,
+  .n-zoom-in-left-leave-active {
+    opacity: 0;
+    transform: scale(0.45, 0.45);
+  }
+
+  /* collapse-transition */
+  .collapse-transition {
+    transition: var(--n-sys-transition-duration) height ease-in-out,
+      var(--n-sys-transition-duration) padding-top ease-in-out,
+      var(--n-sys-transition-duration) padding-bottom ease-in-out;
+  }
+
+  .n-collapse-transition-enter-active,
+  .n-collapse-transition-leave-active {
+    transition: var(--n-sys-transition-duration) max-height ease-in-out,
+      var(--n-sys-transition-duration) padding-top ease-in-out,
+      var(--n-sys-transition-duration) padding-bottom ease-in-out;
+  }
+
+  /* horizontal-collapse-transition */
+  .horizontal-collapse-transition {
+    transition: var(--n-sys-transition-duration) width ease-in-out,
+      var(--n-sys-transition-duration) padding-left ease-in-out,
+      var(--n-sys-transition-duration) padding-right ease-in-out;
+  }
+
+  /* n-list */
+  .n-list-enter-active,
+  .n-list-leave-active {
+    transition: all 1s;
+  }
+
+  .n-list-enter-from,
+  .n-list-leave-to {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  .n-list-leave-active {
+    position: absolute;
+  }
+
+  /* n-opacity */
+  .n-opacity-transition {
+    transition: opacity var(--n-sys-transition-duration) cubic-bezier(0.55, 0, 0.1, 1);
+  }
+}

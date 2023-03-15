@@ -1,0 +1,32 @@
+@layer themes {
+  .nado-theme {
+    /* Font */
+    --n-sys-text-font-family: inter, arial, helvetica, sans-serif;
+    --n-sys-text-weight-bold: 700;
+    --n-sys-text-weight-semibold: 600;
+    --n-sys-text-weight-medium: 500;
+    --n-sys-text-weight-regular: 400;
+
+    /* Font Size */
+    --n-sys-text-size-h1: 32px;
+    --n-sys-text-size-h2: 24px;
+    --n-sys-text-size-h3: 18px;
+    --n-sys-text-size-small: 12px;
+    --n-sys-text-size-base: 14px;
+    --n-sys-text-size-large: 14px;
+
+    /* Line Height */
+    --n-sys-text-line-height-h1: 35px;
+    --n-sys-text-line-height-h2: 26px;
+    --n-sys-text-line-height-h3: 25px;
+    --n-sys-text-line-height-display: 20px;
+    --n-sys-text-line-height-small: 20px;
+
+    /* Color */
+    --n-sys-text-color-default: var(--n-ref-palette-gray-900);
+    --n-sys-text-color-regular: var(--n-ref-palette-gray-700);
+    --n-sys-text-color-placeholder: var(--n-ref-palette-gray-200);
+    --n-sys-text-color-disabled: var(--n-ref-palette-gray-300);
+    --n-sys-text-color-secondary: var(--n-ref-palette-gray-300);
+  }
+}

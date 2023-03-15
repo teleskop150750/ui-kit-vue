@@ -1,0 +1,28 @@
+@layer components {
+  .n-tag {
+    --n-comp-tag-container-text-size: var(--n-sys-text-size-base);
+    --n-comp-tag-container-size: 24px;
+    --n-comp-tag-container-p-r: 9px;
+    --n-comp-tag-container-p-l: 9px;
+    --n-comp-tag-close-size: 14px;
+    --n-comp-tag-close-m-l: 6px;
+  }
+
+  .n-tag--size-large {
+    --n-comp-tag-container-text-size: 16px;
+    --n-comp-tag-container-size: 32px;
+    --n-comp-tag-container-p-r: 7px;
+    --n-comp-tag-container-p-l: 11px;
+    --n-comp-tag-close-size: 16px;
+    --n-comp-tag-close-m-l: 8px;
+  }
+
+  .n-tag--size-small {
+    --n-comp-tag-container-text-size: 12px;
+    --n-comp-tag-container-size: 29px;
+    --n-comp-tag-container-p-r: 3px;
+    --n-comp-tag-container-p-l: 7px;
+    --n-comp-tag-close-size: 14px;
+    --n-comp-tag-close-m-l: 4px;
+  }
+}

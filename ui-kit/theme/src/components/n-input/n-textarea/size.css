@@ -1,0 +1,15 @@
+@layer components {
+  .n-textarea {
+    --n-comp-textarea-container-border-radius: var(--n-sys-border-radius-base);
+  }
+
+  .n-textarea--size-small {
+    --n-comp-textarea-container-text-size: var(--n-sys-text-size-base);
+    --n-comp-textarea-container-border-radius: var(--n-sys-border-radius-small);
+  }
+
+  .n-textarea--size-large {
+    --n-comp-textarea-container-text-size: var(--n-sys-text-size-large);
+    --n-comp-textarea-container-border-radius: var(--n-sys-border-radius-base);
+  }
+}

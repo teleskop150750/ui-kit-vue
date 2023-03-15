@@ -1,0 +1,19 @@
+@layer components {
+  @layer defaults {
+    .n-virtual-list {
+      position: relative;
+    }
+
+    .n-virtual-list:hover .n-virtual-scrollbar {
+      opacity: 1;
+    }
+
+    .n-virtual-list__container {
+      scrollbar-width: none;
+    }
+
+    .n-virtual-list__container::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

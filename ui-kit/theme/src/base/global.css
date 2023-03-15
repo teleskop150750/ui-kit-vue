@@ -1,0 +1,32 @@
+@layer default {
+  .nado-theme *,
+  .nado-theme *::before,
+  .nado-theme *::after {
+    --webkit-tap-highlight-color: transparent;
+
+    box-sizing: border-box;
+  }
+
+  .n-page {
+    color: var(--n-sys-text-color-default);
+    font-size: 1rem;
+    font-family: var(--n-sys-text-font-family);
+    line-height: var(--n-sys-text-line-height-display);
+  }
+
+  .n-page__body {
+    margin: 0;
+  }
+
+  a,
+  area,
+  button,
+  [role='button'],
+  input,
+  label,
+  select,
+  summary,
+  textarea {
+    touch-action: manipulation;
+  }
+}

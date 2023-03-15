@@ -1,0 +1,14 @@
+@layer components {
+  .n-aside {
+    --n-aside-width: var(--n-sys-container-aside-width);
+
+    flex-shrink: 0;
+
+    width: var(--n-aside-width);
+    box-sizing: border-box;
+
+    overflow: initial;
+
+    transition: var(--n-sys-transition-duration-quick);
+  }
+}

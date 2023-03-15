@@ -1,0 +1,15 @@
+@layer components {
+  .n-container {
+    display: flex;
+    flex: 1;
+    flex-basis: auto;
+    flex-direction: row;
+
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .n-container--is-vertical {
+    flex-direction: column;
+  }
+}
