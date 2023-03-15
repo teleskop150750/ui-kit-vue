@@ -1,0 +1,17 @@
+{
+  "name": "@nado/eslint-config-vue",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.cjs",
+  "peerDependencies": {
+    "eslint": ">=8.20.0"
+  },
+  "dependencies": {
+    "@nado/eslint-config-basic": "workspace:*",
+    "@nado/eslint-config-ts": "workspace:*",
+    "eslint-plugin-vue": "^9.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.36.0"
+  }
+}
