@@ -1,0 +1,14 @@
+{
+  "name": "@nado/icons-svg",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "*.svg"
+  ],
+  "scripts": {
+    "optimize": "svgo -f . -o ."
+  },
+  "devDependencies": {
+    "svgo": "^2.8.0"
+  }
+}

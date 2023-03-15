@@ -1,0 +1,10 @@
+{
+  "*.{js,cjs,ts,cts}": ["pnpx prettier --write", "pnpx eslint --fix"],
+  "*.vue": [
+    "pnpx prettier --write",
+    "pnpx stylelint --fix",
+    "pnpx eslint --fix",
+    "pnpx vue-tsc --noEmit -p tsconfig.vitest.json --composite false"
+  ],
+  "*.json": ["pnpx prettier --write", "pnpx eslint --fix"]
+}
