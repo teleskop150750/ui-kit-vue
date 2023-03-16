@@ -16,10 +16,15 @@ export default defineConfig({
     vueJsx(),
 
     Dts({
-      staticImport: true,
       insertTypesEntry: true,
       include: ['src/**/*.ts', 'src/**/*.vue', 'src/**/*.d.ts'],
+      tsConfigFilePath: './tsconfig.vitest.json',
     }),
+    // Dts({
+    //   staticImport: true,
+    //   insertTypesEntry: true,
+    //   include: ['src/**/*.ts', 'src/**/*.vue', 'src/**/*.d.ts'],
+    // }),
   ],
   resolve: {
     alias: {
@@ -30,11 +35,11 @@ export default defineConfig({
     sourcemap: true,
     lib: {
       // Could also be a dictionary or array of multiple entry points
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: resolve(__dirname, './src/index.ts'),
       name: 'UIKitVue',
       formats: ['es'],
       // the proper extensions will be added
-      fileName: 'ui-kit-vue',
+      fileName: 'index',
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled

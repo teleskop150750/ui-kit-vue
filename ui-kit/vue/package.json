@@ -1,7 +1,10 @@
 {
   "name": "@nado/ui-kit-vue",
+  "type": "module",
   "version": "0.0.0",
   "private": true,
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "run-p type-check build-only",
     "test:unit": "vitest",
@@ -18,6 +21,11 @@
     "stylelint:fix": "stylelint --fix \"**/*.{css,vue}\""
   },
   "dependencies": {
+    "@nado/ui-kit-icons-vue": "workspace:^0.0.0",
+    "@popperjs/core": "^2.11.6",
+    "@vue/shared": "^3.2.47",
+    "@vueuse/core": "^9.13.0",
+    "lodash-es": "^4.17.21",
     "vue": "^3.2.47"
   },
   "devDependencies": {
@@ -27,6 +35,7 @@
     "@nado/stylelint-config-css": "workspace:*",
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/jsdom": "^21.1.0",
+    "@types/lodash-es": "^4.17.7",
     "@types/node": "^18.14.2",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vitejs/plugin-vue-jsx": "^3.0.0",
@@ -37,6 +46,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.4",
     "stylelint": "^15.2.0",
+    "type-fest": "^3.6.1",
     "typescript": "^4.9.5",
     "vite": "^4.1.4",
     "vite-plugin-dts": "^2.1.0",

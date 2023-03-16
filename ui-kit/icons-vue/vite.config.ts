@@ -8,12 +8,19 @@ import Dts from 'vite-plugin-dts'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
-  plugins: [Vue(), Dts()],
+  plugins: [
+    Vue(),
+    Dts({
+      insertTypesEntry: true,
+      include: ['src/**/*.ts', 'src/**/*.vue', 'src/**/*.d.ts'],
+      tsConfigFilePath: './tsconfig.vitest.json',
+    }),
+  ],
   build: {
     sourcemap: false,
     lib: {
       // Could also be a dictionary or array of multiple entry points
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: resolve(__dirname, './src/index.ts'),
       name: 'Icons',
       formats: ['es'],
       // the proper extensions will be added

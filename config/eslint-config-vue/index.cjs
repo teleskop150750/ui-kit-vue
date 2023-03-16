@@ -18,8 +18,10 @@ module.exports = {
       },
     },
   ],
-  extends: ['plugin:vue/vue3-recommended', '@nado/eslint-config-ts'],
-  rules: {
+  extends: ['plugin:vue/vue3-recommended', '@nado/eslint-config-ts', 'prettier'],
+  plugins: ['prettier'],
+  "rules": {
+    "prettier/prettier": "error",
     'vue/html-self-closing': [
       'error',
       {

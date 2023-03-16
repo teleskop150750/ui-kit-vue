@@ -22,7 +22,7 @@ const getSvgFiles = async () => {
     (await findWorkspaceDir.default(process.cwd()))!,
   )
 
-  const pkg = pkgs.find((_pkg) => _pkg.manifest.name === '@nado/icons-svg')!
+  const pkg = pkgs.find((_pkg) => _pkg.manifest.name === '@nado/ui-kit-icons-svg')!
 
   return glob('*.svg', { cwd: pkg.dir, absolute: true })
 }

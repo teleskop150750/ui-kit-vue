@@ -1,10 +1,8 @@
 {
   "extends": "./tsconfig.base.json",
-  "include": ["vite.config.*", "vitest.config.*"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "vite.config.*", "vitest.config.*"],
   "compilerOptions": {
     "composite": true,
-
-    "lib": [],
     "types": ["node"]
   }
 }
