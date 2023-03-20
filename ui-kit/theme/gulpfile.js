@@ -5,7 +5,7 @@ import del from 'del' // удалить папки/файлы
 import gulp from 'gulp'
 import postcss from 'gulp-postcss'
 import rename from 'gulp-rename'
-// impor from 'postcs'
+import csso from 'postcss-csso'
 import postcssImport from 'postcss-import'
 import postcssNested from 'postcss-nested'
 
@@ -14,14 +14,14 @@ export const clean = () => del('dist')
 export const stylesTokens = () =>
   gulp
     .src('src/tokens/index.css')
-    .pipe(postcss([postcssImport, postcssNested]))
+    .pipe(postcss([postcssImport, postcssNested, csso]))
     .pipe(rename('tokens.css'))
     .pipe(gulp.dest('dist'))
 
 export const stylesTheme = () =>
   gulp
     .src('src/theme.css')
-    .pipe(postcss([postcssImport, postcssNested]))
+    .pipe(postcss([postcssImport, postcssNested, csso]))
     .pipe(gulp.dest('dist'))
 
 export const stylesComponents = () => {
@@ -29,7 +29,7 @@ export const stylesComponents = () => {
 
   return gulp
     .src(paths)
-    .pipe(postcss([postcssImport, postcssNested]))
+    .pipe(postcss([postcssImport, postcssNested, csso]))
     .pipe(
       rename((_path) => {
         _path.basename = _path.dirname
@@ -42,21 +42,21 @@ export const stylesComponents = () => {
 export const stylesAllComponents = () =>
   gulp
     .src(['src/components/index.css'])
-    .pipe(postcss([postcssImport, postcssNested]))
+    .pipe(postcss([postcssImport, postcssNested, csso]))
     .pipe(rename('index.css'))
     .pipe(gulp.dest('dist/components'))
 
 export const stylesAll = () =>
   gulp
     .src(['src/all.css'])
-    .pipe(postcss([postcssImport, postcssNested]))
+    .pipe(postcss([postcssImport, postcssNested, csso]))
     .pipe(rename('index.css'))
     .pipe(gulp.dest('dist'))
 
 export const stylesFonts = () =>
   gulp
     .src('src/fonts/index.css')
-    .pipe(postcss([postcssImport, postcssNested]))
+    .pipe(postcss([postcssImport, postcssNested, csso]))
     .pipe(rename('fonts.css'))
     .pipe(gulp.dest('dist'))
 

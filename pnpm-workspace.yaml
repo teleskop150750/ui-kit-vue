@@ -3,3 +3,4 @@ packages:
   - "config/*"
   - "packages/*"
   - "ui-kit/*"
+  - "play/*"

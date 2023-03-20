@@ -150,11 +150,10 @@ export const createModelToggleComposable = <T extends string>(name: T) => {
 
     watch(() => props[name], onChange)
 
-    // TODO:: ROU
-    if (shouldHideWhenRouteChanges && (instance!.appContext.config.globalProperties as any).$route! !== undefined) {
+    if (shouldHideWhenRouteChanges && instance!.appContext.config.globalProperties.$route! !== undefined) {
       watch(
         () => ({
-          ...(instance!.proxy as any).$route,
+          ...(instance!.proxy as Record<string, any>)!.$route,
         }),
         () => {
           if (shouldHideWhenRouteChanges.value && indicator.value) {

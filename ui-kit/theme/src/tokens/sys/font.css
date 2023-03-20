@@ -1,7 +1,7 @@
 @layer themes {
   .nado-theme {
     /* Font */
-    --n-sys-text-font-family: inter, arial, helvetica, sans-serif;
+    --n-sys-text-font-family: 'Inter', 'Arial', helvetica, sans-serif;
     --n-sys-text-weight-bold: 700;
     --n-sys-text-weight-semibold: 600;
     --n-sys-text-weight-medium: 500;

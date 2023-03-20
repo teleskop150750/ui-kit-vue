@@ -3,7 +3,6 @@ import { fileURLToPath, URL } from 'node:url'
 
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-// import { defineConfig } from 'histoire'
 import { defineConfig } from 'vite'
 import Dts from 'vite-plugin-dts'
 
@@ -14,17 +13,12 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
-
     Dts({
       insertTypesEntry: true,
       include: ['src/**/*.ts', 'src/**/*.vue', 'src/**/*.d.ts'],
       tsConfigFilePath: './tsconfig.vitest.json',
+      outputDir: './dist/types',
     }),
-    // Dts({
-    //   staticImport: true,
-    //   insertTypesEntry: true,
-    //   include: ['src/**/*.ts', 'src/**/*.vue', 'src/**/*.d.ts'],
-    // }),
   ],
   resolve: {
     alias: {

@@ -18,7 +18,6 @@ export function composeEventHandlers<E>(
 
 type WhenMouseHandler = (e: PointerEvent) => any
 
-// TODO: ARROW
 export function whenMouse(handler: WhenMouseHandler): WhenMouseHandler {
   return (e: PointerEvent) => (e.pointerType === 'mouse' ? handler(e) : undefined)
 }

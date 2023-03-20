@@ -1,0 +1,10 @@
+{
+  "folders": [
+    {
+      "path": "packages/async-validator"
+    },
+    {
+      "path": "ui-kit/vue"
+    }
+  ]
+}

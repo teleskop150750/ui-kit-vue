@@ -1,6 +1,13 @@
 {
   "extends": "./tsconfig.base.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "vite.config.*", "vitest.config.*"],
+  "include": [
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.vue",
+    "vite.config.*",
+    "vitest.config.*",
+    "../../docs/ui-kit/histoire.config.ts"
+  ],
   "compilerOptions": {
     "composite": true,
     "types": ["node"]

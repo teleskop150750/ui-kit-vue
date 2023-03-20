@@ -7,12 +7,9 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "run-p type-check build-only",
-    "test:unit": "vitest",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "docs:dev": "histoire dev --config vite.config.docs.ts",
-    "docs:build": "histoire build --config vite.config.docs.ts",
-    "docs:preview": "histoire preview --config vite.config.docs.ts",
+    "test:unit": "vitest",
     "prettier": "prettier --check --ignore-unknown \"**/*\"",
     "prettier:fix": "prettier --write --ignore-unknown \"**/*\"",
     "eslint": "eslint \"**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,json,vue}\"",
@@ -21,7 +18,7 @@
     "stylelint:fix": "stylelint --fix \"**/*.{css,vue}\""
   },
   "dependencies": {
-    "@nado/ui-kit-icons-vue": "workspace:^0.0.0",
+    "@nado/ui-kit-icons-vue": "workspace:*",
     "@popperjs/core": "^2.11.6",
     "@vue/shared": "^3.2.47",
     "@vueuse/core": "^9.13.0",

@@ -1,0 +1,26 @@
+{
+  "name": "@nado/play-nuxt",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "prettier": "prettier --check --ignore-unknown \"**/*\"",
+    "prettier:fix": "prettier --write --ignore-unknown \"**/*\"",
+    "eslint": "eslint \"**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,json,vue}\"",
+    "eslint:fix": "eslint --fix \"**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,json,vue}\" --fix",
+    "stylelint": "stylelint \"**/*.{css,vue}\"",
+    "stylelint:fix": "stylelint --fix \"**/*.{css,vue}\""
+  },
+  "devDependencies": {
+    "@nado/eslint-config-vue": "workspace:*",
+    "@nado/prettier-config": "workspace:*",
+    "@nado/stylelint-config-css": "workspace:*",
+    "eslint": "^8.34.0",
+    "nuxt": "^3.3.1",
+    "prettier": "^2.8.4",
+    "stylelint": "^15.2.0"
+  }
+}

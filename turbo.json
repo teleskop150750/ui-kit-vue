@@ -4,7 +4,7 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"]
+      "outputs": ["dist/**", ".nuxt/**"]
     },
     "lint": {
       "outputs": []
@@ -14,6 +14,21 @@
     },
     "dev": {
       "cache": false
+    },
+    "@nado/play-vue#dev": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "@nado/ui-kit-vue-docs#dev": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "@nado/ui-kit-icons-vue#build": {
+      "dependsOn": ["@nado/ui-kit-icons-vue#generate", "^build"],
+      "outputs": ["dist/**"]
+    },
+    "@nado/ui-kit-icons-vue#generate": {
+      "cache": true
     }
   }
 }

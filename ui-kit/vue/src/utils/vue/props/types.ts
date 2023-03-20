@@ -2,7 +2,7 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 
 import type { epPropKey as nPropKey } from './runtime'
-import type { IfNever, UnknownToNever, WritableArray } from './util'
+import type { IfNever, UnknownToNever, WritableArray } from './utils'
 
 type Val<T> = T[keyof T]
 
