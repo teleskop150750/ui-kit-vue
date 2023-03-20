@@ -9,24 +9,18 @@ importers:
       commitizen: ^4.3.0
       cz-conventional-changelog: ^3.3.0
       editorconfig-checker: ^5.0.1
-      eslint: ^8.36.0
       husky: ^8.0.0
       lint-staged: ^13.2.0
-      prettier: ^2.8.4
       turbo: ^1.8.3
-      typescript: ^4.9.5
     devDependencies:
       '@commitlint/cli': 17.4.4
       '@commitlint/config-conventional': 17.4.4
       commitizen: 4.3.0
       cz-conventional-changelog: 3.3.0
       editorconfig-checker: 5.0.1
-      eslint: 8.36.0
       husky: 8.0.3
       lint-staged: 13.2.0
-      prettier: 2.8.4
       turbo: 1.8.3
-      typescript: 4.9.5
 
   config/eslint-config-basic:
     specifiers:

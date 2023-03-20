@@ -12,6 +12,24 @@
     "type-check": {
       "outputs": []
     },
+    "stylelint": {
+      "outputs": []
+    },
+    "stylelint:fix": {
+      "outputs": []
+    },
+    "prettier": {
+      "outputs": []
+    },
+    "prettier:fix": {
+      "outputs": []
+    },
+    "eslint": {
+      "outputs": []
+    },
+    "eslint:fix": {
+      "outputs": []
+    },
     "dev": {
       "cache": false
     },
