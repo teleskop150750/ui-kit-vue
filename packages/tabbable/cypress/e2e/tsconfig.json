@@ -1,0 +1,26 @@
+{
+  "include": ["./**/*", "../support/**/*"],
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "useDefineForClassFields": true,
+    // Required in Vue projects
+    "jsx": "preserve",
+    "noImplicitThis": true,
+    "strict": true,
+    // Required in Vite
+    // "isolatedModules": true,
+    "preserveValueImports": true,
+    "importsNotUsedAsValues": "error",
+    "target": "ES2019",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    "isolatedModules": false,
+    // "target": "es5",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "types": ["cypress"]
+  }
+}

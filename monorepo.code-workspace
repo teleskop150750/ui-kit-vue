@@ -4,6 +4,9 @@
       "path": "packages/async-validator"
     },
     {
+      "path": "packages/tabbable"
+    },
+    {
       "path": "ui-kit/vue"
     }
   ]

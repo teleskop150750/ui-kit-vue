@@ -16,7 +16,7 @@ export default defineConfig({
     Dts({
       insertTypesEntry: true,
       include: ['src/**/*.ts', 'src/**/*.vue', 'src/**/*.d.ts'],
-      tsConfigFilePath: './tsconfig.vitest.json',
+      tsConfigFilePath: './tsconfig.node.json',
       outputDir: './dist/types',
     }),
   ],
