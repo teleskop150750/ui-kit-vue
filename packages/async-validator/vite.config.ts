@@ -12,7 +12,7 @@ export default defineConfig({
     Dts({
       insertTypesEntry: true,
       include: ['src/**/*.ts', 'src/**/*.d.ts'],
-      tsConfigFilePath: './tsconfig.node.json',
+      tsConfigFilePath: './tsconfig.json',
     }),
   ],
   build: {
