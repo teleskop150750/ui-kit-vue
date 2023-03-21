@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.app.json",
+  "exclude": [],
+  "include": ["env.d.ts", "test/**/*", "vite.config.*", "cypress.config.*", "vitest.config.*"],
+  "compilerOptions": {
+    "composite": true,
+    "types": ["node", "jsdom"]
+  }
+}
