@@ -7,6 +7,7 @@ export function delay(fn: Function) {
   return setTimeout(fn, 0)
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function valueOrHandler(value: string | Function | any, ...params: any) {
   return typeof value === 'function' ? value(...params) : value
 }

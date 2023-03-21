@@ -4,7 +4,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@theme/*": ["../../ui-kit/theme/src/*"],
+      "@ui": ["../../ui-kit/vue/src/index.ts"]
     }
   },
 

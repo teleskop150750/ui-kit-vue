@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { tabbable } from '../../src'
 import { getFixtures, getIdsFromElementsArray, removeAllChildNodes, setupFixture, setupTestWindow } from './e2e.helpers'
 
@@ -295,7 +296,7 @@ describe('tabbable', () => {
     it('correctly identifies tabbable elements in the "radio" example without the `CSS.escape` functionality', () => {
       const actualEscape = CSS.escape
 
-      CSS.escape = undefined
+      CSS.escape = undefined as any
       cy.spy(console, 'error')
 
       const expectedTabbableIds = [

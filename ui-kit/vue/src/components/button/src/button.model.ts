@@ -15,7 +15,7 @@ export const nButtonProps = buildProps({
   appearance: {
     type: String,
     values: nButtonAppearances,
-    default: 'primary',
+    default: '',
   },
   mode: {
     type: String,

@@ -6,7 +6,7 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".nuxt/**"]
     },
-    "lint": {
+    "test": {
       "outputs": []
     },
     "type-check": {

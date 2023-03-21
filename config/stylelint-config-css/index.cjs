@@ -25,7 +25,7 @@ module.exports = {
       },
     ],
     'declaration-property-value-no-unknown': true,
-    'string-quotes': 'single',
+    // 'string-quotes': 'single',
     'color-format/format': {
       format: 'hsl',
     },

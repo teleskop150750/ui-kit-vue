@@ -944,7 +944,7 @@ module.exports = {
     'block-spacing': 'error',
 
     // Обеспечить согласованный стиль скобок для блоков
-    'brace-style': 'error',
+    'brace-style': ['error', '1tbs', { allowSingleLine: false }],
 
     // Требовать или запрещать запятые в конце
     'comma-dangle': [
@@ -1324,6 +1324,7 @@ module.exports = {
     'yield-star-spacing': ['error', { before: false, after: true }],
 
     // ==================
+    'curly': 'error',
 
     // import
     'import/extensions': 'off',

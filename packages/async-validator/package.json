@@ -3,8 +3,13 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "module": "./dist/index.js",
-  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs"
+    }
+  },
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "run-p type-check build-only",
     "build-only": "vite build",

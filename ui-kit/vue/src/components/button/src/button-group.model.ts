@@ -5,7 +5,7 @@ import { nButtonProps } from './button.model'
 export const nButtonGroupProps = {
   size: nButtonProps.size,
 
-  type: nButtonProps.type,
+  appearance: nButtonProps.appearance,
 } as const
 
 export type NButtonGroupProps = ExtractPropTypes<typeof nButtonGroupProps>

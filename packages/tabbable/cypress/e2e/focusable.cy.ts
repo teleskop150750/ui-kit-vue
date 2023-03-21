@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // https://docs.cypress.io/api/introduction/api.html
 
 import { focusable } from '../../src'

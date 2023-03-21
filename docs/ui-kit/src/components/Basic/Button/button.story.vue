@@ -116,7 +116,7 @@ const icon = computed(() => iconsMap[basicButtonData.icon])
     </Variant>
 
     <Variant title="Group">
-      <NButtonGroup>
+      <NButtonGroup size="small" appearance="warning">
         <NButton
           :label="basicButtonData.label"
           :appearance="basicButtonData.appearance"

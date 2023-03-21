@@ -1,4 +1,4 @@
-import '@nado/ui-kit-theme/styles'
+import '@theme/all.css'
 
 import { createApp } from 'vue'
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { isClient } from '@vueuse/core'
 import type { CSSProperties } from 'vue'
 

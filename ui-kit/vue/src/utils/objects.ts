@@ -22,3 +22,5 @@ export const getProp = <T = any>(
     set(obj, path, val)
   },
 })
+
+export { clone as cloneObject } from 'lodash-es'

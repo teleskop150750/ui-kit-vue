@@ -11,10 +11,16 @@ provide(
   BUTTON_GROUP_INJECTION_KEY,
   reactive({
     size: toRef(props, 'size'),
-    type: toRef(props, 'type'),
+    appearance: toRef(props, 'appearance'),
   }),
 )
 const ns = useNamespace('button-group')
+</script>
+
+<script lang="ts">
+export default {
+  name: 'NButtonGroup',
+}
 </script>
 
 <template>

@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { NButton } from '@nado/ui-kit-vue'
+import { NButton, NButtonGroup } from '@ui'
 </script>
 
 <template>
   <main>
-    <NButton label="Button" />
+    <NButtonGroup size="small" appearance="success">
+      <NButton appearance="primary">Prev</NButton>
+      <NButton>Next</NButton>
+    </NButtonGroup>
   </main>
 </template>

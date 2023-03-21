@@ -1,17 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { focusable, tabbable } from '../../src'
 import { fixtures } from '../fixtures/fixtures'
 
-const getElementIds = (elements) => elements.map((el) => el.id)
+const getElementIds = (elements: HTMLElement[]) => elements.map((el) => el.id)
 
-const expectElementsInOrder = (receivedIds, expectedIds) => {
-  console.log('receivedIds, expectedIds', receivedIds, expectedIds)
+const expectElementsInOrder = (receivedIds: string[], expectedIds: string[]) => {
   expect(receivedIds).toStrictEqual(expectedIds)
 }
 
 describe('unit tests', () => {
-  let options
+  let options: any
 
   beforeEach(() => {
     // NOTE: in jest, the only display check that's expected to work is 'none' because
@@ -25,24 +25,19 @@ describe('unit tests', () => {
     //  find the same nodes regardless of whether they're attached or not
 
     describe('basic example', () => {
-      let container
+      let container: any
 
       beforeEach(() => {
         container = document.createElement('div')
         container.innerHTML = fixtures.basic
-        console.log('fixtures.basic', fixtures.basic)
 
         document.body.append(container)
       })
 
       it('correctly identifies tabbable elements', () => {
-        console.log('container', container)
-
         const elements = tabbable(container, options)
 
-        console.log('elements', elements)
-
-        expectElementsInOrder(getElementIds(elements), [
+        expectElementsInOrder(getElementIds(elements as any), [
           'tabindex-hrefless-anchor',
           'contenteditable-true', // JSDom doesn't appear to support contenteditable
           'contenteditable-nesting', // JSDom doesn't appear to support contenteditable
@@ -70,7 +65,7 @@ describe('unit tests', () => {
     })
 
     describe('inert example', () => {
-      let container
+      let container: any
 
       beforeEach(() => {
         container = document.createElement('div')
@@ -81,7 +76,7 @@ describe('unit tests', () => {
       it('correctly identifies tabbable elements', () => {
         const elements = tabbable(container, options)
 
-        expectElementsInOrder(getElementIds(elements), [])
+        expectElementsInOrder(getElementIds(elements as any), [])
       })
     })
   })
@@ -92,7 +87,7 @@ describe('unit tests', () => {
     //  find the same nodes regardless of whether they're attached or not
 
     describe('basic example', () => {
-      let container
+      let container: any
 
       beforeEach(() => {
         container = document.createElement('div')
@@ -103,7 +98,7 @@ describe('unit tests', () => {
       it('correctly identifies focusable elements', () => {
         const elements = focusable(container, options)
 
-        expectElementsInOrder(getElementIds(elements), [
+        expectElementsInOrder(getElementIds(elements as any), [
           'contenteditable-true',
           'contenteditable-nesting',
           'contenteditable-negative-tabindex',
@@ -133,7 +128,7 @@ describe('unit tests', () => {
     })
 
     describe('inert example', () => {
-      let container
+      let container: any
 
       beforeEach(() => {
         container = document.createElement('div')
@@ -144,7 +139,7 @@ describe('unit tests', () => {
       it('correctly identifies focusable elements', () => {
         const elements = focusable(container, options)
 
-        expectElementsInOrder(getElementIds(elements), [])
+        expectElementsInOrder(getElementIds(elements as any), [])
       })
     })
   })

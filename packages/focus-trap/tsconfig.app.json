@@ -1,8 +1,9 @@
 {
   "extends": "./tsconfig.base.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "include": ["env.d.ts", "src/**/*", "docs/**/*"],
   "compilerOptions": {
     "composite": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "types": ["vite/client"]
   }
 }

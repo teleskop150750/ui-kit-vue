@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable promise/no-callback-in-promise */
 /* eslint-disable promise/catch-or-return */
 export function setupTestWindow(done: (testWindow: Window) => void) {
   cy.visit('./cypress/test-sandbox.html')

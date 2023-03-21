@@ -1,8 +1,6 @@
 <script setup lang="ts">
 const instance = getCurrentInstance()!
 
-console.log()
-
 watch(
   () => ({
     ...instance.proxy!.$route,

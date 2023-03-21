@@ -8,6 +8,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [vue(), vueJsx()],
   server: {
+    port: 6000,
     fs: {
       // strict: false,
       allow: ['../../'],

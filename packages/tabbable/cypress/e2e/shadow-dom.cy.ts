@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { focusable, isFocusable, isTabbable, tabbable } from '../../src'
 import { getFixtures, getIdsFromElementsArray, removeAllChildNodes, setupFixture, setupTestWindow } from './e2e.helpers'
 

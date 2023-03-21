@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getByTestId, getByText } from '@testing-library/dom'
 
 import { isFocusable } from '../../src'

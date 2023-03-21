@@ -1,14 +1,23 @@
 {
   "name": "@nado/focus-trap",
+  "type": "module",
   "version": "0.0.0",
   "private": true,
-  "main": "./src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs"
+    }
+  },
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
     "build-only": "vite build",
     "type-check": "tsc --noEmit -p ./tsconfig.app.json",
-    "test:e2e": "ELECTRON_ENABLE_LOGGING=1 cypress run",
+    "cypress": "start-server-and-test dev 5173 'cypress open'",
+    "test:ci": "cypress run --browser electron",
+    "test:e2e": "ELECTRON_ENABLE_LOGGING=1 cypress run --browser electron",
     "test:e2e:dev": "cypress open",
     "prettier": "prettier --check --ignore-unknown \"**/*\"",
     "prettier:fix": "prettier --write --ignore-unknown \"**/*\"",

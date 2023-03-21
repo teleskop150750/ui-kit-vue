@@ -13,7 +13,6 @@ export default defineConfig({
       insertTypesEntry: true,
       include: ['src/**/*.ts', 'src/**/*.d.ts'],
       tsConfigFilePath: './tsconfig.node.json',
-      outputDir: './dist/types',
     }),
   ],
   build: {

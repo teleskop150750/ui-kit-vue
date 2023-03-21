@@ -12,8 +12,7 @@ export default defineConfig({
     Dts({
       insertTypesEntry: true,
       include: ['src/**/*.ts', 'src/**/*.d.ts'],
-      tsConfigFilePath: './tsconfig.json',
-      outputDir: './dist/types',
+      tsConfigFilePath: './tsconfig.node.json',
     }),
   ],
   build: {
@@ -21,7 +20,7 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: resolve(__dirname, './src/index.ts'),
-      name: 'Validate',
+      name: 'AsyncValidator',
       formats: ['es'],
       // the proper extensions will be added
       fileName: 'index',

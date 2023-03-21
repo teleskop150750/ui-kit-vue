@@ -32,7 +32,7 @@ export function useGetNodeForOption(config: Config) {
       optionValue = optionValue(params as FocusableElement)
     }
 
-    // TODO: Кто вернут true?
+    // TODO: Кто вернет true?
     if ((optionValue as boolean) === true) {
       optionValue = undefined // use default value
     }

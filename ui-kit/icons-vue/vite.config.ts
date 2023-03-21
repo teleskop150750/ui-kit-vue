@@ -13,7 +13,7 @@ export default defineConfig({
     Dts({
       insertTypesEntry: true,
       include: ['src/**/*.ts', 'src/**/*.vue', 'src/**/*.d.ts'],
-      tsConfigFilePath: './tsconfig.vitest.json',
+      tsConfigFilePath: './tsconfig.node.json',
     }),
   ],
   build: {
@@ -21,7 +21,7 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: resolve(__dirname, './src/index.ts'),
-      name: 'Icons',
+      name: 'VueIcons',
       formats: ['es'],
       // the proper extensions will be added
       fileName: 'index',

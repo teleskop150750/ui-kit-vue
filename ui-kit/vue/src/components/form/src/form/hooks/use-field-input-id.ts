@@ -1,9 +1,8 @@
-import { FORM_CONTEXT_INJECTION_KEY, FORM_ITEM_INJECTION_KEY, type FormItemContext } from '@ui/tokens'
+import { useId } from '@ui/hooks'
 import type { Nillable } from '@ui/utils'
 import {
   computed,
   type ComputedRef,
-  inject,
   onMounted,
   onUnmounted,
   type Ref,
@@ -13,35 +12,25 @@ import {
   type WatchStopHandle,
 } from 'vue'
 
-import { useId } from '../use-id'
-
-export function useFormItem() {
-  const form = inject(FORM_CONTEXT_INJECTION_KEY, undefined)
-  const formItem = inject(FORM_ITEM_INJECTION_KEY, undefined)
-
-  return {
-    form,
-    formItem,
-  }
-}
+import type { NFormItemContext } from '../../tokens'
 
 export interface IUseFormItemInputCommonProps {
   id?: string
   label?: string | number | boolean | Record<string, any>
 }
 
-export const useFormItemInputId = (
+export function useFormItemInputId(
   props: Partial<IUseFormItemInputCommonProps>,
   {
     formItemContext,
     disableIdGeneration,
     disableIdManagement,
   }: {
-    formItemContext?: FormItemContext
+    formItemContext?: NFormItemContext
     disableIdGeneration?: ComputedRef<boolean> | Ref<boolean>
     disableIdManagement?: ComputedRef<boolean> | Ref<boolean>
   },
-) => {
+) {
   if (!disableIdGeneration) {
     disableIdGeneration = ref<boolean>(false)
   }

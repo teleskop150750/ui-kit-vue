@@ -4,14 +4,14 @@ import { useNamespace } from '@ui/hooks'
 import { computed, useSlots } from 'vue'
 
 import { nButtonEmits, nButtonProps } from './button.model'
-import { useButton } from './useButton'
+import { useButton } from './use-button'
 
 const props = defineProps(nButtonProps)
 const emit = defineEmits(nButtonEmits)
 
 const ns = useNamespace('button')
 const nsGroup = useNamespace('button-group')
-const { _ref, _size, _type, _disabled, handleClick, isButtonGroup } = useButton(props, emit)
+const { _ref, _size, _appearance, _disabled, handleClick, isButtonGroup } = useButton(props, emit)
 
 const slots = useSlots()
 const hasLabel = computed(() => props.label !== undefined && props.label !== null && props.label !== '')
@@ -23,7 +23,7 @@ const actionable = computed(() => _disabled.value !== true && props.loading !== 
 defineExpose({
   ref: _ref,
   size: _size,
-  type: _type,
+  _appearance,
   disabled: _disabled,
 })
 </script>
@@ -40,12 +40,12 @@ export default {
     :class="[
       nsGroup.e('item', isButtonGroup),
       ns.b(),
-      ns.type('appearance', appearance),
+      ns.type('appearance', _appearance || 'primary'),
       ns.type('mode', mode),
-      ns.type('size', size),
+      ns.type('size', _size),
       ns.type('align', align),
       ns.is('round', round),
-      ns.is('disabled', disabled),
+      ns.is('disabled', _disabled),
       ns.is('loading', props.loading),
       ns.is('hoverable', actionable),
     ]"
