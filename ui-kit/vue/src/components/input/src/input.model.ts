@@ -6,80 +6,44 @@ import type { ExtractPropTypes, StyleValue } from 'vue'
 
 import type Input from './input.vue'
 
-export type InputAutoSize = { minRows?: number; maxRows?: number } | boolean
+export type NInputAutoSize = { minRows?: number; maxRows?: number } | boolean
 
-export const inputProps = buildProps({
-  /**
-   * @description native input id
-   */
+export const nInputProps = buildProps({
+  loading: {
+    type: Boolean,
+  },
+  error: {
+    type: Boolean,
+  },
   id: {
     type: String,
     default: undefined,
   },
-  /**
-   * @description input box size
-   */
   size: useSizeProp,
-  /**
-   * @description whether to disable
-   */
   disabled: Boolean,
-  /**
-   * @description binding value
-   */
   modelValue: {
     type: definePropType<string | number | null | undefined>([String, Number, Object]),
     default: '',
   },
-  /**
-   * @description type of input
-   */
   type: {
     type: String,
     default: 'text',
   },
-  /**
-   * @description control the resizability
-   */
   resize: {
     type: String,
     values: ['none', 'both', 'horizontal', 'vertical'],
   },
-  /**
-   * @description format content
-   */
-  formatter: {
-    type: Function,
-  },
-  /**
-   * @description parse content
-   */
-  parser: {
-    type: Function,
-  },
-  /**
-   * @description whether textarea has an adaptive height
-   */
   autosize: {
-    type: definePropType<InputAutoSize>([Boolean, Object]),
+    type: definePropType<NInputAutoSize>([Boolean, Object]),
     default: false,
   },
-  /**
-   * @description native input autocomplete
-   */
   autocomplete: {
     type: String,
     default: 'off',
   },
-  /**
-   * @description placeholder
-   */
   placeholder: {
     type: String,
   },
-  /**
-   * @description native input form
-   */
   form: {
     type: String,
   },
@@ -159,14 +123,16 @@ export const inputProps = buildProps({
     default: () => mutable({} as const),
   },
 } as const)
-export type InputProps = ExtractPropTypes<typeof inputProps>
+export type NInputProps = ExtractPropTypes<typeof nInputProps>
 
-export const inputEmits = {
+export const nInputEmits = {
   [UPDATE_MODEL_EVENT]: (value: string) => isString(value),
   input: (value: string) => isString(value),
   change: (value: string) => isString(value),
-  focus: (evt: FocusEvent) => evt instanceof FocusEvent,
-  blur: (evt: FocusEvent) => evt instanceof FocusEvent,
+  // focus: () => true,
+
+  focus: (evt: FocusEvent) => evt instanceof Event,
+  blur: (evt: FocusEvent) => evt instanceof Event,
   clear: () => true,
   mouseleave: (evt: MouseEvent) => evt instanceof MouseEvent,
   mouseenter: (evt: MouseEvent) => evt instanceof MouseEvent,
@@ -174,10 +140,10 @@ export const inputEmits = {
   // relative bug report https://github.com/element-plus/element-plus/issues/6665
   keydown: (evt: KeyboardEvent | Event) => evt instanceof Event,
   // TODO: NADO не китайцы
-  // compositionstart: (evt: CompositionEvent) => evt instanceof CompositionEvent,
-  // compositionupdate: (evt: CompositionEvent) => evt instanceof CompositionEvent,
-  // compositionend: (evt: CompositionEvent) => evt instanceof CompositionEvent,
+  compositionstart: (evt: CompositionEvent) => evt instanceof CompositionEvent,
+  compositionupdate: (evt: CompositionEvent) => evt instanceof CompositionEvent,
+  compositionend: (evt: CompositionEvent) => evt instanceof CompositionEvent,
 }
-export type InputEmits = typeof inputEmits
+export type NInputEmits = typeof nInputEmits
 
-export type InputInstance = InstanceType<typeof Input>
+export type NInputInstance = InstanceType<typeof Input>

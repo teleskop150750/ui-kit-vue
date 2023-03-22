@@ -456,7 +456,7 @@ const asyncValidator = useAsyncValidator({
 or
 
 ```js
-globalThis.ASYNC_VALIDATOR_NO_WARNING = 1
+// globalThis.ASYNC_VALIDATOR_NO_WARNING = 1
 ```
 
 ### How to check if it is `true`

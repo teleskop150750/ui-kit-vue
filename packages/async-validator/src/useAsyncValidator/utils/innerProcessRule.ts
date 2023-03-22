@@ -1,25 +1,18 @@
 import type { InternalRuleItem, RuleCallback, RuleValuePackage, ValidateOption, ValidateResult } from '../../types'
 
-export function innerProcessRule(rulePackage: RuleValuePackage, cb: RuleCallback, options: ValidateOption) {
+export function innerProcessRule(rulePackage: RuleValuePackage, ruleCb: RuleCallback, options: ValidateOption) {
   const { rule, value, source } = rulePackage
-  let res: ValidateResult
+  let result: ValidateResult
 
   if (rule.asyncValidator) {
-    res = rule.asyncValidator(rule, value, cb, source, options)
-
-    if (res && (res as Promise<void>).then) {
-      // eslint-disable-next-line promise/no-callback-in-promise
-      ;(res as Promise<void>).then(() => setTimeout(() => cb(), 0)).catch((error) => setTimeout(() => cb(error), 0))
-    }
-
-    return
-  }
-
-  if (rule.validator) {
+    result = rule.asyncValidator(rule, value, ruleCb, source, options)
+  } else if (rule.validator) {
     try {
-      res = rule.validator(rule, value, cb, source, options)
+      result = rule.validator(rule, value, ruleCb, source, options)
     } catch (error) {
-      console.error?.(error)
+      if (options.suppressConsole === false) {
+        console.error?.(error)
+      }
 
       // rethrow to report error
       if (!options.suppressValidatorError) {
@@ -28,22 +21,28 @@ export function innerProcessRule(rulePackage: RuleValuePackage, cb: RuleCallback
         }, 0)
       }
 
-      cb((error as Error).message)
+      ruleCb((error as Error).message)
     }
 
-    callCb(res, rule, cb)
+    callCb(result, rule, ruleCb)
+  }
+
+  if (result && (result as Promise<void>).then) {
+    ;(result as Promise<void>)
+      .then(() => setTimeout(() => ruleCb(), 0))
+      .catch((error) => setTimeout(() => ruleCb(error), 0))
   }
 }
 
-function callCb(res: ValidateResult, rule: InternalRuleItem, cb: RuleCallback) {
+function callCb(res: ValidateResult, rule: InternalRuleItem, ruleCb: RuleCallback) {
   if (res === true) {
-    cb()
+    ruleCb()
   } else if (res === false) {
-    cb(getRuleMessage(rule))
+    ruleCb(getRuleMessage(rule))
   } else if (Array.isArray(res)) {
-    cb(res)
+    ruleCb(res)
   } else if (res instanceof Error) {
-    cb(res.message)
+    ruleCb(res.message)
   }
 }
 

@@ -2,7 +2,7 @@ import type { RuleItem } from '@nado/async-validator'
 import { getProp } from '@ui/utils'
 import type { Arrayable } from '@vueuse/core'
 import { castArray } from 'lodash-es'
-import { computed, inject } from 'vue'
+import { computed, type ComputedRef, inject } from 'vue'
 
 import { FORM_CONTEXT_INJECTION_KEY } from '../../tokens'
 import type { NFormItemProps } from '../form-item.model'
@@ -51,10 +51,8 @@ export function useFieldRules(props: NFormItemProps) {
     return rules
   })
 
-  function filterRules(trigger: string) {
-    const rules = fieldRules.value
-
-    return rules
+  function filterRulesByTrigger(rules: ComputedRef<FormItemRule[]>, trigger: string) {
+    return rules.value
       .filter((rule) => {
         if (!rule.trigger || !trigger) {
           return true
@@ -71,7 +69,7 @@ export function useFieldRules(props: NFormItemProps) {
 
   return {
     fieldRules,
-    filterRules,
+    filterRulesByTrigger,
   }
 }
 

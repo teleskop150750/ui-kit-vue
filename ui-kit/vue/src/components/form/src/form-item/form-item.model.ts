@@ -2,6 +2,7 @@ import { componentSizes } from '@ui/constants'
 import { type Arrayable, buildProps, definePropType } from '@ui/utils'
 import type { ExtractPropTypes } from 'vue'
 
+import type FormItem from './form-item.vue'
 import type { FormItemRule } from './types'
 
 export const formItemValidateStates = ['', 'error', 'validating', 'success'] as const
@@ -18,10 +19,20 @@ export const nFormItemProps = buildProps({
     type: Boolean,
     default: undefined,
   },
+  hint: {
+    type: Boolean,
+    default: undefined,
+  },
+  maxErrors: {
+    type: Number,
+    default: 0,
+  },
   rules: {
     type: definePropType<Arrayable<FormItemRule>>([Object, Array]),
   },
-  error: String,
+  error: {
+    type: definePropType<NFormItemProp>([String, Array]),
+  },
   validateStatus: {
     type: String,
     values: formItemValidateStates,
@@ -37,3 +48,5 @@ export const nFormItemProps = buildProps({
   },
 } as const)
 export type NFormItemProps = ExtractPropTypes<typeof nFormItemProps>
+
+export type NFormItemInstance = InstanceType<typeof FormItem>

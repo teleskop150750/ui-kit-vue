@@ -27,11 +27,8 @@ export function useStyleClasses({ props, validateState, size, isRequired }: Para
     { [ns.m('feedback')]: formContext?.statusIcon },
   ])
 
-  const validateClasses = computed(() => [ns.e('error')])
-
   return {
     ns,
     formItemClasses,
-    validateClasses,
   }
 }

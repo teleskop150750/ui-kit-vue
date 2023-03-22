@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { type RuleItem, useAsyncValidator } from '@nado/async-validator'
-import { cloneObject, getProp, isFunction } from '@ui/utils'
+import { arrWrap, cloneObject, getProp, isFunction } from '@ui/utils'
 import { computed, inject, nextTick, onBeforeUnmount, onMounted, provide, reactive, ref, toRefs, watch } from 'vue'
 
 import type { NFormValidateFailure } from '../form/types'
-import { useFormSize } from '../shared'
+import { useFormSize } from '../hooks'
 import { FORM_CONTEXT_INJECTION_KEY, FORM_ITEM_INJECTION_KEY, type NFormItemContext } from '../tokens'
 import { nFormItemProps } from './form-item.model'
 import {
@@ -25,16 +25,24 @@ const size = useFormSize(undefined, { formItem: false })
 
 const { validateState, setValidationState } = useValidationState()
 const { shouldShowError } = useShouldShowError(props, validateState)
-const validateMessage = ref('')
+const validateMessages = ref<string[]>([])
 const formItemRef = ref<HTMLDivElement>()
+const sliceValidateMessages = computed(() => {
+  if (props.maxErrors < 1) {
+    return validateMessages.value
+  }
+
+  return validateMessages.value.slice(0, props.maxErrors)
+})
+const shouldShowHint = computed(() => props.hint && !shouldShowError.value && sliceValidateMessages.value)
 // special inline value.
 let initialValue: unknown = undefined
 let isResettingField = false
 // ===========
-const { fieldRules, filterRules } = useFieldRules(props)
+const { fieldRules, filterRulesByTrigger } = useFieldRules(props)
 const { hasLabel, currentLabel, labelFor, labelId, inputIds, addInputId, removeInputId } = useLabelId(props)
 const isRequired = computed(() => fieldRules.value.some((rule) => rule.required))
-const { ns, formItemClasses, validateClasses } = useStyleClasses({
+const { ns, formItemClasses } = useStyleClasses({
   props,
   isRequired,
   size,
@@ -47,46 +55,7 @@ const isGroup = computed<boolean>(() => !labelFor.value && hasLabel.value)
 
 const { fieldValue } = useFieldValue(props)
 
-const validateEnabled = computed(() => fieldRules.value.length > 0)
-
-function onValidationFailed(error: NFormValidateFailure) {
-  const { errors, fields } = error
-
-  if (!errors || !fields) {
-    console.error(error)
-  }
-
-  setValidationState('error')
-  validateMessage.value = errors ? errors?.[0]?.message ?? `${props.prop} is required` : ''
-
-  formContext?.emit('validate', props.prop!, false, validateMessage.value)
-}
-
-function onValidationSucceeded() {
-  setValidationState('success')
-  formContext?.emit('validate', props.prop!, true, '')
-}
-
-async function doValidate(rules: RuleItem[]): Promise<true> {
-  const modelName = propName.value
-  const { useSchema } = useAsyncValidator()
-  const validator = useSchema({
-    [modelName]: rules,
-  })
-
-  return validator
-    .validateWithOptions({ [modelName]: fieldValue.value }, { firstFields: true })
-    .then(() => {
-      onValidationSucceeded()
-
-      return true as const
-    })
-    .catch((error: NFormValidateFailure) => {
-      onValidationFailed(error as NFormValidateFailure)
-
-      throw error
-    })
-}
+const hasRules = computed(() => fieldRules.value.length > 0)
 
 const validate: NFormItemContext['validate'] = async (trigger, callback) => {
   // skip validation if its resetting
@@ -94,15 +63,15 @@ const validate: NFormItemContext['validate'] = async (trigger, callback) => {
     return false
   }
 
-  const hasCallback = isFunction(callback)
+  const shouldThrow = isFunction(callback)
 
-  if (!validateEnabled.value) {
+  if (!hasRules.value) {
     callback?.(false)
 
     return false
   }
 
-  const filteredRules = filterRules(trigger)
+  const filteredRules = filterRulesByTrigger(fieldRules, trigger)
 
   if (filteredRules.length === 0) {
     callback?.(true)
@@ -114,6 +83,7 @@ const validate: NFormItemContext['validate'] = async (trigger, callback) => {
 
   return doValidate(filteredRules)
     .then(() => {
+      // eslint-disable-next-line promise/no-callback-in-promise
       callback?.(true)
 
       return true as const
@@ -121,15 +91,57 @@ const validate: NFormItemContext['validate'] = async (trigger, callback) => {
     .catch((error: NFormValidateFailure) => {
       const { fields } = error
 
+      // eslint-disable-next-line promise/no-callback-in-promise
       callback?.(false, fields)
 
-      return hasCallback ? false : Promise.reject(fields)
+      return shouldThrow ? false : Promise.reject(fields)
     })
+}
+
+async function doValidate(rules: RuleItem[]): Promise<true> {
+  const modelName = propName.value
+  const { useSchema } = useAsyncValidator()
+  const validator = useSchema({
+    [modelName]: rules,
+  })
+
+  return validator
+    .validateWithOptions({ [modelName]: fieldValue.value }, { firstFields: false })
+    .then(() => {
+      onValidationSucceeded()
+
+      return true as const
+    })
+    .catch((error: NFormValidateFailure) => {
+      onValidationFailed(error)
+
+      throw error
+    })
+}
+
+function onValidationSucceeded() {
+  setValidationState('success')
+  formContext?.emit('validate', props.prop!, true, [])
+}
+
+function onValidationFailed(error: NFormValidateFailure) {
+  const { errors, fields } = error
+
+  if (!errors || !fields) {
+    // eslint-disable-next-line no-console
+    console.error(error)
+  }
+
+  setValidationState('error')
+
+  validateMessages.value = (errors || []).map((el) => el?.message || `${props.prop} is required`)
+
+  formContext?.emit('validate', props.prop!, false, validateMessages.value)
 }
 
 const clearValidate: NFormItemContext['clearValidate'] = () => {
   setValidationState('')
-  validateMessage.value = ''
+  validateMessages.value = []
   isResettingField = false
 }
 
@@ -156,7 +168,7 @@ const resetField: NFormItemContext['resetField'] = async () => {
 watch(
   () => props.error,
   (val) => {
-    validateMessage.value = val || ''
+    validateMessages.value = val ? arrWrap(val) : []
     setValidationState(val ? 'error' : '')
   },
   { immediate: true },
@@ -198,12 +210,18 @@ onBeforeUnmount(() => {
 
 defineExpose({
   size,
-  validateMessage,
+  validateMessages,
   validateState,
   validate,
   clearValidate,
   resetField,
 })
+</script>
+
+<script lang="ts">
+export default {
+  name: 'NFormItem',
+}
 </script>
 
 <template>
@@ -221,13 +239,24 @@ defineExpose({
 
     <div :class="ns.e('content')">
       <slot />
-      <transition-group :name="`${ns.namespace}-zoom-in-top`">
-        <slot v-if="shouldShowError" name="error" :error="validateMessage">
-          <div :class="validateClasses">
-            {{ validateMessage }}
+    </div>
+    <div :class="ns.e('derail')">
+      <div v-if="shouldShowHint" :class="[ns.e('message'), ns.eType('message', 'type', 'hint')]">
+        <div :class="ns.e('message-text')">
+          {{ hint }}
+        </div>
+      </div>
+      <slot v-if="shouldShowError" name="errors" :errors="sliceValidateMessages">
+        <div
+          v-for="(message, n) in sliceValidateMessages"
+          :key="n"
+          :class="[ns.e('message'), ns.eType('message', 'type', 'error')]"
+        >
+          <div :class="ns.e('message-text')">
+            {{ message }}
           </div>
-        </slot>
-      </transition-group>
+        </div>
+      </slot>
     </div>
   </div>
 </template>

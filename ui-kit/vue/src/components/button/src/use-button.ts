@@ -15,7 +15,6 @@ export const useButton = (props: ButtonProps, emit: SetupContext<ButtonEmits>['e
   const _ref = ref<HTMLButtonElement>()
 
   // const slots = useSlots()
-  console.log(buttonGroupContext?.appearance)
 
   const _appearance = computed(() => props.appearance || buttonGroupContext?.appearance || '')
 

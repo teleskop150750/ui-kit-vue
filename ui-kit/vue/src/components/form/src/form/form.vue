@@ -1,12 +1,11 @@
 <script lang="ts" setup>
 import type { ValidateFieldsError } from '@nado/async-validator'
 import { useNamespace } from '@ui/hooks'
-import { debugWarn, isFunction } from '@ui/utils'
-import type { Arrayable } from '@vueuse/core'
+import { type Arrayable, debugWarn, isFunction } from '@ui/utils'
 import { computed, provide, reactive, toRefs, watch } from 'vue'
 
 import type { NFormItemProp } from '../form-item/form-item.model'
-import { useFormSize } from '../shared'
+import { useFormSize } from '../hooks'
 import { FORM_CONTEXT_INJECTION_KEY, type NFormContext, type NFormItemContext } from '../tokens'
 import { nFormEmits, nFormProps } from './form.model'
 import { useFormItemList } from './hooks'
@@ -21,19 +20,7 @@ const fields: NFormItemContext[] = []
 
 const formSize = useFormSize()
 const ns = useNamespace('form')
-const formClasses = computed(() => {
-  const { inline } = props
-
-  return [
-    ns.b(),
-    // todo: in v2.2.0, we can remove default
-    // in fact, remove it doesn't affect the final style
-    ns.m(formSize.value || 'default'),
-    {
-      [ns.m('inline')]: inline,
-    },
-  ]
-})
+const formClasses = computed(() => [ns.b(), ns.type('size', formSize.value || 'default')])
 
 const isValidatable = computed(() => {
   const hasModel = !!props.model
@@ -45,7 +32,11 @@ const isValidatable = computed(() => {
   return hasModel
 })
 
-const { addField, removeField, obtainValidateFields } = useFormItemList(fields)
+const { addField, removeField, findValidateFields } = useFormItemList(fields)
+
+async function validate(callback?: NFormValidateCallback): NFormValidationResult {
+  return validateField(undefined, callback)
+}
 
 const validateField: NFormContext['validateField'] = async (modelProps = [], callback = undefined) => {
   const shouldThrow = !isFunction(callback)
@@ -78,34 +69,32 @@ const validateField: NFormContext['validateField'] = async (modelProps = [], cal
   }
 }
 
-async function validate(callback?: NFormValidateCallback): NFormValidationResult {
-  return validateField(undefined, callback)
-}
-
-async function doValidateField(props_: Arrayable<NFormItemProp> = []): Promise<boolean> {
+async function doValidateField(fieldNames: Arrayable<NFormItemProp> = []): Promise<boolean> {
   if (!isValidatable.value) {
     return false
   }
 
-  const finedFields = obtainValidateFields(props_)
+  const formItems = findValidateFields(fieldNames)
 
-  if (finedFields.length === 0) {
+  if (formItems.length === 0) {
     return true
   }
 
   let validationErrors: ValidateFieldsError = {}
 
-  for (const field of finedFields) {
-    try {
-      // eslint-disable-next-line no-await-in-loop
-      await field.validate('')
-    } catch (error) {
-      validationErrors = {
-        ...validationErrors,
-        ...(error as ValidateFieldsError),
+  const promises: NFormValidationResult[] = formItems.map((el) => el.validate(''))
+
+  // eslint-disable-next-line promise/always-return
+  await Promise.allSettled(promises).then((results) => {
+    results.forEach((el) => {
+      if (el.status === 'rejected') {
+        validationErrors = {
+          ...validationErrors,
+          ...(el.reason as ValidateFieldsError),
+        }
       }
-    }
-  }
+    })
+  })
 
   if (Object.keys(validationErrors).length === 0) {
     return true
@@ -114,18 +103,18 @@ async function doValidateField(props_: Arrayable<NFormItemProp> = []): Promise<b
   throw validationErrors
 }
 
-const resetFields: NFormContext['resetFields'] = (properties = []) => {
+const resetFields: NFormContext['resetFields'] = (fieldNames = []) => {
   if (!props.model) {
     debugWarn(COMPONENT_NAME, 'model is required for resetFields to work.')
 
     return
   }
 
-  filterFields(fields, properties).forEach((field) => field.resetField())
+  filterFields(fields, fieldNames).forEach((field) => field.resetField())
 }
 
-const clearValidate: NFormContext['clearValidate'] = (props_ = []) => {
-  filterFields(fields, props_).forEach((field) => field.clearValidate())
+const clearValidate: NFormContext['clearValidate'] = (fieldNames = []) => {
+  filterFields(fields, fieldNames).forEach((field) => field.clearValidate())
 }
 
 function scrollToField(prop: NFormItemProp) {
@@ -167,6 +156,12 @@ defineExpose({
   clearValidate,
   scrollToField,
 })
+</script>
+
+<script lang="ts">
+export default {
+  name: 'NForm',
+}
 </script>
 
 <template>

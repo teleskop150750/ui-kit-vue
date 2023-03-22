@@ -1,7 +1,6 @@
 import { messages as defaultMessagesThere, newMessages } from '../messages'
 import type {
   Arrayable,
-  CallbackRule,
   ExecuteValidator,
   InternalValidateMessages,
   RuleItem,
@@ -80,7 +79,7 @@ export function useAsyncValidator({ warning: userWarning = warning_.value } = {}
       return asyncProcessRulesMap(
         rulesMap,
         options,
-        (rulePackage: RuleValuePackage, processNextRule: (errors: ValidateError[]) => void) => {
+        (rulePackage: RuleValuePackage, finishOrProcessNextRule: (errors: ValidateError[]) => void) => {
           const { rule: innerRule, value, field } = rulePackage
 
           innerRule.field = field
@@ -108,11 +107,11 @@ export function useAsyncValidator({ warning: userWarning = warning_.value } = {}
             let validateErrors: ValidateError[] = errorList.map(complementError(innerRule, source))
 
             if (options.first && validateErrors.length > 0) {
-              return processNextRule(validateErrors)
+              return finishOrProcessNextRule(validateErrors)
             }
 
             if (!isDeepRule(innerRule, value)) {
-              processNextRule(validateErrors)
+              finishOrProcessNextRule(validateErrors)
 
               return
             }
@@ -127,7 +126,7 @@ export function useAsyncValidator({ warning: userWarning = warning_.value } = {}
                 validateErrors = [options.error(innerRule, format(options.messages?.required || '', innerRule.field))]
               }
 
-              return processNextRule(validateErrors)
+              return finishOrProcessNextRule(validateErrors)
             }
 
             let fieldRuleMap: RulesMap = {}
@@ -145,13 +144,13 @@ export function useAsyncValidator({ warning: userWarning = warning_.value } = {}
               ...innerRule.fields,
             }
 
-            const paredFieldsSchema: Record<string, RuleItem[]> = {}
+            const paredFieldsSchema: ValidatorRules = {}
 
             Object.keys(fieldRuleMap).forEach((fieldEl) => {
               const fieldSchema = fieldRuleMap[fieldEl]
               const fieldSchemaList = Array.isArray(fieldSchema) ? fieldSchema : [fieldSchema]
 
-              paredFieldsSchema[fieldEl] = fieldSchemaList.map<CallbackRule>(addFullField.bind(undefined, fieldEl))
+              paredFieldsSchema[fieldEl] = fieldSchemaList.map(addFullField.bind(undefined, fieldEl))
             })
             const schema = useSchema(paredFieldsSchema)
 
@@ -173,7 +172,7 @@ export function useAsyncValidator({ warning: userWarning = warning_.value } = {}
                 finalErrors.push(...errs)
               }
 
-              processNextRule(finalErrors.length > 0 ? finalErrors : [])
+              finishOrProcessNextRule(finalErrors.length > 0 ? finalErrors : [])
             })
           }
 

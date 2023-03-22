@@ -15,4 +15,16 @@
 
     outline: var(--n-sys-outline-primary);
   }
+
+  .n-textarea--is-exceed .n-textarea__native {
+    --n-comp-textarea-container-border-color: var(--n-sys-border-color-danger);
+  }
+
+  .n-textarea--is-exceed.n-textarea--is-focused .n-textarea__native {
+    outline: var(--n-sys-outline-danger);
+  }
+
+  .n-textarea--is-exceed .n-textarea__count {
+    color: var(--n-sys-color-danger-500);
+  }
 }

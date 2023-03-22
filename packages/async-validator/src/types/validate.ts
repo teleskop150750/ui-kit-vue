@@ -9,6 +9,9 @@ export interface ValidateOption {
   // whether to suppress internal warning
   suppressWarning?: boolean
 
+  // whether to suppress internal warning
+  suppressConsole?: boolean
+
   // whether to suppress validator error
   suppressValidatorError?: boolean
 

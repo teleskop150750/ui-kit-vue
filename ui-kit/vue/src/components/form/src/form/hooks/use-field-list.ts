@@ -7,7 +7,7 @@ import { filterFields } from '../utils'
 interface Result {
   addField: NFormContext['addField']
   removeField: NFormContext['removeField']
-  obtainValidateFields(props: Arrayable<NFormItemProp>): NFormItemContext[]
+  findValidateFields(props: Arrayable<NFormItemProp>): NFormItemContext[]
 }
 
 export function useFormItemList(fields: NFormItemContext[]): Result {
@@ -21,7 +21,7 @@ export function useFormItemList(fields: NFormItemContext[]): Result {
     }
   }
 
-  function obtainValidateFields(props: Arrayable<NFormItemProp>) {
+  function findValidateFields(props: Arrayable<NFormItemProp>) {
     if (fields.length === 0) {
       return []
     }
@@ -40,6 +40,6 @@ export function useFormItemList(fields: NFormItemContext[]): Result {
   return {
     addField,
     removeField,
-    obtainValidateFields,
+    findValidateFields,
   }
 }

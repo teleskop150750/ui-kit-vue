@@ -1,0 +1,41 @@
+@layer components {
+  .n-form-item {
+    /* label */
+    --n-comp-form-item-label-text-size: var(--n-sys-text-size-base);
+    --n-comp-form-item-label-text-weight: var(--n-sys-text-weight-medium);
+    --n-comp-form-item-label-text-color: var(--n-sys-text-color-default);
+
+    /* hint */
+  }
+
+  .n-form-item__label {
+    display: inline-flex;
+    flex: 0 0 auto;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    margin-bottom: 4px;
+    box-sizing: border-box;
+
+    color: var(--n-comp-form-item-label-text-color);
+    font-weight: var(--n-comp-form-item-label-text-weight);
+    font-size: var(--n-comp-form-item-label-text-size);
+  }
+
+  .n-form-item--size-small .n-form-item__label {
+    margin-bottom: 5px;
+
+    font-size: 12px;
+  }
+
+  .n-form-item__content {
+    position: relative;
+
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    align-items: center;
+
+    min-width: 0;
+  }
+}

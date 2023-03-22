@@ -10,18 +10,22 @@ export function asyncProcessRulesBeforeFistError(
 
   function processNextRule(errors: ValidateError[]) {
     if (errors && errors.length > 0) {
-      return complete(errors)
+      complete(errors)
+
+      return
     }
 
     const currRuleIndex = ruleIndex
 
     ruleIndex += 1
 
-    if (currRuleIndex <= lastRuleIndex) {
-      return processRule(rulesList[currRuleIndex], processNextRule)
+    if (currRuleIndex > lastRuleIndex) {
+      complete([])
+
+      return
     }
 
-    complete([])
+    processRule(rulesList[currRuleIndex], processNextRule)
   }
 
   processNextRule([])

@@ -24,7 +24,10 @@
     --n-sys-border-size: 2px;
     --n-sys-border-style: solid;
     --n-sys-border-color-base: var(--n-ref-palette-gray-400);
-    --n-sys-border-color-primary: var(--n-ref-palette-primary-500);
+    --n-sys-border-color-primary: var(--n-sys-color-primary-500);
+    --n-sys-border-color-danger: var(--n-sys-color-danger-500);
+    --n-sys-border-color-success: var(--n-sys-color-success-500);
+    --n-sys-border-color-warning: var(--n-sys-color-warning-500);
     --n-sys-border-base: var(--n-sys-border-size) var(--n-sys-border-style) var(--n-sys-border-color-danger);
   }
 }

@@ -2,7 +2,7 @@
 
 import type { SyncErrorType } from '../../types'
 
-declare let ASYNC_VALIDATOR_NO_WARNING: boolean | undefined
+// declare let ASYNC_VALIDATOR_NO_WARNING: boolean | undefined
 
 export const warning: { value: (type: string, errors: SyncErrorType[]) => void } = { value: () => {} }
 
@@ -18,7 +18,7 @@ if (
     if (
       typeof console !== 'undefined' &&
       console.warn &&
-      ASYNC_VALIDATOR_NO_WARNING === undefined &&
+      // ASYNC_VALIDATOR_NO_WARNING === undefined &&
       errors.every((e) => typeof e === 'string')
     ) {
       console.warn(type, errors)

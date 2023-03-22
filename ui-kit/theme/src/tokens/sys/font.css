@@ -26,7 +26,8 @@
     --n-sys-text-color-default: var(--n-ref-palette-gray-900);
     --n-sys-text-color-regular: var(--n-ref-palette-gray-700);
     --n-sys-text-color-placeholder: var(--n-ref-palette-gray-200);
-    --n-sys-text-color-disabled: var(--n-ref-palette-gray-300);
-    --n-sys-text-color-secondary: var(--n-ref-palette-gray-300);
+    --n-sys-text-color-disabled: var(--n-ref-palette-gray-400);
+    --n-sys-text-color-secondary: var(--n-ref-palette-gray-400);
+    --n-sys-text-color-error: var(--n-ref-palette-red-500);
   }
 }

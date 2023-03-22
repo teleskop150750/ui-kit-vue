@@ -208,5 +208,21 @@
 
       line-height: initial;
     }
+
+    .n-form-item__derail {
+      min-height: 22px;
+    }
+
+    .n-form-item__message {
+      padding-top: 4px;
+
+      color: var(--n-sys-text-color-secondary);
+      font-size: var(--n-sys-text-size-small);
+      line-height: var(--n-sys-text-size-small);
+    }
+
+    .n-form-item__message--type-error {
+      color: var(--n-sys-text-color-error);
+    }
   }
 }

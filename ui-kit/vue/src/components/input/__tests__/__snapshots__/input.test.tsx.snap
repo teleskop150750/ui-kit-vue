@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Input.vue > sets value on textarea / input type change > "123" 1`] = `"123"`;
+
+exports[`Input.vue > sets value on textarea / input type change > "123" 2`] = `"123"`;
+
+exports[`Input.vue > sets value on textarea / input type change > "123" 3`] = `"123"`;
+
+exports[`Input.vue > test emoji > textarea should minimize value between emoji length and maxLength > 4 / 4 1`] = `"4 / 4"`;
+
+exports[`Input.vue > test emoji > textarea should minimize value between emoji length and maxLength > 8 / 4 1`] = `"8 / 4"`;
+
+exports[`Input.vue > test emoji > textarea should minimize value between emoji length and maxLength > 哈哈1👌3😄 1`] = `"哈哈1👌3😄"`;
+
+exports[`Input.vue > test emoji > textarea should minimize value between emoji length and maxLength > 啊好😄 1`] = `"啊好😄"`;
+
+exports[`Input.vue > test emoji > textarea should minimize value between emoji length and maxLength 1`] = `
+[
+  "n-textarea",
+  "n-textarea--is-exceed",
+]
+`;

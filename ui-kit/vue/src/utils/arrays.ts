@@ -1,6 +1,11 @@
 export function unique<T>(arr: T[]) {
   return [...new Set(arr)]
 }
+// const d:
+
+export function arrWrap<T>(arr: T | T[]): T[] {
+  return Array.isArray(arr) ? arr : ([arr] as T[])
+}
 
 type Many<T> = T | ReadonlyArray<T>
 // TODO: rename to `ensureArray`

@@ -6,19 +6,19 @@ export function asyncProcessRules(
   complete: (errors: ValidateError[]) => void,
 ) {
   const errors: ValidateError[] = []
-  let currentRuleIndex = 0
+  let currentRuleIndex = -1
   const lastRuleIndex = ruleList.length - 1
 
-  function processNextRule(errors_: ValidateError[]) {
+  function finishProcessRule(errors_: ValidateError[]) {
     currentRuleIndex += 1
     errors.push(...(errors_ || []))
 
-    if (currentRuleIndex > lastRuleIndex) {
+    if (currentRuleIndex === lastRuleIndex) {
       complete(errors)
     }
   }
 
   ruleList.forEach((rule) => {
-    processRule(rule, processNextRule)
+    processRule(rule, finishProcessRule)
   })
 }

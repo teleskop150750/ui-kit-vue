@@ -3,6 +3,7 @@ import { buildProps, definePropType, isArray, isBoolean, isString } from '@ui/ut
 import type { ExtractPropTypes } from 'vue'
 
 import type { NFormItemProp } from '../form-item/form-item.model'
+import type Form from './form.vue'
 import type { NFormRules } from './types'
 
 const formMetaProps = buildProps({
@@ -34,9 +35,11 @@ export const nFormProps = buildProps({
     default: '',
   },
 
-  inline: Boolean,
+  statusIcon: {
+    type: Boolean,
+    default: true,
+  },
 
-  statusIcon: Boolean,
   showMessage: {
     type: Boolean,
     default: true,
@@ -52,8 +55,10 @@ export type NFormProps = ExtractPropTypes<typeof nFormProps>
 export type NFormMetaProps = ExtractPropTypes<typeof formMetaProps>
 
 export const nFormEmits = {
-  validate(prop: NFormItemProp, isValid: boolean, message: string) {
-    return (isArray(prop) || isString(prop)) && isBoolean(isValid) && isString(message)
+  validate(prop: NFormItemProp, isValid: boolean, messages: string[]) {
+    return (isArray(prop) || isString(prop)) && isBoolean(isValid) && Array.isArray(messages)
   },
 }
 export type NFormEmits = typeof nFormEmits
+
+export type NFormInstance = InstanceType<typeof Form>

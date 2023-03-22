@@ -1,12 +1,10 @@
 <script lang="ts" setup>
-// TODO: Status [error / success]
-// Убран nativeInputValue
 import { NIconCircleClose, NIconHide, NIconView } from '@nado/ui-kit-icons-vue'
 import { useFormItem, useFormItemInputId } from '@ui/components/form/src/form/hooks'
 import { useFormDisabled, useFormSize } from '@ui/components/form/src/hooks'
 import { UPDATE_MODEL_EVENT } from '@ui/constants'
 import { useAttrs, useNamespace } from '@ui/hooks'
-import { debugWarn, isNil, isObject, NOOP, ValidateComponentsMap } from '@ui/utils'
+import { debugWarn, isKorean, isNil, isObject, NOOP, ValidateComponentsMap } from '@ui/utils'
 import { isClient, useResizeObserver } from '@vueuse/core'
 import {
   computed,
@@ -21,19 +19,20 @@ import {
   watch,
 } from 'vue'
 
-import { inputEmits, inputProps } from './input.model'
+import { nInputEmits, nInputProps } from './input.model'
 import { calcTextareaHeight } from './utils'
 
 type TargetElement = HTMLInputElement | HTMLTextAreaElement
 
-const props = defineProps(inputProps)
-const emit = defineEmits(inputEmits)
+const props = defineProps(nInputProps)
+const emit = defineEmits(nInputEmits)
 const rawAttrs = useRawAttrs()
 const slots = useSlots()
 
 // Ref
 const inputRef = shallowRef<HTMLInputElement>()
 const textareaRef = shallowRef<HTMLTextAreaElement>()
+const nativeRef = computed(() => inputRef.value || textareaRef.value)
 
 // Ns
 const nsInput = useNamespace('input')
@@ -62,13 +61,12 @@ const { inputId } = useFormItemInputId(props, {
 const inputSize = useFormSize()
 const inputDisabled = useFormDisabled()
 
-const focused = ref(false)
-const hovering = ref(false)
+const isFocused = ref(false)
+const isHovering = ref(false)
+const isComposing = ref(false)
 const passwordVisible = ref(false)
 const countStyle = ref<StyleValue>()
 const textareaCalcStyle = shallowRef(props.inputStyle)
-
-const nativeRef = computed(() => inputRef.value || textareaRef.value)
 
 const needStatusIcon = computed(() => form?.statusIcon ?? false)
 const validateState = computed(() => formItem?.validateState || '')
@@ -86,7 +84,7 @@ const showPwdVisible = computed(
     !inputDisabled.value &&
     !props.readonly &&
     !!nativeInputValue.value &&
-    (!!nativeInputValue.value || focused.value),
+    (!!nativeInputValue.value || isFocused.value),
 )
 const isWordLimitVisible = computed(
   () =>
@@ -97,7 +95,7 @@ const isWordLimitVisible = computed(
     !props.readonly &&
     !props.showPassword,
 )
-const textLength = computed(() => [...nativeInputValue.value].length)
+const textLength = computed(() => nativeInputValue.value.length)
 const inputExceed = computed(
   () =>
     // показывать стиль превышения, если длина начального значения больше maxlength
@@ -119,10 +117,11 @@ const containerClasses = computed(() => {
   return [
     ns.b(),
     ns.type('size', inputSize.value),
+    ns.type('state', validateState.value),
     ns.is('disabled', inputDisabled.value),
     ns.is('exceed', inputExceed.value),
-    ns.is('hovering', hovering.value),
-    ns.is('focused', focused.value),
+    ns.is('hovering', isHovering.value),
+    ns.is('focused', isFocused.value),
     ns.has('prefix', !!slots.prefix || !!props.prefixIcon),
     ns.has('suffix', !!slots.suffix || !!props.suffixIcon || props.clearable || props.showPassword),
     {
@@ -183,20 +182,58 @@ function resizeTextarea() {
   }
 }
 
-async function handleInput(evt: Event) {
-  let { value } = evt.target as TargetElement
+function setNativeInputValue() {
+  const input = nativeRef.value
 
-  if (props.formatter) {
-    value = props.parser ? props.parser(value) : value
-    value = props.formatter(value)
+  if (!input || input.value === nativeInputValue.value) {
+    return
+  }
+
+  input.value = nativeInputValue.value
+}
+
+async function handleInput(evt: Event) {
+  const { value } = evt.target as TargetElement
+
+  // should not emit input during composition
+  // see: https://github.com/ElemeFE/element/issues/10516
+  if (isComposing.value) {
+    return
   }
 
   emit(UPDATE_MODEL_EVENT, value)
   emit('input', value)
+
+  // ensure native input value is controlled
+  // see: https://github.com/ElemeFE/element/issues/12850
+  await nextTick()
+  setNativeInputValue()
 }
 
 function handleChange(evt: Event) {
   emit('change', (evt.target as TargetElement).value)
+}
+
+function handleCompositionStart(event: CompositionEvent) {
+  emit('compositionstart', event)
+  isComposing.value = true
+}
+
+function handleCompositionUpdate(event: CompositionEvent) {
+  emit('compositionupdate', event)
+  const text = (event.target as HTMLInputElement)?.value
+  const lastCharacter = text.at(-1) || ''
+
+  isComposing.value = !isKorean(lastCharacter)
+}
+
+function handleCompositionEnd(event: CompositionEvent) {
+  emit('compositionend', event)
+
+  if (isComposing.value) {
+    isComposing.value = false
+    handleInput(event)
+  }
 }
 
 function handlePasswordVisible() {
@@ -215,12 +252,12 @@ function blur() {
 }
 
 function handleFocus(evt: FocusEvent) {
-  focused.value = true
+  isFocused.value = true
   emit('focus', evt)
 }
 
 function handleBlur(event: FocusEvent) {
-  focused.value = false
+  isFocused.value = false
   emit('blur', event)
 
   if (props.validateEvent) {
@@ -229,12 +266,12 @@ function handleBlur(event: FocusEvent) {
 }
 
 function handleMouseLeave(evt: MouseEvent) {
-  hovering.value = false
+  isHovering.value = false
   emit('mouseleave', evt)
 }
 
 function handleMouseEnter(evt: MouseEvent) {
-  hovering.value = true
+  isHovering.value = true
   emit('mouseenter', evt)
 }
 
@@ -264,6 +301,11 @@ watch(
   },
 )
 
+// native input value is set explicitly
+// do not use v-model / :value in template
+// see: https://github.com/ElemeFE/element/issues/14521
+watch(nativeInputValue, () => setNativeInputValue())
+
 // when change between <input> and <textarea>,
 // update DOM dependent value and styles
 // https://github.com/ElemeFE/element/issues/14857
@@ -271,15 +313,13 @@ watch(
   () => props.type,
   async () => {
     await nextTick()
+    setNativeInputValue()
     resizeTextarea()
   },
 )
 
 onMounted(() => {
-  if (!props.formatter && props.parser) {
-    debugWarn('NInput', 'If you set the parser, you also need to set the formatter.')
-  }
-
+  setNativeInputValue()
   nextTick(resizeTextarea)
 })
 
@@ -299,6 +339,7 @@ defineExpose({
 
 <script lang="ts">
 export default {
+  name: 'NInput',
   inheritAttrs: false,
 }
 </script>
@@ -336,14 +377,15 @@ export default {
           :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
           :disabled="inputDisabled"
           :readonly="readonly"
-          :formatter="formatter"
-          :parser="parser"
           :autocomplete="autocomplete"
           :tabindex="tabindex"
           :aria-label="label"
           :placeholder="placeholder"
           :style="inputStyle"
-          :form="form"
+          :form="props.form"
+          @compositionstart="handleCompositionStart"
+          @compositionupdate="handleCompositionUpdate"
+          @compositionend="handleCompositionEnd"
           @input="handleInput"
           @change="handleChange"
           @keydown="handleKeydown"
@@ -382,7 +424,7 @@ export default {
             class="n-icon"
             :class="[
               nsInput.e('icon'),
-              nsInput.e('validateIcon'),
+              nsInput.e('validate-icon'),
               nsInput.is('loading', validateState === 'validating'),
             ]"
           />
@@ -410,6 +452,9 @@ export default {
         :aria-label="label"
         :placeholder="placeholder"
         :form="props.form"
+        @compositionstart="handleCompositionStart"
+        @compositionupdate="handleCompositionUpdate"
+        @compositionend="handleCompositionEnd"
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"

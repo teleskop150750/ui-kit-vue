@@ -18,5 +18,49 @@
 
       outline: var(--n-sys-outline-primary);
     }
+
+    .n-input--is-exceed .n-input__wrapper {
+      --n-comp-input-container-border-color: var(--n-sys-border-color-danger);
+    }
+
+    .n-input--state-validating .n-input__wrapper {
+      --n-comp-input-container-border-color: var(--n-sys-border-color-danger);
+    }
+
+    .n-input--state-error .n-input__wrapper {
+      --n-comp-input-container-border-color: var(--n-sys-border-color-danger);
+    }
+
+    .n-input--is-exceed.n-input--is-focused .n-input__wrapper {
+      outline: var(--n-sys-outline-danger);
+    }
+
+    .n-input--state-validating.n-input--is-focused .n-input__wrapper {
+      outline: var(--n-sys-outline-danger);
+    }
+
+    .n-input--state-error.n-input--is-focused .n-input__wrapper {
+      outline: var(--n-sys-outline-danger);
+    }
+
+    .n-input--is-exceed .n-input__suffix .n-input__count {
+      color: var(--n-sys-color-danger-500);
+    }
+
+    .n-input--is-exceed .n-input__validate-icon {
+      color: var(--n-sys-border-color-danger);
+    }
+
+    .n-input--state-validating .n-input__validate-icon {
+      color: var(--n-sys-border-color-danger);
+    }
+
+    .n-input--state-error .n-input__validate-icon {
+      color: var(--n-sys-border-color-danger);
+    }
+
+    .n-input--state-success .n-input__validate-icon {
+      color: var(--n-sys-border-color-success);
+    }
   }
 }
