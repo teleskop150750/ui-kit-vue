@@ -15,7 +15,7 @@ const TestComp = defineComponent({
   setup() {
     const { t } = useLocale()
 
-    return () => <div>{t('el.popconfirm.confirmButtonText')}</div>
+    return () => <div>{t('nado.popconfirm.confirmButtonText')}</div>
   },
 })
 
@@ -59,18 +59,18 @@ describe('config-provider', () => {
     })
 
     it('should provide locale properly', async () => {
-      expect(wrapper.find('.current-locale').text()).toBe(English.el.popconfirm.confirmButtonText)
-      expect(wrapper.find('.opposite-locale').text()).toBe(Chinese.el.popconfirm.confirmButtonText)
+      expect(wrapper.find('.current-locale').text()).toBe(English.nado.popconfirm.confirmButtonText)
+      expect(wrapper.find('.opposite-locale').text()).toBe(Chinese.nado.popconfirm.confirmButtonText)
     })
 
     it('should reactively update the text on page', async () => {
-      expect(wrapper.find('.current-locale').text()).toBe(English.el.popconfirm.confirmButtonText)
-      expect(wrapper.find('.opposite-locale').text()).toBe(Chinese.el.popconfirm.confirmButtonText)
+      expect(wrapper.find('.current-locale').text()).toBe(English.nado.popconfirm.confirmButtonText)
+      expect(wrapper.find('.opposite-locale').text()).toBe(Chinese.nado.popconfirm.confirmButtonText)
 
       await wrapper.find('.to-zh').trigger('click')
 
-      expect(wrapper.find('.current-locale').text()).toBe(Chinese.el.popconfirm.confirmButtonText)
-      expect(wrapper.find('.opposite-locale').text()).toBe(English.el.popconfirm.confirmButtonText)
+      expect(wrapper.find('.current-locale').text()).toBe(Chinese.nado.popconfirm.confirmButtonText)
+      expect(wrapper.find('.opposite-locale').text()).toBe(English.nado.popconfirm.confirmButtonText)
     })
   })
 

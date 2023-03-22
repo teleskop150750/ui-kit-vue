@@ -19,7 +19,7 @@ const formatDomainError = (count: number) =>
     const key = `domains.${idx}.value`
 
     return {
-      ...prev,type VueWrapper
+      ...prev,
       [key]: [
         {
           field: key,

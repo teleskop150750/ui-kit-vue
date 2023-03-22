@@ -60,5 +60,5 @@ export interface TranslatePair {
 
 export interface Language {
   name: string
-  el: TranslatePair
+  nado: TranslatePair
 }
