@@ -2,6 +2,8 @@ import { useSizeProp } from '@ui/hooks'
 import { buildProps, iconPropType } from '@ui/utils'
 import type { ExtractPropTypes } from 'vue'
 
+import type NButton from './button.vue'
+
 export const nButtonAppearances = ['primary', 'secondary', 'success', 'warning', 'danger', 'info'] as const
 export const nButtonMods = ['solid', 'soft', 'outline', 'text', 'link'] as const
 
@@ -55,3 +57,5 @@ export type ButtonEmits = typeof nButtonEmits
 
 export type ButtonType = ButtonProps['type']
 export type ButtonNativeType = ButtonProps['type']
+
+export type NButtonInstance = InstanceType<typeof NButton>

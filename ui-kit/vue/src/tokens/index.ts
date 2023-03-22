@@ -1,6 +1,5 @@
 export * from './breadcrumb'
 export * from './button'
-export * from './config-provider'
 export * from './popper'
 export * from './row'
 export * from './scrollbar'

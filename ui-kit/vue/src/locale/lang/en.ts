@@ -1,6 +1,6 @@
 export default {
   name: 'en',
-  el: {
+  nado: {
     colorpicker: {
       confirm: 'OK',
       clear: 'Clear',
@@ -98,6 +98,12 @@ export default {
       pagesize: '/page',
       total: 'Total {total}',
       pageClassifier: '',
+      page: 'Page',
+      prev: 'Go to previous page',
+      next: 'Go to next page',
+      currentPage: 'page {pager}',
+      prevPages: 'Previous {pager} pages',
+      nextPages: 'Next {pager} pages',
       deprecationWarning:
         'Deprecated usages detected, please refer to the el-pagination documentation for more details',
     },

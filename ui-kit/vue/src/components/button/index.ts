@@ -10,4 +10,3 @@ export const NButtonGroup = withNoopInstall(ButtonGroup)
 export default NButton
 
 export * from './src/button.model'
-export type { NButtonInstance as ButtonInstance } from './src/instance'
