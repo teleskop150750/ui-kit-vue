@@ -1,7 +1,7 @@
 import NInput from '@ui/components/input'
 import installStyle from '@ui/test-utils/style-plugin'
 import { rAF } from '@ui/test-utils/tick'
-import { mount, type VueWrapper } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { nextTick, reactive, ref } from 'vue'
 
@@ -13,8 +13,6 @@ import MockData from './mocks/MockData.vue'
 
 type FormInstance = InstanceType<typeof NForm>
 type FormItemInstance = InstanceType<typeof NFormItem>
-
-const findStyle = (wrapper: VueWrapper<any>, selector: string) => wrapper.find<HTMLElement>(selector).element.style
 
 const formatDomainError = (count: number) =>
   Array.from({ length: count }).reduce((prev: any, _, idx) => {
