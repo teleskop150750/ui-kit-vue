@@ -37,6 +37,10 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
+    "@nado/play-nuxt#dev": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
     "@nado/ui-kit-vue-docs#dev": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]

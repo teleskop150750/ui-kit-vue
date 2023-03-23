@@ -1,4 +1,4 @@
-import { useSizeProp } from '@ui/hooks'
+import { useRouterLinkProps, useSizeProp } from '@ui/hooks'
 import { buildProps, iconPropType } from '@ui/utils'
 import type { ExtractPropTypes } from 'vue'
 
@@ -12,6 +12,11 @@ const nButtonAlign = ['left', 'right', 'center', 'around', 'between', 'evenly'] 
 export const nButtonNativeTypes = ['button', 'submit', 'reset'] as const
 
 export const nButtonProps = buildProps({
+  ...useRouterLinkProps,
+  tag: {
+    type: String,
+    default: 'button',
+  },
   size: useSizeProp,
   disabled: Boolean,
   appearance: {
@@ -52,10 +57,8 @@ export const nButtonEmits = {
   click: (evt: MouseEvent) => evt instanceof MouseEvent,
 }
 
-export type ButtonProps = ExtractPropTypes<typeof nButtonProps>
-export type ButtonEmits = typeof nButtonEmits
+export type NButtonProps = ExtractPropTypes<typeof nButtonProps>
+export type NButtonEmits = typeof nButtonEmits
 
-export type ButtonType = ButtonProps['type']
-export type ButtonNativeType = ButtonProps['type']
-
+export type NButtonType = NButtonProps['type']
 export type NButtonInstance = InstanceType<typeof NButton>

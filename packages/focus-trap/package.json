@@ -5,10 +5,10 @@
   "private": true,
   "exports": {
     ".": {
-      "import": "./dist/index.mjs"
+      "import": "./dist/index.js"
     }
   },
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite",
@@ -17,8 +17,8 @@
     "type-check": "tsc --noEmit -p ./tsconfig.app.json",
     "cypress": "start-server-and-test dev 5173 'cypress open'",
     "test:ci": "cypress run --browser electron",
-    "test:e2e": "ELECTRON_ENABLE_LOGGING=1 cypress run --browser electron",
-    "test:e2e:dev": "cypress open",
+    "test:e2e": "pnpm build && ELECTRON_ENABLE_LOGGING=1 cypress run --browser electron",
+    "test:e2e:dev": "pnpm build && cypress open",
     "prettier": "prettier --check --ignore-unknown \"**/*\"",
     "prettier:fix": "prettier --write --ignore-unknown \"**/*\"",
     "eslint": "eslint \"**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,json,vue}\"",

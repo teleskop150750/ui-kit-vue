@@ -1,7 +1,7 @@
 /* eslint-disable promise/param-names */
 /* eslint-disable no-promise-executor-return */
 
-import { createFocusTrap } from '../../dist/index.mjs'
+import { createFocusTrap } from '../../dist/index.js'
 
 export default async () => {
   const contextIframe = document.querySelector('#in-iframe')

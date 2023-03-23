@@ -1,4 +1,4 @@
-import { createFocusTrap } from '../../dist/index.mjs'
+import { createFocusTrap } from '../../dist/index.js'
 
 export default () => {
   const container = document.querySelector('#default')

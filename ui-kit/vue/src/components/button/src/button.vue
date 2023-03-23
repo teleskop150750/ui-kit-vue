@@ -11,7 +11,8 @@ const emit = defineEmits(nButtonEmits)
 
 const ns = useNamespace('button')
 const nsGroup = useNamespace('button-group')
-const { _ref, _size, _appearance, _disabled, handleClick, isButtonGroup } = useButton(props, emit)
+const { _ref, _size, _appearance, _disabled, handleClick, isButtonGroup, tagComputed, buttonLinkAttributesComputed } =
+  useButton(props, emit)
 
 const slots = useSlots()
 const hasLabel = computed(() => props.label !== undefined && props.label !== null && props.label !== '')
@@ -35,7 +36,8 @@ export default {
 </script>
 
 <template>
-  <button
+  <component
+    :is="tagComputed"
     ref="rootRef"
     :class="[
       nsGroup.e('item', isButtonGroup),
@@ -49,10 +51,9 @@ export default {
       ns.is('loading', props.loading),
       ns.is('hoverable', actionable),
     ]"
-    :aria-disabled="_disabled || loading"
     :disabled="_disabled || loading"
+    v-bind="buttonLinkAttributesComputed"
     :autofocus="autofocus"
-    :type="type"
     @click="handleClick"
   >
     <span :class="ns.e('content')">
@@ -80,5 +81,5 @@ export default {
     <span v-if="loading" :class="ns.e('loading')">
       <NSpinner :class="ns.e('loading-icon')" />
     </span>
-  </button>
+  </component>
 </template>

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { NIconCircleClose, NIconHide, NIconView } from '@nado/ui-kit-icons-vue'
-import { useFormItem, useFormItemInputId } from '@ui/components/form/src/form/hooks'
-import { useFormDisabled, useFormSize } from '@ui/components/form/src/hooks'
+import { useFormDisabled, useFormItem, useFormSize } from '@ui/components/form'
+import { useFormItemInputId } from '@ui/components/form/src/form/hooks'
 import { UPDATE_MODEL_EVENT } from '@ui/constants'
 import { useAttrs, useNamespace } from '@ui/hooks'
 import { debugWarn, isKorean, isNil, isObject, NOOP, ValidateComponentsMap } from '@ui/utils'

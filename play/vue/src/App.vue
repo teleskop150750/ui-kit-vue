@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { NButton } from '@ui'
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
@@ -12,7 +13,9 @@ import { RouterLink, RouterView } from 'vue-router'
     </div>
   </header>
 
-  <RouterView />
+  <NButton to="/about">About</NButton>
+
+  <!-- <RouterView /> -->
 </template>
 
 <style>

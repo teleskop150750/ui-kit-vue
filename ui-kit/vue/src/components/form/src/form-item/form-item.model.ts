@@ -20,7 +20,7 @@ export const nFormItemProps = buildProps({
     default: undefined,
   },
   hint: {
-    type: Boolean,
+    type: String,
     default: undefined,
   },
   maxErrors: {
