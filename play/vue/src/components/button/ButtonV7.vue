@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { NIconPlus } from '@nado/ui-kit-icons-vue'
-import { NButton } from '@ui'
+import { NButton } from '@ui/index'
 
 function buttonOnClick() {
   // eslint-disable-next-line no-console

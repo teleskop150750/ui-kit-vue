@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NButton } from '@ui'
+import { NButton } from '@ui/index'
 import { RouterLink } from 'vue-router'
 </script>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NButton, NButtonGroup } from '@ui'
+import { NButton, NButtonGroup } from '@ui/index'
 
 import DocsButton from '@/components/button/DocsButton.vue'
 import DocsForm from '@/components/form/DocsForm.vue'

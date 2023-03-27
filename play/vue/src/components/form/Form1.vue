@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NButton, NForm, type NFormInstance, NFormItem, type NFormRules, NInput } from '@ui'
+import { NButton, NForm, type NFormInstance, NFormItem, type NFormRules, NInput } from '@ui/index'
 import { reactive, ref } from 'vue'
 
 const formRef = ref<NFormInstance>()

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NInput } from '@ui'
+import { NInput } from '@ui/index'
 import { ref } from 'vue'
 
 const input = ref('')

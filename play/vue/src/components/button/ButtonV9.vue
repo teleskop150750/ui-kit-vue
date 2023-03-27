@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { NIconPlus } from '@nado/ui-kit-icons-vue'
-import { NButton, nButtonAppearances, NButtonGroup } from '@ui'
+import { NButton, nButtonAppearances, NButtonGroup } from '@ui/index'
 
 const buttonMods = ['solid', 'soft', 'outline'] as const
 

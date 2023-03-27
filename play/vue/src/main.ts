@@ -1,6 +1,6 @@
 import '@theme/all.css'
 
-import { makeInstaller, NButton, NInput } from '@ui'
+import { makeInstaller, NButton, NInput } from '@ui/index'
 import { createApp } from 'vue'
 
 import App from './App.vue'
