@@ -4,6 +4,10 @@ import { type Router, RouterLink } from 'vue-router'
 
 const instance = getCurrentInstance()!
 const router = instance.appContext.config.globalProperties.$router as Router
+
+const t = instance.proxy!.$route
+
+console.log(t)
 const routes = router
   .getRoutes()
   .map((el) => el)
