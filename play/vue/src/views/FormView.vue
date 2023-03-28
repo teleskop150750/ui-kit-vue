@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import DocsButton from '@/components/button/DocsButton.vue'
 import DocsForm from '@/components/form/DocsForm.vue'
-import DocsInput from '@/components/input/DocsInput.vue'
 </script>
 
 <template>
   <main>
     <div>
       <DocsForm />
-      <DocsButton />
-      <DocsInput />
     </div>
   </main>
 </template>

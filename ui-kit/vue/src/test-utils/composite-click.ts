@@ -1,7 +1,7 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils'
 import { nextTick } from 'vue'
 
-import triggerEvent from './trigger-event'
+import { triggerEvent } from './trigger-event'
 
 const triggerCompositeClick = async <T extends VueWrapper<any> | DOMWrapper<Element>>(wrapper: T) => {
   await wrapper.trigger('mousedown')

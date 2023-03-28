@@ -1,6 +1,6 @@
-import sleep from './sleep'
+import { sleep } from './sleep'
 
-const makeScroll = (dom: Element, name: 'scrollTop' | 'scrollLeft', offset: number) => {
+export function makeScroll(dom: Element, name: 'scrollTop' | 'scrollLeft', offset: number) {
   const eventTarget = dom === document.documentElement ? window : dom
 
   dom[name] = offset
@@ -17,5 +17,3 @@ const makeScroll = (dom: Element, name: 'scrollTop' | 'scrollLeft', offset: numb
   // must use setTimeout instead of nextTick to wait dom change
   return sleep()
 }
-
-export default makeScroll

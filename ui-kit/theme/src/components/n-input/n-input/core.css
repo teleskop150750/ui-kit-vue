@@ -211,6 +211,7 @@
 
     .n-form-item__derail {
       min-height: 22px;
+      padding-bottom: 6px;
     }
 
     .n-form-item__message {

@@ -1,4 +1,4 @@
 /* eslint-disable no-promise-executor-return */
-const sleep = (time = 0) => new Promise((resolve) => setTimeout(resolve, time))
-
-export default sleep
+export function sleep(time = 0) {
+  return new Promise((resolve) => setTimeout(resolve, time))
+}

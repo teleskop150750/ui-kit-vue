@@ -4,18 +4,16 @@
 /* eslint-disable promise/param-names */
 import { nextTick } from 'vue'
 
-const tick = async (times: number) => {
+export async function tick(times: number) {
   while (times--) {
     await nextTick()
   }
 }
 
-export default tick
-
 // in order to test transitions, we need to use
 // await rAF() after firing transition events.
-export const rAF = async () =>
-  new Promise((res) => {
+export async function rAF() {
+  return new Promise((res) => {
     requestAnimationFrame(() => {
       requestAnimationFrame(async () => {
         res(null)
@@ -23,3 +21,4 @@ export const rAF = async () =>
       })
     })
   })
+}

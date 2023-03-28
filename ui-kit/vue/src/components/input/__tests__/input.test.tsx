@@ -1,5 +1,5 @@
 import { NFormItem as FormItem } from '@ui/components/form'
-import defineGetter from '@ui/test-utils/define-getter'
+import { defineGetter } from '@ui/test-utils/define-getter'
 import { mount } from '@vue/test-utils'
 import { afterEach, describe, expect, test, vi } from 'vitest'
 import { type CSSProperties, nextTick, ref } from 'vue'

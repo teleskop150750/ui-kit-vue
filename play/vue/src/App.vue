@@ -1,24 +1,33 @@
 <script setup lang="ts">
-import { NButton } from '@ui/index'
-import { RouterLink } from 'vue-router'
+import { getCurrentInstance } from 'vue'
+import { type Router, RouterLink } from 'vue-router'
+
+const instance = getCurrentInstance()!
+const router = instance.appContext.config.globalProperties.$router as Router
+const routes = router
+  .getRoutes()
+  .map((el) => el)
+  .filter((el) => el !== undefined)
 </script>
 
 <template>
   <header>
     <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+      <nav class="nav">
+        <RouterLink v-for="r in routes" :key="r.path" :to="r">{{ r.name }}</RouterLink>
       </nav>
     </div>
   </header>
 
-  <NButton to="/about">About</NButton>
-
-  <!-- <RouterView /> -->
+  <RouterView />
 </template>
 
 <style>
+.nav {
+  display: flex;
+  gap: 1rem;
+}
+
 .docs-card {
   --surface-card: hsl(0deg 0% 100%);
 

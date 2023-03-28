@@ -11,7 +11,7 @@
     /* On container */
 
     /* Disabled */
-    --n-sys-on-container-color-disabled: var(--n-ref-palette-gray-500);
+    --n-sys-on-container-color-disabled: var(--n-ref-palette-gray-700);
     --n-sys-on-container-color-disabled-hovered: var(--n-ref-palette-gray-500);
     --n-sys-on-container-color-disabled-pressed: var(--n-ref-palette-gray-500);
 

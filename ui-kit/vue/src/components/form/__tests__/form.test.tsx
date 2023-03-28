@@ -1,5 +1,5 @@
 import NInput from '@ui/components/input'
-import installStyle from '@ui/test-utils/style-plugin'
+import { InstallStylePlugin } from '@ui/test-utils/style-plugin'
 import { rAF } from '@ui/test-utils/tick'
 import { mount } from '@vue/test-utils'
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
@@ -32,7 +32,7 @@ const formatDomainError = (count: number) =>
 
 describe('Form', () => {
   beforeAll(() => {
-    installStyle()
+    InstallStylePlugin()
   })
 
   it('show message', async () => {

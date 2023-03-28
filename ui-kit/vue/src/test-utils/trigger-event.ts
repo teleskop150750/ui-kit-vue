@@ -2,7 +2,7 @@
  * Trigger event
  * mouseenter, mouseleave, mouseover, keyup, change, click
  */
-const triggerEvent = (elm: Element, name: string, ...opts: any[]) => {
+export function triggerEvent(elm: Element, name: string, ...opts: any[]) {
   let eventName: string
 
   if (/^mouse|click/.test(name)) {
@@ -27,5 +27,3 @@ const triggerEvent = (elm: Element, name: string, ...opts: any[]) => {
 
   return elm
 }
-
-export default triggerEvent
