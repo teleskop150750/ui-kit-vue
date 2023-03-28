@@ -555,6 +555,7 @@ importers:
       jsdom: ^21.1.0
       lodash-es: ^4.17.21
       memoize-one: ^6.0.0
+      normalize-wheel-es: ^1.2.0
       npm-run-all: ^4.1.5
       prettier: ^2.8.4
       stylelint: ^15.2.0
@@ -573,6 +574,7 @@ importers:
       '@vueuse/core': 9.13.0_vue@3.2.47
       lodash-es: 4.17.21
       memoize-one: 6.0.0
+      normalize-wheel-es: 1.2.0
       vue: 3.2.47
     devDependencies:
       '@histoire/plugin-vue': 0.15.8_7zgdlnqgt2sigbxfvcwphqv3a4
@@ -14792,6 +14794,10 @@ packages:
     resolution: {integrity: sha512-DlL+XwOy3NxAQ8xuC0okPgK46iuVNAK01YN7RueYBqqFeGsBjV9XmCAzAdgt+667bCl5kPh9EqKKDwnaPG1I7A==}
     engines: {node: '>=10'}
     dev: true
+
+  /normalize-wheel-es/1.2.0:
+    resolution: {integrity: sha512-Wj7+EJQ8mSuXr2iWfnujrimU35R2W4FAErEyTmJoJ7ucwTn2hOUSsRehMb5RSYkxXGTM7Y9QpvPmp++w5ftoJw==}
+    dev: false
 
   /now-and-later/2.0.1:
     resolution: {integrity: sha512-KGvQ0cB70AQfg107Xvs/Fbu+dGmZoTRJp2TaPwcwQm3/7PteUyN2BCgk8KBMPGBUXZdVwyWS8fDCGFygBm19UQ==}

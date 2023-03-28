@@ -2,7 +2,7 @@ import { installer } from './defaults'
 
 export * from './components'
 export * from './constants'
-// export * from './directives'
+export * from './directives'
 export * from './hooks'
 export * from './make-installer'
 export * from './tokens'
