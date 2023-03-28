@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import DocsButton from '@/components/button/DocsButton.vue'
+import Docs from '@/components/button/Docs.vue'
 </script>
 
 <template>
   <main>
     <div>
-      <DocsButton />
+      <Docs />
     </div>
   </main>
 </template>

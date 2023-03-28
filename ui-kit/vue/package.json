@@ -31,6 +31,7 @@
     "@vue/shared": "^3.2.47",
     "@vueuse/core": "^9.13.0",
     "lodash-es": "^4.17.21",
+    "memoize-one": "^6.0.0",
     "vue": "^3.2.47"
   },
   "devDependencies": {

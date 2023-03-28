@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Docs from '@/components/form/Docs.vue'
+import Docs from '@/components/virtual/Docs.vue'
 </script>
 
 <template>

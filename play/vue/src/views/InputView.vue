@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import DocsInput from '@/components/input/DocsInput.vue'
+import Docs from '@/components/input/Docs.vue'
 </script>
 
 <template>
   <main>
     <div>
-      <DocsInput />
+      <Docs />
     </div>
   </main>
 </template>

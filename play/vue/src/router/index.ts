@@ -30,6 +30,11 @@ const router = createRouter({
       name: 'scrollbar',
       component: () => import('../views/ScrollbarView.vue'),
     },
+    {
+      path: '/virtual',
+      name: 'virtual',
+      component: () => import('../views/VirtualView.vue'),
+    },
   ],
 })
 

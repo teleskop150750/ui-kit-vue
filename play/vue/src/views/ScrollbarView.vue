@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import DocsScrollbar from '@/components/scrollbar/ScrollbarDocs.vue'
+import Docs from '@/components/scrollbar/Scrollbar.vue'
 </script>
 
 <template>
   <main>
     <div>
-      <DocsScrollbar />
+      <Docs />
     </div>
   </main>
 </template>
