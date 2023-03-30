@@ -4,6 +4,9 @@
   "include": ["vite-env.d.ts", "test/**/*", "vite.config.*", "cypress.config.*", "vitest.config.*"],
   "compilerOptions": {
     "composite": true,
-    "types": ["node", "jsdom"]
+    "types": ["node", "jsdom"],
+    "paths": {
+      "@ui/*": ["./src/*"]
+    }
   }
 }

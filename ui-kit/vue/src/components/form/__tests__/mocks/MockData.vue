@@ -1,8 +1,8 @@
 <!-- eslint-disable vue/require-default-prop -->
 <script setup lang="ts">
+import { NButton } from '@ui/components/button'
 import { ref, toRef } from 'vue'
 
-import { NButton } from '../../../button'
 import NForm from '../../src/form/form.vue'
 import NFormItem from '../../src/form-item/form-item.vue'
 
