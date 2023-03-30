@@ -3,11 +3,6 @@ import { computed, type ComputedRef } from 'vue'
 
 import type { NPaginationQueryProps } from '../pagination.model'
 
-export interface PageFromQuery {
-  current?: number | undefined
-  size?: number | undefined
-}
-
 export function usePaginationQuery(routeNav: ComputedRef<RouteLocation | undefined>, props: NPaginationQueryProps) {
   const queryType = computed(() => props.queryType)
 

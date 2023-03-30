@@ -34,7 +34,6 @@ export function useButton(props: NPaginationNavButtonProps) {
   return {
     _disabled,
     tagComputed,
-    // shouldAddSpace,
     buttonLinkAttributesComputed,
   }
 }
