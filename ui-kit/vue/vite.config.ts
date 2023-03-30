@@ -41,7 +41,7 @@ export default defineConfig({
       // into your library
 
       treeshake: true,
-      external: ['vue', '@vueuse/core', '@vue/shared'],
+      external: ['vue'],
       output: {
         exports: 'named',
         // Provide global variables to use in the UMD build

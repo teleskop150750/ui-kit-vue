@@ -31,7 +31,7 @@ const total = ref(100)
       <div>PerPage _ total: {{ perPage }} | {{ total }}</div>
       <div><input v-model.number="total" type="text" /></div>
       <div>
-        <select v-model="perPage">
+        <select v-model.number="perPage">
           <option value="10">10</option>
           <option value="50">50</option>
           <option value="100">100</option>
