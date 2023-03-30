@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { useLocale, useNamespace } from '@ui/hooks'
+import { computed } from 'vue'
 
 import Button from './button.vue'
-import { useNav, useNavRouter } from './hooks'
+import { useNavPagers, useNavRoute, usePaginationRoute } from './hooks'
 import MoreNext from './more-next.vue'
 import MorePrev from './more-prev.vue'
 import { nPaginationNavEmits, nPaginationNavProps } from './nav.model'
@@ -16,28 +17,38 @@ const emit = defineEmits(nPaginationNavEmits)
 const ns = useNamespace('pagination-nav')
 const { t } = useLocale()
 
-const { showPrevMore, showNextMore, pagers } = useNav(props)
-const { makeLink, isRouter } = useNavRouter(props)
+const { showPrevMore, showNextMore, pagers } = useNavPagers(props)
+const { routeNav: route } = usePaginationRoute(props)
+
+const queryType = computed(() => props.queryType)
+const pageNumberOrOffsetQueryParamName = computed(() => props.pageNumberOrOffsetQueryParamName)
+const pageSizeQueryParamName = computed(() => props.pageSizeQueryParamName)
+
+const { makeLink } = useNavRoute(route, {
+  queryType,
+  pageNumberOrOffsetQueryParamName,
+  pageSizeQueryParamName,
+})
 
 function handlePrev(val: number) {
   emit('prevClick', val)
 
-  if (!isRouter.value) {
-    emit('change', val)
+  if (route.value === undefined) {
+    emit('click', val)
   }
 }
 
 function handleNext(val: number) {
   emit('nextClick', val)
 
-  if (!isRouter.value) {
-    emit('change', val)
+  if (route.value === undefined) {
+    emit('click', val)
   }
 }
 
 function handleChangerCurrentPage(val: number) {
-  if (!isRouter.value) {
-    emit('change', val)
+  if (route.value === undefined) {
+    emit('click', val)
   }
 }
 </script>
@@ -53,7 +64,7 @@ export default {
     <ul :class="ns.e('list')">
       <li :class="ns.e('item')">
         <Prev
-          :page-number-query-param-name="pageNumberQueryParamName"
+          :page-number-or-offset-query-param-name="pageNumberOrOffsetQueryParamName"
           :page-size-query-param-name="pageSizeQueryParamName"
           :query-type="queryType"
           :current-page="currentPage"
@@ -79,7 +90,7 @@ export default {
       </li>
       <li v-if="showPrevMore" :class="ns.e('item')">
         <MorePrev
-          :page-number-query-param-name="pageNumberQueryParamName"
+          :page-number-or-offset-query-param-name="pageNumberOrOffsetQueryParamName"
           :page-size-query-param-name="pageSizeQueryParamName"
           :query-type="queryType"
           :current-page="currentPage"
@@ -97,13 +108,13 @@ export default {
           :aria-label="t('nado.pagination.currentPage', { pager })"
           :label="pager"
           :mode="currentPage === pager ? 'solid' : 'outline'"
-          :to="currentPage !== pager ? makeLink(pager, pageSize) : undefined"
+          :to="makeLink(pager, pageSize)"
           @click="currentPage !== pager && handleChangerCurrentPage(pager)"
         />
       </li>
       <li v-if="showNextMore" :class="ns.e('item')">
         <MoreNext
-          :page-number-query-param-name="pageNumberQueryParamName"
+          :page-number-or-offset-query-param-name="pageNumberOrOffsetQueryParamName"
           :page-size-query-param-name="pageSizeQueryParamName"
           :query-type="queryType"
           :current-page="currentPage"
@@ -127,7 +138,7 @@ export default {
       </li>
       <li :class="ns.e('item')">
         <Next
-          :page-number-query-param-name="pageNumberQueryParamName"
+          :page-number-or-offset-query-param-name="pageNumberOrOffsetQueryParamName"
           :page-size-query-param-name="pageSizeQueryParamName"
           :query-type="queryType"
           :current-page="currentPage"

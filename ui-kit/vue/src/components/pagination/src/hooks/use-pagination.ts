@@ -1,11 +1,29 @@
 import { useLocale } from '@ui/hooks'
-import { debugWarn } from '@ui/utils'
-import { computed, type ComputedRef, getCurrentInstance, ref, type SetupContext, watch } from 'vue'
+import { debugWarn, isEqual } from '@ui/utils'
+import { computed, getCurrentInstance, ref, type SetupContext, watch } from 'vue'
 
 import type { NPaginationEmits, NPaginationProps } from '../pagination.model'
 import { isAbsent } from '../utils'
+import { useNavRoute } from './use-nav-route'
+import { usePaginationQuery } from './use-pagination-query'
+import { usePaginationRoute } from './use-pagination-route'
+import { useRouter } from './use-router'
 
 export function usePagination(props: NPaginationProps, emit: SetupContext<NPaginationEmits>['emit']) {
+  const { routeNav } = usePaginationRoute(props)
+
+  const { queryType, pageNumberOrOffsetQueryParamName, pageSizeQueryParamName, getPageInQuery } = usePaginationQuery(
+    routeNav,
+    props,
+  )
+
+  const { makeLink } = useNavRoute(routeNav, {
+    queryType,
+    pageNumberOrOffsetQueryParamName,
+    pageSizeQueryParamName,
+  })
+
+  const { router } = useRouter()
   const { t } = useLocale()
 
   function assertValidUsage() {
@@ -33,15 +51,15 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
     return { isValid }
   }
 
-  function bridge(
-    queryPageNumber: ComputedRef<number | undefined>,
-    queryPageSize: ComputedRef<number | undefined>,
-    queryPageNumberOrOffset: ComputedRef<number | undefined>,
-  ) {
-    const innerPageSize = ref((props.defaultPageSize !== undefined ? props.defaultPageSize : queryPageSize.value) || 10)
+  function usePaginationPage() {
+    const { pageNumberQueryVal, pageSizeQueryVal, pageNumberOrOffsetQueryVal } = getPageInQuery()
+
+    const innerPageSize = ref(
+      (props.defaultPageSize !== undefined ? props.defaultPageSize : pageSizeQueryVal.value) || 10,
+    )
 
     const innerCurrentPage = ref(
-      (props.defaultCurrentPage !== undefined ? props.defaultCurrentPage : queryPageNumber.value) || 1,
+      (props.defaultCurrentPage !== undefined ? props.defaultCurrentPage : pageNumberQueryVal.value) || 1,
     )
 
     const pageSizeBridge = computed({
@@ -90,7 +108,7 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
     })
 
     watch(
-      () => queryPageSize.value,
+      () => pageSizeQueryVal.value,
       (newValue: number | undefined, oldValue: number | undefined) => {
         if (!props.queryType) {
           return
@@ -109,7 +127,7 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
     )
 
     watch(
-      () => queryPageNumberOrOffset.value,
+      () => pageNumberOrOffsetQueryVal.value,
       (newValue: number | undefined, oldValue: number | undefined) => {
         if (!props.queryType) {
           return
@@ -135,15 +153,71 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
       },
     )
 
+    watch(pageCountBridge, (val) => {
+      if (currentPageBridge.value > val) {
+        currentPageBridge.value = val
+      }
+    })
+
+    watch(
+      () => props.pageSize,
+      (newVal, oldVal) => {
+        if (isEqual(newVal, oldVal)) {
+          return
+        }
+
+        if (newVal === undefined) {
+          return
+        }
+
+        changePageSize(newVal)
+      },
+    )
+
+    function changeCurrentPage(val: number) {
+      if (!routeNav.value) {
+        currentPageBridge.value = val
+
+        return
+      }
+
+      const link = makeLink(val, pageSizeBridge.value)
+
+      if (!link) {
+        return
+      }
+
+      router.push(link)
+    }
+
+    function changePageSize(val: number) {
+      if (!routeNav.value) {
+        pageSizeBridge.value = val
+
+        return
+      }
+
+      const link = makeLink(currentPageBridge.value, val)
+
+      if (!link) {
+        return
+      }
+
+      router.push(link)
+    }
+
     return {
       pageSizeBridge,
       pageCountBridge,
       currentPageBridge,
+      changeCurrentPage,
     }
   }
 
   return {
+    pageNumberOrOffsetQueryParamName,
+    pageSizeQueryParamName,
     assertValidUsage,
-    bridge,
+    usePaginationPage,
   }
 }

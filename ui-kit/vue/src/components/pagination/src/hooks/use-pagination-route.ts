@@ -6,7 +6,7 @@ import type { NPaginationProps } from '../pagination.model'
 export function usePaginationRoute(props: Pick<NPaginationProps, 'queryType'>) {
   const instance = getCurrentInstance()!
 
-  const route = computed(() => {
+  const routeNav = computed(() => {
     if (!props.queryType) {
       return undefined
     }
@@ -25,7 +25,7 @@ export function usePaginationRoute(props: Pick<NPaginationProps, 'queryType'>) {
     return route_ as RouteLocation
   })
 
-  const isRouter = computed(() => !route.value)
+  const isRouter = computed(() => !!routeNav.value)
 
-  return { isRouter, route }
+  return { isRouter, routeNav }
 }

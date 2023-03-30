@@ -7,4 +7,4 @@ export interface _RouteLocationPathRaw extends RouteQueryAndHash, MatcherLocatio
 
 export interface _RouteLocationNamedRaw extends RouteQueryAndHash, LocationAsRelativeRaw, RouteLocationOptions {}
 
-export type RouteTo = string | _RouteLocationPathRaw | _RouteLocationNamedRaw
+export type RouteLocationRaw = string | _RouteLocationPathRaw | _RouteLocationNamedRaw

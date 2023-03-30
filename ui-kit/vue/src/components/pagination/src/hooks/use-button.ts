@@ -1,12 +1,9 @@
-// useFormItem, useGlobalConfig
 import { useFormDisabled } from '@ui/components/form'
 import { useRouterLink } from '@ui/hooks'
 import { computed } from 'vue'
 
-// Text, useSlotsuseDisabled
 import type { NPaginationNavButtonProps } from '../button.model'
 
-// useRouterLink, useRouterLinkProps
 export function useButton(props: NPaginationNavButtonProps) {
   const { tagComputed, linkAttributesComputed, isLinkTag } = useRouterLink(props)
   const _formDisabled = useFormDisabled()

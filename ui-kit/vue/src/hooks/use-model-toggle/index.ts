@@ -153,6 +153,7 @@ export const createModelToggleComposable = <T extends string>(name: T) => {
     if (shouldHideWhenRouteChanges && instance!.appContext.config.globalProperties.$route! !== undefined) {
       watch(
         () => ({
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ...(instance!.proxy as Record<string, any>)!.$route,
         }),
         () => {

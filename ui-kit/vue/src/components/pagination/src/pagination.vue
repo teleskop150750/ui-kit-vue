@@ -2,7 +2,7 @@
 import { useNamespace } from '@ui/hooks'
 import { computed } from 'vue'
 
-import { usePagination, usePaginationQuery, usePaginationRoute } from './hooks'
+import { usePagination } from './hooks'
 import Nav from './nav.vue'
 import { nPaginationEmits, nPaginationProps } from './pagination.model'
 
@@ -10,29 +10,18 @@ const props = defineProps(nPaginationProps)
 const emit = defineEmits(nPaginationEmits)
 
 const ns = useNamespace('pagination')
-const { route, isRouter } = usePaginationRoute(props)
-const { getQueryPageParams } = usePaginationQuery(route)
-const { getQueryPageParamsName, getPageInQuery } = getQueryPageParams(props)
-const pageInQuery = getPageInQuery()
-
-const { pageNumberOrOffsetQueryParamName, pageSizeQueryParamName } = getQueryPageParamsName()
-
-const { assertValidUsage, bridge } = usePagination(props, emit)
-
+const { pageNumberOrOffsetQueryParamName, pageSizeQueryParamName, assertValidUsage, usePaginationPage } = usePagination(
+  props,
+  emit,
+)
 const { isValid } = assertValidUsage()
 
 const canShowPagination = computed(() => isValid.value && !(props.hideOnSinglePage && pageCountBridge.value <= 1))
 
-const { pageSizeBridge, pageCountBridge, currentPageBridge } = bridge(
-  pageInQuery.queryPageNumber,
-  pageInQuery.queryPageSize,
-  pageInQuery.queryPageNumberOrOffset,
-)
+const { pageSizeBridge, pageCountBridge, currentPageBridge, changeCurrentPage } = usePaginationPage()
 
-function handleChangeCurrent(val: number) {
-  if (!isRouter.value) {
-    currentPageBridge.value = val
-  }
+function handleClickNav(val: number) {
+  changeCurrentPage(val)
 }
 
 function handlePrevClick(val: number) {
@@ -55,8 +44,8 @@ export default {
     <Nav
       :class="ns.e('pager')"
       :query-type="queryType"
-      :page-number-query-param-name="pageNumberOrOffsetQueryParamName || ''"
-      :page-size-query-param-name="pageSizeQueryParamName || ''"
+      :page-number-or-offset-query-param-name="pageNumberOrOffsetQueryParamName"
+      :page-size-query-param-name="pageSizeQueryParamName"
       :current-page="currentPageBridge"
       :page-size="pageSizeBridge"
       :page-count="pageCountBridge"
@@ -68,7 +57,7 @@ export default {
       :next-icon="nextIcon"
       @prev-click="handlePrevClick"
       @next-click="handleNextClick"
-      @change="handleChangeCurrent"
+      @click="handleClickNav"
     />
   </div>
 </template>

@@ -16,6 +16,7 @@ import type { NFormItemContext } from '../../tokens'
 
 export interface IUseFormItemInputCommonProps {
   id?: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   label?: string | number | boolean | Record<string, any>
 }
 

@@ -100,6 +100,7 @@ export function provideGlobalConfig(config: MaybeRef<NConfigProviderContext>, ap
 
 function mergeConfig(a: NConfigProviderContext, b: NConfigProviderContext): NConfigProviderContext {
   const keys = [...new Set([...keysOf(a), ...keysOf(b)])]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const obj: Record<string, any> = {}
 
   for (const key of keys) {

@@ -3,13 +3,24 @@ import { useLocale } from '@ui/hooks'
 import { computed } from 'vue'
 
 import Button from './button.vue'
-import { useNavRouter } from './hooks'
+import { useNavRoute, usePaginationRoute } from './hooks'
 import { nPaginationNavPrevEmits, nPaginationPrevProps } from './prev.model'
 
 const props = defineProps(nPaginationPrevProps)
 const emit = defineEmits(nPaginationNavPrevEmits)
-const { makeLink } = useNavRouter(props)
+
 const { t } = useLocale()
+const { routeNav: route } = usePaginationRoute(props)
+
+const queryType = computed(() => props.queryType)
+const pageNumberOrOffsetQueryParamName = computed(() => props.pageNumberOrOffsetQueryParamName)
+const pageSizeQueryParamName = computed(() => props.pageSizeQueryParamName)
+
+const { makeLink } = useNavRoute(route, {
+  queryType,
+  pageNumberOrOffsetQueryParamName,
+  pageSizeQueryParamName,
+})
 
 const internalDisabled = computed(() => props.disabled || props.currentPage <= 1)
 

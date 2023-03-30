@@ -1,25 +1,8 @@
 <script lang="ts" setup>
 import { NPagination } from '@ui/index'
-import { computed, getCurrentInstance } from 'vue'
 import { useRoute } from 'vue-router'
 
 const router = useRoute()
-
-const route2 = computed(() => {
-  const instance = getCurrentInstance()
-
-  if (!instance) {
-    return undefined
-  }
-
-  const route_ = instance.proxy?.$route
-
-  if (!route_) {
-    return undefined
-  }
-
-  return route_
-})
 </script>
 
 <template>
@@ -27,16 +10,21 @@ const route2 = computed(() => {
     <div>
       {{ router.fullPath }}
     </div>
-    <div>
-      {{ route2?.fullPath }}
-    </div>
 
     <div class="example-demonstration">When you have few pages</div>
-    <!-- <NPagination query-type="offset" :total="50" /> -->
   </div>
   <div class="example-pagination-block">
-    <div class="example-demonstration">When you have more than 7 pages</div>
-    <NPagination query-type="offset" :page-count="100" />
+    <div class="example-demonstration">[Button] page-count</div>
+    <NPagination :page-count="100" />
+  </div>
+  <div class="example-pagination-block">
+    <div class="example-demonstration">[number] page-count</div>
+    <NPagination query-type="number" :page-count="100" />
+  </div>
+
+  <div class="example-pagination-block">
+    <div class="example-demonstration">[total] page-count</div>
+    <NPagination query-type="number" :total="1000" />
   </div>
 </template>
 

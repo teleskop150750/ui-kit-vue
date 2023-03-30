@@ -3,7 +3,7 @@ import { isNil } from 'lodash-es'
 
 export { isArray, isDate, isFunction, isObject, isPromise, isString, isSymbol } from '@vue/shared'
 export { isBoolean, isNumber } from '@vueuse/core'
-export { isNil } from 'lodash-es'
+export { isEqual, isNil } from 'lodash-es'
 export { isVNode } from 'vue'
 
 export function isUndefined(val: unknown): val is undefined {

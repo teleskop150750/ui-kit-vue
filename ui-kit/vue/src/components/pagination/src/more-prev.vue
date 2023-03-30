@@ -4,7 +4,7 @@ import { useLocale, useNamespace } from '@ui/hooks'
 import { computed } from 'vue'
 
 import Button from './button.vue'
-import { useMoreButton, useNavRouter } from './hooks'
+import { useMoreButton, useNavRoute, usePaginationRoute } from './hooks'
 import { nPaginationNavMorePrevEmits, nPaginationNavMorePrevProps } from './more-prev.model'
 
 const props = defineProps(nPaginationNavMorePrevProps)
@@ -13,7 +13,18 @@ const emit = defineEmits(nPaginationNavMorePrevEmits)
 const ns = useNamespace('pagination-nav')
 const { t } = useLocale()
 const { quickHover, quickFocus, pagerCountOffset, onMouseEnter } = useMoreButton(props)
-const { makeLink } = useNavRouter(props)
+
+const { routeNav: route } = usePaginationRoute(props)
+
+const queryType = computed(() => props.queryType)
+const pageNumberOrOffsetQueryParamName = computed(() => props.pageNumberOrOffsetQueryParamName)
+const pageSizeQueryParamName = computed(() => props.pageSizeQueryParamName)
+
+const { makeLink } = useNavRoute(route, {
+  queryType,
+  pageNumberOrOffsetQueryParamName,
+  pageSizeQueryParamName,
+})
 
 const newPage = computed(() => {
   let page = props.currentPage - pagerCountOffset.value

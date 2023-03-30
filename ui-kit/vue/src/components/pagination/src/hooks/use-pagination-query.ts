@@ -8,110 +8,101 @@ export interface PageFromQuery {
   size?: number | undefined
 }
 
-export function usePaginationQuery(route: ComputedRef<RouteLocation | undefined>) {
-  function getQueryPageParams(props: NPaginationQueryProps) {
-    const pageNumberOrOffsetQueryParamName = computed(() => {
-      if (props.queryType === 'number') {
-        return props.queryPageNumber
-      }
+export function usePaginationQuery(routeNav: ComputedRef<RouteLocation | undefined>, props: NPaginationQueryProps) {
+  const queryType = computed(() => props.queryType)
 
-      if (props.queryType === 'offset') {
-        return props.queryPageOffset
-      }
-
-      return undefined
-    })
-
-    const pageSizeQueryParamName = computed(() => {
-      if (props.queryType === 'number') {
-        return props.queryPageSize
-      }
-
-      if (props.queryType === 'offset') {
-        return props.queryPageLimit
-      }
-
-      return undefined
-    })
-
-    function getQueryPageParamsName() {
-      return {
-        pageNumberOrOffsetQueryParamName,
-        pageSizeQueryParamName,
-      }
+  const pageNumberOrOffsetQueryParamName = computed(() => {
+    if (queryType.value === 'number') {
+      return props.queryPageNumber
     }
 
-    function getPageInQuery() {
-      const queryPageSize = computed(() => {
-        if (!route.value) {
-          return undefined
-        }
+    if (queryType.value === 'offset') {
+      return props.queryPageOffset
+    }
 
-        if (!pageSizeQueryParamName.value) {
-          return undefined
-        }
+    return ''
+  })
 
-        const res = route.value.query[pageSizeQueryParamName.value] as string | undefined
+  const pageSizeQueryParamName = computed(() => {
+    if (queryType.value === 'number') {
+      return props.queryPageSize
+    }
 
-        if (!res) {
-          return undefined
-        }
+    if (queryType.value === 'offset') {
+      return props.queryPageLimit
+    }
 
-        return Number.parseInt(res)
-      })
+    return ''
+  })
 
-      const queryPageNumberOrOffset = computed(() => {
-        if (!route.value) {
-          return undefined
-        }
-
-        if (!pageNumberOrOffsetQueryParamName.value) {
-          return undefined
-        }
-
-        const res = route.value.query[pageNumberOrOffsetQueryParamName.value] as string | undefined
-
-        if (!res) {
-          return undefined
-        }
-
-        return Number.parseInt(res)
-      })
-
-      const queryPageNumber = computed(() => {
-        if (queryPageSize.value === undefined || queryPageNumberOrOffset.value === undefined) {
-          return undefined
-        }
-
-        if (props.queryType === 'number') {
-          return queryPageNumberOrOffset.value
-        }
-
-        if (props.queryType === 'offset') {
-          if (queryPageNumberOrOffset.value === 0) {
-            return 1
-          }
-
-          return queryPageNumberOrOffset.value / queryPageSize.value + 1
-        }
-
+  function getPageInQuery() {
+    const pageSizeQueryVal = computed(() => {
+      if (!routeNav.value) {
         return undefined
-      })
-
-      return {
-        queryPageSize,
-        queryPageNumberOrOffset,
-        queryPageNumber,
       }
-    }
+
+      if (!pageSizeQueryParamName.value) {
+        return undefined
+      }
+
+      const res = routeNav.value.query[pageSizeQueryParamName.value] as string | undefined
+
+      if (!res) {
+        return undefined
+      }
+
+      return Number.parseInt(res)
+    })
+
+    const pageNumberOrOffsetQueryVal = computed(() => {
+      if (!routeNav.value) {
+        return undefined
+      }
+
+      if (!pageNumberOrOffsetQueryParamName.value) {
+        return undefined
+      }
+
+      const res = routeNav.value.query[pageNumberOrOffsetQueryParamName.value] as string | undefined
+
+      if (!res) {
+        return undefined
+      }
+
+      return Number.parseInt(res)
+    })
+
+    const pageNumberQueryVal = computed(() => {
+      if (pageSizeQueryVal.value === undefined || pageNumberOrOffsetQueryVal.value === undefined) {
+        return undefined
+      }
+
+      if (queryType.value === 'number') {
+        return pageNumberOrOffsetQueryVal.value
+      }
+
+      if (queryType.value === 'offset') {
+        if (pageNumberOrOffsetQueryVal.value === 0) {
+          return 1
+        }
+
+        return pageNumberOrOffsetQueryVal.value / pageSizeQueryVal.value + 1
+      }
+
+      return undefined
+    })
 
     return {
-      getQueryPageParamsName,
-      getPageInQuery,
+      pageSizeQueryVal,
+      pageNumberOrOffsetQueryVal,
+      pageNumberQueryVal,
     }
   }
 
   return {
-    getQueryPageParams,
+    queryType,
+    pageNumberOrOffsetQueryParamName,
+    pageSizeQueryParamName,
+    getPageInQuery,
   }
 }

@@ -2,7 +2,7 @@ import { computed, ref, watchEffect } from 'vue'
 
 import type { NPaginationNavProps } from '../nav.model'
 
-export function useNav(props: NPaginationNavProps) {
+export function useNavPagers(props: NPaginationNavProps) {
   const showPrevMore = ref(false)
   const showNextMore = ref(false)
 

@@ -9,7 +9,7 @@ export const nPaginationNavQueryProps = buildProps({
     ...nPaginationQueryProps.queryType,
     required: true,
   },
-  pageNumberQueryParamName: {
+  pageNumberOrOffsetQueryParamName: {
     type: String,
     required: true,
   },
@@ -60,7 +60,7 @@ export const nPaginationNavProps = buildProps({
 } as const)
 
 export const nPaginationNavEmits = {
-  change: (val: number) => isNumber(val),
+  click: (val: number) => isNumber(val),
   prevClick: (val: number) => isNumber(val),
   nextClick: (val: number) => isNumber(val),
 }
