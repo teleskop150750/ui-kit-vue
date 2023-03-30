@@ -174,6 +174,22 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
       },
     )
 
+    watch(currentPageBridge, (newVal, oldVal) => {
+      if (isEqual(newVal, oldVal)) {
+        return
+      }
+
+      changeCurrentPage(newVal)
+    })
+
+    if (currentPageBridge.value > pageCountBridge.value) {
+      currentPageBridge.value = pageCountBridge.value
+    }
+
+    if (currentPageBridge.value < 1) {
+      currentPageBridge.value = 1
+    }
+
     function changeCurrentPage(val: number) {
       if (!routeNav.value) {
         currentPageBridge.value = val

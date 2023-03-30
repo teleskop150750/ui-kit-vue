@@ -5,7 +5,7 @@ import { useRoute } from 'vue-router'
 
 const router = useRoute()
 
-const perPage = ref(10)
+const pageSize = ref(10)
 const pageCount = ref(100)
 const total = ref(100)
 </script>
@@ -28,10 +28,10 @@ const total = ref(100)
 
   <div class="example-pagination-block">
     <div>
-      <div>PerPage _ total: {{ perPage }} | {{ total }}</div>
+      <div>PerPage _ total: {{ pageSize }} | {{ total }}</div>
       <div><input v-model.number="total" type="text" /></div>
       <div>
-        <select v-model.number="perPage">
+        <select v-model.number="pageSize">
           <option value="10">10</option>
           <option value="50">50</option>
           <option value="100">100</option>
@@ -39,7 +39,7 @@ const total = ref(100)
       </div>
     </div>
     <div>
-      <NPagination query-type="number" :total="total" :page-size="perPage" />
+      <NPagination query-type="number" :total="total" :page-size="pageSize" />
     </div>
   </div>
 </template>
