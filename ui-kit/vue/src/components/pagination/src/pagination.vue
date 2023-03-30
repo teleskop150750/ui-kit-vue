@@ -24,7 +24,7 @@ const { isValid } = assertValidUsage()
 const canShowPagination = computed(() => isValid.value && !(props.hideOnSinglePage && pageCountBridge.value <= 1))
 
 const { pageSizeBridge, pageCountBridge, currentPageBridge } = bridge(
-  pageInQuery.init,
+  pageInQuery.queryPageNumber,
   pageInQuery.queryPageSize,
   pageInQuery.queryPageNumberOrOffset,
 )

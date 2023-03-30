@@ -32,11 +32,11 @@ const route2 = computed(() => {
     </div>
 
     <div class="example-demonstration">When you have few pages</div>
-    <!-- <NPagination query-type="number" :total="50" /> -->
+    <!-- <NPagination query-type="offset" :total="50" /> -->
   </div>
   <div class="example-pagination-block">
     <div class="example-demonstration">When you have more than 7 pages</div>
-    <NPagination query-type="number" :total="1000" />
+    <NPagination query-type="offset" :page-count="100" />
   </div>
 </template>
 

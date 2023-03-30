@@ -78,49 +78,30 @@ export function usePaginationQuery(route: ComputedRef<RouteLocation | undefined>
         return Number.parseInt(res)
       })
 
-      function getPageFromQuery() {
-        const pageFromQuery: PageFromQuery = {
-          current: undefined,
-          size: undefined,
-        }
-
-        if (!props.queryType || !pageSizeQueryParamName.value || !pageNumberOrOffsetQueryParamName.value) {
-          return pageFromQuery
-        }
-
-        const pageSize = getQueryParamValue(pageSizeQueryParamName.value)
-
-        if (pageSize === undefined) {
-          return pageFromQuery
-        }
-
-        const numberOrOffset = getQueryParamValue(pageNumberOrOffsetQueryParamName.value)
-
-        if (numberOrOffset === undefined) {
-          return pageFromQuery
+      const queryPageNumber = computed(() => {
+        if (queryPageSize.value === undefined || queryPageNumberOrOffset.value === undefined) {
+          return undefined
         }
 
         if (props.queryType === 'number') {
-          pageFromQuery.current = numberOrOffset
-          pageFromQuery.size = pageSize
-
-          return pageFromQuery
+          return queryPageNumberOrOffset.value
         }
 
         if (props.queryType === 'offset') {
-          pageFromQuery.size = numberOrOffset / pageSize
-          pageFromQuery.size = pageSize
+          if (queryPageNumberOrOffset.value === 0) {
+            return 1
+          }
 
-          return pageFromQuery
+          return queryPageNumberOrOffset.value / queryPageSize.value + 1
         }
 
-        return pageFromQuery
-      }
+        return undefined
+      })
 
       return {
         queryPageSize,
         queryPageNumberOrOffset,
-        init: getPageFromQuery(),
+        queryPageNumber,
       }
     }
 
@@ -128,22 +109,6 @@ export function usePaginationQuery(route: ComputedRef<RouteLocation | undefined>
       getQueryPageParamsName,
       getPageInQuery,
     }
-  }
-
-  function getQueryParamValue(param: string) {
-    if (!route.value) {
-      return undefined
-    }
-
-    if (!route.value.query) {
-      return undefined
-    }
-
-    if (!route.value.query[param]) {
-      return undefined
-    }
-
-    return Number(route.value.query[param])
   }
 
   return {

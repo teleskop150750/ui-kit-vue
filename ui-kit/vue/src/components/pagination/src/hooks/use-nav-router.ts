@@ -41,15 +41,15 @@ export function useNavRouter(props: NPaginationNavQueryProps) {
 }
 
 function getQueryPageNumber(
-  router: Required<Pick<NPaginationNavQueryProps, 'queryType'>>['queryType'],
+  queryType: Required<Pick<NPaginationNavQueryProps, 'queryType'>>['queryType'],
   page: number,
   size: number,
 ) {
-  if (router === 'number') {
+  if (queryType === 'number') {
     return page
   }
 
-  return page * size
+  return (page - 1) * size
 }
 
 function getQueryPageSize(size: number) {

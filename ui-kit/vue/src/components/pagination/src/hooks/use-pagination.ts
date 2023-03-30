@@ -4,7 +4,6 @@ import { computed, type ComputedRef, getCurrentInstance, ref, type SetupContext,
 
 import type { NPaginationEmits, NPaginationProps } from '../pagination.model'
 import { isAbsent } from '../utils'
-import type { PageFromQuery } from './use-pagination-query'
 
 export function usePagination(props: NPaginationProps, emit: SetupContext<NPaginationEmits>['emit']) {
   const { t } = useLocale()
@@ -35,14 +34,14 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
   }
 
   function bridge(
-    pageFromQuery: PageFromQuery,
+    queryPageNumber: ComputedRef<number | undefined>,
     queryPageSize: ComputedRef<number | undefined>,
     queryPageNumberOrOffset: ComputedRef<number | undefined>,
   ) {
-    const innerPageSize = ref((props.defaultPageSize !== undefined ? props.defaultPageSize : pageFromQuery.size) || 10)
+    const innerPageSize = ref((props.defaultPageSize !== undefined ? props.defaultPageSize : queryPageSize.value) || 10)
 
     const innerCurrentPage = ref(
-      (props.defaultCurrentPage !== undefined ? props.defaultCurrentPage : pageFromQuery.current) || 1,
+      (props.defaultCurrentPage !== undefined ? props.defaultCurrentPage : queryPageNumber.value) || 1,
     )
 
     const pageSizeBridge = computed({
