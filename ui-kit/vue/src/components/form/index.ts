@@ -6,7 +6,6 @@ import FormItem from './src/form-item/form-item.vue'
 export const NForm = withInstall(Form, {
   FormItem,
 })
-// export default NForm
 export const NFormItem = withNoopInstall(FormItem)
 
 export * from './src/form/form.model'

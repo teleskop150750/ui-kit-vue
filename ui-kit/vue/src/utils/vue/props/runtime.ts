@@ -14,11 +14,11 @@ import type {
   NPropMergeType,
 } from './types'
 
-export const epPropKey = '__epPropKey'
+export const nPropKey = '__nPropKey'
 
 export const definePropType = <T>(val: any): PropType<T> => val
 
-export const isNProp = (val: unknown): val is NProp<any, any, any> => isObject(val) && !!(val as any)[epPropKey]
+export const isNProp = (val: unknown): val is NProp<any, any, any> => isObject(val) && !!(val as any)[nPropKey]
 
 /**
  * @description Build prop. Это может лучше оптимизировать типы реквизита
@@ -94,7 +94,7 @@ export const buildProp = <
     type,
     required: !!required,
     validator: _validator,
-    [epPropKey]: true,
+    [nPropKey]: true,
   }
 
   if (hasOwn(prop, 'default')) {
@@ -105,7 +105,7 @@ export const buildProp = <
 }
 
 export const buildProps = <
-  Props extends Record<string, { [epPropKey]: true } | NativePropType | NPropInput<any, any, any, any, any>>,
+  Props extends Record<string, { [nPropKey]: true } | NativePropType | NPropInput<any, any, any, any, any>>,
 >(
   props: Props,
 ): {

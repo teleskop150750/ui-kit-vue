@@ -1324,7 +1324,6 @@ module.exports = {
     'yield-star-spacing': ['error', { before: false, after: true }],
 
     // ==================
-    'curly': 'error',
 
     // import
     'import/extensions': 'off',

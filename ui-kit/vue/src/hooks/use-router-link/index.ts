@@ -2,11 +2,13 @@ import { useGlobalConfig } from '@ui/components/config-provider'
 import { buildProps, definePropType } from '@ui/utils'
 import { computed, type ExtractPropTypes, getCurrentInstance } from 'vue'
 
-// import { useGlobalConfig } from '../services/global-config'
+import type { RouteTo } from './types/route'
+
+export * from './types'
 
 const vueRouterLinkProps = buildProps({
   to: {
-    type: definePropType<string | object | undefined>([String, Object]),
+    type: definePropType<RouteTo | undefined>([String, Object]),
     default: undefined,
   },
   activeClass: {

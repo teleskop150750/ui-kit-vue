@@ -4,22 +4,29 @@ import { useNamespace } from '@ui/hooks'
 import { computed, useSlots } from 'vue'
 
 import { nButtonEmits, nButtonProps } from './button.model'
-import { useButton } from './use-button'
+import { useButton } from './hooks'
 
 const props = defineProps(nButtonProps)
 const emit = defineEmits(nButtonEmits)
 
 const ns = useNamespace('button')
 const nsGroup = useNamespace('button-group')
-const { _ref, _size, _appearance, _disabled, handleClick, isButtonGroup, tagComputed, buttonLinkAttributesComputed } =
-  useButton(props, emit)
+const {
+  _ref,
+  _size,
+  _appearance,
+  _disabled,
+  actionable,
+  handleClick,
+  isButtonGroup,
+  tagComputed,
+  buttonLinkAttributesComputed,
+} = useButton(props, emit)
 
 const slots = useSlots()
 const hasLabel = computed(() => props.label !== undefined && props.label !== null && props.label !== '')
 const hasLabelSlot = computed(() => Boolean(slots.default))
 const hasLabelContent = computed(() => hasLabel.value || hasLabelSlot.value)
-
-const actionable = computed(() => _disabled.value !== true && props.loading !== true)
 
 defineExpose({
   ref: _ref,
@@ -38,7 +45,7 @@ export default {
 <template>
   <component
     :is="tagComputed"
-    ref="rootRef"
+    ref="_ref"
     :class="[
       nsGroup.e('item', isButtonGroup),
       ns.b(),
@@ -51,7 +58,7 @@ export default {
       ns.is('loading', props.loading),
       ns.is('hoverable', actionable),
     ]"
-    :disabled="_disabled || loading"
+    :disabled="!actionable"
     v-bind="buttonLinkAttributesComputed"
     :autofocus="autofocus"
     @click="handleClick"

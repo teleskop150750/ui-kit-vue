@@ -1,0 +1,41 @@
+@layer components {
+  .n-pagination-nav-button--mode-solid {
+    /* container-color-outline */
+    --n-comp-pagination-nav-button-outline: var(--n-sys-outline-primary);
+
+    /* container-bg-color */
+    --n-comp-pagination-nav-button-container-bg-color: var(--n-sys-color-primary);
+    --n-comp-pagination-nav-button-container-bg-color-hovered: var(--n-sys-color-primary-light);
+    --n-comp-pagination-nav-button-container-bg-color-pressed: var(--n-sys-color-primary-dark);
+
+    /* container-border-color */
+    --n-comp-pagination-nav-button-container-border-color: var(--n-sys-color-primary);
+    --n-comp-pagination-nav-button-container-border-color-hovered: var(--n-sys-color-primary-light);
+    --n-comp-pagination-nav-button-container-border-color-pressed: var(--n-sys-color-primary-dark);
+
+    /* container-text-color */
+    --n-comp-pagination-nav-button-container-text-color: var(--n-sys-color-white);
+    --n-comp-pagination-nav-button-container-text-color-hovered: var(--n-sys-color-white);
+    --n-comp-pagination-nav-button-container-text-color-pressed: var(--n-sys-color-white);
+  }
+
+  .n-pagination-nav-button--mode-outline {
+    /* container-color-outline */
+    --n-comp-pagination-nav-button-outline: var(--n-sys-outline-primary);
+
+    /* container-bg-color */
+    --n-comp-pagination-nav-button-container-bg-color: var(--n-sys-color-white);
+    --n-comp-pagination-nav-button-container-bg-color-hovered: var(--n-sys-color-primary-50);
+    --n-comp-pagination-nav-button-container-bg-color-pressed: var(--n-sys-color-primary-100);
+
+    /* container-border-color */
+    --n-comp-pagination-nav-button-container-border-color: var(--n-sys-color-primary);
+    --n-comp-pagination-nav-button-container-border-color-hovered: var(--n-sys-color-primary-light);
+    --n-comp-pagination-nav-button-container-border-color-pressed: var(--n-sys-color-primary-dark);
+
+    /* container-text-color */
+    --n-comp-pagination-nav-button-container-text-color: var(--n-sys-color-primary);
+    --n-comp-pagination-nav-button-container-text-color-hovered: var(--n-sys-color-primary);
+    --n-comp-pagination-nav-button-container-text-color-pressed: var(--n-sys-color-primary);
+  }
+}

@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.base.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "vite.config.*", "vitest.config.*"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "vite.config.*"],
+  "exclude": ["node_modules", "dist", "src/**/__tests__/*"],
   "compilerOptions": {
     "composite": true,
     "types": ["node"]

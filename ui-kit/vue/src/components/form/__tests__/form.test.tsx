@@ -1,4 +1,4 @@
-import NInput from '@ui/components/input'
+import { NInput } from '@ui/components/input'
 import { InstallStylePlugin } from '@ui/test-utils/style-plugin'
 import { rAF } from '@ui/test-utils/tick'
 import { mount } from '@vue/test-utils'
@@ -391,7 +391,7 @@ describe('Form', () => {
       expect(onError).toHaveBeenLastCalledWith(formatDomainError(1))
     })
 
-    it.only('should not throw error when callback passed in', async () => {
+    it('should not throw error when callback passed in', async () => {
       const onSubmit = vi.fn()
 
       createComponent(onSubmit)

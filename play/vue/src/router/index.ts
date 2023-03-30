@@ -35,6 +35,11 @@ const router = createRouter({
       name: 'virtual',
       component: () => import('../views/VirtualView.vue'),
     },
+    {
+      path: '/pagination',
+      name: 'pagination',
+      component: () => import('../views/PaginationView.vue'),
+    },
   ],
 })
 

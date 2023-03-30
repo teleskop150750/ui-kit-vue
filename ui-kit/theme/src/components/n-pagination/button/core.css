@@ -1,0 +1,53 @@
+@layer components {
+  .n-pagination-nav-button {
+    position: relative;
+
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    height: var(--n-comp-pagination-nav-button-container-height);
+    min-width: var(--n-comp-pagination-nav-button-container-min-width);
+    padding: var(--n-comp-pagination-nav-button-padding-y) var(--n-comp-pagination-nav-button-padding-x);
+
+    color: var(--n-comp-pagination-nav-button-container-text-color);
+    font: inherit;
+    font-weight: var(--n-sys-text-weight-regular);
+    font-size: var(--n-comp-pagination-nav-button-container-label-size);
+    font-family: var(--n-sys-text-font-family);
+    line-height: 1;
+    white-space: nowrap;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+
+    border-color: var(--n-comp-pagination-nav-button-container-border-color);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: var(--n-comp-pagination-nav-button-container-border-radius);
+
+    background-color: var(--n-comp-pagination-nav-button-container-bg-color);
+
+    cursor: pointer;
+
+    user-select: none;
+    touch-action: none;
+  }
+
+  .n-pagination-nav-button__content {
+    display: flex;
+    flex: 10000 1 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+  }
+
+  .n-pagination-nav-button__icon {
+    width: var(--n-comp-pagination-nav-button-icon-size);
+    height: var(--n-comp-pagination-nav-button-icon-size);
+    margin-right: -12px;
+    margin-left: -12px;
+  }
+}

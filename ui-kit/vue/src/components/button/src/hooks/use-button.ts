@@ -1,14 +1,11 @@
-// useFormItem, useGlobalConfig
 import { useFormDisabled, useFormItem, useFormSize } from '@ui/components/form'
 import { useRouterLink } from '@ui/hooks'
 import { BUTTON_GROUP_INJECTION_KEY } from '@ui/tokens'
 import { computed, inject, ref, type SetupContext } from 'vue'
 
-// Text, useSlotsuseDisabled
-import type { NButtonEmits, NButtonProps } from './button.model'
+import type { NButtonEmits, NButtonProps } from '../button.model'
 
-// useRouterLink, useRouterLinkProps
-export const useButton = (props: NButtonProps, emit: SetupContext<NButtonEmits>['emit']) => {
+export function useButton(props: NButtonProps, emit: SetupContext<NButtonEmits>['emit']) {
   const buttonGroupContext = inject(BUTTON_GROUP_INJECTION_KEY, undefined)
 
   const { tagComputed, linkAttributesComputed, isLinkTag } = useRouterLink(props)
@@ -20,11 +17,12 @@ export const useButton = (props: NButtonProps, emit: SetupContext<NButtonEmits>[
   const _ref = ref<HTMLButtonElement>()
 
   const _appearance = computed(() => props.appearance || buttonGroupContext?.appearance || '')
+  const actionable = computed(() => _disabled.value !== true && props.loading !== true)
 
   const typeComputed = computed(() => (isLinkTag.value ? undefined : props.type))
   const buttonAttributesComputed = computed(() => {
     const disabledAttributes = {
-      'aria-disabled': props.loading || _disabled.value,
+      'aria-disabled': !actionable.value,
     }
 
     if (isLinkTag.value) {
@@ -33,7 +31,7 @@ export const useButton = (props: NButtonProps, emit: SetupContext<NButtonEmits>[
 
     return {
       type: typeComputed.value,
-      tabindex: props.loading || _disabled.value ? -1 : 0,
+      tabindex: !actionable.value ? -1 : 0,
       ...disabledAttributes,
     }
   })
@@ -53,6 +51,7 @@ export const useButton = (props: NButtonProps, emit: SetupContext<NButtonEmits>[
 
   return {
     _disabled,
+    actionable,
     _size,
     _appearance,
     _ref,

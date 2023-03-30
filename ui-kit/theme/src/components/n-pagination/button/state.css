@@ -1,0 +1,38 @@
+@layer components {
+  .n-pagination-nav-button--is-hoverable:hover {
+    --n-comp-pagination-nav-button-container-text-color: var(
+      --n-comp-pagination-nav-button-container-text-color-hovered
+    );
+    --n-comp-pagination-nav-button-container-bg-color: var(--n-comp-pagination-nav-button-container-bg-color-hovered);
+    --n-comp-pagination-nav-button-container-border-color: var(
+      --n-comp-pagination-nav-button-container-border-color-hovered
+    );
+  }
+
+  .n-pagination-nav-button--is-hoverable:active {
+    --n-comp-pagination-nav-button-container-text-color: var(
+      --n-comp-pagination-nav-button-container-text-color-pressed
+    );
+    --n-comp-pagination-nav-button-container-bg-color: var(--n-comp-pagination-nav-button-container-bg-color-pressed);
+    --n-comp-pagination-nav-button-container-border-color: var(
+      --n-comp-pagination-nav-button-container-border-color-pressed
+    );
+  }
+
+  .n-pagination-nav-button:focus {
+    outline: none;
+  }
+
+  .n-pagination-nav-button:focus-visible {
+    z-index: 1;
+
+    outline: var(--n-comp-pagination-nav-button-outline);
+    outline-offset: 0;
+  }
+
+  .n-pagination-nav-button--is-disabled:disabled {
+    cursor: default;
+
+    opacity: 0.5;
+  }
+}

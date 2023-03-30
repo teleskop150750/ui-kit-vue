@@ -22,6 +22,7 @@ module.exports = {
   plugins: ['prettier'],
   "rules": {
     "prettier/prettier": "error",
+    'curly': 'error',
     'vue/html-self-closing': [
       'error',
       {

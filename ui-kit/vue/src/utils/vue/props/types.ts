@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ExtractPropTypes, PropType } from 'vue'
 
-import type { epPropKey as nPropKey } from './runtime'
+import type { nPropKey } from './runtime'
 import type { IfNever, UnknownToNever, WritableArray } from './util'
 
 type Val<T> = T[keyof T]

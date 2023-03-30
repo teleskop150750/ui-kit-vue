@@ -14,10 +14,11 @@ export default defineConfig({
     vue(),
     vueJsx(),
     Dts({
+      staticImport: true,
       insertTypesEntry: true,
       include: ['src/**/*.ts', 'src/**/*.vue', 'src/**/*.d.ts'],
       tsConfigFilePath: './tsconfig.node.json',
-      outputDir: './dist/types',
+      outputDir: './dist',
     }),
   ],
   resolve: {
@@ -38,8 +39,11 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: ['vue'],
+
+      treeshake: true,
+      external: ['vue', '@vueuse/core', '@vue/shared'],
       output: {
+        exports: 'named',
         // Provide global variables to use in the UMD build
         // for externalized deps
         globals: {

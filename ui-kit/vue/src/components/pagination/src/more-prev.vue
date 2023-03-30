@@ -1,0 +1,57 @@
+<script lang="ts" setup>
+import { NIconDArrowLeft, NIconMoreFilled } from '@nado/ui-kit-icons-vue'
+import { useLocale, useNamespace } from '@ui/hooks'
+import { computed } from 'vue'
+
+import Button from './button.vue'
+import { useMoreButton, useNavRouter } from './hooks'
+import { nPaginationNavMorePrevEmits, nPaginationNavMorePrevProps } from './more-prev.model'
+
+const props = defineProps(nPaginationNavMorePrevProps)
+const emit = defineEmits(nPaginationNavMorePrevEmits)
+
+const ns = useNamespace('pagination-nav')
+const { t } = useLocale()
+const { quickHover, quickFocus, pagerCountOffset, onMouseEnter } = useMoreButton(props)
+const { makeLink } = useNavRouter(props)
+
+const newPage = computed(() => {
+  let page = props.currentPage - pagerCountOffset.value
+
+  if (page < 1) {
+    page = 1
+  }
+
+  if (page > props.pageCount) {
+    page = props.pageCount
+  }
+
+  return page
+})
+
+function handleClick() {
+  emit('change', newPage.value)
+}
+</script>
+
+<script lang="ts">
+export default {
+  name: 'NPaginationNavButtonMorePrev',
+}
+</script>
+
+<template>
+  <Button
+    :to="makeLink(newPage, pageSize)"
+    :disabled="disabled"
+    :aria-label="t('nado.pagination.prevPages', { pager: pagerCount - 2 })"
+    :icon="(quickHover || quickFocus) && !disabled ? NIconDArrowLeft : NIconMoreFilled"
+    :class="[ns.m('more'), ns.m('more-prev')]"
+    mode="outline"
+    @mouseenter="onMouseEnter()"
+    @mouseleave="quickHover = false"
+    @focus="quickFocus = true"
+    @blur="quickFocus = false"
+    @click="handleClick"
+  />
+</template>

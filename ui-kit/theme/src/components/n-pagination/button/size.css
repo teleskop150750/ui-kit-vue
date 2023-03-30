@@ -1,0 +1,11 @@
+@layer components {
+  .n-pagination-nav-button {
+    --n-comp-pagination-nav-button-container-height: var(--n-sys-component-size-base);
+    --n-comp-pagination-nav-button-container-min-width: var(--n-sys-component-size-base);
+    --n-comp-pagination-nav-button-container-label-size: var(--n-sys-text-size-base);
+    --n-comp-pagination-nav-button-container-border-radius: var(--n-sys-border-radius-base);
+    --n-comp-pagination-nav-button-icon-size: 14px;
+    --n-comp-pagination-nav-button-padding-y: 0;
+    --n-comp-pagination-nav-button-padding-x: calc(2px - 1px);
+  }
+}

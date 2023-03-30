@@ -3,7 +3,6 @@ import { withInstall } from '@ui/utils'
 import ConfigProvider from './src/config-provider'
 
 export const NConfigProvider = withInstall(ConfigProvider)
-export default NConfigProvider
 
 export * from './src/config-provider'
 export * from './src/config-provider.model'

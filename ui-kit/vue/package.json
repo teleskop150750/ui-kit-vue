@@ -1,5 +1,6 @@
 {
   "name": "@nado/ui-kit-vue",
+  "type": "module",
   "version": "0.0.0",
   "private": true,
   "exports": {
@@ -12,7 +13,7 @@
   "scripts": {
     "build": "run-p type-check build-only",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
+    "type-check": "vue-tsc --noEmit -p tsconfig.node.json --composite false",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
@@ -36,7 +37,6 @@
     "vue": "^3.2.47"
   },
   "devDependencies": {
-    "@histoire/plugin-vue": "^0.15.8",
     "@nado/eslint-config-vue": "workspace:*",
     "@nado/prettier-config": "workspace:*",
     "@nado/stylelint-config-css": "workspace:*",
@@ -49,7 +49,6 @@
     "@vitest/coverage-c8": "^0.29.3",
     "@vue/test-utils": "^2.3.0",
     "eslint": "^8.36.0",
-    "histoire": "^0.15.8",
     "jsdom": "^21.1.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.4",

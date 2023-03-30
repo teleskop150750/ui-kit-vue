@@ -92,7 +92,7 @@ export function useNamespace(block: string) {
   }
 
   // Type
-  function type(name: string, val: string, state = true) {
+  function type(name: string, val?: string, state = true) {
     return name && val && state ? _bem(namespace, block, '', '', `${name}-${val}`) : undefined
   }
 

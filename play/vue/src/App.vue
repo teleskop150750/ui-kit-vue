@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { getCurrentInstance } from 'vue'
-import { type Router, RouterLink } from 'vue-router'
+import { type Router, RouterLink, useRoute } from 'vue-router'
 
 const instance = getCurrentInstance()!
 const router = instance.appContext.config.globalProperties.$router as Router
 
-const t = instance.proxy!.$route
+const r = instance.proxy!.$route
 
-console.log(t)
+const route = useRoute()
+
+console.log('route', route.path)
+
+console.log(r)
 const routes = router
   .getRoutes()
   .map((el) => el)
@@ -18,8 +22,20 @@ const routes = router
   <header>
     <div class="wrapper">
       <nav class="nav">
-        <RouterLink v-for="r in routes" :key="r.path" :to="r">{{ r.name }}</RouterLink>
+        <RouterLink v-for="rI in routes" :key="rI.name" :to="rI">{{ rI.name }}</RouterLink>
       </nav>
+      <RouterLink
+        :to="{
+          path: route.path,
+
+          query: {
+            page: 1,
+            ...route.query,
+          },
+          hash: route.hash,
+        }"
+        >test</RouterLink
+      >
     </div>
   </header>
 
