@@ -7,4 +7,7 @@ module.exports = {
     sourceType: 'module',
   },
   extends: ['@nado/eslint-config-vue'],
+  rules: {
+    'vue/no-unused-vars': 'error',
+  },
 }

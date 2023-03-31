@@ -7,6 +7,7 @@ import {
   NScrollbar,
   NSpinner,
   NSyncScroll,
+  NTable,
 } from '@ui/components'
 import type { Plugin } from 'vue'
 
@@ -19,4 +20,5 @@ export const Components: Plugin[] = [
   NScrollbar,
   NSpinner,
   NSyncScroll,
+  NTable,
 ]

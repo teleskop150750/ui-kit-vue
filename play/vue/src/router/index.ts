@@ -41,6 +41,11 @@ const router = createRouter({
       component: () => import('../views/PaginationView.vue'),
     },
     {
+      path: '/sync-scroll',
+      name: 'sync-scroll',
+      component: () => import('../views/SyncScrollView.vue'),
+    },
+    {
       path: '/table',
       name: 'table',
       component: () => import('../views/TableView.vue'),

@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { NScrollbar, type NScrollbarInstance } from '@ui/index'
-import { inject, onMounted, ref } from 'vue'
-
-import { SYNC_SCROLL_INJECTION_KEY } from './tokens'
+import { NScrollbar, type NScrollbarInstance, SYNC_SCROLL_INJECTION_KEY } from '@ui/index'
+import { inject, onBeforeUnmount, onMounted, ref } from 'vue'
 
 const nScrollbarRef = ref<NScrollbarInstance>()
 
-const scrollContext = inject(SYNC_SCROLL_INJECTION_KEY, undefined)
+const scrollContext = inject(SYNC_SCROLL_INJECTION_KEY, undefined)!
 
 onMounted(() => {
   scrollContext!.addEl(nScrollbarRef.value!.wrapRef!)
+})
+
+onBeforeUnmount(() => {
+  scrollContext.removeEl(nScrollbarRef.value!.wrapRef!)
 })
 </script>
 

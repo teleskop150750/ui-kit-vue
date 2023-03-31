@@ -7,7 +7,7 @@ import type { IfNever, UnknownToNever, WritableArray } from './util'
 type Val<T> = T[keyof T]
 
 /**
- * Extract the type of a single prop
+ * Извлеките тип из single prop
  *
  * @example
  * ExtractPropType<{ type: StringConstructor }> => string | undefined
@@ -21,7 +21,7 @@ export type ExtractPropType<T extends object> = Val<
 >
 
 /**
- * Extracts types via `ExtractPropTypes`, accepting `PropType<T>`, `XXXConstructor`, `never`...
+ * Извлеките типы из `ExtractPropTypes`, accepting `PropType<T>`, `XXXConstructor`, `never`...
  *
  * @example
  * ResolvePropType<BooleanConstructor> => boolean
@@ -37,11 +37,11 @@ export type ResolvePropType<T> = IfNever<
 >
 
 /**
- * Merge Type, Value, Validator types\
+ * Merge Type, Value, Validator types
  *
  * @example
- * EpPropMergeType<StringConstructor, '1', 1> =>  1 | "1" // ignores StringConstructor
- * EpPropMergeType<StringConstructor, never, number> =>  string | number
+ * NPropMergeType<StringConstructor, '1', 1> =>  1 | "1" // ignores StringConstructor
+ * NPropMergeType<StringConstructor, never, number> =>  string | number
  */
 export type NPropMergeType<Type, Value, Validator> =
   | IfNever<UnknownToNever<Value>, ResolvePropType<Type>, never>
@@ -138,5 +138,3 @@ export type NPropFinalized<Type, Value, Validator, Default, Required> = NProp<
   UnknownToNever<Default>,
   Required
 >
-
-export {}

@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import { inject, onMounted, ref } from 'vue'
-
-import { SYNC_SCROLL_INJECTION_KEY } from './tokens'
+import { SYNC_SCROLL_INJECTION_KEY } from '@ui/index'
+import { inject, onBeforeUnmount, onMounted, ref } from 'vue'
 
 const headerRef = ref<HTMLElement>()
 
-const scrollContext = inject(SYNC_SCROLL_INJECTION_KEY, undefined)
+const scrollContext = inject(SYNC_SCROLL_INJECTION_KEY, undefined)!
 
 onMounted(() => {
-  scrollContext!.addEl(headerRef.value!)
+  scrollContext.addEl(headerRef.value!)
+})
+
+onBeforeUnmount(() => {
+  scrollContext.removeEl(headerRef.value!)
 })
 </script>
 
