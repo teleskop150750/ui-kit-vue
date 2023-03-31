@@ -82,6 +82,8 @@ describe('virtual scrollbar', () => {
     const e = document.createEvent('MouseEvents')
     const clientY = 20
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     // eslint-disable-next-line unicorn/no-null
     e.initMouseEvent('mousedown', false, false, null, 0, 0, 0, 0, clientY, false, false, false, false, 0, null)
     el.dispatchEvent(e)

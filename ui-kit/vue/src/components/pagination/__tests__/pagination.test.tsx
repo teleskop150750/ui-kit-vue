@@ -1,23 +1,22 @@
 /* eslint-disable no-console */
-import { NIconCaretLeft, NIconCaretRight } from '@nado/ui-kit-icons-vue'
-import { mount, type VueWrapper } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest'
 import { nextTick, ref } from 'vue'
 
 import Pagination from '../src/pagination.vue'
 
-const assertElementsExistence = (wrapper: VueWrapper<any>, selectors: string[], existence: boolean) => {
-  selectors.forEach((selector) => {
-    expect(wrapper.find(selector).exists()).toBe(existence)
-  })
-}
+// const assertElementsExistence = (wrapper: VueWrapper<any>, selectors: string[], existence: boolean) => {
+//   selectors.forEach((selector) => {
+//     expect(wrapper.find(selector).exists()).toBe(existence)
+//   })
+// }
 
-const assertCurrent = (wrapper: VueWrapper<any>, page: number) => {
-  expect(wrapper.find('.el-pager li.is-active.number').text()).toBe(String(page))
-}
-const assertPages = (wrapper: VueWrapper<any>, total: number) => {
-  expect(wrapper.find('.n-pagination .el-pager li:last-child').text()).toBe(String(total))
-}
+// const assertCurrent = (wrapper: VueWrapper<any>, page: number) => {
+//   expect(wrapper.find('.el-pager li.is-active.number').text()).toBe(String(page))
+// }
+// const assertPages = (wrapper: VueWrapper<any>, total: number) => {
+//   expect(wrapper.find('.n-pagination .el-pager li:last-child').text()).toBe(String(total))
+// }
 
 describe('Pagination', () => {
   describe('test invalid usages', () => {
