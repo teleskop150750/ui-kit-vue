@@ -3,20 +3,20 @@ import { useLocale } from '@ui/hooks'
 import { computed } from 'vue'
 
 import Button from './button.vue'
-import { usePaginationRoute, useRoute } from './hooks'
+import { usePaginationRoute, useRouteLocation } from './hooks'
 import { nPaginationNavPrevEmits, nPaginationPrevProps } from './prev.model'
 
 const props = defineProps(nPaginationPrevProps)
 const emit = defineEmits(nPaginationNavPrevEmits)
 
 const { t } = useLocale()
-const { routeNav: route } = usePaginationRoute(props)
+const { paginationRoute: route } = usePaginationRoute(props)
 
 const queryType = computed(() => props.queryType)
 const pageNumberOrOffsetQueryParamName = computed(() => props.pageNumberOrOffsetQueryParamName)
 const pageSizeQueryParamName = computed(() => props.pageSizeQueryParamName)
 
-const { makeLink } = useRoute(route, {
+const { makeLocation } = useRouteLocation(route, {
   queryType,
   pageNumberOrOffsetQueryParamName,
   pageSizeQueryParamName,
@@ -40,12 +40,11 @@ export default {
 <template>
   <div>
     <Button
-      :to="makeLink(newPage, pageSize)"
+      :to="makeLocation(newPage, pageSize)"
       :disabled="internalDisabled"
       :aria-label="prevText || t('nado.pagination.next')"
       :icon="!prevText ? prevIcon : undefined"
       :label="prevText ? prevText : undefined"
-      mode="outline"
       @click="handleClick"
     />
   </div>

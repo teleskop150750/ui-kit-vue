@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NPagination } from '@nado/ui-kit-vue'
+import { NPagination } from '@ui/index'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 

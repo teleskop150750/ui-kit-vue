@@ -3,7 +3,10 @@ import { computed, type ComputedRef } from 'vue'
 
 import type { NPaginationQueryProps } from '../pagination.model'
 
-export function usePaginationQuery(routeNav: ComputedRef<RouteLocation | undefined>, props: NPaginationQueryProps) {
+export function usePaginationQuery(
+  paginationRoute: ComputedRef<RouteLocation | undefined>,
+  props: NPaginationQueryProps,
+) {
   const queryType = computed(() => props.queryType)
 
   const pageNumberOrOffsetQueryParamName = computed(() => {
@@ -32,7 +35,7 @@ export function usePaginationQuery(routeNav: ComputedRef<RouteLocation | undefin
 
   function getPageInQuery() {
     const pageSizeQueryVal = computed(() => {
-      if (!routeNav.value) {
+      if (!paginationRoute.value) {
         return undefined
       }
 
@@ -40,7 +43,7 @@ export function usePaginationQuery(routeNav: ComputedRef<RouteLocation | undefin
         return undefined
       }
 
-      const res = routeNav.value.query[pageSizeQueryParamName.value] as string | undefined
+      const res = paginationRoute.value.query[pageSizeQueryParamName.value] as string | undefined
 
       if (!res) {
         return undefined
@@ -50,7 +53,7 @@ export function usePaginationQuery(routeNav: ComputedRef<RouteLocation | undefin
     })
 
     const pageNumberOrOffsetQueryVal = computed(() => {
-      if (!routeNav.value) {
+      if (!paginationRoute.value) {
         return undefined
       }
 
@@ -58,7 +61,7 @@ export function usePaginationQuery(routeNav: ComputedRef<RouteLocation | undefin
         return undefined
       }
 
-      const res = routeNav.value.query[pageNumberOrOffsetQueryParamName.value] as string | undefined
+      const res = paginationRoute.value.query[pageNumberOrOffsetQueryParamName.value] as string | undefined
 
       if (!res) {
         return undefined

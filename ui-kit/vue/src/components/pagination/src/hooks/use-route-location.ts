@@ -9,11 +9,11 @@ interface Props {
   pageSizeQueryParamName: ComputedRef<NPaginationNavQueryProps['pageSizeQueryParamName']>
 }
 
-export function useRoute(
+export function useRouteLocation(
   routeNav: ComputedRef<RouteLocation | undefined>,
   { queryType, pageNumberOrOffsetQueryParamName, pageSizeQueryParamName }: Props,
 ) {
-  function makeLink(page: number, size: number): RouteLocationRaw | undefined {
+  function makeLocation(page: number, size: number): RouteLocationRaw | undefined {
     if (!queryType.value) {
       return undefined
     }
@@ -42,7 +42,7 @@ export function useRoute(
   }
 
   return {
-    makeLink,
+    makeLocation,
   }
 }
 

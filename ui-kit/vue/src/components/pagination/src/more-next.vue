@@ -4,7 +4,7 @@ import { useLocale, useNamespace } from '@ui/hooks'
 import { computed } from 'vue'
 
 import Button from './button.vue'
-import { useMoreButton, usePaginationRoute, useRoute } from './hooks'
+import { useMoreButton, usePaginationRoute, useRouteLocation } from './hooks'
 import { nPaginationNavMoreNextEmits, nPaginationNavMoreNextProps } from './more-next.model'
 
 const props = defineProps(nPaginationNavMoreNextProps)
@@ -14,12 +14,12 @@ const ns = useNamespace('pagination-nav')
 const { t } = useLocale()
 const { quickHover, quickFocus, onMouseEnter, pagerCountOffset } = useMoreButton(props)
 
-const { routeNav: route } = usePaginationRoute(props)
+const { paginationRoute: route } = usePaginationRoute(props)
 const queryType = computed(() => props.queryType)
 const pageNumberOrOffsetQueryParamName = computed(() => props.pageNumberOrOffsetQueryParamName)
 const pageSizeQueryParamName = computed(() => props.pageSizeQueryParamName)
 
-const { makeLink } = useRoute(route, {
+const { makeLocation } = useRouteLocation(route, {
   queryType,
   pageNumberOrOffsetQueryParamName,
   pageSizeQueryParamName,
@@ -52,12 +52,11 @@ export default {
 
 <template>
   <Button
-    :to="makeLink(newPage, pageSize)"
+    :to="makeLocation(newPage, pageSize)"
     :disabled="disabled"
     :aria-label="t('nado.pagination.prevPages', { pager: pagerCount - 2 })"
     :icon="(quickHover || quickFocus) && !disabled ? NIconDArrowRight : NIconMoreFilled"
     :class="[ns.m('more'), ns.m('more-prev')]"
-    mode="outline"
     @mouseenter="onMouseEnter()"
     @mouseleave="quickHover = false"
     @focus="quickFocus = true"

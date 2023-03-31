@@ -6,18 +6,18 @@ import type { NPaginationEmits, NPaginationProps } from '../pagination.model'
 import { isAbsent } from '../utils'
 import { usePaginationQuery } from './use-pagination-query'
 import { usePaginationRoute } from './use-pagination-route'
-import { useRoute } from './use-route'
+import { useRouteLocation } from './use-route-location'
 import { useRouter } from './use-router'
 
 export function usePagination(props: NPaginationProps, emit: SetupContext<NPaginationEmits>['emit']) {
-  const { routeNav } = usePaginationRoute(props)
+  const { paginationRoute } = usePaginationRoute(props)
 
   const { queryType, pageNumberOrOffsetQueryParamName, pageSizeQueryParamName, getPageInQuery } = usePaginationQuery(
-    routeNav,
+    paginationRoute,
     props,
   )
 
-  const { makeLink } = useRoute(routeNav, {
+  const { makeLocation } = useRouteLocation(paginationRoute, {
     queryType,
     pageNumberOrOffsetQueryParamName,
     pageSizeQueryParamName,
@@ -191,29 +191,29 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
     }
 
     function changeCurrentPage(val: number) {
-      if (!routeNav.value) {
+      if (!paginationRoute.value) {
         currentPageBridge.value = val
 
         return
       }
 
-      const link = makeLink(val, pageSizeBridge.value)
+      const location = makeLocation(val, pageSizeBridge.value)
 
-      if (!link) {
+      if (!location) {
         return
       }
 
-      router.push(link)
+      router.push(location)
     }
 
     function changePageSize(val: number) {
-      if (!routeNav.value) {
+      if (!paginationRoute.value) {
         pageSizeBridge.value = val
 
         return
       }
 
-      const link = makeLink(currentPageBridge.value, val)
+      const link = makeLocation(currentPageBridge.value, val)
 
       if (!link) {
         return

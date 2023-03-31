@@ -3,7 +3,7 @@ import { useLocale, useNamespace } from '@ui/hooks'
 import { computed } from 'vue'
 
 import Button from './button.vue'
-import { useNavPagers, usePaginationRoute, useRoute } from './hooks'
+import { useNavPagers, usePaginationRoute, useRouteLocation } from './hooks'
 import MoreNext from './more-next.vue'
 import MorePrev from './more-prev.vue'
 import { nPaginationNavEmits, nPaginationNavProps } from './nav.model'
@@ -18,13 +18,13 @@ const ns = useNamespace('pagination-nav')
 const { t } = useLocale()
 
 const { showPrevMore, showNextMore, pagers } = useNavPagers(props)
-const { routeNav } = usePaginationRoute(props)
+const { paginationRoute: routeNav } = usePaginationRoute(props)
 
 const queryType = computed(() => props.queryType)
 const pageNumberOrOffsetQueryParamName = computed(() => props.pageNumberOrOffsetQueryParamName)
 const pageSizeQueryParamName = computed(() => props.pageSizeQueryParamName)
 
-const { makeLink } = useRoute(routeNav, {
+const { makeLocation } = useRouteLocation(routeNav, {
   queryType,
   pageNumberOrOffsetQueryParamName,
   pageSizeQueryParamName,
@@ -83,8 +83,8 @@ export default {
           :aria-label="t('nado.pagination.currentPage', { pager: 1 })"
           :disabled="disabled"
           label="1"
-          :to="makeLink(1, pageSize)"
-          :mode="currentPage === 1 ? 'solid' : 'outline'"
+          :to="makeLocation(1, pageSize)"
+          :active="currentPage === 1"
           @click="handleChangerCurrentPage(1)"
         />
       </li>
@@ -107,8 +107,8 @@ export default {
           :aria-current="currentPage === pager"
           :aria-label="t('nado.pagination.currentPage', { pager })"
           :label="pager"
-          :mode="currentPage === pager ? 'solid' : 'outline'"
-          :to="makeLink(pager, pageSize)"
+          :active="currentPage === pager"
+          :to="makeLocation(pager, pageSize)"
           @click="currentPage !== pager && handleChangerCurrentPage(pager)"
         />
       </li>
@@ -130,9 +130,9 @@ export default {
           :disabled="disabled"
           :aria-current="currentPage === pageCount"
           :aria-label="t('nado.pagination.currentPage', { pager: pageCount })"
-          :mode="currentPage === pageCount ? 'solid' : 'outline'"
+          :active="currentPage === pageCount"
           :label="pageCount"
-          :to="makeLink(pageCount, pageSize)"
+          :to="makeLocation(pageCount, pageSize)"
           @click="handleChangerCurrentPage(pageCount)"
         />
       </li>

@@ -4,8 +4,6 @@ import type { ExtractPropTypes } from 'vue'
 
 import type NPaginationButton from './button.vue'
 
-export const nButtonMods = ['solid', 'outline'] as const
-
 export const nPaginationNavButtonProps = buildProps({
   ...useRouterLinkProps,
   to: {
@@ -20,14 +18,13 @@ export const nPaginationNavButtonProps = buildProps({
     type: Boolean,
     required: true,
   },
-  mode: {
-    type: String,
-    values: nButtonMods,
-    default: 'solid',
-  },
   label: {
     type: [Number, String],
     default: '',
+  },
+  active: {
+    type: Boolean,
+    default: false,
   },
   icon: {
     type: iconPropType,

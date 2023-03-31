@@ -27,13 +27,7 @@ export default {
 <template>
   <component
     :is="tagComputed"
-    :class="[
-      ns.b(),
-      ns.type('appearance', 'primary'),
-      ns.type('mode', mode),
-      ns.is('disabled', _disabled),
-      ns.is('hoverable', actionable),
-    ]"
+    :class="[ns.b(), ns.m('active', active), ns.is('disabled', _disabled), ns.is('hoverable', actionable)]"
     :disabled="_disabled"
     v-bind="buttonLinkAttributesComputed"
   >
