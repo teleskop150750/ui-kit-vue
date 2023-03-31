@@ -3,7 +3,7 @@ import { useLocale, useNamespace } from '@ui/hooks'
 import { computed } from 'vue'
 
 import Button from './button.vue'
-import { useNavPagers, useNavRoute, usePaginationRoute } from './hooks'
+import { useNavPagers, usePaginationRoute, useRoute } from './hooks'
 import MoreNext from './more-next.vue'
 import MorePrev from './more-prev.vue'
 import { nPaginationNavEmits, nPaginationNavProps } from './nav.model'
@@ -18,13 +18,13 @@ const ns = useNamespace('pagination-nav')
 const { t } = useLocale()
 
 const { showPrevMore, showNextMore, pagers } = useNavPagers(props)
-const { routeNav: route } = usePaginationRoute(props)
+const { routeNav } = usePaginationRoute(props)
 
 const queryType = computed(() => props.queryType)
 const pageNumberOrOffsetQueryParamName = computed(() => props.pageNumberOrOffsetQueryParamName)
 const pageSizeQueryParamName = computed(() => props.pageSizeQueryParamName)
 
-const { makeLink } = useNavRoute(route, {
+const { makeLink } = useRoute(routeNav, {
   queryType,
   pageNumberOrOffsetQueryParamName,
   pageSizeQueryParamName,
@@ -33,7 +33,7 @@ const { makeLink } = useNavRoute(route, {
 function handlePrev(val: number) {
   emit('prevClick', val)
 
-  if (route.value === undefined) {
+  if (routeNav.value === undefined) {
     emit('click', val)
   }
 }
@@ -41,13 +41,13 @@ function handlePrev(val: number) {
 function handleNext(val: number) {
   emit('nextClick', val)
 
-  if (route.value === undefined) {
+  if (routeNav.value === undefined) {
     emit('click', val)
   }
 }
 
 function handleChangerCurrentPage(val: number) {
-  if (route.value === undefined) {
+  if (routeNav.value === undefined) {
     emit('click', val)
   }
 }

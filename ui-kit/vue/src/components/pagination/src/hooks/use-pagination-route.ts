@@ -25,7 +25,7 @@ export function usePaginationRoute(props: Pick<NPaginationProps, 'queryType'>) {
     return route_ as RouteLocation
   })
 
-  const isRouter = computed(() => !!routeNav.value)
+  const isRouterNav = computed(() => !!routeNav.value)
 
-  return { isRouter, routeNav }
+  return { isRouterNav, routeNav }
 }

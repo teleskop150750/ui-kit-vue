@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NScrollbar } from '@ui/index'
+import { NScrollbar } from '@nado/ui-kit-vue'
 </script>
 
 <template>

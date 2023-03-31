@@ -4,23 +4,12 @@ import { fileURLToPath, URL } from 'node:url'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { defineConfig } from 'vite'
-import Dts from 'vite-plugin-dts'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    vueJsx(),
-    Dts({
-      staticImport: true,
-      insertTypesEntry: true,
-      include: ['src/**/*.ts', 'src/**/*.vue', 'src/**/*.d.ts'],
-      tsConfigFilePath: './tsconfig.node.json',
-      outputDir: './dist',
-    }),
-  ],
+  plugins: [vue(), vueJsx()],
   resolve: {
     alias: {
       '@ui': fileURLToPath(new URL('src', import.meta.url)),

@@ -9,10 +9,11 @@
     }
   },
   "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/src/index.d.ts",
   "scripts": {
     "build": "run-p type-check build-only",
-    "build-only": "vite build",
+    "build-only": "vite build && pnpm run build-types",
+    "build-types": "vue-tsc -p tsconfig.app.json --declaration --emitDeclarationOnly",
     "type-check": "vue-tsc --noEmit -p tsconfig.node.json --composite false",
     "test": "vitest",
     "test:ui": "vitest --ui",

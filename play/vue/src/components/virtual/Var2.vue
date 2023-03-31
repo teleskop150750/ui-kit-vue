@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NVirtualList } from '@ui/index'
+import { NVirtualList } from '@nado/ui-kit-vue'
 
 const fixVerticalData = Array.from({ length: 1000 }).map((_, i) => `Item #${i}`)
 </script>

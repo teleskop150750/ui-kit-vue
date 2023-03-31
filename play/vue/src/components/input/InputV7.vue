@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NInput } from '@ui/index'
+import { NInput } from '@nado/ui-kit-vue'
 import { ref } from 'vue'
 
 const textarea = ref('')

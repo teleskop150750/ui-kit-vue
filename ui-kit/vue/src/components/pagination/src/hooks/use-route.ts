@@ -9,7 +9,7 @@ interface Props {
   pageSizeQueryParamName: ComputedRef<NPaginationNavQueryProps['pageSizeQueryParamName']>
 }
 
-export function useNavRoute(
+export function useRoute(
   routeNav: ComputedRef<RouteLocation | undefined>,
   { queryType, pageNumberOrOffsetQueryParamName, pageSizeQueryParamName }: Props,
 ) {

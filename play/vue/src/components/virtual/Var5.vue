@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NVirtualList } from '@ui/index'
+import { NVirtualList } from '@nado/ui-kit-vue'
 import { onMounted, ref } from 'vue'
 
 const dynamicVerticalItems = Array.from({ length: 100_000 }).map((_, i) => ({

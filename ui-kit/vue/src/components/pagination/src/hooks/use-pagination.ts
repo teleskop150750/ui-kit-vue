@@ -4,9 +4,9 @@ import { computed, getCurrentInstance, ref, type SetupContext, watch } from 'vue
 
 import type { NPaginationEmits, NPaginationProps } from '../pagination.model'
 import { isAbsent } from '../utils'
-import { useNavRoute } from './use-nav-route'
 import { usePaginationQuery } from './use-pagination-query'
 import { usePaginationRoute } from './use-pagination-route'
+import { useRoute } from './use-route'
 import { useRouter } from './use-router'
 
 export function usePagination(props: NPaginationProps, emit: SetupContext<NPaginationEmits>['emit']) {
@@ -17,7 +17,7 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
     props,
   )
 
-  const { makeLink } = useNavRoute(routeNav, {
+  const { makeLink } = useRoute(routeNav, {
     queryType,
     pageNumberOrOffsetQueryParamName,
     pageSizeQueryParamName,

@@ -4,7 +4,7 @@ import { useLocale, useNamespace } from '@ui/hooks'
 import { computed } from 'vue'
 
 import Button from './button.vue'
-import { useMoreButton, useNavRoute, usePaginationRoute } from './hooks'
+import { useMoreButton, usePaginationRoute, useRoute } from './hooks'
 import { nPaginationNavMoreNextEmits, nPaginationNavMoreNextProps } from './more-next.model'
 
 const props = defineProps(nPaginationNavMoreNextProps)
@@ -19,7 +19,7 @@ const queryType = computed(() => props.queryType)
 const pageNumberOrOffsetQueryParamName = computed(() => props.pageNumberOrOffsetQueryParamName)
 const pageSizeQueryParamName = computed(() => props.pageSizeQueryParamName)
 
-const { makeLink } = useNavRoute(route, {
+const { makeLink } = useRoute(route, {
   queryType,
   pageNumberOrOffsetQueryParamName,
   pageSizeQueryParamName,

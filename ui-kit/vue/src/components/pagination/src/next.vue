@@ -3,7 +3,7 @@ import { useLocale } from '@ui/hooks'
 import { computed } from 'vue'
 
 import Button from './button.vue'
-import { useNavRoute, usePaginationRoute } from './hooks'
+import { usePaginationRoute, useRoute } from './hooks'
 import { nPaginationNavNextEmits, nPaginationNavNextProps } from './next.model'
 
 const props = defineProps(nPaginationNavNextProps)
@@ -16,7 +16,7 @@ const queryType = computed(() => props.queryType)
 const pageNumberOrOffsetQueryParamName = computed(() => props.pageNumberOrOffsetQueryParamName)
 const pageSizeQueryParamName = computed(() => props.pageSizeQueryParamName)
 
-const { makeLink } = useNavRoute(route, {
+const { makeLink } = useRoute(route, {
   queryType,
   pageNumberOrOffsetQueryParamName,
   pageSizeQueryParamName,

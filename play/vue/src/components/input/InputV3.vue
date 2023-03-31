@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { NIconSearch } from '@nado/ui-kit-icons-vue'
-import { NInput } from '@ui/index'
+import { NInput } from '@nado/ui-kit-vue'
 import { ref } from 'vue'
 
 const input = ref('')

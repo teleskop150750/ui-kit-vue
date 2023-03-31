@@ -1,10 +1,9 @@
 import { useGlobalConfig } from '@ui/components/config-provider'
 import { buildProps, definePropType } from '@ui/utils'
 import { computed, type ExtractPropTypes, getCurrentInstance } from 'vue'
+import type { RouteLocationRaw } from 'vue-router'
 
-import type { RouteLocationRaw } from './types/route'
-
-export * from './types'
+export type { RouteLocation, RouteLocationRaw, Router } from 'vue-router'
 
 const vueRouterLinkProps = buildProps({
   to: {

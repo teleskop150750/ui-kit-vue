@@ -1,7 +1,0 @@
-export * from './history'
-export * from './LocationAsRelativeRaw'
-export * from './MatcherLocationAsPath'
-export * from './query'
-export * from './RouteLocationOptions'
-export * from './RouteLocationRaw'
-export * from './RouteQueryAndHash'
