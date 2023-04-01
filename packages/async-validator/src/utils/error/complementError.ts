@@ -6,7 +6,7 @@ export function complementError(rule: InternalRuleItem, source: ValidateValues) 
     const fieldValue = getFieldValue(validateError, rule, source)
 
     if (isValidateError(validateError)) {
-      validateError.field ||= rule.fullField
+      validateError.field ||= rule.fullField!
       validateError.fieldValue = fieldValue
 
       return validateError
@@ -15,7 +15,7 @@ export function complementError(rule: InternalRuleItem, source: ValidateValues) 
     return {
       message: typeof validateError === 'function' ? validateError() : validateError,
       fieldValue,
-      field: (validateError as ValidateError).field || rule.fullField,
+      field: (validateError as ValidateError).field || rule.fullField!,
     }
   }
 }

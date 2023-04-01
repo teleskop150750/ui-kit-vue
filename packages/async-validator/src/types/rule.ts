@@ -31,8 +31,8 @@ export interface RuleItem {
   len?: number // Length of type 'string' and 'array'
   enum?: Array<Nillable<string | number | boolean>> // possible values of type 'enum'
   whitespace?: boolean
-  fields?: Record<string, Rule> // ignore when without required
-  options?: ValidateOption
+  fields?: Record<string, Rule> | undefined // ignore when without required
+  options?: ValidateOption | undefined
   defaultField?: Rule // 'object' or 'array' containing validation rules
   transform?: (value: ValidateValue) => ValidateValue
   message?: string | ((a?: string) => string)

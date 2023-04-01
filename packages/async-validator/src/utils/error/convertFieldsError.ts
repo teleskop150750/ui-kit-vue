@@ -8,7 +8,7 @@ export function fieldsErrorListToMap(errors: ValidateError[]): ValidateFieldsErr
 
     if (field !== undefined) {
       fields[field] ||= []
-      fields[field].push(error)
+      fields[field]!.push(error)
     }
   })
 

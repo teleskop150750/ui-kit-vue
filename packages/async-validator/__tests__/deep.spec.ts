@@ -9,7 +9,7 @@ describe('deep', () => {
     const { useSchema } = useAsyncValidator()
 
     try {
-      await useSchema({
+      const schema = useSchema({
         v: {
           required: true,
           type: 'array',
@@ -18,7 +18,9 @@ describe('deep', () => {
             1: [{ type: 'string' }],
           },
         },
-      }).validate(
+      })
+
+      await schema.validate(
         {
           v: [1, 'b'],
         },

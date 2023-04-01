@@ -147,18 +147,20 @@ export function useAsyncValidator({ warning: userWarning = warning_.value } = {}
             const paredFieldsSchema: ValidatorRules = {}
 
             Object.keys(fieldRuleMap).forEach((fieldEl) => {
-              const fieldSchema = fieldRuleMap[fieldEl]
+              const fieldSchema = fieldRuleMap[fieldEl]!
               const fieldSchemaList = Array.isArray(fieldSchema) ? fieldSchema : [fieldSchema]
 
-              paredFieldsSchema[fieldEl] = fieldSchemaList.map(addFullField.bind(undefined, fieldEl))
+              // TODO fix types
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              paredFieldsSchema[fieldEl] = fieldSchemaList.map((el) => addFullField.bind(undefined, fieldEl, el)) as any
             })
             const schema = useSchema(paredFieldsSchema)
 
             schema.messages(options.messages)
 
             if (innerRule.options) {
-              innerRule.options.messages = options.messages
-              innerRule.options.error = options.error
+              innerRule.options.messages = options.messages!
+              innerRule.options.error = options.error!
             }
 
             schema.validateWithOptions(value, innerRule.options || options, (errs) => {

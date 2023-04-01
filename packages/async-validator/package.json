@@ -5,14 +5,16 @@
   "private": true,
   "exports": {
     ".": {
+      "types": "./dist/src/index.d.ts",
       "import": "./dist/index.js"
     }
   },
   "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/src/index.d.ts",
   "scripts": {
-    "build": "run-p type-check build-only",
+    "build": "run-p type-check build-only dts",
     "build-only": "vite build",
+    "dts": "tsc -p tsconfig.app.json --declaration --emitDeclarationOnly",
     "type-check": "tsc --noEmit -p ./tsconfig.json",
     "test": "vitest",
     "test:ui": "vitest --ui",
@@ -26,6 +28,7 @@
   "devDependencies": {
     "@nado/eslint-config-ts": "workspace:*",
     "@nado/prettier-config": "workspace:*",
+    "@nado/tsconfig": "workspace:*",
     "@types/node": "^18.15.3",
     "@vitest/coverage-c8": "^0.29.3",
     "@vitest/ui": "^0.29.3",
@@ -34,7 +37,6 @@
     "prettier": "^2.8.4",
     "typescript": "^4.9.3",
     "vite": "^4.2.0",
-    "vite-plugin-dts": "^2.1.0",
     "vitest": "^0.29.3"
   }
 }

@@ -164,17 +164,17 @@ export function createFocusTrap(elements: Params['elements'], userOptions?: Para
 
   function tryFocus(node: FocusableElement | false): undefined {
     if (node === false) {
-      return
+      return undefined
     }
 
     if (node === doc.activeElement) {
-      return
+      return undefined
     }
 
     if (!node || !node.focus) {
       tryFocus(getInitialFocusNode())
 
-      return
+      return undefined
     }
 
     node.focus({ preventScroll: !!config.preventScroll })
@@ -183,6 +183,8 @@ export function createFocusTrap(elements: Params['elements'], userOptions?: Para
     if (isSelectableInput(node)) {
       node.select()
     }
+
+    return undefined
   }
 
   function getReturnFocusNode(previousActiveElement: FocusableElement) {

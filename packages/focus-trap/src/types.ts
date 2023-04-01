@@ -46,14 +46,14 @@ export interface FocusTrapOptions {
    * A function that will be called **before** sending focus to the
    * trigger element upon deactivation.
    */
-  onDeactivate?: () => void
+  onDeactivate?: Nillable<() => void>
 
   /**
    * A function that will be called after the trap is deactivated, after `onDeactivate`.
    * If `returnFocus` was set, it will be called **after** focus has been sent to the trigger
    * element upon deactivation; otherwise, it will be called after deactivation completes.
    */
-  onPostDeactivate?: () => void
+  onPostDeactivate?: Nillable<() => void>
   /**
    * A function for determining if it is safe to send focus back to the `trigger` element.
    *
@@ -69,7 +69,7 @@ export interface FocusTrapOptions {
    * This handler is **not** called if the `returnFocusOnDeactivate` configuration option
    * (or the `returnFocus` deactivation option) is falsy.
    */
-  checkCanReturnFocus?: (trigger: FocusableElement) => Promise<void>
+  checkCanReturnFocus?: Nillable<(trigger: FocusableElement) => Promise<void>>
 
   /**
    * By default, when a focus trap is activated the first element in the
@@ -195,7 +195,7 @@ export type ActivateOptions = Pick<FocusTrapOptions, 'onActivate' | 'onPostActiv
 
 export interface DeactivateOptions
   extends Pick<FocusTrapOptions, 'onDeactivate' | 'onPostDeactivate' | 'checkCanReturnFocus'> {
-  returnFocus?: boolean
+  returnFocus?: boolean | undefined
 }
 
 export interface FocusTrap {

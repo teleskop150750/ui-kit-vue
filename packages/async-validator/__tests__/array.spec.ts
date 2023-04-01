@@ -52,17 +52,15 @@ describe('array', () => {
         )
     } catch {}
     expect(res.errors.length).toBe(1)
-    expect(res.fields).toMatchInlineSnapshot(`
-      Object {
-        "v": Array [
-          Object {
-            "field": "v",
-            "fieldValue": "",
-            "message": "v is not an array",
-          },
-        ],
-      }
-    `)
+    expect(res.fields).toMatchSnapshot({
+      v: [
+        {
+          field: 'v',
+          fieldValue: '',
+          message: 'v is not an array',
+        },
+      ],
+    })
     expect(res.errors[0].message).toBe('v is not an array')
   })
 

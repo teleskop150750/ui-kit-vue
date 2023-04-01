@@ -28,6 +28,8 @@
   },
   "dependencies": {
     "@nado/async-validator": "workspace:*",
+    "@nado/focus-trap": "workspace:*",
+    "@nado/tabbable": "workspace:*",
     "@nado/ui-kit-icons-vue": "workspace:*",
     "@popperjs/core": "^2.11.6",
     "@vue/shared": "^3.2.47",

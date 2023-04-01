@@ -1,8 +1,10 @@
 {
-  "extends": "./tsconfig.base.json",
+  "extends": "@nado/tsconfig/tsconfig.json",
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "exclude": ["test/**/*", "cypress/**/*"],
   "compilerOptions": {
+    "outDir": "./dist",
     "composite": true,
-    "baseUrl": "."
+    "baseUrl": "./"
   }
 }

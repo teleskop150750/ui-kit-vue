@@ -25,7 +25,7 @@ export function asyncProcessRulesBeforeFistError(
       return
     }
 
-    processRule(rulesList[currRuleIndex], processNextRule)
+    processRule(rulesList[currRuleIndex]!, processNextRule)
   }
 
   processNextRule([])

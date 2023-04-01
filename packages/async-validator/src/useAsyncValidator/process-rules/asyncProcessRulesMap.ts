@@ -84,7 +84,7 @@ function processRulesWrap(
     }
 
     fields.forEach((field) => {
-      const fieldRules = rulesMap[field]
+      const fieldRules = rulesMap[field]!
 
       if (firstFields.includes(field)) {
         asyncProcessRulesBeforeFistError(fieldRules, processRule, complete)

@@ -14,7 +14,7 @@ export function getSourceAndRulesMap(fields: string[], userSource: ValidateValue
   let source = userSource
 
   fields.forEach((field) => {
-    const fieldRules: RuleItem[] = rules[field]
+    const fieldRules: RuleItem[] = rules[field]!
     let value: unknown = source[field]
 
     fieldRules.forEach((fieldRule: RuleItem) => {
@@ -30,7 +30,7 @@ export function getSourceAndRulesMap(fields: string[], userSource: ValidateValue
       }
 
       // Fill validator. Skip if nothing need to validate
-      internalRule.validator = getValidationMethod(internalRule)
+      internalRule.validator = getValidationMethod(internalRule)!
 
       if (!internalRule.validator) {
         return
@@ -41,7 +41,7 @@ export function getSourceAndRulesMap(fields: string[], userSource: ValidateValue
       internalRule.type = getType(internalRule)
 
       rulesMap[field] ||= []
-      rulesMap[field].push({
+      rulesMap[field]!.push({
         rule: internalRule,
         value,
         source,
