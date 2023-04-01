@@ -147,12 +147,12 @@ export function useAsyncValidator({ warning: userWarning = warning_.value } = {}
             const paredFieldsSchema: ValidatorRules = {}
 
             Object.keys(fieldRuleMap).forEach((fieldEl) => {
-              const fieldSchema = fieldRuleMap[fieldEl]!
+              const fieldSchema = fieldRuleMap[fieldEl]
               const fieldSchemaList = Array.isArray(fieldSchema) ? fieldSchema : [fieldSchema]
 
-              // TODO fix types
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              paredFieldsSchema[fieldEl] = fieldSchemaList.map((el) => addFullField.bind(undefined, fieldEl, el)) as any
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
+              // @ts-ignore
+              paredFieldsSchema[fieldEl] = fieldSchemaList.map(addFullField.bind(undefined, fieldEl))
             })
             const schema = useSchema(paredFieldsSchema)
 
@@ -201,18 +201,3 @@ export function useAsyncValidator({ warning: userWarning = warning_.value } = {}
     useSchema,
   }
 }
-
-// interface NewRule extends RuleItem {
-//   fullField: string
-//   fullFields: string[]
-// }
-
-// function addInternalRuleFullField(internalRule: InternalRuleItem, field: string, rule: RuleItem): NewRule {
-//   return {
-//     ...rule,
-//     fullField: `${internalRule.fullField}.${field}`,
-//     fullFields: internalRule.fullFields ? [...internalRule.fullFields, field] : [field],
-//   }
-// }
-
-// ====================================
