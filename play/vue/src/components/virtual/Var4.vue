@@ -6,7 +6,7 @@ const dynamicVerticalItems = Array.from({ length: 100_000 }).map((_, i) => ({
 }))
 
 function getSize(idx: number) {
-  return dynamicVerticalItems[idx].size
+  return dynamicVerticalItems[idx]!.size
 }
 </script>
 

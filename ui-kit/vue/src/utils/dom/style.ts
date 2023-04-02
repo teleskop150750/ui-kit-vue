@@ -111,4 +111,6 @@ export function addUnit(value?: string | number, defaultUnit = 'px') {
   }
 
   debugWarn(SCOPE, 'binding value must be a string or number')
+
+  return ''
 }

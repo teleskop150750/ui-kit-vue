@@ -28,6 +28,7 @@ export const nPaginationNavButtonProps = buildProps({
   },
   icon: {
     type: iconPropType,
+    default: undefined,
   },
 } as const)
 

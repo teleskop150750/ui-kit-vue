@@ -7,6 +7,7 @@ import { isFunction, isUndefined } from 'lodash-es'
  * @param value The value of `obj[prop]` or a getter
  * @returns A restore function which can reset `obj[prop]`'s value or getter
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function defineGetter(obj: Record<string, any>, prop: string, value: any, defaultValue?: any) {
   let oldValue = defaultValue
   const { get, configurable } = Object.getOwnPropertyDescriptor(obj, prop) || {}
@@ -31,8 +32,8 @@ export function defineGetter(obj: Record<string, any>, prop: string, value: any,
 
   return () => {
     Object.defineProperty(obj, prop, {
-      configurable,
-      get: oldGetter,
+      configurable: configurable!,
+      get: oldGetter!,
     })
   }
 }

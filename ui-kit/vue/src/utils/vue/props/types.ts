@@ -88,7 +88,7 @@ export interface NPropInput<
   required?: Required
   values?: readonly Value[]
   validator?: ((val: any) => val is Validator) | ((val: any) => boolean)
-  default?: NPropInputDefault<Required, Default>
+  default?: NPropInputDefault<Required, Default> | undefined
 }
 
 /**

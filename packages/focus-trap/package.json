@@ -3,20 +3,14 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "exports": {
-    ".": {
-      "types": "./dist/src/index.d.ts",
-      "import": "./dist/index.js"
-    }
-  },
-  "module": "./dist/index.js",
-  "types": "./dist/src/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "dev": "vite",
-    "build": "run-p type-check build-only dts",
+    "build": "run-p type-check clean build-only dts",
     "build-only": "vite build",
-    "dts": "tsc -p tsconfig.app.json --declaration --emitDeclarationOnly",
-    "type-check": "tsc --noEmit -p ./tsconfig.app.json",
+    "clean": "rimraf dist",
+    "dts": "tsc -p tsconfig.app.json --declaration --emitDeclarationOnly --composite false",
+    "type-check": "tsc --noEmit -p ./tsconfig.app.json --composite false",
     "cypress": "start-server-and-test dev 5173 'cypress open'",
     "test:ci": "cypress run --browser electron",
     "test:e2e": "pnpm build && ELECTRON_ENABLE_LOGGING=1 cypress run --browser electron",
@@ -46,6 +40,7 @@
     "jsdom": "^21.1.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.4",
+    "rimraf": "^4.4.1",
     "start-server-and-test": "^2.0.0",
     "typescript": "^4.9.5",
     "vite": "^4.2.0",

@@ -50,6 +50,8 @@ export function useFormItemInputId(
   // Сгенерировать id для NFormItem label если он не указан в качестве prop
   onMounted(() => {
     idUnwatch = watch(
+      // TODO: remove any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       [toRef(props, 'id'), disableIdGeneration] as any,
       ([id, _disableIdGeneration]: [string, boolean]) => {
         const newId = id ?? (!_disableIdGeneration ? useId().value : undefined)

@@ -41,11 +41,11 @@ export default {
 
 <template>
   <Button
-    :to="makeLocation(newPage, pageSize)"
-    :disabled="internalDisabled"
-    :aria-label="nextText || t('nado.pagination.next')"
+    :to="makeLocation(newPage, pageSize)!"
+    :disabled="internalDisabled!"
+    :aria-label="nextText || t('nado.pagination.next')!"
     :icon="!nextText ? nextIcon : undefined"
-    :label="nextText ? nextText : undefined"
+    :label="nextText ? nextText : ''"
     @click="handleClick"
   />
 </template>

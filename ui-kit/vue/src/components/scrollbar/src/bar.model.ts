@@ -7,8 +7,14 @@ export const nBarProps = {
     type: Boolean,
     default: false,
   },
-  width: String,
-  height: String,
+  width: {
+    type: String,
+    required: true,
+  },
+  height: {
+    type: String,
+    required: true,
+  },
   ratioX: {
     type: Number,
     default: 1,

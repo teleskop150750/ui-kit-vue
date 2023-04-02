@@ -7,7 +7,7 @@
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit -p tsconfig.node.json"
+    "type-check": "vue-tsc --noEmit -p ./tsconfig.app.json --composite false"
   },
   "dependencies": {
     "@nado/ui-kit-icons-vue": "workspace:*",
@@ -19,6 +19,7 @@
     "@nado/eslint-config-vue": "workspace:*",
     "@nado/prettier-config": "workspace:*",
     "@nado/stylelint-config-css": "workspace:*",
+    "@nado/tsconfig": "workspace:*",
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/node": "^18.14.2",
     "@vitejs/plugin-vue": "^4.0.0",

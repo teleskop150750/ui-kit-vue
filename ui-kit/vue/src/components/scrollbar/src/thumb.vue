@@ -32,8 +32,8 @@ const bar = computed(() => BAR_MAP[props.vertical ? 'vertical' : 'horizontal'])
 
 const thumbStyle = computed(() =>
   renderThumbStyle({
-    move: props.move,
-    size: props.size,
+    move: props.move!,
+    size: props.size!,
     bar: bar.value,
   }),
 )

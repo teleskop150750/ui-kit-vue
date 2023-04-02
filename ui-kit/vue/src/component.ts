@@ -2,6 +2,7 @@ import {
   NButton,
   NButtonGroup,
   NConfigProvider,
+  NFocusTrapV2,
   NInput,
   NPagination,
   NScrollbar,
@@ -21,4 +22,5 @@ export const Components: Plugin[] = [
   NSpinner,
   NSyncScroll,
   NTable,
+  NFocusTrapV2,
 ]
