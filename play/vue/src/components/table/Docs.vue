@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NTable, NTable2, type NTableColumn } from '@ui/index'
+import { type NTableColumn, NTableV2, NTd } from '@ui/index'
 import { ref } from 'vue'
 
 const isBody = ref(false)
@@ -32,18 +32,17 @@ const rows = [
 <template>
   <div class="demo">
     <button type="button" @click="isBody = !isBody">button</button>
-    <div>
-      <NTable :columns="columns" :rows="rows">
-        <!-- <template #body>
-          <div>Body</div>
-        </template> -->
-      </NTable>
-    </div>
 
     <hr />
 
     <div>
-      <NTable2 :columns="columns" :rows="rows" />
+      <NTableV2 :columns="columns" :rows="rows">
+        <template #body-cell-name>
+          <NTd>
+            <div class="my-table-details">1</div>
+          </NTd>
+        </template>
+      </NTableV2>
     </div>
   </div>
 </template>

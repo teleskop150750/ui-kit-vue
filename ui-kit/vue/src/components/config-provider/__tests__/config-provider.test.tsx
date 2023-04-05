@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ComponentSize } from '@ui/constants'
 import { useLocale } from '@ui/hooks'
 import type { Language } from '@ui/locale'

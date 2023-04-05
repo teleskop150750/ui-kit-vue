@@ -1,0 +1,30 @@
+@layer components {
+  .n-table-v2__table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+
+    border-collapse: collapse;
+
+    background-color: transparent;
+  }
+
+  .n-table-v2__th {
+    vertical-align: bottom;
+
+    border-bottom: 2px solid hsl(210deg 14% 89%);
+  }
+
+  .n-table-v2__td,
+  .n-table-v2__th {
+    padding: 0.75rem;
+
+    vertical-align: top;
+
+    border-top: 1px solid hsl(210deg 14% 89%);
+  }
+
+  .n-table-v2__tr:nth-of-type(odd) {
+    background-color: rgb(0 0 0 / 5%);
+  }
+}

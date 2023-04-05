@@ -108,7 +108,7 @@ export interface FocusTrapOptions {
    */
   setReturnFocus?:
     | FocusTargetValueOrFalse
-    | ((nodeFocusedBeforeActivation: FocusableElement) => FocusTargetValueOrFalse)
+    | ((nodeFocusedBeforeActivation?: FocusableElement) => FocusTargetValueOrFalse)
   /**
    * Default: `true`. If `false` or returns `false`, the `Escape` key will not trigger
    * deactivation of the focus trap. This can be useful if you want

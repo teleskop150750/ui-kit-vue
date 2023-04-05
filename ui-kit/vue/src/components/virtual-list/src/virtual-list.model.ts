@@ -52,6 +52,7 @@ export const virtualizedProps = buildProps({
   },
 
   data: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     type: definePropType<any[]>(Array),
     default: () => mutable([] as const),
   },

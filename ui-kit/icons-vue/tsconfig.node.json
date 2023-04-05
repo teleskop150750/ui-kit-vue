@@ -1,10 +1,8 @@
 {
-  "extends": "./tsconfig.base.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "vite.config.*", "vitest.config.*"],
+  "extends": "@nado/tsconfig/tsconfig.json",
+  "include": ["vite.config.*", "vitest.config.*", "cypress.config.*"],
   "compilerOptions": {
     "composite": true,
-
-    "lib": [],
     "types": ["node"]
   }
 }

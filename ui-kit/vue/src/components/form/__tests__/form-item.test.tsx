@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NInput, type NInputInstance } from '@ui/components/input'
 import { rAF } from '@ui/test-utils/tick'
 import { mount } from '@vue/test-utils'

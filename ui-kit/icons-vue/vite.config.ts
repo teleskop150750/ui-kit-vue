@@ -1,43 +1,30 @@
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import Vue from '@vitejs/plugin-vue'
+import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
-import Dts from 'vite-plugin-dts'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    Vue(),
-    Dts({
-      insertTypesEntry: true,
-      include: ['src/**/*.ts', 'src/**/*.vue', 'src/**/*.d.ts'],
-      tsConfigFilePath: './tsconfig.node.json',
-    }),
-  ],
+  plugins: [vue()],
   build: {
-    sourcemap: false,
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: resolve(__dirname, './src/index.ts'),
-      name: 'VueIcons',
       formats: ['es'],
+      name: 'UiKitIconsVue',
       // the proper extensions will be added
       fileName: 'index',
     },
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library
+      // output: {
+      //   format: 'es',
+      //   entryFileNames: '[name].js',
+      //   preserveModules: true,
+      // },
       external: ['vue'],
-      treeshake: true,
-      output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
-        globals: {
-          vue: 'Vue',
-        },
-      },
     },
   },
 })

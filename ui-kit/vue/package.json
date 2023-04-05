@@ -3,18 +3,13 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "exports": {
-    ".": {
-      "import": "./dist/index.js"
-    }
-  },
-  "module": "./dist/index.js",
-  "types": "./dist/src/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
   "scripts": {
     "build": "run-p type-check clean build-only dts",
     "build-only": "vite build",
     "clean": "rimraf dist",
-    "dts": "vue-tsc -p tsconfig.app.json --declaration --emitDeclarationOnly --composite false",
+    "dts": "vue-tsc -p tsconfig.app.json --outDir dist/types --declaration --emitDeclarationOnly --composite false",
     "type-check": "vue-tsc --noEmit -p ./tsconfig.app.json --composite false",
     "test": "vitest",
     "test:ui": "vitest --ui",
@@ -60,8 +55,8 @@
     "rimraf": "^4.4.1",
     "stylelint": "^15.2.0",
     "type-fest": "^3.6.1",
-    "typescript": "^4.9.5",
     "vite": "^4.1.4",
+    "vite-plugin-chunk-split": "^0.4.7",
     "vite-plugin-dts": "^2.1.0",
     "vitest": "^0.29.1",
     "vue-router": "^4.1.6",

@@ -22,14 +22,14 @@ interface Params {
  */
 // TODO: ...params
 export function useGetNodeForOption(config: Config) {
-  const getNodeForOption = (
+  function getNodeForOption(
     optionName: Params['optionName'],
     params?: Params['params'],
-  ): Nillable<false | FocusableElement> => {
+  ): Nillable<false | FocusableElement> {
     let optionValue = config[optionName]
 
     if (typeof optionValue === 'function') {
-      optionValue = optionValue(params as FocusableElement)
+      optionValue = optionValue(params)
     }
 
     // TODO: Кто вернет true?
@@ -56,7 +56,7 @@ export function useGetNodeForOption(config: Config) {
       return node
     }
 
-    return optionValue as any
+    return optionValue
   }
 
   return { getNodeForOption }

@@ -1,6 +1,6 @@
-import { nextTick } from '@vue/runtime-core'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
+import { nextTick } from 'vue'
 
 import { ScrollbarDirKey } from '../src/defaults'
 import Scrollbar from '../src/scrollbar.vue'

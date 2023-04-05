@@ -17,6 +17,8 @@ export interface NTableColumn {
   format?: (val: NTableRowVal, row: NTableRow) => string | number
 }
 
+export type NTableColumnMap = Record<string, NTableColumn>
+
 export interface SlotData {
   key: NTableRowKey
   row: NTableRow

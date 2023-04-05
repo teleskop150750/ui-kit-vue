@@ -11,6 +11,7 @@ interface Options {
     [key: string]: unknown
   }
   methods?: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: (...args: unknown[]) => any
   }
 }

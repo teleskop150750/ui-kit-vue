@@ -4,6 +4,7 @@ import { computed, defineComponent, type Slot } from 'vue'
 
 import { useTableColumn } from './hooks'
 import { nTableProps } from './table.model'
+import NTh from './th.vue'
 import type { BodyCellScopeData, NTableColumn, NTableRow, NTableRowKey, SlotData } from './types'
 
 export const Table = defineComponent({
@@ -13,7 +14,7 @@ export const Table = defineComponent({
   },
 
   setup(props, { slots }) {
-    const ns = useNamespace('table')
+    const ns = useNamespace('table-v2')
 
     const { computedCols, computedColsMap } = useTableColumn(props)
     const getRowKey = computed<(row: NTableRow) => NTableRowKey>(() =>
@@ -41,6 +42,71 @@ export const Table = defineComponent({
       const val = typeof col.field === 'function' ? col.field(row) : row[col.field]
 
       return col.format !== undefined ? col.format(val, row) : val
+    }
+
+    function getTHead() {
+      const child = getTHeadTR()
+
+      // if (props.loading === true && slots.loading === void 0) {
+      //   child.push(
+      //     h('tr', { class: 'q-table__progress' }, [
+      //       h(
+      //         'th',
+      //         {
+      //           class: 'relative-position',
+      //           colspan: computedColspan.value,
+      //         },
+      //         getProgress(),
+      //       ),
+      //     ]),
+      //   )
+      // }
+
+      return <thead class={ns.e('thead')}>{child}</thead>
+    }
+
+    function getTHeadTR() {
+      const { header } = slots
+      const headerCell = slots['header-cell']
+
+      if (header !== undefined) {
+        return [...header(getHeaderCellScope())]
+      }
+
+      const child = computedCols.value.map((col) => {
+        const headerCellCol = slots[`header-cell-${col.name}`]
+        const slot = headerCellCol !== undefined ? headerCellCol : headerCell
+        const thProps = getHeaderNameCellScope(col)
+
+        return slot !== undefined ? (
+          slot(thProps)
+        ) : (
+          <NTh key={col.name} col={thProps.col} cols={thProps.cols} colsMap={thProps.colsMap}>
+            {col.label}
+          </NTh>
+        )
+      })
+
+      return <tr class={ns.e('thead-tr')}>{child}</tr>
+    }
+
+    function getHeaderCellScope() {
+      return {
+        cols: computedCols.value,
+        colsMap: computedColsMap.value,
+      }
+    }
+
+    function getHeaderNameCellScope(col: NTableColumn) {
+      return { col, ...getHeaderCellScope() }
+    }
+
+    function getTBody() {
+      const { body: bodySlot } = slots
+
+      const child = computedRows.value.map((row, rowIndex) => getTBodyTR(row, bodySlot, rowIndex))
+
+      return <tbody class={ns.e('tbody')}>{child}</tbody>
     }
 
     function getTBodyTR(row: NTableRow, _bodySlot: Nillable<Slot>, pageRowIndex: number) {
@@ -108,18 +174,12 @@ export const Table = defineComponent({
       return <tr class={ns.e('tr')}>{child}</tr>
     }
 
-    function getTBody() {
-      const { body: bodySlot } = slots
-
-      const child = computedRows.value.map((row, rowIndex) => getTBodyTR(row, bodySlot, rowIndex))
-
-      return <tbody class={ns.e('tbody')}>{child}</tbody>
-    }
-
     return () => (
       <div class={ns.b()}>
-        <div>1</div>
-        <table class={ns.e('table')}>{getTBody()}</table>
+        <table class={ns.e('table')}>
+          {getTHead()}
+          {getTBody()}
+        </table>
       </div>
     )
   },

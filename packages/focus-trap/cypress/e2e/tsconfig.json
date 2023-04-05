@@ -10,9 +10,10 @@
     "noImplicitThis": true,
     "strict": true,
     // Required in Vite
-    // "isolatedModules": true,
-    "preserveValueImports": true,
-    "importsNotUsedAsValues": "error",
+    // || "isolatedModules": true,
+    // || "preserveValueImports": true,
+    // || "importsNotUsedAsValues": "error",
+    "verbatimModuleSyntax": true,
     "target": "ES2019",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

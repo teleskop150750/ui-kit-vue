@@ -2,7 +2,7 @@ import { definePropType, isNumber } from '@ui/utils'
 import { computed } from 'vue'
 
 import type { NTableProps } from '../table.model'
-import type { NTableColumn } from '../types'
+import type { NTableColumn, NTableColumnMap } from '../types'
 
 export const useTableColumnProps = {
   visibleColumns: {
@@ -12,7 +12,7 @@ export const useTableColumnProps = {
 }
 
 export function useTableColumn(props: NTableProps) {
-  const columnList = computed<NTableColumn[]>(() => {
+  const cols = computed<NTableColumn[]>(() => {
     if (props.columns !== undefined) {
       return props.columns
     }
@@ -35,11 +35,11 @@ export function useTableColumn(props: NTableProps) {
     const { visibleColumns } = props
 
     return visibleColumns !== undefined
-      ? columnList.value.filter((col) => col.required === true || visibleColumns.includes(col.name) === true)
-      : columnList.value
+      ? cols.value.filter((col) => col.required === true || visibleColumns.includes(col.name) === true)
+      : cols.value
   })
 
-  const computedColumnList = computed(() =>
+  const computedCols = computed<NTableColumn[]>(() =>
     visibleColumnList.value.map((col) => {
       const align = col.align || 'right'
 
@@ -50,10 +50,10 @@ export function useTableColumn(props: NTableProps) {
     }),
   )
 
-  const computedColsMap = computed(() => {
+  const computedColsMap = computed<NTableColumnMap>(() => {
     const names: Record<NTableColumn['name'], NTableColumn> = {}
 
-    computedColumnList.value.forEach((col) => {
+    computedCols.value.forEach((col) => {
       names[col.name] = col
     })
 
@@ -61,8 +61,8 @@ export function useTableColumn(props: NTableProps) {
   })
 
   return {
-    cols: columnList,
-    computedCols: computedColumnList,
+    cols,
+    computedCols,
     computedColsMap,
   }
 }
