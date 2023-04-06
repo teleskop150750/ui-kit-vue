@@ -6,4 +6,7 @@ module.exports = {
     ecmaVersion: 'latest',
   },
   extends: ['@nado/eslint-config-ts'],
+  rules: {
+    // curly:['error', 'all'],
+  },
 }

@@ -1,5 +1,5 @@
 @layer components {
-  .n-table-v2__table {
+  .n-table__table {
     width: 100%;
     max-width: 100%;
     margin-bottom: 1rem;
@@ -9,14 +9,14 @@
     background-color: transparent;
   }
 
-  .n-table-v2__th {
+  .n-table__th {
     vertical-align: bottom;
 
     border-bottom: 2px solid hsl(210deg 14% 89%);
   }
 
-  .n-table-v2__td,
-  .n-table-v2__th {
+  .n-table__td,
+  .n-table__th {
     padding: 0.75rem;
 
     vertical-align: top;
@@ -24,7 +24,7 @@
     border-top: 1px solid hsl(210deg 14% 89%);
   }
 
-  .n-table-v2__tr:nth-of-type(odd) {
+  .n-table__tr:nth-of-type(odd) {
     background-color: rgb(0 0 0 / 5%);
   }
 }

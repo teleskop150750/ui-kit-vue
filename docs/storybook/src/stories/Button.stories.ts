@@ -1,5 +1,5 @@
+import { NButton } from '@nado/ui-kit-vue'
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { NButton } from '@ui/index'
 
 // More on how to set up stories at: https://storybook.js.org/docs/7.0/vue/writing-stories/introduction
 const meta: Meta<typeof NButton> = {

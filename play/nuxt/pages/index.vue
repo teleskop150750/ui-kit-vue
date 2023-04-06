@@ -1,5 +1,5 @@
 <script setup>
-import { NButton } from '@ui'
+import { NButton } from '@nado/ui-kit-vue'
 
 import TheHeader from '~~/components/TheHeader.vue'
 </script>

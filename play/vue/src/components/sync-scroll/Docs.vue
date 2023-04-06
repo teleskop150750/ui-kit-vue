@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NSyncScroll } from '@ui/index'
+import { NSyncScroll } from '@nado/ui-kit-vue'
 import { onMounted } from 'vue'
 
 import TableBody from './TableBody.vue'

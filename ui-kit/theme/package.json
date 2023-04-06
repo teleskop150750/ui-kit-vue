@@ -9,8 +9,6 @@
     "./components/*": "./dist/components/*.css",
     "./fonts": "./dist/fonts.css"
   },
-  "main": "./dist/index.css",
-  "module": "./dist/index.css",
   "style": "./dist/index.css",
   "files": [
     "dist"

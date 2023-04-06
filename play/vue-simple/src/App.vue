@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NButton } from '@ui/index'
+import { NButton } from '@nado/ui-kit-vue'
 
 import HelloWorld from './components/HelloWorld.vue'
 </script>

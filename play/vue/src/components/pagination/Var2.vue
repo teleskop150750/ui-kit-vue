@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NPagination } from '@ui/index'
+import { NPagination } from '@nado/ui-kit-vue'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -39,7 +39,7 @@ const total = ref(100)
       </div>
     </div>
     <div>
-      <NPagination query-type="number" :total="total" :page-size="pageSize" />
+      <NPagination query-type="offset" :total="total" :page-size="pageSize" />
     </div>
   </div>
 </template>

@@ -1,0 +1,21 @@
+{
+  "name": "@nado/eslint-config-basic-ts",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.cjs",
+  "peerDependencies": {
+    "eslint": ">=8.20.0",
+    "typescript": ">=4.9"
+  },
+  "dependencies": {
+    "@nado/eslint-config-basic": "workspace:*",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
+    "eslint-import-resolver-typescript": "^3.5.3",
+    "eslint-plugin-import": "^2.27.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.36.0",
+    "prettier": "^2.8.4"
+  }
+}

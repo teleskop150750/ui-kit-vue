@@ -10,7 +10,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('src', import.meta.url)),
-      '@ui': fileURLToPath(new URL('../../ui-kit/vue/src', import.meta.url)),
       '@theme': fileURLToPath(new URL('../../ui-kit/theme/src', import.meta.url)),
     },
   },

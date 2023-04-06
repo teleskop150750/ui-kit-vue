@@ -18,7 +18,7 @@ module.exports = {
       },
     },
   ],
-  extends: ['plugin:vue/vue3-recommended', '@nado/eslint-config-ts', 'prettier'],
+  extends: ['plugin:vue/vue3-recommended', '@nado/eslint-config-basic-ts', 'prettier'],
   plugins: ['prettier'],
   "rules": {
     "prettier/prettier": "error",

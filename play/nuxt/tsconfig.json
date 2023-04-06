@@ -1,31 +1,4 @@
 {
   // https://nuxt.com/docs/guide/concepts/typescript
   "extends": "./.nuxt/tsconfig.json",
-  "compilerOptions": {
-    "paths": {
-      "~~": ["."],
-      "~~/*": ["./*"],
-      "@@": ["."],
-      "@@/*": ["./*"],
-      "~": ["."],
-      "~/*": ["./*"],
-      "@": ["."],
-      "@/*": ["./*"],
-      "assets": ["assets"],
-      "public": ["public"],
-      "public/*": ["public/*"],
-      "#app": ["../../node_modules/.pnpm/nuxt@3.3.1_exed4kwpmorx56wjtx5tlhqh24/node_modules/nuxt/dist/app"],
-      "#app/*": ["../../node_modules/.pnpm/nuxt@3.3.1_exed4kwpmorx56wjtx5tlhqh24/node_modules/nuxt/dist/app/*"],
-      "vue-demi": [
-        "../../node_modules/.pnpm/nuxt@3.3.1_exed4kwpmorx56wjtx5tlhqh24/node_modules/nuxt/dist/app/compat/vue-demi"
-      ],
-      "@vueuse/head": ["../../node_modules/.pnpm/@unhead+vue@1.1.23_vue@3.2.47/node_modules/@unhead/vue/dist/index"],
-      "#imports": [".nuxt/imports"],
-      "#build": [".nuxt"],
-      "#build/*": [".nuxt/*"],
-      "#components": [".nuxt/components"],
-      "@theme/*": ["../../ui-kit/theme/src/*"],
-      "@ui/*": ["../../ui-kit/vue/src/*"]
-    }
-  }
 }

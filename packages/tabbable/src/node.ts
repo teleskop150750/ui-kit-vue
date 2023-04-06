@@ -2,9 +2,9 @@ import { NoElement } from './constants'
 
 export const matches = NoElement ? () => false : Element.prototype.matches || Element.prototype.webkitMatchesSelector
 
-export const getRootNode = !NoElement
-  ? (element: Element) => element?.getRootNode?.()
-  : (element: Element) => element?.ownerDocument
+export const getRootNode = NoElement
+  ? (element: Element) => element?.ownerDocument
+  : (element: Element) => element?.getRootNode?.()
 
 export function isRadio(node: HTMLInputElement) {
   return isInput(node) && node.type === 'radio'
@@ -29,16 +29,15 @@ export function isHiddenInput(node: HTMLInputElement) {
 }
 
 export function isDisabledFromFieldset(node: HTMLFieldSetElement) {
-  // eslint-disable-next-line prefer-named-capture-group
-  if (/^(INPUT|BUTTON|SELECT|TEXTAREA)$/.test(node.tagName)) {
+  if (/^(?:INPUT|BUTTON|SELECT|TEXTAREA)$/.test(node.tagName)) {
     let parentNode = node.parentElement as HTMLFieldSetElement
 
     // check if `node` is contained in a disabled <fieldset>
     while (parentNode) {
       if (parentNode.tagName === 'FIELDSET' && parentNode.disabled) {
         // look for the first <legend> among the children of the disabled <fieldset>
-        for (let i = 0; i < parentNode.children.length; i++) {
-          const child = parentNode.children.item(i) as HTMLElement
+        for (let index = 0; index < parentNode.children.length; index++) {
+          const child = parentNode.children.item(index) as HTMLElement
 
           // when the first <legend> (in document order) is found
           if (child.tagName === 'LEGEND') {
@@ -80,12 +79,10 @@ export function isContentEditable(node: Element) {
 
   return attValue === '' || attValue === 'true'
 }
-
-/* eslint-disable prefer-named-capture-group */
 export function getTabindex(node: HTMLElement, isScope?: boolean) {
   if (
     node.tabIndex < 0 &&
-    (isScope || /^(AUDIO|VIDEO|DETAILS)$/.test(node.tagName) || isContentEditable(node)) &&
+    (isScope || /^(?:AUDIO|VIDEO|DETAILS)$/.test(node.tagName) || isContentEditable(node)) &&
     Number.isNaN(Number.parseInt(node.getAttribute('tabindex')!))
   ) {
     return 0
@@ -113,7 +110,6 @@ export function isTabbableRadio(node: HTMLInputElement) {
     try {
       radioSet = queryRadios(node.name)
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error(
         'Looks like you have a radio button with a name attribute containing invalid CSS selector characters and need the CSS.escape polyfill: %s',
         (error as Error).message,

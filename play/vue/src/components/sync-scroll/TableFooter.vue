@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SYNC_SCROLL_INJECTION_KEY } from '@ui/index'
+import { SYNC_SCROLL_INJECTION_KEY } from '@nado/ui-kit-vue'
 import { inject, onBeforeUnmount, onMounted, ref } from 'vue'
 
 const footerRef = ref<HTMLElement>()

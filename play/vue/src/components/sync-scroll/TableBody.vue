@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NScrollbar, type NScrollbarInstance, SYNC_SCROLL_INJECTION_KEY } from '@ui/index'
+import { NScrollbar, type NScrollbarInstance, SYNC_SCROLL_INJECTION_KEY } from '@nado/ui-kit-vue'
 import { inject, onBeforeUnmount, onMounted, ref } from 'vue'
 
 const nScrollbarRef = ref<NScrollbarInstance>()

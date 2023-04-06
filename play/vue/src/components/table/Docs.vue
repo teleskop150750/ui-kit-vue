@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type NTableColumn, NTableV2, NTd } from '@ui/index'
+import { NTable, type NTableColumn, NTd } from '@nado/ui-kit-vue'
 import { ref } from 'vue'
 
 const isBody = ref(false)
@@ -36,13 +36,13 @@ const rows = [
     <hr />
 
     <div>
-      <NTableV2 :columns="columns" :rows="rows">
+      <NTable :columns="columns" :rows="rows">
         <template #body-cell-name>
           <NTd>
             <div class="my-table-details">1</div>
           </NTd>
         </template>
-      </NTableV2>
+      </NTable>
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NPagination } from '@ui/index'
+import { NPagination } from '@nado/ui-kit-vue'
 import { useRoute } from 'vue-router'
 
 const router = useRoute()
@@ -24,7 +24,7 @@ const router = useRoute()
 
   <div class="example-pagination-block">
     <div class="example-demonstration">[total] page-count</div>
-    <NPagination query-type="number" :total="1000" />
+    <NPagination query-type="number" query-page-number="page_2[number]" query-page-size="page_2[size]" :total="1000" />
   </div>
 </template>
 

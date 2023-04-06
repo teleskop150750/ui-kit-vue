@@ -15,10 +15,13 @@
   "dependencies": {
     "pinia": "^2.0.32",
     "vue": "^3.2.47",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "@nado/ui-kit-vue": "workspace*",
+    "@nado/ui-kit-theme": "workspace*"
   },
   "devDependencies": {
     "@nado/eslint-config-vue": "workspace:*",
+    "@nado/tsconfig": "workspace:*",
     "@nado/prettier-config": "workspace:*",
     "@nado/stylelint-config-css": "workspace:*",
     "@rushstack/eslint-patch": "^1.2.0",

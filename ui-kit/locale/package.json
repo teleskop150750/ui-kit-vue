@@ -1,0 +1,26 @@
+{
+  "name": "@nado/ui-kit-locale",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "type-check": "vue-tsc --noEmit -p ./tsconfig.app.json --composite false",
+    "prettier": "prettier --check --ignore-unknown \"**/*\"",
+    "prettier:fix": "prettier --write --ignore-unknown \"**/*\"",
+    "eslint": "eslint \"**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,json,vue}\"",
+    "eslint:fix": "eslint --fix \"**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,json,vue}\" --fix"
+  },
+  "devDependencies": {
+    "@nado/eslint-config-vue": "workspace:*",
+    "@nado/prettier-config": "workspace:*",
+    "@nado/tsconfig": "workspace:*",
+    "@rushstack/eslint-patch": "^1.2.0",
+    "@types/jsdom": "^21.1.0",
+    "@types/node": "^18.14.2",
+    "eslint": "^8.36.0",
+    "jsdom": "^21.1.0",
+    "prettier": "^2.8.4"
+  }
+}

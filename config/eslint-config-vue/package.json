@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@nado/eslint-config-basic": "workspace:*",
-    "@nado/eslint-config-ts": "workspace:*",
+    "@nado/eslint-config-basic-ts": "workspace:*",
     "eslint-config-prettier": "^8.7.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.9.0"

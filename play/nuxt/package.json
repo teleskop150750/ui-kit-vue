@@ -14,6 +14,10 @@
     "stylelint": "stylelint \"**/*.{css,vue}\"",
     "stylelint:fix": "stylelint --fix \"**/*.{css,vue}\""
   },
+  "dependencies": {
+    "@nado/ui-kit-theme": "workspace:*",
+    "@nado/ui-kit-vue": "workspace*"
+  },
   "devDependencies": {
     "@nado/eslint-config-vue": "workspace:*",
     "@nado/prettier-config": "workspace:*",

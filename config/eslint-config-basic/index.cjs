@@ -148,10 +148,11 @@ module.exports = {
       },
     },
     {
-      files: ['*.test.ts', '*.test.js', '*.spec.ts', '*.spec.js'],
+      files: ['*.test.ts', '*.test.tsx', '*.test.js', '*.test.jsx', '*.spec.ts', '*.spec.js'],
       rules: {
         'no-unused-expressions': 'off',
         'no-only-tests/no-only-tests': 'error',
+        '@typescript-eslint/no-explicit-any': 'off',
       },
     },
     {
@@ -417,7 +418,7 @@ module.exports = {
     // Consistent-this
 
     // Обеспечьте согласованный стиль фигурных скобок для всех операторов управления
-    curly: 'error',
+    curly: ['error', 'all'],
 
     /**
      * Требовать default падежи в switch заявлениях
@@ -491,7 +492,7 @@ module.exports = {
     'no-confusing-arrow': 'off',
 
     // Запретить использование console
-    'no-console': 'warn',
+    'no-console': ['error', { allow: ['warn', 'error'] }],
 
     // Запретить удаление переменных
     'no-delete-var': 'error',
@@ -1323,7 +1324,7 @@ module.exports = {
     // Требовать или запрещать пробелы вокруг выражений *inyield*
     'yield-star-spacing': ['error', { before: false, after: true }],
 
-    // ==================
+    // // ==================
 
     // import
     'import/extensions': 'off',

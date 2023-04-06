@@ -1,0 +1,9 @@
+{
+  "extends": "@nado/tsconfig/tsconfig.json",
+  "include": ["src/**/*", "src/**/*.ts"],
+  "compilerOptions": {
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "types": ["node"]
+  }
+}

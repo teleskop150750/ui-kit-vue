@@ -1,4 +1,4 @@
-import { makeInstaller } from '@ui'
+import { makeInstaller } from '@nado/'
 
 import { defineNuxtPlugin } from '#app'
 import NuxtLink from '#app/components/nuxt-link'

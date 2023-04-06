@@ -19,6 +19,7 @@
     "@nado/ui-kit-icons-vue": "workspace:*",
     "@nado/ui-kit-theme": "workspace:*",
     "@nado/ui-kit-vue": "workspace:*",
+    "@nado/tsconfig": "workspace:*",
     "vue": "^3.2.47"
   },
   "devDependencies": {
