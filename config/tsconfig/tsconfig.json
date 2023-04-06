@@ -44,7 +44,7 @@
     // "maxNodeModuleJsDepth": 1,                           /* Укажите максимальную глубину папки, используемую для проверки файлов JavaScript из «node_modules». Применимо только с 'allowJs'. */
 
     /* Emit */
-    "declaration": true,                                 /* Создавайте файлы .d.ts из файлов TypeScript и JavaScript в своем проекте.. */
+    "declaration": false,                                 /* Создавайте файлы .d.ts из файлов TypeScript и JavaScript в своем проекте.. */
     "declarationMap": false,                              /* Создание исходных карт для файлов d.ts. */
     // "emitDeclarationOnly": true,                      /* Выводить только файлы d.ts, а не файлы JavaScript. */
     // "sourceMap": true,                                /* Создайте исходные файлы карт для выпущенных файлов JavaScript. */

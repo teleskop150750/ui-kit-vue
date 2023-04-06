@@ -1,6 +1,7 @@
 import type { Nillable } from './typescript'
 import type { ValidateValue } from './values'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ValidateMessage<T extends any[] = unknown[]> = string | ((...args: T) => string)
 type FullField = Nillable<string>
 type EnumString = Nillable<string>

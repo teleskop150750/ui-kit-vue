@@ -6,5 +6,5 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  extends: ['@nado/eslint-config-ts']
+  extends: ['@nado/eslint-config-ts'],
 }

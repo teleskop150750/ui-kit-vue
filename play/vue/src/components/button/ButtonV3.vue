@@ -3,7 +3,6 @@ import { NIconPlus } from '@nado/ui-kit-icons-vue'
 import { NButton } from '@nado/ui-kit-vue'
 
 function buttonOnClick() {
-  // eslint-disable-next-line no-console
   console.log('CLICK')
 }
 </script>

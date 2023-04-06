@@ -5,7 +5,6 @@ import { NButton, nButtonAppearances, NButtonGroup } from '@nado/ui-kit-vue'
 const buttonMods = ['solid', 'soft', 'outline'] as const
 
 function buttonOnClick() {
-  // eslint-disable-next-line no-console
   console.log('CLICK')
 }
 </script>

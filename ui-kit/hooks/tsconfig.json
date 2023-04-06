@@ -6,6 +6,6 @@
     "composite": true,
     "outDir": "./dist",
     "baseUrl": ".",
-    "types": ["node"],
+    "types": ["node"]
   }
 }

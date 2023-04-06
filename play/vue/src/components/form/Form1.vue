@@ -19,7 +19,9 @@ const rules = reactive<NFormRules>({
 })
 
 const submitForm = async (formEl: NFormInstance | undefined) => {
-  if (!formEl) return
+  if (!formEl) {
+    return
+  }
 
   await formEl.validate((valid, fields) => {
     if (valid) {

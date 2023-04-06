@@ -1,5 +1,6 @@
 const formatRegExp = /%[%djs]/g
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function format(template: ((...args: any[]) => string) | string, ...args: any[]): string {
   let i = 0
   const len = args.length

@@ -7,15 +7,10 @@
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit -p ./tsconfig.app.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
     "prettier": "prettier --check --ignore-unknown \"**/*\"",
-    "prettier:fix": "prettier --write --ignore-unknown \"**/*\"",
-    "eslint": "eslint \"**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,json,vue}\"",
-    "eslint:fix": "eslint --fix \"**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,json,vue}\" --fix",
-    "stylelint": "stylelint \"**/*.{css,vue}\"",
-    "stylelint:fix": "stylelint --fix \"**/*.{css,vue}\""
+    "prettier:fix": "prettier --write --ignore-unknown \"**/*\""
   },
   "dependencies": {
     "@nado/ui-kit-icons-vue": "workspace:*",

@@ -319,7 +319,7 @@ describe('tabbable', () => {
 
       try {
         expect(getIdsFromElementsArray(tabbableElements)).to.eql(expectedTabbableIds)
-        // eslint-disable-next-line no-console
+
         expect(console.error).to.have.callCount(2)
       } finally {
         if (actualEscape) {

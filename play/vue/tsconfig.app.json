@@ -9,7 +9,7 @@
     "types": ["node"],
     "paths": {
       "@/*": ["./src/*"],
-      "@theme/*": ["../../ui-kit/theme/src/*"],
+      "@theme/*": ["../../ui-kit/theme/src/*"]
     }
   }
 }
