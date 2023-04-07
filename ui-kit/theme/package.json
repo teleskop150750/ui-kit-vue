@@ -3,15 +3,10 @@
   "type": "module",
   "private": true,
   "license": "MIT",
-  "exports": {
-    "./styles": "./dist/index.css",
-    "./components/all": "./dist/components/index.css",
-    "./components/*": "./dist/components/*.css",
-    "./fonts": "./dist/fonts.css"
-  },
-  "style": "./dist/index.css",
+  "sideEffects": false,
+  "style": "./src/theme.css",
   "files": [
-    "dist"
+    "src/*"
   ],
   "scripts": {
     "build": "gulp",

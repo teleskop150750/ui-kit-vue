@@ -8,10 +8,13 @@ module.exports = {
     'stylelint-declaration-strict-value',
     'stylelint-color-format',
     'stylelint-declaration-block-no-ignored-properties',
+    'stylelint-prettier',
   ],
   extends: ['stylelint-config-standard', 'stylelint-config-html'],
   rules: {
+    "prettier/prettier": true,
     'declaration-no-important': true,
+    // 'scale-unlimited/declaration-strict-value': 'color',
     'scale-unlimited/declaration-strict-value': [
       '/color$/',
       {
@@ -25,7 +28,6 @@ module.exports = {
       },
     ],
     'declaration-property-value-no-unknown': true,
-    'string-quotes': 'single',
     'color-format/format': {
       format: 'hsl',
     },

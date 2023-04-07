@@ -3,7 +3,7 @@ import type {} from '@nado/tabbable'
 import { buildProps, isBoolean } from '@nado/ui-kit-utils'
 import type { ExtractPropTypes, PropType } from 'vue'
 
-import type { FocusTrap } from './focus-trap'
+import type { NFocusTrap } from './NFocusTrap'
 
 export const focusTrapProps = buildProps({
   active: {
@@ -71,4 +71,4 @@ export type FocusTrapProps = ExtractPropTypes<typeof focusTrapProps>
 
 export type FocusTrapEmits = typeof focusTrapEmits
 
-export type FocusTrapInstance = InstanceType<typeof FocusTrap>
+export type FocusTrapInstance = InstanceType<typeof NFocusTrap>

@@ -34,10 +34,8 @@
 
     .n-virtual-scrollbar__thumb::before {
       position: absolute;
-      top: var(--n-comp-scrollbar-bar-offset);
-      left: var(--n-comp-scrollbar-bar-offset);
-      bottom: var(--n-comp-scrollbar-bar-offset);
-      right: var(--n-comp-scrollbar-bar-offset);
+      inset: var(--n-comp-scrollbar-bar-offset) var(--n-comp-scrollbar-bar-offset) var(--n-comp-scrollbar-bar-offset)
+        var(--n-comp-scrollbar-bar-offset);
       content: '';
 
       border-radius: inherit;

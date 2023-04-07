@@ -1,2 +1,2 @@
-export * from './use-global-config'
-export * from './use-router-link'
+export * from './useGlobalConfig'
+export * from './useRouterLink'

@@ -8,4 +8,7 @@ module.exports = {
     sourceType: 'module',
   },
   extends: ['@nado/eslint-config-vue'],
+  rules: {
+    'no-console': 'off',
+  },
 }

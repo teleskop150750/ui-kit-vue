@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { getCurrentInstance, watch } from '#imports'
+
 const instance = getCurrentInstance()!
 
 // console.log(instance.appContext.config.globalProperties.$route);

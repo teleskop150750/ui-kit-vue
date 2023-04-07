@@ -3,7 +3,7 @@ import { useSizeProp } from '@nado/ui-kit-hooks'
 import { buildProps, definePropType, iconPropType, isString, mutable } from '@nado/ui-kit-utils'
 import type { ExtractPropTypes, StyleValue } from 'vue'
 
-import type Input from './input.vue'
+import type Input from './NInput.vue'
 
 export type NInputAutoSize = { minRows?: number; maxRows?: number } | boolean
 

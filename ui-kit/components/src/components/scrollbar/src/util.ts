@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'vue'
 
-import type { NThumbProps } from './thumb.model'
+import type { NThumbProps } from './scrollbar-thumb.model'
 
 export const GAP = 3
 

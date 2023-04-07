@@ -1,3 +1,3 @@
-import type NSpinner from './spinner.vue'
+import type NSpinner from './NSpinner.vue'
 
 export type NSpinnerInstance = InstanceType<typeof NSpinner>

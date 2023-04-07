@@ -1,7 +1,11 @@
 <script setup>
 import { NButton } from '@nado/ui-kit-vue'
 
-import TheHeader from '~~/components/TheHeader.vue'
+import NuxtLink from '#app/components/nuxt-link'
+// import { NuxtLink, TheHeader } from '@/.nuxt/components'
+// import { NuxtLink } from '~/.nuxt/components'
+// import TheHeader from '~/components/TheHeader.vue'
+// TheHeader
 </script>
 
 <template>

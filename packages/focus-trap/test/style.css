@@ -84,7 +84,7 @@ kbd {
 }
 
 .demo-in-iframe-wrapper {
-  display:flex;
+  display: flex;
 }
 .demo-in-iframe-wrapper > aside {
   padding: 1em 2em;

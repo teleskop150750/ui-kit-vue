@@ -8,8 +8,7 @@
     "baseUrl": ".",
     "types": ["node"],
     "paths": {
-      "@/*": ["./src/*"],
-      "@theme/*": ["../../ui-kit/theme/src/*"]
+      "@/*": ["./src/*"]
     }
   }
 }

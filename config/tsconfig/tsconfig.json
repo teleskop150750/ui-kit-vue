@@ -35,7 +35,7 @@
     // "types": [],                                      /* Укажите имена пакетов типов, которые будут включены без ссылок в исходном файле. */
     // "allowUmdGlobalAccess": true,                     /* Разрешить доступ к глобальным UMD из модулей. */
     // "moduleSuffixes": [],                             /* List of file name suffixes to search when resolving a module. */
-    "resolveJsonModule": false,                          /* Enable importing .json files. */
+    "resolveJsonModule": true,                           /* Enable importing .json files. */
     // "noResolve": true,                                /* Запретить 'import's, 'require's или <reference> для увеличения количества файлов, которые TypeScript должен добавить в проект.. */
 
     /* JavaScript Support */

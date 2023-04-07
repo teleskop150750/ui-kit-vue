@@ -1,5 +1,5 @@
 import { readFile, writeFile } from 'node:fs/promises'
-import path from 'node:path'
+import * as path from 'node:path'
 
 import findWorkspaceDir from '@pnpm/find-workspace-dir'
 import findWorkspacePackages from '@pnpm/find-workspace-packages'
@@ -12,7 +12,7 @@ import { type BuiltInParserName, format } from 'prettier'
 
 import { pathComponents } from './paths'
 
-const getSvgFiles = async () => {
+async function getSvgFiles() {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
   const pkgs = await (findWorkspacePackages.default as typeof findWorkspacePackages)(
@@ -27,7 +27,7 @@ const getSvgFiles = async () => {
   return glob('*.svg', { cwd: pkg.dir, absolute: true })
 }
 
-const getName = (file: string) => {
+function getName(file: string) {
   let filename = path.basename(file).replace('.svg', '')
 
   filename = `NIcon${camelcase(filename, {
@@ -42,14 +42,15 @@ const getName = (file: string) => {
   }
 }
 
-const formatCode = (code: string, parser: BuiltInParserName = 'typescript') =>
-  format(code, {
+function formatCode(code: string, parser: BuiltInParserName = 'typescript') {
+  return format(code, {
     parser,
     semi: false,
     singleQuote: true,
   })
+}
 
-const transformToVueComponent = async (file: string) => {
+async function transformToVueComponent(file: string) {
   const content = await readFile(file, 'utf8')
   const { filename, componentName } = getName(file)
   const vue = formatCode(
@@ -69,7 +70,7 @@ export default ({
   writeFile(path.resolve(pathComponents, `${filename}.vue`), vue, 'utf8')
 }
 
-const generateEntry = async (files: string[]) => {
+async function generateEntry(files: string[]) {
   const code = formatCode(
     files
       .map((file) => {

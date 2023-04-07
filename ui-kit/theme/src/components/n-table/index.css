@@ -1,104 +1,30 @@
 @layer components {
-  .n-table {
-    --n-comp-table-border: 1px solid var(--theme-layout-pages-border-color);
+  .n-table__table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
 
-    display: grid;
+    border-collapse: collapse;
 
-    height: calc(100% - 2 * var(--n-sys-markup-value));
-    margin: var(--n-sys-markup-value);
-
-    border: var(--n-comp-table-border);
-    border-bottom: none;
-    border-radius: var(--n-sys-border-radius-base);
-
-    overflow-x: auto;
+    background-color: transparent;
   }
 
-  .n-table--row {
-    display: inline-flex;
-    align-items: center;
+  .n-table__th {
+    vertical-align: bottom;
 
-    min-height: 50px;
-
-    border-bottom: var(--n-comp-table-border);
+    border-bottom: 2px solid hsl(210deg 14% 89%);
   }
 
-  .n-table-header {
-    --n-table-header-width: 100px;
+  .n-table__td,
+  .n-table__th {
+    padding: 0.75rem;
 
-    position: relative;
+    vertical-align: top;
 
-    width: var(--n-table-header-width);
-    height: 100%;
-
-    color: var(--theme-layout-pages-header-color);
-
-    border-right: var(--n-comp-table-border);
-
-    background-color: var(--theme-layout-pages-header-background-color);
+    border-top: 1px solid hsl(210deg 14% 89%);
   }
 
-  .n-table--cell {
-    min-width: 100px;
-
-    border-right: var(--n-comp-table-border);
-  }
-
-  .n-table-item {
-    --n-table-item-width: 100px;
-
-    width: var(--n-table-item-width);
-    height: 100%;
-    min-width: 0;
-
-    color: var(--theme-layout-pages-cell-color);
-    white-space: nowrap;
-    text-overflow: ellipsis;
-
-    border-right: var(--n-comp-table-border);
-
-    background-color: var(--theme-layout-pages-cell-background-color);
-
-    overflow: hidden;
-  }
-
-  .n-table-item:last-child {
-    flex-grow: 2;
-
-    /* width: auto; */
-
-    border-right: none;
-  }
-
-  .n-table-header--draggable {
-    position: absolute;
-    top: 0;
-    right: 0;
-
-    width: 10px;
-    height: 100%;
-
-    background-color: unset;
-
-    cursor: col-resize;
-  }
-
-  .n-table-header:last-child .n-table-header--draggable {
-    display: none;
-  }
-
-  .n-table-header:last-child {
-    flex-grow: 1;
-
-    /* width: auto !important; */
-
-    border-right: none;
-  }
-
-  .n-table--rows {
-    display: grid;
-
-    overflow-x: hidden;
-    overflow-y: scroll;
+  .n-table__tr:nth-of-type(odd) {
+    background-color: rgb(0 0 0 / 5%);
   }
 }

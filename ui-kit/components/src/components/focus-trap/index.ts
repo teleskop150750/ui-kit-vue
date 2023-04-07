@@ -1,6 +1,6 @@
 import { withInstall } from '@nado/ui-kit-utils'
 
-import { FocusTrap } from './src/focus-trap'
+import { NFocusTrap as FocusTrap } from './src/NFocusTrap'
 
 export const NFocusTrap = withInstall(FocusTrap)
 

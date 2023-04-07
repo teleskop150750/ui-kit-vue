@@ -5,8 +5,8 @@ import { mount, type VueWrapper } from '@vue/test-utils'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { defineComponent, nextTick, ref } from 'vue'
 
-import ConfigProvider from '../src/config-provider'
-import { useGlobalComponentSettings } from '../src/hooks/use-global-config'
+import { useGlobalComponentSettings } from '../src/hooks'
+import { NConfigProvider } from '../src/NConfigProvider'
 
 // eslint-disable-next-line vue/one-component-per-file
 const TestComp = defineComponent({
@@ -35,12 +35,12 @@ describe('config-provider', () => {
 
       wrapper = mount(() => (
         <>
-          <ConfigProvider locale={currentLocale.value}>
+          <NConfigProvider locale={currentLocale.value}>
             <TestComp class="current-locale" />
-            <ConfigProvider locale={oppositeLocale.value}>
+            <NConfigProvider locale={oppositeLocale.value}>
               <TestComp class="opposite-locale" />
-            </ConfigProvider>
-          </ConfigProvider>
+            </NConfigProvider>
+          </NConfigProvider>
 
           <button onClick={toEn} class="to-en">
             toEn
@@ -89,9 +89,9 @@ describe('config-provider', () => {
       })
 
       mount(() => (
-        <ConfigProvider zIndex={zIndex} locale={locale} size={size}>
+        <NConfigProvider zIndex={zIndex} locale={locale} size={size}>
           <ReceiverComponent />
-        </ConfigProvider>
+        </NConfigProvider>
       ))
 
       const vm = receiverRef.value

@@ -1,7 +1,7 @@
 import type { ExtractPropTypes } from 'vue'
 
 import { nButtonProps } from './button.model'
-import type ButtonGroup from './button-group.vue'
+import type ButtonGroup from './NButtonGroup.vue'
 
 export const nButtonGroupProps = {
   size: nButtonProps.size,

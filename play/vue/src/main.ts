@@ -1,4 +1,4 @@
-import '@theme/all.css'
+import '@nado/ui-kit-theme/src/theme.css'
 
 import { makeInstaller, NButton, NInput } from '@nado/ui-kit-vue'
 import { createApp } from 'vue'

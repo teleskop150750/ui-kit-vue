@@ -1,6 +1,6 @@
 import { withInstall } from '@nado/ui-kit-utils'
 
-import SyncScroll from './src/sync-scroll.vue'
+import SyncScroll from './src/NSyncScroll.vue'
 
 export const NSyncScroll = withInstall(SyncScroll)
 

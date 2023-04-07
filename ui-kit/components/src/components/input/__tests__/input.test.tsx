@@ -3,9 +3,9 @@ import { mount } from '@vue/test-utils'
 import { afterEach, describe, expect, test, vi } from 'vitest'
 import { type CSSProperties, nextTick, ref } from 'vue'
 
-import { NFormItem as FormItem } from '../../form'
+import { NFormItem as FormItem } from '../../form-item'
 import type { NInputAutoSize, NInputInstance, NInputProps } from '../src/input.model'
-import Input from '../src/input.vue'
+import Input from '../src/NInput.vue'
 
 describe('Input.vue', () => {
   afterEach(() => {

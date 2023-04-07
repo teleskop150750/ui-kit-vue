@@ -1,4 +1,5 @@
-import { makeInstaller } from '@nado/'
+import { makeInstaller } from '@nado/ui-kit-vue'
+import { markRaw } from 'vue'
 
 import { defineNuxtPlugin } from '#app'
 import NuxtLink from '#app/components/nuxt-link'

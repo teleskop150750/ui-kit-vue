@@ -13,10 +13,10 @@
       "outputs": []
     },
     "stylelint": {
-      "outputs": []
+      "cache": false
     },
     "stylelint:fix": {
-      "outputs": []
+      "cache": false
     },
     "prettier": {
       "outputs": []
@@ -33,12 +33,32 @@
     "dev": {
       "cache": false
     },
-    "@nado/ui-kit-icons-vue#build": {
-      "dependsOn": ["@nado/ui-kit-icons-vue#generate", "^build"],
+    "@nado/play-nuxt#dev": {
+      "dependsOn": ["@nado/ui-kit-icons-vue#generate"],
+      "cache": false
+    },
+    "@nado/play-nuxt#build": {
+      "dependsOn": ["@nado/ui-kit-icons-vue#generate"],
+      "outputs": ["dist/**"]
+    },
+    "@nado/play-vue#dev": {
+      "dependsOn": ["@nado/ui-kit-icons-vue#generate"],
+      "cache": false
+    },
+    "@nado/play-vue#build": {
+      "dependsOn": ["@nado/ui-kit-icons-vue#generate"],
+      "outputs": ["dist/**"]
+    },
+    "@nado/play-vue-simple#dev": {
+      "dependsOn": ["@nado/ui-kit-icons-vue#generate"],
+      "cache": false
+    },
+    "@nado/play-vue-simple#build": {
+      "dependsOn": ["@nado/ui-kit-icons-vue#generate"],
       "outputs": ["dist/**"]
     },
     "@nado/ui-kit-icons-vue#generate": {
-      "cache": true
+      "outputs": []
     }
   }
 }

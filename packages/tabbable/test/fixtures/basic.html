@@ -1,22 +1,14 @@
-<div id="contenteditable-true" contenteditable="true" style="padding:1em">
-  editable text
-</div>
-<div id="contenteditable-false" contenteditable="false" style="padding:1em">
-  not editable text
-</div>
-<div id="contenteditable-nesting" contenteditable style="padding:1em">
+<div id="contenteditable-true" contenteditable="true" style="padding: 1em">editable text</div>
+<div id="contenteditable-false" contenteditable="false" style="padding: 1em">not editable text</div>
+<div id="contenteditable-nesting" contenteditable style="padding: 1em">
   <div>
-    <div>
-      editable text
-    </div>
+    <div>editable text</div>
   </div>
 </div>
-<div id="contenteditable-negative-tabindex" contenteditable="true" tabindex="-1" style="padding:1em">
+<div id="contenteditable-negative-tabindex" contenteditable="true" tabindex="-1" style="padding: 1em">
   this editable text is focusable but not tabbable
 </div>
-<div id="contenteditable-NaN-tabindex" contenteditable="true" tabindex="NaN" style="padding:1em">
-  editable text
-</div>
+<div id="contenteditable-NaN-tabindex" contenteditable="true" tabindex="NaN" style="padding: 1em">editable text</div>
 
 <input id="input" type="text" />
 <input id="input-readonly" readonly />
@@ -39,22 +31,15 @@
   <option value="foo">foo</option>
 </select>
 <a id="hrefless-anchor">foo</a>
-<textarea
-  id="displaynone-textarea"
-  cols="30"
-  rows="10"
-  style="display:none;"
-></textarea>
-<button id="visibilityhidden-button" style="visibility:hidden;">foo</button>
-<div style="visibility:hidden;">
+<textarea id="displaynone-textarea" cols="30" rows="10" style="display: none"></textarea>
+<button id="visibilityhidden-button" style="visibility: hidden">foo</button>
+<div style="visibility: hidden">
   <button id="hiddenParent-button">foo</button>
-  <button id="hiddenParentVisible-button" style="visibility:visible;">
-    bar
-  </button>
+  <button id="hiddenParentVisible-button" style="visibility: visible">bar</button>
 </div>
 <div id="noindex-div">foo</div>
 
-<div id="displaycontents" style="display: contents; background-color: lime;" tabindex="0">
+<div id="displaycontents" style="display: contents; background-color: lime" tabindex="0">
   <div id="displaycontents-child" tabindex="0">displaycontents-child</div>
   <div id="displaycontents-child-displaynone" style="display: none" tabindex="0">displaycontents-child-displaynone</div>
 </div>
@@ -67,7 +52,4 @@
 <video id="video-nocontrol"></video>
 <video id="video-control-NaN-tabindex" tabindex="bar" controls></video>
 
-<iframe
-  id="iframe"
-  src="https://en.wikipedia.org/wiki/Mars_Reconnaissance_Orbiter"
-></iframe>
+<iframe id="iframe" src="https://en.wikipedia.org/wiki/Mars_Reconnaissance_Orbiter"></iframe>

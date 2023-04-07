@@ -1,6 +1,6 @@
 import { withInstall } from '@nado/ui-kit-utils'
 
-import Spinner from './src/spinner.vue'
+import Spinner from './src/NSpinner.vue'
 
 export const NSpinner = withInstall(Spinner)
 

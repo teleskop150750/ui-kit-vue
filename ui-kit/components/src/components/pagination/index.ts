@@ -1,6 +1,6 @@
 import { withInstall } from '@nado/ui-kit-utils'
 
-import Pagination from './src/pagination.vue'
+import Pagination from './src/NPagination.vue'
 
 export const NPagination = withInstall(Pagination)
 

@@ -1,7 +1,7 @@
 import { withInstall } from '@nado/ui-kit-utils'
 
 // import _NVirtualGrid from './src/NVirtualGrid.vue'
-import VirtualList from './src/virtual-list.vue'
+import VirtualList from './src/NVirtualList.vue'
 
 // export const NVirtualGrid = withInstall(_NVirtualGrid)
 export const NVirtualList = withInstall(VirtualList)

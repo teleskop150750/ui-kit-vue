@@ -3,7 +3,7 @@ import { buildProps, iconPropType } from '@nado/ui-kit-utils'
 import type { ExtractPropTypes } from 'vue'
 
 import { useRouterLinkProps } from '../../config-provider'
-import type NButton from './button.vue'
+import type NButton from './NButton.vue'
 
 export const nButtonAppearances = ['primary', 'secondary', 'success', 'warning', 'danger', 'info'] as const
 export const nButtonMods = ['solid', 'soft', 'outline', 'text', 'link'] as const

@@ -2,9 +2,9 @@ import type { ComponentSize } from '@nado/ui-kit-constants'
 import type { Arrayable } from '@nado/ui-kit-utils'
 import type { InjectionKey, SetupContext } from 'vue'
 
-import type { NFormEmits, NFormProps } from './form/form.model'
-import type { NFormValidateCallback, NFormValidationResult } from './form/types'
-import type { NFormItemProp, NFormItemProps, NFormItemValidateState } from './form-item/form-item.model'
+import type { NFormItemProp, NFormItemProps, NFormItemValidateState } from '../../form-item'
+import type { NFormEmits, NFormProps } from './form.model'
+import type { NFormValidateCallback, NFormValidationResult } from './types'
 
 export type NFormContext = NFormProps & {
   emit: SetupContext<NFormEmits>['emit']

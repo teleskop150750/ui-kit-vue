@@ -1,7 +1,7 @@
 import { type ClassValue, isNumber } from '@nado/ui-kit-utils'
 import type { ExtractPropTypes, PropType, StyleValue } from 'vue'
 
-import type NScrollbar from './scrollbar.vue'
+import type NScrollbar from './NScrollbar.vue'
 
 export const nScrollbarProps = {
   height: {

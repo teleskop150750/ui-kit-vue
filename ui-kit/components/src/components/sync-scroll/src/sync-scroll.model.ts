@@ -1,3 +1,3 @@
-import type NSyncScroll from './sync-scroll.vue'
+import type NSyncScroll from './NSyncScroll.vue'
 
 export type NSyncScrollInstance = InstanceType<typeof NSyncScroll>

@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
+  "sideEffects": false,
   "module": "./src/components/index.ts",
   "types": "./src/components/index.ts",
   "scripts": {
@@ -20,12 +21,13 @@
   },
   "dependencies": {
     "@nado/async-validator": "workspace:*",
-    "@nado/focus-trap": "workspace:^",
-    "@nado/tabbable": "workspace:^",
+    "@nado/focus-trap": "workspace:*",
+    "@nado/tabbable": "workspace:*",
     "@nado/ui-kit-constants": "workspace:*",
     "@nado/ui-kit-hooks": "workspace:*",
     "@nado/ui-kit-icons-vue": "workspace:*",
     "@nado/ui-kit-locale": "workspace:*",
+    "@nado/ui-kit-theme": "workspace:*",
     "@nado/ui-kit-utils": "workspace:*",
     "@types/lodash-es": "^4.17.7",
     "@vueuse/core": "^9.13.0",

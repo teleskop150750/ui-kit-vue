@@ -1,3 +1,9 @@
 @import url('./pagination/index.css');
 @import url('./nav/index.css');
 @import url('./button/index.css');
+
+.a {
+  margin: 0;
+
+  color: hsl(0deg 0% 80%);
+}
