@@ -1,9 +1,0 @@
-@layer components {
-  .n-label__header {
-    font-weight: var(--n-sys-text-weight-medium);
-  }
-
-  .n-label__footer {
-    color: var(--n-ref-palette-white-800);
-  }
-}
