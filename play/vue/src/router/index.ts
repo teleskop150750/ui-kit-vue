@@ -16,6 +16,11 @@ const router = createRouter({
       component: () => import('../views/ButtonView.vue'),
     },
     {
+      path: '/badge',
+      name: 'badge',
+      component: () => import('../views/BadgeView.vue'),
+    },
+    {
       path: '/input',
       name: 'input',
       component: () => import('../views/InputView.vue'),

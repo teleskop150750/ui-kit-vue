@@ -1,0 +1,31 @@
+@layer components {
+  .n-badge {
+    --n-comp-badge-container-text-size: var(--n-sys-text-size-base);
+    --n-comp-badge-container-size: 24px;
+    --n-comp-badge-container-p-r: 9px;
+    --n-comp-badge-container-p-l: 9px;
+    --n-comp-badge-close-size: 14px;
+    --n-comp-badge-close-m-l: 6px;
+    --n-comp-badge-close-m-r: -4px;
+  }
+
+  .n-badge--size-large {
+    --n-comp-badge-container-text-size: 16px;
+    --n-comp-badge-container-size: 32px;
+    --n-comp-badge-container-p-r: 11px;
+    --n-comp-badge-container-p-l: 11px;
+    --n-comp-badge-close-size: 16px;
+    --n-comp-badge-close-m-l: 8px;
+    --n-comp-badge-close-m-r: -6px;
+  }
+
+  .n-badge--size-small {
+    --n-comp-badge-container-text-size: 12px;
+    --n-comp-badge-container-size: 20px;
+    --n-comp-badge-container-p-r: 7px;
+    --n-comp-badge-container-p-l: 7px;
+    --n-comp-badge-close-size: 12px;
+    --n-comp-badge-close-m-l: 4px;
+    --n-comp-badge-close-m-r: -2px;
+  }
+}

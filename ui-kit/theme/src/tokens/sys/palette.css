@@ -6,13 +6,13 @@
     --n-sys-color-black: var(--n-ref-palette-black);
 
     /* Primary */
-    --n-sys-color-primary-lightest: var(--n-ref-palette-blue-300);
-    --n-sys-color-primary-lighter: var(--n-ref-palette-blue-400);
-    --n-sys-color-primary-light: var(--n-ref-palette-blue-500);
-    --n-sys-color-primary: var(--n-ref-palette-blue-600);
-    --n-sys-color-primary-dark: var(--n-ref-palette-blue-700);
-    --n-sys-color-primary-darker: var(--n-ref-palette-blue-800);
-    --n-sys-color-primary-darkest: var(--n-ref-palette-blue-900);
+    --n-sys-color-primary-lightest: var(--n-ref-palette-blue-200);
+    --n-sys-color-primary-lighter: var(--n-ref-palette-blue-300);
+    --n-sys-color-primary-light: var(--n-ref-palette-blue-400);
+    --n-sys-color-primary: var(--n-ref-palette-blue-500);
+    --n-sys-color-primary-dark: var(--n-ref-palette-blue-600);
+    --n-sys-color-primary-darker: var(--n-ref-palette-blue-700);
+    --n-sys-color-primary-darkest: var(--n-ref-palette-blue-800);
 
     /* ------ */
     --n-sys-color-primary-50: var(--n-ref-palette-blue-50);
@@ -28,13 +28,13 @@
     --n-sys-color-primary-900: var(--n-ref-palette-blue-900);
 
     /* Secondary */
-    --n-sys-color-secondary-lightest: var(--n-ref-palette-gray-300);
-    --n-sys-color-secondary-lighter: var(--n-ref-palette-gray-400);
-    --n-sys-color-secondary-light: var(--n-ref-palette-gray-500);
-    --n-sys-color-secondary: var(--n-ref-palette-gray-600);
-    --n-sys-color-secondary-dark: var(--n-ref-palette-gray-700);
-    --n-sys-color-secondary-darker: var(--n-ref-palette-gray-800);
-    --n-sys-color-secondary-darkest: var(--n-ref-palette-gray-900);
+    --n-sys-color-secondary-lightest: var(--n-ref-palette-gray-200);
+    --n-sys-color-secondary-lighter: var(--n-ref-palette-gray-300);
+    --n-sys-color-secondary-light: var(--n-ref-palette-gray-400);
+    --n-sys-color-secondary: var(--n-ref-palette-gray-500);
+    --n-sys-color-secondary-dark: var(--n-ref-palette-gray-600);
+    --n-sys-color-secondary-darker: var(--n-ref-palette-gray-700);
+    --n-sys-color-secondary-darkest: var(--n-ref-palette-gray-800);
 
     /* ------ */
     --n-sys-color-secondary-50: var(--n-ref-palette-gray-50);
@@ -50,13 +50,13 @@
     --n-sys-color-secondary-900: var(--n-ref-palette-gray-900);
 
     /* Info */
-    --n-sys-color-info-lightest: var(--n-ref-palette-purple-300);
-    --n-sys-color-info-lighter: var(--n-ref-palette-purple-400);
-    --n-sys-color-info-light: var(--n-ref-palette-purple-500);
-    --n-sys-color-info: var(--n-ref-palette-purple-600);
-    --n-sys-color-info-dark: var(--n-ref-palette-purple-700);
-    --n-sys-color-info-darker: var(--n-ref-palette-purple-800);
-    --n-sys-color-info-darkest: var(--n-ref-palette-purple-900);
+    --n-sys-color-info-lightest: var(--n-ref-palette-purple-200);
+    --n-sys-color-info-lighter: var(--n-ref-palette-purple-300);
+    --n-sys-color-info-light: var(--n-ref-palette-purple-400);
+    --n-sys-color-info: var(--n-ref-palette-purple-500);
+    --n-sys-color-info-dark: var(--n-ref-palette-purple-600);
+    --n-sys-color-info-darker: var(--n-ref-palette-purple-700);
+    --n-sys-color-info-darkest: var(--n-ref-palette-purple-800);
 
     /* ------ */
     --n-sys-color-info-50: var(--n-ref-palette-purple-50);
@@ -72,13 +72,13 @@
     --n-sys-color-info-900: var(--n-ref-palette-purple-900);
 
     /* Danger */
-    --n-sys-color-danger-lightest: var(--n-ref-palette-red-300);
-    --n-sys-color-danger-lighter: var(--n-ref-palette-red-400);
-    --n-sys-color-danger-light: var(--n-ref-palette-red-500);
-    --n-sys-color-danger: var(--n-ref-palette-red-600);
-    --n-sys-color-danger-dark: var(--n-ref-palette-red-700);
-    --n-sys-color-danger-darker: var(--n-ref-palette-red-800);
-    --n-sys-color-danger-darkest: var(--n-ref-palette-red-900);
+    --n-sys-color-danger-lightest: var(--n-ref-palette-red-200);
+    --n-sys-color-danger-lighter: var(--n-ref-palette-red-300);
+    --n-sys-color-danger-light: var(--n-ref-palette-red-400);
+    --n-sys-color-danger: var(--n-ref-palette-red-500);
+    --n-sys-color-danger-dark: var(--n-ref-palette-red-600);
+    --n-sys-color-danger-darker: var(--n-ref-palette-red-700);
+    --n-sys-color-danger-darkest: var(--n-ref-palette-red-800);
 
     /* ------ */
     --n-sys-color-danger-50: var(--n-ref-palette-red-50);
@@ -94,13 +94,13 @@
     --n-sys-color-danger-900: var(--n-ref-palette-red-900);
 
     /* Success */
-    --n-sys-color-success-lightest: var(--n-ref-palette-green-300);
-    --n-sys-color-success-lighter: var(--n-ref-palette-green-400);
-    --n-sys-color-success-light: var(--n-ref-palette-green-500);
-    --n-sys-color-success: var(--n-ref-palette-green-600);
-    --n-sys-color-success-dark: var(--n-ref-palette-green-700);
-    --n-sys-color-success-darker: var(--n-ref-palette-green-800);
-    --n-sys-color-success-darkest: var(--n-ref-palette-green-900);
+    --n-sys-color-success-lightest: var(--n-ref-palette-green-200);
+    --n-sys-color-success-lighter: var(--n-ref-palette-green-300);
+    --n-sys-color-success-light: var(--n-ref-palette-green-400);
+    --n-sys-color-success: var(--n-ref-palette-green-500);
+    --n-sys-color-success-dark: var(--n-ref-palette-green-600);
+    --n-sys-color-success-darker: var(--n-ref-palette-green-700);
+    --n-sys-color-success-darkest: var(--n-ref-palette-green-800);
 
     /* ------ */
     --n-sys-color-success-50: var(--n-ref-palette-green-50);
@@ -116,13 +116,13 @@
     --n-sys-color-success-900: var(--n-ref-palette-green-900);
 
     /* Warning */
-    --n-sys-color-warning-lightest: var(--n-ref-palette-orange-300);
-    --n-sys-color-warning-lighter: var(--n-ref-palette-orange-400);
-    --n-sys-color-warning-light: var(--n-ref-palette-orange-500);
-    --n-sys-color-warning: var(--n-ref-palette-orange-600);
-    --n-sys-color-warning-dark: var(--n-ref-palette-orange-700);
-    --n-sys-color-warning-darker: var(--n-ref-palette-orange-800);
-    --n-sys-color-warning-darkest: var(--n-ref-palette-orange-900);
+    --n-sys-color-warning-lightest: var(--n-ref-palette-orange-200);
+    --n-sys-color-warning-lighter: var(--n-ref-palette-orange-300);
+    --n-sys-color-warning-light: var(--n-ref-palette-orange-400);
+    --n-sys-color-warning: var(--n-ref-palette-orange-500);
+    --n-sys-color-warning-dark: var(--n-ref-palette-orange-600);
+    --n-sys-color-warning-darker: var(--n-ref-palette-orange-700);
+    --n-sys-color-warning-darkest: var(--n-ref-palette-orange-800);
 
     /* ------ */
     --n-sys-color-warning-50: var(--n-ref-palette-orange-50);

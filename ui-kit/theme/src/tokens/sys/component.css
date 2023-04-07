@@ -29,5 +29,13 @@
     --n-sys-border-color-success: var(--n-sys-color-success-500);
     --n-sys-border-color-warning: var(--n-sys-color-warning-500);
     --n-sys-border-base: var(--n-sys-border-size) var(--n-sys-border-style) var(--n-sys-border-color-danger);
+
+    /* ------ */
+    --n-sys-border-primary: var(--n-sys-border-size) var(--n-sys-border-style) var(--n-sys-border-color-primary);
+    --n-sys-border-secondary: var(--n-sys-border-size) var(--n-sys-border-style) var(--n-sys-border-color-secondary);
+    --n-sys-border-info: var(--n-sys-border-size) var(--n-sys-border-style) var(--n-sys-border-color-info);
+    --n-sys-border-success: var(--n-sys-border-size) var(--n-sys-border-style) var(--n-sys-border-color-success);
+    --n-sys-border-warning: var(--n-sys-border-size) var(--n-sys-border-style) var(--n-sys-border-color-warning);
+    --n-sys-border-danger: var(--n-sys-border-size) var(--n-sys-border-style) var(--n-sys-border-color-danger);
   }
 }

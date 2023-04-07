@@ -44,7 +44,7 @@
     --n-comp-button-outline: var(--n-sys-outline-info);
 
     /* container-bg-color */
-    --n-comp-button-container-bg-color: var(--n-sys-color-white);
+    --n-comp-button-container-bg-color: transparent;
     --n-comp-button-container-bg-color-hovered: var(--n-sys-color-info-50);
     --n-comp-button-container-bg-color-pressed: var(--n-sys-color-info-100);
 
@@ -64,7 +64,7 @@
     --n-comp-button-outline: var(--n-sys-outline-info);
 
     /* container-bg-color */
-    --n-comp-button-container-bg-color: var(--n-sys-color-white);
+    --n-comp-button-container-bg-color: transparent;
     --n-comp-button-container-bg-color-hovered: var(--n-sys-color-info-50);
     --n-comp-button-container-bg-color-pressed: var(--n-sys-color-info-100);
 
