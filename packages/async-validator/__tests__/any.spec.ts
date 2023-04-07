@@ -50,7 +50,6 @@ const testRequiredErrorFor = (value) => async () => {
 }
 
 describe('any', () => {
-  // eslint-disable-next-line unicorn/no-null
   it('allows null', testNoErrorsFor(null))
   it('allows undefined', testNoErrorsFor(undefined))
   it('allows strings', testNoErrorsFor('foo'))
@@ -59,6 +58,6 @@ describe('any', () => {
   it('allows arrays', testNoErrorsFor([]))
   it('allows objects', testNoErrorsFor({}))
   it('rejects undefined when required', testRequiredErrorFor(undefined))
-  // eslint-disable-next-line unicorn/no-null
+
   it('rejects null when required', testRequiredErrorFor(null))
 })

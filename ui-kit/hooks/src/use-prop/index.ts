@@ -2,7 +2,7 @@
 import { computed, type ComputedRef, getCurrentInstance } from 'vue'
 
 export const useProp = <T>(name: string): ComputedRef<T | undefined> => {
-  const vm = getCurrentInstance()!
+  const vm = getCurrentInstance()
 
-  return computed(() => (vm.proxy?.$props as any)[name] ?? undefined)
+  return computed(() => (vm?.proxy?.$props as any)?.[name])
 }

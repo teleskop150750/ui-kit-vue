@@ -1,4 +1,4 @@
-import type { VNode } from 'vue'
+export { isVNode, type VNode } from 'vue'
 
 const objectToString = Object.prototype.toString
 
@@ -91,10 +91,9 @@ export function isNil(value: unknown): value is null | undefined {
 export function isPropAbsent(prop: unknown): prop is null | undefined {
   return isNil(prop)
 }
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function isVNode(value: any): value is VNode {
-  return value ? value.__v_isVNode === true : false
-}
+// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// export function isVNode(value: any): value is VNode {
+//   return value ? value.__v_isVNode === true : false
+// }
 
 export function NOOP() {}

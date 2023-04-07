@@ -1,9 +1,14 @@
 {
-  "extends": "@nado/tsconfig/tsconfig.json",
-  "include": ["src/**/*", "src/**/*.vue"],
-  "compilerOptions": {
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "types": ["node"]
-  }
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.vitest.json"
+    }
+  ]
 }

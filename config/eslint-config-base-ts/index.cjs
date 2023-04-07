@@ -68,7 +68,10 @@ module.exports = {
     "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
     "@typescript-eslint/prefer-ts-expect-error": "error",
 
-    // Override JS
+    // // Override JS
+    // "func-call-spacing": "off",
+    // "@typescript-eslint/func-call-spacing": "error",
+
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": "error",
     // no-extra-semi

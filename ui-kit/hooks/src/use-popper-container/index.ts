@@ -6,7 +6,7 @@ import { namespace } from '../use-namespace'
 
 let cachedContainer: HTMLElement
 
-export const usePopperContainerId = () => {
+export function usePopperContainerId() {
   const idInjection = useIdInjection()
 
   const id = computed(() => `${namespace}-popper-container-${idInjection.prefix}`)
@@ -18,7 +18,7 @@ export const usePopperContainerId = () => {
   }
 }
 
-const createContainer = (id: string) => {
+function createContainer(id: string) {
   const container = document.createElement('div')
 
   container.id = id
@@ -27,13 +27,13 @@ const createContainer = (id: string) => {
   return container
 }
 
-export const usePopperContainer = () => {
+export function usePopperContainer() {
+  const { id, selector } = usePopperContainerId()
+
   onBeforeMount(() => {
     if (!isClient) {
       return
     }
-
-    const { id, selector } = usePopperContainerId()
 
     // This is for bypassing the error that when under testing env, we often encounter
     // document.body.innerHTML = '' situation
@@ -42,4 +42,9 @@ export const usePopperContainer = () => {
       cachedContainer = createContainer(id.value)
     }
   })
+
+  return {
+    id,
+    selector,
+  }
 }

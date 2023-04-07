@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, test } from 'vitest'
 import { nextTick } from 'vue'
 
-import NScrollbar from '../src/scrollbar.vue'
+import NScrollbar from '../src/NScrollbar.vue'
 
 describe('ScrollBar', () => {
   test('vertical', async () => {

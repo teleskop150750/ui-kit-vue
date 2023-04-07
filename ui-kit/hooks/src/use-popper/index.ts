@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Nillable } from '@nado/ui-kit-utils'
 import {
   createPopper,
@@ -11,18 +10,14 @@ import {
 import { computed, onBeforeUnmount, type Ref, ref, shallowRef, unref, watch } from 'vue'
 
 type ElementType = Nillable<HTMLElement>
-export type ReferenceElement = ElementType | VirtualElement
+type ReferenceElement = ElementType | VirtualElement
 export type PartialOptions = Partial<Options>
 
-type States = Ref<Pick<State, 'styles' | 'attributes'>>
-
-export const usePopper = (
+export function usePopper(
   referenceElementRef: Ref<ReferenceElement>,
   popperElementRef: Ref<ElementType>,
   opts: Ref<PartialOptions> | PartialOptions = {} as PartialOptions,
-) => {
-  const states: States = ref({ styles: {}, attributes: {} })
-
+) {
   const stateUpdater = {
     name: 'updateState',
     enabled: true,
@@ -30,9 +25,11 @@ export const usePopper = (
     fn: ({ state }) => {
       const derivedState = deriveState(state)
 
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       Object.assign(states.value, derivedState)
     },
     requires: ['computeStyles'],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as Modifier<'updateState', any>
 
   const options = computed<Options>(() => {
@@ -47,20 +44,19 @@ export const usePopper = (
   })
 
   const instanceRef = shallowRef<Instance | undefined>()
-
-  states.value = {
+  const states = ref<Pick<State, 'styles' | 'attributes'>>({
     styles: {
       popper: {
         position: unref(options).strategy,
         left: '0',
-        right: '0',
+        top: '0',
       },
       arrow: {
         position: 'absolute',
       },
     },
     attributes: {},
-  }
+  })
 
   const destroy = () => {
     if (!instanceRef.value) {

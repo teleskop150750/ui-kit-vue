@@ -1,6 +1,14 @@
 {
   "extends": "@nado/tsconfig/tsconfig.json",
-  "include": ["src/**/*", "src/**/*.vue", "build-icons/**/*", "build-icons/**/*.ts"],
+  "include": [
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.vue",
+    "build-icons/**/*",
+    "build-icons/**/*.ts",
+    "vite.config.*",
+    "vitest.config.*"
+  ],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "outDir": "./dist",

@@ -1,4 +1,5 @@
 import { addClass, getScrollBarWidth, getStyle, hasClass, isClient, removeClass, throwError } from '@nado/ui-kit-utils'
+import { computed } from '@vue/reactivity'
 import { isRef, onScopeDispose, type Ref, watch } from 'vue'
 
 import { useNamespace, type UseNamespaceReturn } from '../use-namespace'
@@ -20,9 +21,9 @@ export function useLockScreen(trigger: Ref<boolean>, options: UseLockScreenOptio
 
   const ns = options.ns || useNamespace('popup')
 
-  const hiddenCls = ns.sm('parent', 'hidden')
+  const hiddenCls = computed(() => ns.sm('parent', 'hidden'))
 
-  if (!isClient || hasClass(document.body, hiddenCls)) {
+  if (!isClient || hasClass(document.body, hiddenCls.value)) {
     return
   }
 
@@ -32,7 +33,7 @@ export function useLockScreen(trigger: Ref<boolean>, options: UseLockScreenOptio
 
   function cleanup() {
     setTimeout(() => {
-      removeClass(document?.body, hiddenCls)
+      removeClass(document?.body, hiddenCls.value)
 
       if (withoutHiddenClass && document) {
         document.body.style.width = bodyWidth
@@ -47,7 +48,7 @@ export function useLockScreen(trigger: Ref<boolean>, options: UseLockScreenOptio
       return
     }
 
-    withoutHiddenClass = !hasClass(document.body, hiddenCls)
+    withoutHiddenClass = !hasClass(document.body, hiddenCls.value)
 
     if (withoutHiddenClass) {
       bodyWidth = document.body.style.width
@@ -61,7 +62,7 @@ export function useLockScreen(trigger: Ref<boolean>, options: UseLockScreenOptio
       document.body.style.width = `calc(100% - ${scrollBarWidth}px)`
     }
 
-    addClass(document.body, hiddenCls)
+    addClass(document.body, hiddenCls.value)
   })
   onScopeDispose(() => cleanup())
 }

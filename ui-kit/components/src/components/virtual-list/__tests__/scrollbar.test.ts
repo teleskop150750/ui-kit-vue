@@ -3,19 +3,19 @@ import { describe, expect, it } from 'vitest'
 import { nextTick } from 'vue'
 
 import { ScrollbarDirKey } from '../src/defaults'
-import Scrollbar from '../src/scrollbar.vue'
+import NVirtualScrollbar from '../src/NVirtualScrollbar.vue'
 
 describe('virtual scrollbar', () => {
   async function testInlineStyle(layout: 'vertical' | 'horizontal' = 'vertical') {
     const wrapper = mount({
       template: `<scrollbar visible layout="${layout}" :total="100" :ratio="25" :client-size="100" :scroll-from="20"></scrollbar>`,
       components: {
-        Scrollbar,
+        Scrollbar: NVirtualScrollbar,
       },
     })
 
     await nextTick()
-    const scrollbar = wrapper.findComponent(Scrollbar)
+    const scrollbar = wrapper.findComponent(NVirtualScrollbar)
     const styles = getComputedStyle(scrollbar.vm.$el)
 
     Object.entries({
@@ -60,13 +60,13 @@ describe('virtual scrollbar', () => {
         </div>
       `,
       components: {
-        Scrollbar,
+        Scrollbar: NVirtualScrollbar,
       },
     })
 
     await nextTick()
 
-    const scrollbar = wrapper.findComponent(Scrollbar)
+    const scrollbar = wrapper.findComponent(NVirtualScrollbar)
     const el = scrollbar.vm.$el
 
     /**
@@ -84,7 +84,7 @@ describe('virtual scrollbar', () => {
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    // eslint-disable-next-line unicorn/no-null
+
     e.initMouseEvent('mousedown', false, false, null, 0, 0, 0, 0, clientY, false, false, false, false, 0, null)
     el.dispatchEvent(e)
 
@@ -115,7 +115,7 @@ describe('virtual scrollbar', () => {
         </div>
       `,
       components: {
-        Scrollbar,
+        Scrollbar: NVirtualScrollbar,
       },
     })
 
@@ -140,7 +140,7 @@ describe('virtual scrollbar', () => {
       </div>
     `,
       components: {
-        Scrollbar,
+        Scrollbar: NVirtualScrollbar,
       },
     })
 
@@ -166,7 +166,7 @@ describe('virtual scrollbar', () => {
       </div>
     `,
       components: {
-        Scrollbar,
+        Scrollbar: NVirtualScrollbar,
       },
     })
 

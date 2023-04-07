@@ -1,11 +1,14 @@
 {
-  "extends": "@nado/tsconfig/tsconfig.json",
-  "include": ["src/**/*", "src/**/*.ts"],
-  "exclude": ["src/**/__tests__/*"],
-  "compilerOptions": {
-    "composite": true,
-    "outDir": "./dist",
-    "baseUrl": ".",
-    "types": ["node"]
-  }
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.vitest.json"
+    }
+  ]
 }

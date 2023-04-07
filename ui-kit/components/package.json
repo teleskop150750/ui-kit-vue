@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "private": true,
   "sideEffects": false,
+  "main": "./src/components/index.ts",
   "module": "./src/components/index.ts",
   "types": "./src/components/index.ts",
   "scripts": {

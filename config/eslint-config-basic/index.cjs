@@ -150,6 +150,8 @@ module.exports = {
     {
       files: ['*.test.ts', '*.test.tsx', '*.test.js', '*.test.jsx', '*.spec.ts', '*.spec.js'],
       rules: {
+        'no-console': 'off',
+        'unicorn/no-null': 'off',
         'no-unused-expressions': 'off',
         'no-only-tests/no-only-tests': 'error',
         '@typescript-eslint/no-explicit-any': 'off',
@@ -981,6 +983,7 @@ module.exports = {
 
     // Требовать или запрещать интервалы между идентификаторами функций и их вызовами
     // 'func-call-spacing': ['error', 'never'],
+    'func-call-spacing': 'off',
 
     // Применять разрывы строк между аргументами вызова функции
     'function-call-argument-newline': ['error', 'consistent'],
@@ -1323,6 +1326,9 @@ module.exports = {
 
     // Требовать или запрещать пробелы вокруг выражений *inyield*
     'yield-star-spacing': ['error', { before: false, after: true }],
+
+
+    'no-spaced-func': 'off',
 
     // // ==================
 

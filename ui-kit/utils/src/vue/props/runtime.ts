@@ -16,9 +16,13 @@ import type {
 
 export const nPropKey = '__nPropKey'
 
-export const definePropType = <T>(val: any): PropType<T> => val
+export function definePropType<T>(val: any): PropType<T> {
+  return val
+}
 
-export const isNProp = (val: unknown): val is NProp<any, any, any> => isObject(val) && !!(val as any)[nPropKey]
+export function isNProp(val: unknown): val is NProp<any, any, any> {
+  return isObject(val) && !!val[nPropKey]
+}
 
 /**
  * @description Build prop. Это может лучше оптимизировать типы реквизита
@@ -39,7 +43,7 @@ export const isNProp = (val: unknown): val is NProp<any, any, any> => isObject(v
   } as const)
   @link see more: https://github.com/element-plus/element-plus/pull/3341
  */
-export const buildProp = <
+export function buildProp<
   Type = never,
   Value = never,
   Validator = never,
@@ -48,9 +52,9 @@ export const buildProp = <
 >(
   prop: NPropInput<Type, Value, Validator, Default, Required>,
   key?: string,
-): NPropFinalized<Type, Value, Validator, Default, Required> => {
+): NPropFinalized<Type, Value, Validator, Default, Required> {
   // фильтровать собственный тип реквизита и вложенный реквизит, например `null`, `undefined` (from `buildProps`)
-  if (!isObject(prop) || isNProp(prop)) {
+  if (prop === null || !isObject(prop) || isNProp(prop)) {
     return prop as any
   }
 
@@ -104,10 +108,12 @@ export const buildProp = <
   return epProp
 }
 
-export const buildProps = <
+export function buildProps<
   Props extends Record<string, { [nPropKey]: true } | NativePropType | NPropInput<any, any, any, any, any>>,
 >(
   props: Props,
 ): {
   [K in keyof Props]: IfNProp<Props[K], Props[K], IfNativePropType<Props[K], Props[K], NPropConvert<Props[K]>>>
-} => Object.fromEntries(Object.entries(props).map(([key, option]) => [key, buildProp(option as any, key)])) as any
+} {
+  return Object.fromEntries(Object.entries(props).map(([key, option]) => [key, buildProp(option as any, key)])) as any
+}
