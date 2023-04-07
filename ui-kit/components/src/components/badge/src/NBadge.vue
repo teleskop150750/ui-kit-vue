@@ -24,11 +24,11 @@ const classes = computed(() => {
 })
 
 // methods
-const handleClose = (event: MouseEvent) => {
+function handleClose(event: MouseEvent) {
   emit('close', event)
 }
 
-const handleClick = (event: MouseEvent) => {
+function handleClick(event: MouseEvent) {
   emit('click', event)
 }
 </script>
