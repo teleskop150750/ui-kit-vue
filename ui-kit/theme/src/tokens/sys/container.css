@@ -1,6 +1,46 @@
 /* stylelint-disable comment-empty-line-before */
 @layer themes {
   .nado-theme {
+    /* Outline */
+    --n-sys-outline-size: 4px;
+    --n-sys-outline-style: solid;
+    --n-sys-outline-color-primary: var(--n-sys-color-primary-200);
+    --n-sys-outline-color-secondary: var(--n-sys-color-secondary-200);
+    --n-sys-outline-color-info: var(--n-sys-color-info-200);
+    --n-sys-outline-color-success: var(--n-sys-color-success-200);
+    --n-sys-outline-color-warning: var(--n-sys-color-warning-200);
+    --n-sys-outline-color-danger: var(--n-sys-color-danger-200);
+
+    /* ------ */
+    --n-sys-outline-primary: var(--n-sys-outline-color-primary) var(--n-sys-outline-style) var(--n-sys-outline-size);
+    --n-sys-outline-secondary: var(--n-sys-outline-color-secondary) var(--n-sys-outline-style) var(--n-sys-outline-size);
+    --n-sys-outline-info: var(--n-sys-outline-color-info) var(--n-sys-outline-style) var(--n-sys-outline-size);
+    --n-sys-outline-success: var(--n-sys-outline-color-success) var(--n-sys-outline-style) var(--n-sys-outline-size);
+    --n-sys-outline-warning: var(--n-sys-outline-color-warning) var(--n-sys-outline-style) var(--n-sys-outline-size);
+    --n-sys-outline-danger: var(--n-sys-outline-color-danger) var(--n-sys-outline-style) var(--n-sys-outline-size);
+
+    /* Border */
+
+    /* Default */
+    --n-sys-border-size: 1px;
+    --n-sys-border-style: solid;
+    --n-sys-border-color-base: var(--n-ref-palette-gray-400);
+    --n-sys-border-color-primary: var(--n-sys-color-primary-500);
+    --n-sys-border-color-danger: var(--n-sys-color-danger-500);
+    --n-sys-border-color-success: var(--n-sys-color-success-500);
+    --n-sys-border-color-warning: var(--n-sys-color-warning-500);
+    --n-sys-border-color-disabled: var(--n-ref-palette-gray-300);
+
+    /* ------ */
+    --n-sys-border-base: var(--n-sys-border-size) var(--n-sys-border-style) var(--n-sys-border-color-base);
+    --n-sys-border-primary: var(--n-sys-border-size) var(--n-sys-border-style) var(--n-sys-border-color-primary);
+    --n-sys-border-secondary: var(--n-sys-border-size) var(--n-sys-border-style) var(--n-sys-border-color-secondary);
+    --n-sys-border-info: var(--n-sys-border-size) var(--n-sys-border-style) var(--n-sys-border-color-info);
+    --n-sys-border-success: var(--n-sys-border-size) var(--n-sys-border-style) var(--n-sys-border-color-success);
+    --n-sys-border-warning: var(--n-sys-border-size) var(--n-sys-border-style) var(--n-sys-border-color-warning);
+    --n-sys-border-danger: var(--n-sys-border-size) var(--n-sys-border-style) var(--n-sys-border-color-danger);
+    --n-sys-border-disabled: var(--n-sys-border-size) var(--n-sys-border-style) var(--n-sys-border-color-disabled);
+
     /* TODO: определиться что с этим делать */
 
     /* Disabled */

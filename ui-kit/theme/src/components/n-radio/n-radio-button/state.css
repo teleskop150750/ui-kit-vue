@@ -1,0 +1,23 @@
+@layer components {
+  .n-radio-button__native:checked + .n-radio-button__inner {
+    --n-comp-radio-button-container-text-color: var(--n-sys-color-white);
+    --n-comp-radio-button-container-bg-color: var(--n-sys-color-primary);
+  }
+
+  .n-radio-button__native:focus-visible + .n-radio-button__inner {
+    z-index: 2;
+
+    outline: var(--n-sys-outline-primary);
+  }
+
+  .n-radio-button__native:disabled + .n-radio-button__inner {
+    --n-comp-radio-button-container-border-color: var(--n-sys-border-color-disabled);
+    --n-comp-radio-button-container-text-color: var(--n-sys-text-color-disabled);
+
+    cursor: default;
+  }
+
+  .n-radio-button__native:disabled:checked + .n-radio-button__inner {
+    --n-comp-radio-button-container-bg-color: var(--n-sys-container-color-disabled);
+  }
+}

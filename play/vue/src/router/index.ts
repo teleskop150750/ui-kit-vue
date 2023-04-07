@@ -26,6 +26,11 @@ const router = createRouter({
       component: () => import('../views/InputView.vue'),
     },
     {
+      path: '/radio',
+      name: 'radio',
+      component: () => import('../views/RadioView.vue'),
+    },
+    {
       path: '/form',
       name: 'form',
       component: () => import('../views/FormView.vue'),

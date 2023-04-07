@@ -1,0 +1,43 @@
+@layer components {
+  /* checked */
+  .n-radio--is-checked.n-radio--is-bordered {
+    --n-comp-radio-container-border-color: var(--n-sys-border-color-primary);
+  }
+
+  .n-radio__input-wrapper--is-checked .n-radio__input {
+    --n-comp-radio-input-bg-color: var(--n-sys-color-primary);
+  }
+
+  .n-radio__input-wrapper--is-checked .n-radio__input::after {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* disabled */
+  .n-radio--is-disabled.n-radio--is-bordered {
+    --n-comp-radio-container-border-color: var(--n-sys-border-color-disabled);
+
+    cursor: default;
+  }
+
+  .n-radio__input-wrapper--is-disabled .n-radio__input {
+    --n-comp-radio-input-bg-color: var(--n-sys-container-color-disabled);
+    --n-comp-radio-input-border-color: var(--n-sys-border-color-disabled);
+
+    cursor: default;
+  }
+
+  .n-radio__input-wrapper--is-disabled .n-radio__input::after {
+    --n-comp-radio-input-dot-bg-color: var(--n-sys-on-container-color-disabled);
+  }
+
+  .n-radio__input-wrapper--is-disabled + .n-radio__label {
+    color: var(--n-sys-text-color-disabled);
+
+    cursor: default;
+  }
+
+  /* origin */
+  .n-radio__native:focus-visible + .n-radio__input {
+    outline: var(--n-sys-outline-primary);
+  }
+}

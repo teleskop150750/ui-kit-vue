@@ -1,0 +1,11 @@
+@layer components {
+  .n-radio--is-bordered {
+    padding: 0 15px 0 9px;
+    box-sizing: border-box;
+
+    border-color: var(--n-comp-radio-container-border-color);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: var(--n-sys-border-radius-base);
+  }
+}

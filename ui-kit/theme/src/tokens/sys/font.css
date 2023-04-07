@@ -23,7 +23,7 @@
     --n-sys-text-line-height-small: 20px;
 
     /* Color */
-    --n-sys-text-color-default: var(--n-ref-palette-gray-900);
+    --n-sys-text-color-default: var(--n-ref-palette-gray-800);
     --n-sys-text-color-regular: var(--n-ref-palette-gray-700);
     --n-sys-text-color-placeholder: var(--n-ref-palette-gray-200);
     --n-sys-text-color-disabled: var(--n-ref-palette-gray-400);

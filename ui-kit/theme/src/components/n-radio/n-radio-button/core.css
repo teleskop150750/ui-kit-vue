@@ -1,0 +1,74 @@
+@layer components {
+  .n-radio-button {
+    --n-comp-radio-button-container-bg-color: var(--n-sys-color-white);
+    --n-comp-radio-button-container-text-color: var(--n-sys-text-color-regular);
+    --n-comp-radio-button-container-border-color: var(--n-sys-color-primary);
+
+    position: relative;
+
+    display: inline-block;
+
+    outline: 0;
+  }
+
+  .n-radio-button__inner {
+    position: relative;
+
+    display: inline-block;
+
+    margin: 0;
+    padding: 8px 15px;
+    box-sizing: border-box;
+
+    color: var(--n-comp-radio-button-container-text-color);
+    font-weight: var(--n-sys-text-weight-medium);
+    font-size: var(--n-sys-text-size-base);
+    line-height: 1;
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: middle;
+
+    border-color: var(--n-comp-radio-button-container-border-color);
+    border-style: solid;
+    border-width: 1px;
+    border-left: 0;
+    border-radius: 0;
+
+    background: var(--n-comp-radio-button-container-bg-color);
+
+    outline: 0;
+
+    cursor: pointer;
+
+    appearance: none;
+    user-select: none;
+  }
+
+  .n-radio-button__inner:hover {
+    --n-comp-radio-button-container-text-color: var(--n-sys-color-primary);
+  }
+
+  .n-radio-button:first-child .n-radio-button__inner {
+    border-left: 1px solid var(--n-comp-radio-button-container-border-color);
+    border-radius: var(--n-sys-border-radius-base) 0 0 var(--n-sys-border-radius-base);
+  }
+
+  .n-radio-button:last-child .n-radio-button__inner {
+    border-radius: 0 var(--n-sys-border-radius-base) var(--n-sys-border-radius-base) 0;
+  }
+
+  .n-radio-button:first-child:last-child .n-radio-button__inner {
+    border-radius: var(--n-sys-border-radius-base);
+  }
+
+  .n-radio-button__native {
+    position: absolute;
+    z-index: -1;
+
+    outline: 0;
+
+    opacity: 0;
+
+    appearance: none;
+  }
+}

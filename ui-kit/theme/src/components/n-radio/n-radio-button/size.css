@@ -1,0 +1,9 @@
+@layer components {
+  .n-radio-button--size-small .n-radio-button__inner {
+    padding: 5px 11px;
+
+    font-size: 12px;
+
+    border-radius: 0;
+  }
+}
