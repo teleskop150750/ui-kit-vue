@@ -8,6 +8,14 @@
     /* hint */
   }
 
+  .n-form-item--is-required:not(.n-form-item--no-asterisk) .n-form-item__label::after {
+    content: '*';
+
+    margin-left: 4px;
+
+    color: var(--n-ref-palette-red-600);
+  }
+
   .n-form-item__label {
     display: inline-flex;
     flex: 0 0 auto;

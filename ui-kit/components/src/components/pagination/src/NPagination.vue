@@ -61,3 +61,7 @@ export default {
     />
   </div>
 </template>
+
+<style>
+@import url('@nado/ui-kit-theme/src/components/n-pagination/index.css');
+</style>

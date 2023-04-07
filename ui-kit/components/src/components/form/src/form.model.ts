@@ -25,11 +25,6 @@ export const nFormProps = buildProps({
     type: Boolean,
     default: false,
   },
-  requireAsteriskPosition: {
-    type: String,
-    values: ['left', 'right'],
-    default: 'left',
-  },
   labelSuffix: {
     type: String,
     default: '',

@@ -3,16 +3,12 @@ import { NButton, NForm, type NFormInstance, NFormItem, type NFormRules, NInput 
 import { reactive, ref } from 'vue'
 
 const formRef = ref<NFormInstance>()
-const formModel = reactive({ text: 'text', desc: 'desc' })
+const formModel = reactive({ name: 'Name', desc: 'Description' })
 
 const rules = reactive<NFormRules>({
-  text: [
-    { required: true, message: 'Please input Activity name', trigger: 'blur' },
-    { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' },
-    { min: 2, max: 5, message: 'Length should be 2', trigger: 'blur' },
-  ],
+  name: [{ required: true, message: 'Please input activity form', trigger: 'blur' }],
   desc: [
-    { required: true, message: 'Please input Activity name', trigger: 'blur' },
+    { message: 'Please input Activity name', trigger: 'blur' },
     { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' },
     { min: 2, max: 5, message: 'Length should be 2', trigger: 'blur' },
   ],
@@ -44,10 +40,10 @@ const resetForm = (formEl: NFormInstance | undefined) => {
 <template>
   <div class="row">
     <NForm ref="formRef" :model="formModel" :rules="rules">
-      <NFormItem label="Label" prop="text" :max-errors="2" hint="Введите email">
-        <NInput v-model="formModel.text" />
+      <NFormItem label="Name" prop="name" :max-errors="2" hint="Введите имя">
+        <NInput v-model="formModel.name" />
       </NFormItem>
-      <NFormItem label="Label" prop="desc">
+      <NFormItem label="Description" prop="desc">
         <NInput v-model="formModel.desc" />
       </NFormItem>
       <NButton @click="resetForm(formRef)">Reset</NButton>

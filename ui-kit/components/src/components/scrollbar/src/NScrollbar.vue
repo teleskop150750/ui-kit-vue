@@ -229,3 +229,7 @@ export default {
     </div>
   </div>
 </template>
+
+<style>
+@import url('@nado/ui-kit-theme/src/components/n-scrollbar/index.css');
+</style>

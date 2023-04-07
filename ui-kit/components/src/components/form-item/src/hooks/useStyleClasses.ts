@@ -21,9 +21,8 @@ export function useStyleClasses({ props, validateState, size, isRequired }: Para
     ns.is('error', validateState.value === 'error'),
     ns.is('validating', validateState.value === 'validating'),
     ns.is('success', validateState.value === 'success'),
-    ns.is('required', isRequired.value || props.required),
+    ns.is('required', isRequired.value || props.required || false),
     ns.is('no-asterisk', formContext?.hideRequiredAsterisk),
-    formContext?.requireAsteriskPosition === 'right' ? 'asterisk-right' : 'asterisk-left',
     { [ns.m('feedback')]: formContext?.statusIcon },
   ])
 
