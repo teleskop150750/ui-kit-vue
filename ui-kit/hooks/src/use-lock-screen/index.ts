@@ -1,6 +1,5 @@
 import { addClass, getScrollBarWidth, getStyle, hasClass, isClient, removeClass, throwError } from '@nado/ui-kit-utils'
-import { computed } from '@vue/reactivity'
-import { isRef, onScopeDispose, type Ref, watch } from 'vue'
+import { computed, isRef, onScopeDispose, type Ref, watch } from 'vue'
 
 import { useNamespace, type UseNamespaceReturn } from '../use-namespace'
 

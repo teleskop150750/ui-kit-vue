@@ -1,6 +1,6 @@
 import { useSizeProp } from '@nado/ui-kit-hooks'
 import { buildProps } from '@nado/ui-kit-utils'
-import type { ExtractPropTypes } from '@vue/runtime-core'
+import type { ExtractPropTypes } from 'vue'
 
 import type RadioGroup from './NRadioGroup.vue'
 import { nRadioEmits } from './radio.model'

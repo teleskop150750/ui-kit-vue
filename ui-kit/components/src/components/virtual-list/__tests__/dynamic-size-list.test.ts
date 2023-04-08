@@ -112,7 +112,7 @@ describe('<dynamic-size-list />', () => {
       expect(Number.parseInt(listRef.innerRef.style.height)).toBe(BASE_SIZE)
       expect(Number.parseInt(listRef.innerRef.style.height)).toBe(BASE_SIZE)
       expect(wrapper.findAll(ITEM_SELECTOR).length).toBe(10)
-      expect(wrapper.findAll(ITEM_SELECTOR).length).toBeLessThanOrEqual(10)
+      expect(wrapper.findAll(ITEM_SELECTOR).length).toBeLessThanOrEqual(11)
     })
     it('should scroll correctly in horizontal mode', async () => {
       const wrapper = mount({

@@ -30,6 +30,7 @@
     "@nado/ui-kit-locale": "workspace:*",
     "@nado/ui-kit-theme": "workspace:*",
     "@nado/ui-kit-utils": "workspace:*",
+    "@popperjs/core": "^2.11.7",
     "@types/lodash-es": "^4.17.7",
     "@vueuse/core": "^9.13.0",
     "lodash-es": "^4.17.21",

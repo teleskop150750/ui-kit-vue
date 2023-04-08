@@ -730,6 +730,9 @@ importers:
       '@nado/ui-kit-utils':
         specifier: workspace:*
         version: link:../utils
+      '@popperjs/core':
+        specifier: ^2.11.7
+        version: 2.11.7
       '@types/lodash-es':
         specifier: ^4.17.7
         version: 4.17.7

@@ -19,7 +19,7 @@ describe('Radio', () => {
   //   const wrapper = mount(() => <NRadio v-model={radio.value} value="a" onClick={handleClick} />)
 
   //   expect(wrapper.classes()).toContain('n-radio')
-  //   await wrapper.find('.n-radio__native').trigger('click')
+  //   await wrapper.trigger('click')
 
   //   expect(wrapper.classes()).toContain('n-radio--is-checked')
   // })
