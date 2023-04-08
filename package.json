@@ -21,20 +21,20 @@
     "commit": "cz"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.4.2",
-    "@commitlint/config-conventional": "^17.4.2",
+    "@commitlint/cli": "^17.5.1",
+    "@commitlint/config-conventional": "^17.4.4",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "editorconfig-checker": "^5.0.1",
-    "husky": "^8.0.0",
-    "lint-staged": "^13.2.0",
-    "turbo": "^1.8.3",
-    "typescript": "^5.0.3"
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.1",
+    "turbo": "^1.8.8",
+    "typescript": "^5.0.4"
   },
   "engines": {
     "node": ">=18.0.0"
   },
-  "packageManager": "pnpm@7.29.1",
+  "packageManager": "pnpm@7.31.0",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"

@@ -22,9 +22,9 @@
     "@nado/prettier-config": "workspace:*",
     "@nado/tsconfig": "workspace:*",
     "@rushstack/eslint-patch": "^1.2.0",
-    "@types/node": "^18.14.2",
-    "eslint": "^8.36.0",
-    "prettier": "^2.8.4",
+    "@types/node": "^18.15.11",
+    "eslint": "^8.38.0",
+    "prettier": "^2.8.7",
     "vue": "^3.2.47",
     "vue-tsc": "^1.2.0"
   }
