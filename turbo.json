@@ -32,33 +32,6 @@
     },
     "dev": {
       "cache": false
-    },
-    "@nado/play-nuxt#dev": {
-      "dependsOn": ["@nado/ui-kit-icons-vue#generate"],
-      "cache": false
-    },
-    "@nado/play-nuxt#build": {
-      "dependsOn": ["@nado/ui-kit-icons-vue#generate"],
-      "outputs": ["dist/**"]
-    },
-    "@nado/play-vue#dev": {
-      "dependsOn": ["@nado/ui-kit-icons-vue#generate"],
-      "cache": false
-    },
-    "@nado/play-vue#build": {
-      "dependsOn": ["@nado/ui-kit-icons-vue#generate"],
-      "outputs": ["dist/**"]
-    },
-    "@nado/play-vue-simple#dev": {
-      "dependsOn": ["@nado/ui-kit-icons-vue#generate"],
-      "cache": false
-    },
-    "@nado/play-vue-simple#build": {
-      "dependsOn": ["@nado/ui-kit-icons-vue#generate"],
-      "outputs": ["dist/**"]
-    },
-    "@nado/ui-kit-icons-vue#generate": {
-      "outputs": []
     }
   }
 }
