@@ -10,10 +10,10 @@ import { useCheckboxStatus } from './useCheckboxStatus'
 
 function setStoreValue(props: NCheckboxProps, { model }: Pick<CheckboxModel, 'model'>) {
   function addToStore() {
-    if (isArray(model.value) && !model.value.includes(props.label)) {
-      model.value.push(props.label)
+    if (isArray(model.value) && !model.value.includes(props.val)) {
+      model.value.push(props.val)
     } else {
-      model.value = props.trueLabel || true
+      model.value = props.trueValue || true
     }
   }
   props.checked && addToStore()

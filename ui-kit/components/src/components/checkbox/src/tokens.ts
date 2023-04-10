@@ -7,6 +7,6 @@ type CheckboxGroupContext = {
   modelValue?: WritableComputedRef<any>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   changeEvent?: (...args: any) => any
-} & ToRefs<Pick<NCheckboxGroupProps, 'size' | 'min' | 'max' | 'disabled' | 'validateEvent' | 'fill' | 'textColor'>>
+} & ToRefs<Pick<NCheckboxGroupProps, 'size' | 'min' | 'max' | 'disabled' | 'validateEvent'>>
 
 export const CHECKBOX_GROUP_INJECTION_KEY: InjectionKey<CheckboxGroupContext> = Symbol('CHECKBOX_GROUP_INJECTION_KEY')

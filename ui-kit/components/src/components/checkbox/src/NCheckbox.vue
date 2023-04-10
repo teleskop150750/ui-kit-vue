@@ -63,7 +63,7 @@ export default {
       :aria-checked="indeterminate ? 'mixed' : undefined"
     >
       <input
-        v-if="trueLabel || falseLabel"
+        v-if="trueValue || falseValue"
         :id="inputId"
         v-model="model"
         :class="ns.e('native')"
@@ -72,8 +72,8 @@ export default {
         :name="name"
         :tabindex="tabindex"
         :disabled="isDisabled"
-        :true-value="trueLabel"
-        :false-value="falseLabel"
+        :true-value="trueValue"
+        :false-value="falseValue"
         @change="handleChange"
         @focus="isFocused = true"
         @blur="isFocused = false"
@@ -88,7 +88,7 @@ export default {
         :name="name"
         :tabindex="tabindex"
         :disabled="isDisabled"
-        :value="label"
+        :value="val"
         @change="handleChange"
         @focus="isFocused = true"
         @blur="isFocused = false"
@@ -97,7 +97,7 @@ export default {
     </span>
     <span v-if="hasOwnLabel" :class="ns.e('label')">
       <slot />
-      <template v-if="!$slots.default">{{ label }}</template>
+      <template v-if="!$slots.default">{{ val }}</template>
     </span>
   </component>
 </template>

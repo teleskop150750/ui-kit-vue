@@ -21,15 +21,15 @@ export function useCheckboxStatus(
     }
 
     if (isArray(value)) {
-      if (isObject(props.label)) {
-        return value.map(toRaw).some((o) => isEqual(o, props.label))
+      if (isObject(props.val)) {
+        return value.map(toRaw).some((o) => isEqual(o, props.val))
       }
 
-      return value.map(toRaw).includes(props.label)
+      return value.map(toRaw).includes(props.val)
     }
 
     if (value !== null && value !== undefined) {
-      return value === props.trueLabel
+      return value === props.trueValue
     }
 
     return !!value
@@ -43,7 +43,7 @@ export function useCheckboxStatus(
   )
   const checkboxSize = useFormSize(computed(() => checkboxGroup?.size?.value))
 
-  const hasOwnLabel = computed<boolean>(() => !!(slots.default || props.label))
+  const hasOwnLabel = computed<boolean>(() => !!slots.default)
 
   return {
     checkboxButtonSize,

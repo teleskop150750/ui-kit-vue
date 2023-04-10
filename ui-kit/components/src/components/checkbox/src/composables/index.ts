@@ -1,4 +1,4 @@
-export * from './use-checkbox'
+export * from './useCheckbox'
 export * from './useCheckboxDisabled'
 export * from './useCheckboxEvent'
 export * from './useCheckboxModel'

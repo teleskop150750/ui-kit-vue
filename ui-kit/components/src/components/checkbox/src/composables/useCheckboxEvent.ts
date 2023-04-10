@@ -24,7 +24,7 @@ export function useCheckboxEvent(
   const { emit } = getCurrentInstance()!
 
   function getLabeledValue(value: string | number | boolean) {
-    return value === props.trueLabel || value === true ? props.trueLabel ?? true : props.falseLabel ?? false
+    return value === props.trueValue || value === true ? props.trueValue ?? true : props.falseValue ?? false
   }
 
   function emitChangeEvent(checked: string | number | boolean, e: InputEvent | MouseEvent) {
@@ -52,7 +52,7 @@ export function useCheckboxEvent(
       const hasLabel = eventTargets.some((item) => (item as HTMLElement).tagName === 'LABEL')
 
       if (!hasLabel) {
-        model.value = getLabeledValue([false, props.falseLabel].includes(model.value))
+        model.value = getLabeledValue([false, props.falseValue].includes(model.value))
         await nextTick()
         emitChangeEvent(model.value, e)
       }

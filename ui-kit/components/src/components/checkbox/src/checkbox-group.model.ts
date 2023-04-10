@@ -37,14 +37,6 @@ export const nCheckboxGroupProps = buildProps({
    */
   label: String,
   /**
-   * @description border and background color when button is active
-   */
-  fill: String,
-  /**
-   * @description font color when button is active
-   */
-  textColor: String,
-  /**
    * @description element tag of the checkbox group
    */
   tag: {

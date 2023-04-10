@@ -35,7 +35,7 @@ const modelValue = computed({
 })
 
 provide(CHECKBOX_GROUP_INJECTION_KEY, {
-  ...pick(toRefs(props), ['size', 'min', 'max', 'disabled', 'validateEvent', 'fill', 'textColor']),
+  ...pick(toRefs(props), ['size', 'min', 'max', 'disabled', 'validateEvent']),
   modelValue,
   changeEvent,
 })
