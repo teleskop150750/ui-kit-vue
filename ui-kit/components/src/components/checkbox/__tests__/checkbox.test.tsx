@@ -417,18 +417,18 @@ describe('check-button', () => {
 
     expect(wrapper.classes()).toContain('n-checkbox-button')
     await wrapper.trigger('click')
-    expect(wrapper.classes()).toContain('n-checkbox--is-checked')
+    expect(wrapper.classes()).toContain('n-checkbox-button--is-checked')
     await wrapper.trigger('click')
-    expect(wrapper.classes('n-checkbox--is-checked')).toBe(false)
+    expect(wrapper.classes('n-checkbox-button--is-checked')).toBe(false)
   })
 
   test('disabled', async () => {
     const checked = ref(false)
     const wrapper = mount(() => <CheckboxButton v-model={checked.value} disabled label="a" />)
 
-    expect(wrapper.classes()).toContain('n-checkbox--is-disabled')
+    expect(wrapper.classes()).toContain('n-checkbox-button--is-disabled')
     await wrapper.trigger('click')
-    expect(wrapper.classes()).toContain('n-checkbox--is-disabled')
+    expect(wrapper.classes()).toContain('n-checkbox-button--is-disabled')
   })
 
   test('change event', async () => {
@@ -498,7 +498,7 @@ describe('check-button', () => {
     const checkbox = wrapper.findComponent({ ref: 'a' })
 
     expect(checkList.value.length).toBe(2)
-    expect(checkbox.classes()).contains('n-checkbox--is-checked')
+    expect(checkbox.classes()).contains('n-checkbox-button--is-checked')
     expect(checkbox.find('.n-checkbox-button__inner').attributes('style')).contains('border-color: #ff0000;')
   })
 
@@ -625,7 +625,7 @@ describe('check-button', () => {
       const formItem = await wrapper.findComponent(NFormItem)
       const checkbox = await wrapper.findComponent(Checkbox)
       const formItemLabel = formItem.find('.n-form-item__label')
-      const checkboxInput = checkbox.find('.n-checkbox__original')
+      const checkboxInput = checkbox.find('.n-checkbox__native')
 
       expect(checkboxInput.attributes('id')).toBe(formItemLabel.attributes('for'))
     })
@@ -643,7 +643,7 @@ describe('check-button', () => {
       const formItem = await wrapper.findComponent(NFormItem)
       const checkbox = await wrapper.findComponent(Checkbox)
       const checkboxLabel = checkbox.find('.n-checkbox__label')
-      const checkboxInput = checkbox.find('.n-checkbox__original')
+      const checkboxInput = checkbox.find('.n-checkbox__native')
 
       expect(checkboxLabel.element.textContent).toBe('Foo')
       expect(checkboxInput.attributes('id')).toBeFalsy()
