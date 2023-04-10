@@ -2,9 +2,9 @@
   @layer defaults {
     .n-virtual-scrollbar {
       --n-comp-scrollbar-opacity: 0.3;
-      --n-comp-scrollbar-opacity-hover: 0.5;
+      --n-comp-scrollbar-opacity-hovered: 0.5;
       --n-comp-scrollbar-color-bg: var(--n-sys-color-primary-500);
-      --n-comp-scrollbar-color-bg-hover: var(--n-sys-color-primary-600);
+      --n-comp-scrollbar-color-bg-hovered: var(--n-sys-color-primary-600);
       --n-comp-scrollbar-bar-offset: 2px;
       --n-comp-scrollbar-bar-size: 12px;
 
@@ -46,9 +46,9 @@
     }
 
     .n-virtual-scrollbar__thumb:hover::before {
-      background-color: var(--n-comp-scrollbar-color-bg-hover);
+      background-color: var(--n-comp-scrollbar-color-bg-hovered);
 
-      opacity: var(--n-comp-scrollbar-opacity-hover);
+      opacity: var(--n-comp-scrollbar-opacity-hovered);
     }
 
     .n-virtual-scrollbar__bar {

@@ -40,6 +40,8 @@
   .n-button--mode-link {
     height: auto;
     padding: 2px;
+
+    text-decoration: underline;
   }
 
   .n-button__content {

@@ -1,0 +1,27 @@
+.n-checkbox-button--is-checked .n-checkbox-button__inner {
+  color: var(--n-comp-checkbox-button-container-text-color-checked);
+
+  background-color: var(--n-comp-checkbox-button-container-bg-color-checked);
+
+  box-shadow: -1px 0 0 0 var(--n-sys-color-white);
+}
+
+.n-checkbox-button.n-checkbox-button--is-disabled .n-checkbox-button__inner {
+  color: var(--n-sys-on-container-color-disabled);
+
+  border-color: var(--n-sys-border-color-disabled);
+
+  background-image: none;
+
+  box-shadow: none;
+
+  cursor: not-allowed;
+}
+
+.n-checkbox-button.n-checkbox-button--is-checked.n-checkbox-button--is-disabled .n-checkbox-button__inner {
+  background-color: var(--n-sys-container-color-disabled);
+}
+
+.n-checkbox-button.n-checkbox-button--is-disabled:first-child .n-checkbox-button__inner {
+  border-left-color: var(--n-sys-border-color-disabled);
+}

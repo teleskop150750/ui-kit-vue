@@ -26,20 +26,20 @@ const {
 
 const ns = useNamespace('checkbox')
 
-const compKls = computed(() => [
+const rootClasses = computed(() => [
   ns.b(),
-  ns.m(checkboxSize.value),
+  ns.type('size', checkboxSize.value),
   ns.is('disabled', isDisabled.value),
   ns.is('bordered', props.border),
   ns.is('checked', isChecked.value),
 ])
 
-const spanKls = computed(() => [
+const inputClasses = computed(() => [
   ns.e('input'),
-  ns.is('disabled', isDisabled.value),
-  ns.is('checked', isChecked.value),
-  ns.is('indeterminate', props.indeterminate),
-  ns.is('focus', isFocused.value),
+  ns.eIs('input', 'disabled', isDisabled.value),
+  ns.eIs('input', 'checked', isChecked.value),
+  ns.eIs('input', 'indeterminate', props.indeterminate),
+  ns.eIs('input', 'focus', isFocused.value),
 ])
 </script>
 
@@ -52,12 +52,12 @@ export default {
 <template>
   <component
     :is="!hasOwnLabel && isLabeledByFormItem ? 'span' : 'label'"
-    :class="compKls"
+    :class="rootClasses"
     :aria-controls="indeterminate ? controls : null"
     @click="onClickRoot"
   >
     <span
-      :class="spanKls"
+      :class="inputClasses"
       :tabindex="indeterminate ? 0 : undefined"
       :role="indeterminate ? 'checkbox' : undefined"
       :aria-checked="indeterminate ? 'mixed' : undefined"
@@ -66,7 +66,7 @@ export default {
         v-if="trueLabel || falseLabel"
         :id="inputId"
         v-model="model"
-        :class="ns.e('original')"
+        :class="ns.e('native')"
         type="checkbox"
         :aria-hidden="indeterminate ? 'true' : 'false'"
         :name="name"
@@ -82,7 +82,7 @@ export default {
         v-else
         :id="inputId"
         v-model="model"
-        :class="ns.e('original')"
+        :class="ns.e('native')"
         type="checkbox"
         :aria-hidden="indeterminate ? 'true' : 'false'"
         :name="name"
@@ -101,3 +101,7 @@ export default {
     </span>
   </component>
 </template>
+
+<style>
+@import url('@nado/ui-kit-theme/src/components/n-checkbox/n-checkbox/index.css');
+</style>

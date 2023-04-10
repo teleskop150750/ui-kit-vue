@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { NButton } from '@nado/ui-kit-vue'
 import { getCurrentInstance } from 'vue'
-import { type Router, RouterLink, useRoute } from 'vue-router'
+import { type Router, useRoute } from 'vue-router'
 
 const instance = getCurrentInstance()!
 const router = instance.appContext.config.globalProperties.$router as Router
@@ -22,20 +23,8 @@ const routes = router
   <header>
     <div class="wrapper">
       <nav class="nav">
-        <RouterLink v-for="rI in routes" :key="rI.name" :to="rI">{{ rI.name }}</RouterLink>
+        <NButton v-for="rI in routes" :key="rI.name" :to="rI" mode="link">{{ rI.name }}</NButton>
       </nav>
-      <RouterLink
-        :to="{
-          path: route.path,
-
-          query: {
-            page: 1,
-            ...route.query,
-          },
-          hash: route.hash,
-        }"
-        >test</RouterLink
-      >
     </div>
   </header>
 
@@ -45,6 +34,7 @@ const routes = router
 <style>
 .nav {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 

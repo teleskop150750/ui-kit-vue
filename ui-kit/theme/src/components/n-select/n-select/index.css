@@ -8,7 +8,7 @@
     --n-comp-select-multiple-input-text-color: var(--n-sys-text-color-default);
     --n-comp-select-icon-color: var(--n-sys-color-secondary);
     --n-comp-select-icon-color-disabled: var(--n-sys-text-color-disabled);
-    --n-comp-select-close-color-hover: var(--n-sys-text-color-secondary);
+    --n-comp-select-close-color-hovered: var(--n-sys-text-color-secondary);
 
     position: relative;
 

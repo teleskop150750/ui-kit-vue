@@ -14,7 +14,7 @@ const slots = useSlots()
 
 const { isFocused, isChecked, isDisabled, checkboxButtonSize, model, handleChange } = useCheckbox(props, slots)
 const checkboxGroup = inject(CHECKBOX_GROUP_INJECTION_KEY, undefined)
-const ns = useNamespace('checkbox')
+const ns = useNamespace('checkbox-button')
 
 const activeStyle = computed<CSSProperties>(() => {
   const fillValue = checkboxGroup?.fill?.value ?? ''
@@ -28,8 +28,8 @@ const activeStyle = computed<CSSProperties>(() => {
 })
 
 const labelClasses = computed(() => [
-  ns.s('button'),
-  ns.sm('button', checkboxButtonSize.value),
+  ns.b(),
+  ns.m(checkboxButtonSize.value),
   ns.is('disabled', isDisabled.value),
   ns.is('checked', isChecked.value),
   ns.is('focus', isFocused.value),
@@ -47,7 +47,7 @@ export default {
     <input
       v-if="trueLabel || falseLabel"
       v-model="model"
-      :class="ns.se('button', 'original')"
+      :class="ns.e('native')"
       type="checkbox"
       :name="name"
       :tabindex="tabindex"
@@ -61,7 +61,7 @@ export default {
     <input
       v-else
       v-model="model"
-      :class="ns.se('button', 'original')"
+      :class="ns.e('native')"
       type="checkbox"
       :name="name"
       :tabindex="tabindex"
@@ -72,8 +72,12 @@ export default {
       @blur="isFocused = false"
     />
 
-    <span v-if="$slots.default || label" :class="ns.se('button', 'inner')" :style="isChecked ? activeStyle : undefined">
+    <span v-if="$slots.default || label" :class="ns.e('inner')" :style="isChecked ? activeStyle : undefined">
       <slot>{{ label }}</slot>
     </span>
   </label>
 </template>
+
+<style>
+@import url('@nado/ui-kit-theme/src/components/n-checkbox/n-checkbox-button/index.css');
+</style>

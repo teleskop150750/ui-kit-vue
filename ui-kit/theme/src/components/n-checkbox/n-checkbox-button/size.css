@@ -1,0 +1,23 @@
+.n-checkbox-button--size-small .n-checkbox-button__inner {
+  padding: 5px 11px;
+
+  font-size: 12px;
+
+  border-radius: 0;
+}
+
+.n-checkbox-button--size-large .n-checkbox-button__inner {
+  padding: 12px 19px;
+
+  font-size: var(--n-sys-text-size-base);
+
+  border-radius: 0;
+}
+
+.n-checkbox-button--size-large .n-checkbox-button__inner--is-round {
+  padding: 12px 19px;
+}
+
+.n-checkbox-button--size-small .n-checkbox-button__inner--is-round {
+  padding: 5px 11px;
+}

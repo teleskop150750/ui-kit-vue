@@ -1,5 +1,6 @@
 export * from './badge'
 export * from './button'
+export * from './checkbox'
 export * from './config-provider'
 export * from './focus-trap'
 export * from './form'

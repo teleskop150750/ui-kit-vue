@@ -68,3 +68,7 @@ export default {
     <slot />
   </component>
 </template>
+
+<style>
+@import url('@nado/ui-kit-theme/src/components/n-checkbox/n-checkbox-group/index.css');
+</style>

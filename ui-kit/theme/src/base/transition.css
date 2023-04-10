@@ -17,6 +17,9 @@
     /* color */
     --n-sys-transition-color: color var(--n-sys-transition-duration-fast)
       var(--n-sys-transition-function-ease-in-out-bezier);
+
+    /* ==== */
+    --n-sys-transition-all: all var(--n-sys-transition-duration) var(--n-sys-transition-function-ease-in-out-bezier);
   }
 }
 

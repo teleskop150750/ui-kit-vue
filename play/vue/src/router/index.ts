@@ -31,6 +31,11 @@ const router = createRouter({
       component: () => import('../views/RadioView.vue'),
     },
     {
+      path: '/checkbox',
+      name: 'checkbox',
+      component: () => import('../views/CheckboxView.vue'),
+    },
+    {
       path: '/form',
       name: 'form',
       component: () => import('../views/FormView.vue'),
