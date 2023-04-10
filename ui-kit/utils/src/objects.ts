@@ -3,7 +3,7 @@ import type { Entries } from 'type-fest'
 
 import type { Arrayable } from './typescript'
 
-export { get, set } from 'lodash-es'
+export { get, pick, set } from 'lodash-es'
 export { clone as cloneObject } from 'lodash-es'
 
 export function keysOf<T extends object>(arr: T): Array<keyof T> {
