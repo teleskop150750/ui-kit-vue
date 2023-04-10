@@ -8,21 +8,20 @@ import NRadioButton from '../src/NRadioButton.vue'
 import NRadioGroup from '../src/NRadioGroup.vue'
 import type { NRadioProps } from '../src/radio.model'
 
-// TODO: fix test Не работает клик по radio
 describe('Radio', () => {
-  // test('create', async () => {
-  //   const radio = ref('')
+  test('create', async () => {
+    const radio = ref('')
 
-  //   function handleClick() {
-  //     console.log('click')
-  //   }
-  //   const wrapper = mount(() => <NRadio v-model={radio.value} value="a" onClick={handleClick} />)
+    function handleClick() {
+      console.log('click')
+    }
+    const wrapper = mount(() => <NRadio v-model={radio.value} value="a" onClick={handleClick} />)
 
-  //   expect(wrapper.classes()).toContain('n-radio')
-  //   await wrapper.trigger('click')
+    expect(wrapper.classes()).toContain('n-radio')
+    await wrapper.find('input').setValue()
 
-  //   expect(wrapper.classes()).toContain('n-radio--is-checked')
-  // })
+    expect(wrapper.classes()).toContain('n-radio--is-checked')
+  })
 
   test('disabled', async () => {
     const radio = ref('')
@@ -41,19 +40,19 @@ describe('Radio', () => {
     expect(wrapper.classes()).toContain('n-radio--is-bordered')
   })
 
-  // test('change event', async () => {
-  //   const radio = ref('')
-  //   const changeData = ref<NRadioProps['modelValue']>('')
+  test('change event', async () => {
+    const radio = ref('')
+    const changeData = ref<NRadioProps['modelValue']>('')
 
-  //   function handleChange(val: NRadioProps['modelValue']) {
-  //     changeData.value = val
-  //   }
-  //   const wrapper = mount(() => <NRadio v-model={radio.value} value="3" onChange={handleChange} />)
+    function handleChange(val: NRadioProps['modelValue']) {
+      changeData.value = val
+    }
+    const wrapper = mount(() => <NRadio v-model={radio.value} value="3" onChange={handleChange} />)
 
-  //   await wrapper.trigger('click')
-  //   await nextTick()
-  //   expect(changeData.value).toEqual('3')
-  // })
+    await wrapper.find('input').setValue()
+    await nextTick()
+    expect(changeData.value).toEqual('3')
+  })
 
   test('change event only triggers on user input', async () => {
     const radio = ref('')
@@ -71,29 +70,29 @@ describe('Radio', () => {
 })
 
 describe('Radio group', () => {
-  // test('create', async () => {
-  //   const radio = ref(3)
-  //   const wrapper = mount(() => (
-  //     <NRadioGroup v-model={radio.value}>
-  //       <NRadio value={3} ref="radio1">
-  //         3
-  //       </NRadio>
-  //       <NRadio value={6} ref="radio2">
-  //         6
-  //       </NRadio>
-  //       <NRadio value={9}>9</NRadio>
-  //     </NRadioGroup>
-  //   ))
+  test('create', async () => {
+    const radio = ref(3)
+    const wrapper = mount(() => (
+      <NRadioGroup v-model={radio.value}>
+        <NRadio value={3} ref="radio1">
+          3
+        </NRadio>
+        <NRadio value={6} ref="radio2">
+          6
+        </NRadio>
+        <NRadio value={9}>9</NRadio>
+      </NRadioGroup>
+    ))
 
-  //   await nextTick()
-  //   const [radio1, radio2] = wrapper.findAll('.n-radio')
+    await nextTick()
+    const [radio1, radio2] = wrapper.findAll('.n-radio')
 
-  //   expect(radio1!.classes()).toContain('n-radio--is-checked')
-  //   await radio2!.trigger('click')
+    expect(radio1!.classes()).toContain('n-radio--is-checked')
+    await radio2!.find('input').setValue()
 
-  //   expect(radio2!.classes()).toContain('n-radio--is-checked')
-  //   expect(radio.value).toEqual(6)
-  // })
+    expect(radio2!.classes()).toContain('n-radio--is-checked')
+    expect(radio.value).toEqual(6)
+  })
 
   test('id auto derive', async () => {
     const radioValue1 = ref(3)
@@ -128,74 +127,74 @@ describe('Radio group', () => {
     expect(id1).not.toEqual(id2)
   })
 
-  // test('disabled', async () => {
-  //   const radio = ref(3)
-  //   const wrapper = mount(() => (
-  //     <NRadioGroup v-model={radio.value} disabled>
-  //       <NRadio value={3} ref="radio1">
-  //         3
-  //       </NRadio>
-  //       <NRadio value={6} ref="radio2">
-  //         6
-  //       </NRadio>
-  //       <NRadio value={9}>9</NRadio>
-  //     </NRadioGroup>
-  //   ))
+  test('disabled', async () => {
+    const radio = ref(3)
+    const wrapper = mount(() => (
+      <NRadioGroup v-model={radio.value} disabled>
+        <NRadio value={3} ref="radio1">
+          3
+        </NRadio>
+        <NRadio value={6} ref="radio2">
+          6
+        </NRadio>
+        <NRadio value={9}>9</NRadio>
+      </NRadioGroup>
+    ))
 
-  //   expect(wrapper.find('label.n-radio--is-disabled').exists()).toBe(true)
+    expect(wrapper.find('label.n-radio--is-disabled').exists()).toBe(true)
 
-  //   const [radio1, radio2] = wrapper.findAll('.el-radio')
+    const [radio1, radio2] = wrapper.findAll('.n-radio')
 
-  //   expect(radio1!.classes()).toContain('n-radio--is-checked')
-  //   await radio2!.trigger('click')
-  //   expect(radio.value).toEqual(3)
-  //   expect(radio1!.classes()).toContain('is-checked')
-  // })
-  // test('change event', async () => {
-  //   const radio = ref(3)
-  //   const data = ref<NRadioProps['modelValue']>(0)
+    expect(radio1!.classes()).toContain('n-radio--is-checked')
+    await radio2!.find('input').setValue()
+    expect(radio.value).toEqual(3)
+    expect(radio1!.classes()).toContain('n-radio--is-checked')
+  })
+  test('change event', async () => {
+    const radio = ref(3)
+    const data = ref<NRadioProps['modelValue']>(0)
 
-  //   function onChange(val: NRadioProps['modelValue']) {
-  //     console.log('val', val)
+    function onChange(val: NRadioProps['modelValue']) {
+      console.log('val', val)
 
-  //     data.value = val
-  //   }
-  //   const wrapper = mount(() => (
-  //     <NRadioGroup v-model={radio.value} onChange={onChange}>
-  //       <NRadio value={3}>3</NRadio>
-  //       <NRadio value={6} ref="radio2">
-  //         6
-  //       </NRadio>
-  //       <NRadio value={9}>9</NRadio>
-  //     </NRadioGroup>
-  //   ))
-  //   const radio2 = wrapper.findAll('.n-radio').at(1)!
+      data.value = val
+    }
+    const wrapper = mount(() => (
+      <NRadioGroup v-model={radio.value} onChange={onChange}>
+        <NRadio value={3}>3</NRadio>
+        <NRadio value={6} ref="radio2">
+          6
+        </NRadio>
+        <NRadio value={9}>9</NRadio>
+      </NRadioGroup>
+    ))
+    const radio2 = wrapper.findAll('.n-radio').at(1)!
 
-  //   await radio2?.trigger('click')
-  //   await nextTick()
-  //   expect(data.value).toEqual(6)
-  // })
-  // test('change event only triggers on user input', async () => {
-  //   const radio = ref(3)
-  //   const data = ref<NRadioProps['modelValue']>(0)
+    await radio2?.find('input').setValue()
+    await nextTick()
+    expect(data.value).toEqual(6)
+  })
+  test('change event only triggers on user input', async () => {
+    const radio = ref(3)
+    const data = ref<NRadioProps['modelValue']>(0)
 
-  //   function onChange(val: NRadioProps['modelValue']) {
-  //     data.value = val
-  //   }
-  //   mount(() => (
-  //     <NRadioGroup v-model={radio.value} onChange={onChange}>
-  //       <NRadio value={3}>3</NRadio>
-  //       <NRadio value={6} ref="radio2">
-  //         6
-  //       </NRadio>
-  //       <NRadio value={9}>9</NRadio>
-  //     </NRadioGroup>
-  //   ))
+    function onChange(val: NRadioProps['modelValue']) {
+      data.value = val
+    }
+    mount(() => (
+      <NRadioGroup v-model={radio.value} onChange={onChange}>
+        <NRadio value={3}>3</NRadio>
+        <NRadio value={6} ref="radio2">
+          6
+        </NRadio>
+        <NRadio value={9}>9</NRadio>
+      </NRadioGroup>
+    ))
 
-  //   radio.value = 6
-  //   await nextTick()
-  //   expect(data.value).toEqual(0)
-  // })
+    radio.value = 6
+    await nextTick()
+    expect(data.value).toEqual(0)
+  })
   test('disabled when children is radio button', async () => {
     const radio = ref(3)
     const wrapper = mount(() => (
