@@ -31,7 +31,7 @@ export function useCheckbox(props: NCheckboxProps, slots: ComponentInternalInsta
     disableIdGeneration: hasOwnLabel,
     disableIdManagement: isGroup,
   })
-  const { handleChange, onClickRoot } = useCheckboxEvent(props, {
+  const { handleChange, handleClickRoot } = useCheckboxEvent(props, {
     model,
     isLimitExceeded,
     hasOwnLabel,
@@ -52,6 +52,6 @@ export function useCheckbox(props: NCheckboxProps, slots: ComponentInternalInsta
     hasOwnLabel,
     model,
     handleChange,
-    onClickRoot,
+    handleClickRoot,
   }
 }

@@ -21,7 +21,7 @@ const {
   hasOwnLabel,
   model,
   handleChange,
-  onClickRoot,
+  handleClickRoot: onClickRoot,
 } = useCheckbox(props, slots)
 
 const ns = useNamespace('checkbox')
@@ -97,7 +97,6 @@ export default {
     </span>
     <span v-if="hasOwnLabel" :class="ns.e('label')">
       <slot />
-      <template v-if="!$slots.default">{{ val }}</template>
     </span>
   </component>
 </template>

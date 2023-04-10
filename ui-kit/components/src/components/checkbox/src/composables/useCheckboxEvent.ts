@@ -23,12 +23,12 @@ export function useCheckboxEvent(
   const { formItem } = useFormItem()
   const { emit } = getCurrentInstance()!
 
-  function getLabeledValue(value: string | number | boolean) {
+  function getValue(value: string | number | boolean) {
     return value === props.trueValue || value === true ? props.trueValue ?? true : props.falseValue ?? false
   }
 
   function emitChangeEvent(checked: string | number | boolean, e: InputEvent | MouseEvent) {
-    emit('change', getLabeledValue(checked), e)
+    emit('change', getValue(checked), e)
   }
 
   function handleChange(e: Event) {
@@ -38,10 +38,10 @@ export function useCheckboxEvent(
 
     const target = e.target as HTMLInputElement
 
-    emit('change', getLabeledValue(target.checked), e)
+    emit('change', getValue(target.checked), e)
   }
 
-  async function onClickRoot(e: MouseEvent) {
+  async function handleClickRoot(e: MouseEvent) {
     if (isLimitExceeded.value) {
       return
     }
@@ -52,7 +52,7 @@ export function useCheckboxEvent(
       const hasLabel = eventTargets.some((item) => (item as HTMLElement).tagName === 'LABEL')
 
       if (!hasLabel) {
-        model.value = getLabeledValue([false, props.falseValue].includes(model.value))
+        model.value = getValue([false, props.falseValue].includes(model.value))
         await nextTick()
         emitChangeEvent(model.value, e)
       }
@@ -72,6 +72,6 @@ export function useCheckboxEvent(
 
   return {
     handleChange,
-    onClickRoot,
+    handleClickRoot,
   }
 }
