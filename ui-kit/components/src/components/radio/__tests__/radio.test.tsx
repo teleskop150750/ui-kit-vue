@@ -15,10 +15,12 @@ describe('Radio', () => {
     function handleClick() {
       console.log('click')
     }
-    const wrapper = mount(() => <NRadio v-model={radio.value} value="a" onClick={handleClick} />)
+    const wrapper = mount(() => <NRadio v-model={radio.value} value="a" onClick={handleClick} />, {
+      attachTo: document.body,
+    })
 
     expect(wrapper.classes()).toContain('n-radio')
-    await wrapper.find('input').setValue()
+    await wrapper.trigger('click')
 
     expect(wrapper.classes()).toContain('n-radio--is-checked')
   })
@@ -26,7 +28,9 @@ describe('Radio', () => {
   test('disabled', async () => {
     const radio = ref('')
 
-    const wrapper = mount(() => <NRadio v-model={radio.value} value="3" disabled />)
+    const wrapper = mount(() => <NRadio v-model={radio.value} value="3" disabled />, {
+      attachTo: document.body,
+    })
 
     await wrapper.trigger('click')
     expect(radio.value).toBe('')
@@ -35,7 +39,9 @@ describe('Radio', () => {
 
   test('border', () => {
     const radio = ref('')
-    const wrapper = mount(() => <NRadio v-model={radio.value} value="3" border />)
+    const wrapper = mount(() => <NRadio v-model={radio.value} value="3" border />, {
+      attachTo: document.body,
+    })
 
     expect(wrapper.classes()).toContain('n-radio--is-bordered')
   })
@@ -47,9 +53,11 @@ describe('Radio', () => {
     function handleChange(val: NRadioProps['modelValue']) {
       changeData.value = val
     }
-    const wrapper = mount(() => <NRadio v-model={radio.value} value="3" onChange={handleChange} />)
+    const wrapper = mount(() => <NRadio v-model={radio.value} value="3" onChange={handleChange} />, {
+      attachTo: document.body,
+    })
 
-    await wrapper.find('input').setValue()
+    await wrapper.trigger('click')
     await nextTick()
     expect(changeData.value).toEqual('3')
   })
@@ -61,7 +69,9 @@ describe('Radio', () => {
     function handleChange(val: NRadioProps['modelValue']) {
       changeData.value = val
     }
-    mount(() => <NRadio v-model={radio.value} value="3" onChange={handleChange} />)
+    mount(() => <NRadio v-model={radio.value} value="3" onChange={handleChange} />, {
+      attachTo: document.body,
+    })
     radio.value = '3'
     await nextTick()
     expect(changeData.value).toEqual('')
@@ -72,23 +82,28 @@ describe('Radio', () => {
 describe('Radio group', () => {
   test('create', async () => {
     const radio = ref(3)
-    const wrapper = mount(() => (
-      <NRadioGroup v-model={radio.value}>
-        <NRadio value={3} ref="radio1">
-          3
-        </NRadio>
-        <NRadio value={6} ref="radio2">
-          6
-        </NRadio>
-        <NRadio value={9}>9</NRadio>
-      </NRadioGroup>
-    ))
+    const wrapper = mount(
+      () => (
+        <NRadioGroup v-model={radio.value}>
+          <NRadio value={3} ref="radio1">
+            3
+          </NRadio>
+          <NRadio value={6} ref="radio2">
+            6
+          </NRadio>
+          <NRadio value={9}>9</NRadio>
+        </NRadioGroup>
+      ),
+      {
+        attachTo: document.body,
+      },
+    )
 
     await nextTick()
     const [radio1, radio2] = wrapper.findAll('.n-radio')
 
     expect(radio1!.classes()).toContain('n-radio--is-checked')
-    await radio2!.find('input').setValue()
+    await radio2!.trigger('click')
 
     expect(radio2!.classes()).toContain('n-radio--is-checked')
     expect(radio.value).toEqual(6)
@@ -96,30 +111,40 @@ describe('Radio group', () => {
 
   test('id auto derive', async () => {
     const radioValue1 = ref(3)
-    const wrapper1 = mount(() => (
-      <NRadioGroup v-model={radioValue1.value}>
-        <NRadio value={3} ref="radio1">
-          3
-        </NRadio>
-        <NRadio value={6} ref="radio2">
-          6
-        </NRadio>
-        <NRadio value={9}>9</NRadio>
-      </NRadioGroup>
-    ))
+    const wrapper1 = mount(
+      () => (
+        <NRadioGroup v-model={radioValue1.value}>
+          <NRadio value={3} ref="radio1">
+            3
+          </NRadio>
+          <NRadio value={6} ref="radio2">
+            6
+          </NRadio>
+          <NRadio value={9}>9</NRadio>
+        </NRadioGroup>
+      ),
+      {
+        attachTo: document.body,
+      },
+    )
 
     const radioValue2 = ref(3)
-    const wrapper2 = mount(() => (
-      <NRadioGroup v-model={radioValue2.value}>
-        <NRadio value={3} ref="radio1">
-          3
-        </NRadio>
-        <NRadio value={6} ref="radio2">
-          6
-        </NRadio>
-        <NRadio value={9}>9</NRadio>
-      </NRadioGroup>
-    ))
+    const wrapper2 = mount(
+      () => (
+        <NRadioGroup v-model={radioValue2.value}>
+          <NRadio value={3} ref="radio1">
+            3
+          </NRadio>
+          <NRadio value={6} ref="radio2">
+            6
+          </NRadio>
+          <NRadio value={9}>9</NRadio>
+        </NRadioGroup>
+      ),
+      {
+        attachTo: document.body,
+      },
+    )
 
     const id1 = wrapper1.find('.n-radio').find('input').attributes('name')
     const id2 = wrapper2.find('.n-radio').find('input').attributes('name')
@@ -129,24 +154,29 @@ describe('Radio group', () => {
 
   test('disabled', async () => {
     const radio = ref(3)
-    const wrapper = mount(() => (
-      <NRadioGroup v-model={radio.value} disabled>
-        <NRadio value={3} ref="radio1">
-          3
-        </NRadio>
-        <NRadio value={6} ref="radio2">
-          6
-        </NRadio>
-        <NRadio value={9}>9</NRadio>
-      </NRadioGroup>
-    ))
+    const wrapper = mount(
+      () => (
+        <NRadioGroup v-model={radio.value} disabled>
+          <NRadio value={3} ref="radio1">
+            3
+          </NRadio>
+          <NRadio value={6} ref="radio2">
+            6
+          </NRadio>
+          <NRadio value={9}>9</NRadio>
+        </NRadioGroup>
+      ),
+      {
+        attachTo: document.body,
+      },
+    )
 
     expect(wrapper.find('label.n-radio--is-disabled').exists()).toBe(true)
 
     const [radio1, radio2] = wrapper.findAll('.n-radio')
 
     expect(radio1!.classes()).toContain('n-radio--is-checked')
-    await radio2!.find('input').setValue()
+    await radio2!.trigger('click')
     expect(radio.value).toEqual(3)
     expect(radio1!.classes()).toContain('n-radio--is-checked')
   })
@@ -159,18 +189,23 @@ describe('Radio group', () => {
 
       data.value = val
     }
-    const wrapper = mount(() => (
-      <NRadioGroup v-model={radio.value} onChange={onChange}>
-        <NRadio value={3}>3</NRadio>
-        <NRadio value={6} ref="radio2">
-          6
-        </NRadio>
-        <NRadio value={9}>9</NRadio>
-      </NRadioGroup>
-    ))
+    const wrapper = mount(
+      () => (
+        <NRadioGroup v-model={radio.value} onChange={onChange}>
+          <NRadio value={3}>3</NRadio>
+          <NRadio value={6} ref="radio2">
+            6
+          </NRadio>
+          <NRadio value={9}>9</NRadio>
+        </NRadioGroup>
+      ),
+      {
+        attachTo: document.body,
+      },
+    )
     const radio2 = wrapper.findAll('.n-radio').at(1)!
 
-    await radio2?.find('input').setValue()
+    await radio2?.trigger('click')
     await nextTick()
     expect(data.value).toEqual(6)
   })
@@ -181,15 +216,20 @@ describe('Radio group', () => {
     function onChange(val: NRadioProps['modelValue']) {
       data.value = val
     }
-    mount(() => (
-      <NRadioGroup v-model={radio.value} onChange={onChange}>
-        <NRadio value={3}>3</NRadio>
-        <NRadio value={6} ref="radio2">
-          6
-        </NRadio>
-        <NRadio value={9}>9</NRadio>
-      </NRadioGroup>
-    ))
+    mount(
+      () => (
+        <NRadioGroup v-model={radio.value} onChange={onChange}>
+          <NRadio value={3}>3</NRadio>
+          <NRadio value={6} ref="radio2">
+            6
+          </NRadio>
+          <NRadio value={9}>9</NRadio>
+        </NRadioGroup>
+      ),
+      {
+        attachTo: document.body,
+      },
+    )
 
     radio.value = 6
     await nextTick()
@@ -197,17 +237,22 @@ describe('Radio group', () => {
   })
   test('disabled when children is radio button', async () => {
     const radio = ref(3)
-    const wrapper = mount(() => (
-      <NRadioGroup v-model={radio.value} disabled>
-        <NRadioButton value={3} ref="radio1">
-          3
-        </NRadioButton>
-        <NRadioButton value={6} ref="radio2">
-          6
-        </NRadioButton>
-        <NRadioButton value={9}>9</NRadioButton>
-      </NRadioGroup>
-    ))
+    const wrapper = mount(
+      () => (
+        <NRadioGroup v-model={radio.value} disabled>
+          <NRadioButton value={3} ref="radio1">
+            3
+          </NRadioButton>
+          <NRadioButton value={6} ref="radio2">
+            6
+          </NRadioButton>
+          <NRadioButton value={9}>9</NRadioButton>
+        </NRadioGroup>
+      ),
+      {
+        attachTo: document.body,
+      },
+    )
 
     const [radio1, radio2] = wrapper.findAll('.n-radio-button')
 
@@ -222,17 +267,22 @@ describe('Radio group', () => {
 describe('Radio Button', () => {
   test.skip('create', async () => {
     const radio = ref(3)
-    const wrapper = mount(() => (
-      <NRadioGroup v-model={radio.value}>
-        <NRadioButton value={3} ref="radio1">
-          3
-        </NRadioButton>
-        <NRadioButton value={6} ref="radio2">
-          6
-        </NRadioButton>
-        <NRadioButton value={9}>9</NRadioButton>
-      </NRadioGroup>
-    ))
+    const wrapper = mount(
+      () => (
+        <NRadioGroup v-model={radio.value}>
+          <NRadioButton value={3} ref="radio1">
+            3
+          </NRadioButton>
+          <NRadioButton value={6} ref="radio2">
+            6
+          </NRadioButton>
+          <NRadioButton value={9}>9</NRadioButton>
+        </NRadioGroup>
+      ),
+      {
+        attachTo: document.body,
+      },
+    )
     const [radio1, radio2] = wrapper.findAll('.n-radio-button')
 
     expect(radio1!.classes()).toContain('n-radio-button--is-active')
@@ -240,29 +290,35 @@ describe('Radio Button', () => {
     expect(radio2!.classes()).toContain('n-radio-button--is-active')
     expect(radio.value).toEqual(6)
   })
-  // test('change event', async () => {
-  //   const radio = ref(3)
-  //   const data = ref<NRadioProps['modelValue']>(0)
+  test('change event', async () => {
+    const radio = ref(3)
+    const data = ref<NRadioProps['modelValue']>(0)
 
-  //   function onChange(val: NRadioProps['modelValue']) {
-  //     data.value = val
-  //   }
-  //   const wrapper = mount(() => (
-  //     <NRadioGroup v-model={radio.value} onChange={onChange}>
-  //       <NRadioButton value={3} ref="radio1">
-  //         3
-  //       </NRadioButton>
-  //       <NRadioButton value={6} ref="radio2">
-  //         6
-  //       </NRadioButton>
-  //       <NRadioButton value={9}>9</NRadioButton>
-  //     </NRadioGroup>
-  //   ))
-  //   const radio2 = wrapper.findAll('.n-radio-button').at(1)
+    function onChange(val: NRadioProps['modelValue']) {
+      data.value = val
+    }
 
-  //   await radio2?.trigger('click')
-  //   expect(radio.value).toEqual(6)
-  // })
+    const wrapper = mount(
+      () => (
+        <NRadioGroup v-model={radio.value} onChange={onChange}>
+          <NRadioButton value={3} ref="radio1">
+            3
+          </NRadioButton>
+          <NRadioButton value={6} ref="radio2">
+            6
+          </NRadioButton>
+          <NRadioButton value={9}>9</NRadioButton>
+        </NRadioGroup>
+      ),
+      {
+        attachTo: document.body,
+      },
+    )
+    const radio2 = wrapper.findAll('.n-radio-button').at(1)
+
+    await radio2?.trigger('click')
+    expect(radio.value).toEqual(6)
+  })
   test('change event only triggers on user input', async () => {
     const radio = ref(3)
     const data = ref<NRadioProps['modelValue']>(0)
@@ -270,17 +326,22 @@ describe('Radio Button', () => {
     function onChange(val: NRadioProps['modelValue']) {
       data.value = val
     }
-    mount(() => (
-      <NRadioGroup v-model={radio.value} onChange={onChange}>
-        <NRadioButton value={3} ref="radio1">
-          3
-        </NRadioButton>
-        <NRadioButton value={6} ref="radio2">
-          6
-        </NRadioButton>
-        <NRadioButton value={9}>9</NRadioButton>
-      </NRadioGroup>
-    ))
+    mount(
+      () => (
+        <NRadioGroup v-model={radio.value} onChange={onChange}>
+          <NRadioButton value={3} ref="radio1">
+            3
+          </NRadioButton>
+          <NRadioButton value={6} ref="radio2">
+            6
+          </NRadioButton>
+          <NRadioButton value={9}>9</NRadioButton>
+        </NRadioGroup>
+      ),
+      {
+        attachTo: document.body,
+      },
+    )
 
     radio.value = 6
     await nextTick()
@@ -289,31 +350,41 @@ describe('Radio Button', () => {
 
   test('size', () => {
     const radio = ref(3)
-    const wrapper = mount(() => (
-      <NRadioGroup v-model={radio.value} size="large">
-        <NRadioButton value={3} ref="radio1">
-          3
-        </NRadioButton>
-        <NRadioButton value={6} ref="radio2">
-          6
-        </NRadioButton>
-        <NRadioButton value={9}>9</NRadioButton>
-      </NRadioGroup>
-    ))
+    const wrapper = mount(
+      () => (
+        <NRadioGroup v-model={radio.value} size="large">
+          <NRadioButton value={3} ref="radio1">
+            3
+          </NRadioButton>
+          <NRadioButton value={6} ref="radio2">
+            6
+          </NRadioButton>
+          <NRadioButton value={9}>9</NRadioButton>
+        </NRadioGroup>
+      ),
+      {
+        attachTo: document.body,
+      },
+    )
 
     expect(wrapper.findAll('.n-radio-button--size-large').length).toBe(3)
   })
 
   describe('form item accessibility integration', () => {
     test('single radio group in form item', async () => {
-      const wrapper = mount(() => (
-        <NFormItem ref="item" label="Test">
-          <NRadioGroup ref="radioGroup">
-            <NRadio value="Foo" />
-            <NRadio value="Bar" />
-          </NRadioGroup>
-        </NFormItem>
-      ))
+      const wrapper = mount(
+        () => (
+          <NFormItem ref="item" label="Test">
+            <NRadioGroup ref="radioGroup">
+              <NRadio value="Foo" />
+              <NRadio value="Bar" />
+            </NRadioGroup>
+          </NFormItem>
+        ),
+        {
+          attachTo: document.body,
+        },
+      )
 
       await nextTick()
       const formItem = await wrapper.findComponent(NFormItem)
@@ -327,14 +398,19 @@ describe('Radio Button', () => {
     })
 
     test('single radio group in form item, override label', async () => {
-      const wrapper = mount(() => (
-        <NFormItem ref="item" label="Test">
-          <NRadioGroup label="Foo" ref="radioGroup">
-            <NRadio value="Foo" />
-            <NRadio value="Bar" />
-          </NRadioGroup>
-        </NFormItem>
-      ))
+      const wrapper = mount(
+        () => (
+          <NFormItem ref="item" label="Test">
+            <NRadioGroup label="Foo" ref="radioGroup">
+              <NRadio value="Foo" />
+              <NRadio value="Bar" />
+            </NRadioGroup>
+          </NFormItem>
+        ),
+        {
+          attachTo: document.body,
+        },
+      )
 
       await nextTick()
       const formItem = await wrapper.findComponent(NFormItem)
@@ -348,18 +424,23 @@ describe('Radio Button', () => {
     })
 
     test('multiple radio groups in form item', async () => {
-      const wrapper = mount(() => (
-        <NFormItem ref="item" label="Test">
-          <NRadioGroup label="Foo" ref="radioGroup1">
-            <NRadio value="Foo" />
-            <NRadio value="Bar" />
-          </NRadioGroup>
-          <NRadioGroup label="Bar" ref="radioGroup2">
-            <NRadio value="Foo" />
-            <NRadio value="Bar" />
-          </NRadioGroup>
-        </NFormItem>
-      ))
+      const wrapper = mount(
+        () => (
+          <NFormItem ref="item" label="Test">
+            <NRadioGroup label="Foo" ref="radioGroup1">
+              <NRadio value="Foo" />
+              <NRadio value="Bar" />
+            </NRadioGroup>
+            <NRadioGroup label="Bar" ref="radioGroup2">
+              <NRadio value="Foo" />
+              <NRadio value="Bar" />
+            </NRadioGroup>
+          </NFormItem>
+        ),
+        {
+          attachTo: document.body,
+        },
+      )
 
       await nextTick()
       const formItem = await wrapper.findComponent(NFormItem)
