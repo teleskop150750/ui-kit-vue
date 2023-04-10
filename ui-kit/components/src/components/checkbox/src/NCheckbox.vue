@@ -21,7 +21,7 @@ const {
   hasOwnLabel,
   model,
   handleChange,
-  handleClickRoot: onClickRoot,
+  handleClickRoot,
 } = useCheckbox(props, slots)
 
 const ns = useNamespace('checkbox')
@@ -54,7 +54,7 @@ export default {
     :is="!hasOwnLabel && isLabeledByFormItem ? 'span' : 'label'"
     :class="rootClasses"
     :aria-controls="indeterminate ? controls : null"
-    @click="onClickRoot"
+    @click="handleClickRoot"
   >
     <span
       :class="inputClasses"
@@ -97,6 +97,7 @@ export default {
     </span>
     <span v-if="hasOwnLabel" :class="ns.e('label')">
       <slot />
+      <template v-if="!$slots.default">{{ label }}</template>
     </span>
   </component>
 </template>

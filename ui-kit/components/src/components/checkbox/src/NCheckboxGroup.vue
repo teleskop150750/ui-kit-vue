@@ -19,7 +19,7 @@ const { inputId: groupId, isLabeledByFormItem } = useFormItemInputId(props, {
   formItemContext: formItem,
 })
 
-const changeEvent = async (value: CheckboxGroupValueType) => {
+async function changeEvent(value: CheckboxGroupValueType) {
   emit(UPDATE_MODEL_EVENT, value)
   await nextTick()
   emit('change', value)

@@ -43,7 +43,7 @@ export function useCheckboxStatus(
   )
   const checkboxSize = useFormSize(computed(() => checkboxGroup?.size?.value))
 
-  const hasOwnLabel = computed<boolean>(() => !!slots.default)
+  const hasOwnLabel = computed<boolean>(() => !!(slots.default || props.label))
 
   return {
     checkboxButtonSize,

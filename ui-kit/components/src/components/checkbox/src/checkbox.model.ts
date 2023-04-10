@@ -1,13 +1,13 @@
 import { UPDATE_MODEL_EVENT } from '@nado/ui-kit-constants'
 import { useSizeProp } from '@nado/ui-kit-hooks'
-import { isBoolean, isNumber, isString } from '@nado/ui-kit-utils'
+import { buildProps, isBoolean, isNumber, isString } from '@nado/ui-kit-utils'
 import type { ExtractPropTypes } from 'vue'
 
 import type Checkbox from './NCheckbox.vue'
 
 export type CheckboxValueType = string | number | boolean
 
-export const nCheckboxProps = {
+export const nCheckboxProps = buildProps({
   /**
    * @description binding value
    */
@@ -20,6 +20,7 @@ export const nCheckboxProps = {
    */
   val: {
     type: [String, Boolean, Number, Object],
+    default: undefined,
   },
   /**
    * @description Set indeterminate state, only responsible for style control
@@ -62,6 +63,12 @@ export const nCheckboxProps = {
     default: undefined,
   },
   /**
+   * @description label
+   */
+  label: {
+    type: String,
+  },
+  /**
    * @description same as [aria-controls](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-controls), takes effect when `indeterminate` is `true`
    */
   controls: {
@@ -79,7 +86,9 @@ export const nCheckboxProps = {
   /**
    * @description input tabindex
    */
-  tabindex: [String, Number],
+  tabindex: {
+    type: [String, Number],
+  },
   /**
    * @description whether to trigger form validation
    */
@@ -87,7 +96,7 @@ export const nCheckboxProps = {
     type: Boolean,
     default: true,
   },
-}
+} as const)
 
 export const nCheckboxEmits = {
   [UPDATE_MODEL_EVENT]: (val: CheckboxValueType) => isString(val) || isNumber(val) || isBoolean(val),
