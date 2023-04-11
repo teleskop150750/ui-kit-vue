@@ -239,7 +239,7 @@ export default {
     <div :class="ns.e('content')">
       <slot />
     </div>
-    <div :class="ns.e('derail')">
+    <div :class="ns.e('detail')">
       <div v-if="shouldShowHint" :class="[ns.e('message'), ns.eType('message', 'type', 'hint')]">
         <div :class="ns.e('message-text')">
           {{ hint }}
