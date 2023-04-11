@@ -20,14 +20,14 @@ function setStoreValue(props: NCheckboxProps, { model }: Pick<CheckboxModel, 'mo
 }
 
 export function useCheckbox(props: NCheckboxProps, slots: ComponentInternalInstance['slots']) {
-  const { formItem: elFormItem } = useFormItem()
+  const { formItem } = useFormItem()
   const { model, isGroup, isLimitExceeded } = useCheckboxModel(props)
   const { isFocused, isChecked, checkboxButtonSize, checkboxSize, hasOwnLabel } = useCheckboxStatus(props, slots, {
     model,
   })
   const { isDisabled } = useCheckboxDisabled({ model, isChecked })
   const { inputId, isLabeledByFormItem } = useFormItemInputId(props, {
-    formItemContext: elFormItem,
+    formItemContext: formItem,
     disableIdGeneration: hasOwnLabel,
     disableIdManagement: isGroup,
   })
