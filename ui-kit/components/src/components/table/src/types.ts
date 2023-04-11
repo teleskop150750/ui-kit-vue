@@ -1,3 +1,4 @@
+import type { NTableColumnSortOrder } from './hooks/useTableSort'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type NTableRowVal = any
 export type NTableRow = Record<string, NTableRowVal>
@@ -13,9 +14,12 @@ export interface NTableColumn {
   required?: boolean
   align?: 'left' | 'right' | 'center'
   sortable?: boolean
-  sort?: (a: NTableRowVal, b: NTableRowVal, rowA: NTableRow, rowB: NTableRow) => number
+  sortOrder?: NTableColumnSortOrder
   format?: (val: NTableRowVal, row: NTableRow) => string | number
 }
+
+export type NTableColumnInner = NTableColumn &
+  Required<Pick<NTableColumn, 'align' | 'sortable' | 'sortOrder' | 'required'>>
 
 export type NTableColumnMap = Record<string, NTableColumn>
 
@@ -28,4 +32,13 @@ export interface SlotData {
 
 export interface BodyCellScopeData extends SlotData {
   value: NTableRowCellVal
+}
+
+export interface NTableRequest {
+  sort: {
+    name: string
+    order: 'ASC' | 'DESC'
+  }[]
+  page: number
+  limit: number
 }

@@ -4,18 +4,20 @@ import { ref } from 'vue'
 
 const isBody = ref(false)
 
-const columns: NTableColumn[] = [
+const columns = ref<NTableColumn[]>([
   {
     field: 'id',
     label: 'id',
     name: 'id',
+    sortable: true,
   },
   {
     field: 'name',
     label: 'name',
     name: 'name',
+    sortable: true,
   },
-]
+])
 
 const rows = [
   {
@@ -36,7 +38,7 @@ const rows = [
     <hr />
 
     <div>
-      <NTable :columns="columns" :rows="rows">
+      <NTable v-model:columns="columns" :rows="rows">
         <template #body-cell-name>
           <NTd>
             <div class="my-table-details">1</div>

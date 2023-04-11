@@ -1,20 +1,104 @@
-<script lang="ts" setup>
+<script setup lang="tsx">
 import { useNamespace } from '@nado/ui-kit-hooks'
+import { NIconSort, NIconSortDown, NIconSortUp } from '@nado/ui-kit-icons-vue'
+import { hSlot, hUniqueSlot } from '@nado/ui-kit-utils'
+import { computed, getCurrentInstance, useSlots } from 'vue'
 
-import { nThProps } from './th.model'
+import { nThEmits, nThProps } from './th.model'
 
-defineProps(nThProps)
-const ns = useNamespace('table')
+const props = defineProps(nThProps)
+const emit = defineEmits(nThEmits)
+
+const slots = useSlots()
+const ns = useNamespace('th')
+const instance = getCurrentInstance()!
+
+const col = computed(() => {
+  if (!props.options) {
+    return undefined
+  }
+
+  const name = instance.vnode.key as string | null
+  const col = name ? props.options.colsMap[name] : props.options.col
+
+  return col
+})
+
+const SortIcon = computed(() => {
+  if (!col.value || !col.value.sortable) {
+    return undefined
+  }
+
+  if (col.value.sortOrder === 'ASC') {
+    return NIconSortUp
+  }
+
+  if (col.value.sortOrder === 'DESC') {
+    return NIconSortDown
+  }
+
+  return NIconSort
+})
+
+function handleClick(event: MouseEvent) {
+  emit('click', event)
+}
+
+function handleSort(event: MouseEvent) {
+  if (col.value && props.options) {
+    const { options } = props
+    const { sort } = options
+
+    col.value!.sortable === true && sort(col.value)
+  }
+
+  emit('click', event)
+}
+
+const Th = () => {
+  if (props.options === undefined) {
+    return (
+      <th class={ns.b()} onClick={handleClick}>
+        <div class={ns.e('inner')}>{hSlot(slots.default)}</div>
+      </th>
+    )
+  }
+
+  if (!col.value) {
+    return undefined
+  }
+
+  let child = undefined
+
+  if (col.value.sortable === true && SortIcon.value) {
+    child = hUniqueSlot(slots.default, [])
+    child.push(
+      <span class={ns.e('sort')}>
+        <SortIcon.value class={ns.e('sort-icon')} />
+      </span>,
+    )
+  } else {
+    child = hSlot(slots.default)
+  }
+
+  return (
+    <th class={ns.b()} onClick={handleSort}>
+      <div class={ns.e('inner')}>{child}</div>
+    </th>
+  )
+}
 </script>
 
-<script lang="ts">
+<script lang="tsx">
 export default {
   name: 'NTh',
 }
 </script>
 
 <template>
-  <th :class="ns.e('th')">
-    <slot />
-  </th>
+  <Th />
 </template>
+
+<style>
+@import url('@nado/ui-kit-theme/src/components/n-table/n-th/index.css');
+</style>

@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import { NPagination } from '@nado/ui-kit-vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 
+const page = ref(10)
 const router = useRoute()
 </script>
 
@@ -15,7 +17,8 @@ const router = useRoute()
   </div>
   <div class="example-pagination-block">
     <div class="example-demonstration">[Button] page-count</div>
-    <NPagination :page-count="100" />
+    <div class="example-demonstration">[Button] current-count | {{ page }}</div>
+    <NPagination v-model:current-page="page" :page-count="100" />
   </div>
   <div class="example-pagination-block">
     <div class="example-demonstration">[number] page-count</div>

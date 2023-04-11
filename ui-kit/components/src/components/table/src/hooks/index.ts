@@ -1,1 +1,1 @@
-export * from './use-table-column'
+export * from './useTableColumn'

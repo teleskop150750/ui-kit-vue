@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script lang="tsx" setup>
 import { useNamespace } from '@nado/ui-kit-hooks'
 
 import { nTdProps } from './td.model'
@@ -7,7 +7,7 @@ defineProps(nTdProps)
 const ns = useNamespace('table')
 </script>
 
-<script lang="ts">
+<script lang="tsx">
 export default {
   name: 'NTd',
 }
