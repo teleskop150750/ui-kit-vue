@@ -3,7 +3,7 @@ import { buildProps, definePropType } from '@nado/ui-kit-utils'
 import type Trigger from './NPopperTrigger.vue'
 import type { Measurable } from './tokens'
 
-export const popperTriggerProps = buildProps({
+export const nPopperTriggerProps = buildProps({
   virtualRef: {
     type: definePropType<Measurable>(Object),
   },
@@ -33,12 +33,6 @@ export const popperTriggerProps = buildProps({
   open: Boolean,
 } as const)
 
-export type PopperTriggerProps = typeof popperTriggerProps
+export type NPopperTriggerProps = typeof nPopperTriggerProps
 
-export type PopperTriggerInstance = InstanceType<typeof Trigger>
-
-/** @deprecated use `popperTriggerProps` instead, and it will be deprecated in the next major version */
-export const usePopperTriggerProps = popperTriggerProps
-
-/** @deprecated use `PopperTriggerInstance` instead, and it will be deprecated in the next major version */
-export type ElPopperArrowTrigger = PopperTriggerInstance
+export type NPopperTriggerInstance = InstanceType<typeof Trigger>

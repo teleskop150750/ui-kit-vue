@@ -2,10 +2,10 @@
 import type { Instance as PopperInstance } from '@popperjs/core'
 import { computed, provide, ref } from 'vue'
 
-import { popperProps } from './popper.model'
-import { type ElPopperInjectionContext, POPPER_INJECTION_KEY } from './tokens'
+import { nPopperProps } from './popper.model'
+import { type NPopperInjectionContext, POPPER_INJECTION_KEY } from './tokens'
 
-const props = defineProps(popperProps)
+const props = defineProps(nPopperProps)
 
 const triggerRef = ref<HTMLElement>()
 const popperInstanceRef = ref<PopperInstance>()
@@ -14,27 +14,12 @@ const referenceRef = ref<HTMLElement>()
 const role = computed(() => props.role)
 
 const popperProvides = {
-  /**
-   * @description trigger element
-   */
   triggerRef,
-  /**
-   * @description popperjs instance
-   */
   popperInstanceRef,
-  /**
-   * @description popper content element
-   */
   contentRef,
-  /**
-   * @description popper reference element
-   */
   referenceRef,
-  /**
-   * @description role determines how aria attributes are distributed
-   */
   role,
-} as ElPopperInjectionContext
+} as NPopperInjectionContext
 
 defineExpose(popperProvides)
 

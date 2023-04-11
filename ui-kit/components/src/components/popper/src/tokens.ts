@@ -10,7 +10,7 @@ export interface Measurable {
  * contentRef indicates the element of popper content
  * referenceRef indicates the element that popper content relative with
  */
-export interface ElPopperInjectionContext {
+export interface NPopperInjectionContext {
   triggerRef: Ref<Measurable | undefined>
   contentRef: Ref<HTMLElement | undefined>
   popperInstanceRef: Ref<Instance | undefined>
@@ -24,6 +24,6 @@ export interface ElPopperContentInjectionContext {
   arrowStyle: ComputedRef<CSSProperties>
 }
 
-export const POPPER_INJECTION_KEY: InjectionKey<ElPopperInjectionContext> = Symbol('popper')
+export const POPPER_INJECTION_KEY: InjectionKey<NPopperInjectionContext> = Symbol('popper')
 
 export const POPPER_CONTENT_INJECTION_KEY: InjectionKey<ElPopperContentInjectionContext> = Symbol('popperContent')

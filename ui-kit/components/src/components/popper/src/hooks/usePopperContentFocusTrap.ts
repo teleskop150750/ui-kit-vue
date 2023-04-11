@@ -1,10 +1,10 @@
 import { ref, type SetupContext } from 'vue'
 
-import type { PopperContentEmits, PopperContentProps } from '../popper-content.model'
+import type { NPopperContentEmits, PopperContentProps } from '../popper-content.model'
 
 export const usePopperContentFocusTrap = (
   props: PopperContentProps,
-  emit: SetupContext<PopperContentEmits>['emit'],
+  emit: SetupContext<NPopperContentEmits>['emit'],
 ) => {
   const trapped = ref(false)
   const focusStartRef = ref<'container' | 'first' | HTMLElement>()

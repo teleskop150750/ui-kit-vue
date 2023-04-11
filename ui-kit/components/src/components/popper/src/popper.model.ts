@@ -16,7 +16,7 @@ export const roleTypes = ['dialog', 'grid', 'group', 'listbox', 'menu', 'navigat
 export type PopperEffect = (typeof effects)[number]
 export type PopperTrigger = (typeof triggers)[number]
 
-export const popperProps = buildProps({
+export const nPopperProps = buildProps({
   role: {
     type: String,
     values: roleTypes,
@@ -24,12 +24,6 @@ export const popperProps = buildProps({
   },
 } as const)
 
-export type PopperProps = ExtractPropTypes<typeof popperProps>
+export type NPopperProps = ExtractPropTypes<typeof nPopperProps>
 
-export type PopperInstance = InstanceType<typeof Popper>
-
-/** @deprecated use `popperProps` instead, and it will be deprecated in the next major version */
-export const usePopperProps = popperProps
-
-/** @deprecated use `PopperProps` instead, and it will be deprecated in the next major version */
-export type UsePopperProps = PopperProps
+export type NPopperInstance = InstanceType<typeof Popper>

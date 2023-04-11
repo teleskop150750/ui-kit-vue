@@ -4,10 +4,10 @@ import { isElement, isNil } from '@nado/ui-kit-utils'
 import { unrefElement } from '@vueuse/core'
 import { computed, inject, onBeforeUnmount, onMounted, watch, type WatchStopHandle } from 'vue'
 
-import { popperTriggerProps } from './popper-trigger.model'
+import { nPopperTriggerProps } from './popper-trigger.model'
 import { POPPER_INJECTION_KEY } from './tokens'
 
-const props = defineProps(popperTriggerProps)
+const props = defineProps(nPopperTriggerProps)
 
 const { role, triggerRef } = inject(POPPER_INJECTION_KEY, undefined)!
 
@@ -94,9 +94,6 @@ onBeforeUnmount(() => {
 })
 
 defineExpose({
-  /**
-   * @description trigger element
-   */
   triggerRef,
 })
 </script>

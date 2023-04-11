@@ -105,22 +105,9 @@ onBeforeUnmount(() => {
 })
 
 defineExpose({
-  /**
-   * @description popper content element
-   */
   popperContentRef: contentRef,
-  /**
-   * @description popperjs instance
-   */
   popperInstanceRef: instanceRef,
-  /**
-   * @description method for updating popper
-   */
   updatePopper,
-
-  /**
-   * @description content style
-   */
   contentStyle,
 })
 </script>
