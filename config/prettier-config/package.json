@@ -6,8 +6,5 @@
   "main": "index.cjs",
   "publishConfig": {
     "access": "public"
-  },
-  "peerDependencies": {
-    "prettier": "^2.5.1"
   }
 }

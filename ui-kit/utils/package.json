@@ -39,7 +39,6 @@
     "expect-type": "^0.15.0",
     "jsdom": "^21.1.1",
     "lodash-es": "^4.17.21",
-    "prettier": "^2.8.7",
     "type-fest": "^3.8.0",
     "vitest": "^0.29.8",
     "vue": "^3.2.47",
