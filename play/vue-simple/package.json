@@ -7,7 +7,7 @@
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit -p ./tsconfig.app.json --composite false",
+    "type-check": "vue-tsc --noEmit -p ./tsconfig.vitest.json --composite false",
     "prettier": "prettier --check --ignore-unknown \"**/*\"",
     "prettier:fix": "prettier --write --ignore-unknown \"**/*\"",
     "eslint": "eslint \"**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,json,vue}\"",

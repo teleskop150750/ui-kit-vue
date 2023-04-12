@@ -1,5 +1,5 @@
 {
-  "extends": "@nado/tsconfig/tsconfig.json",
+  "extends": "@nado/tsconfig/tsconfig.web.json",
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "compilerOptions": {
     "outDir": "./dist",

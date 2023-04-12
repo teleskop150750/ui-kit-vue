@@ -8,7 +8,7 @@
   "module": "./src/components/index.ts",
   "types": "./src/components/index.ts",
   "scripts": {
-    "type-check": "vue-tsc --noEmit -p ./tsconfig.app.json --composite false",
+    "type-check": "vue-tsc --noEmit -p ./tsconfig.vitest.json --composite false",
     "test": "pnpm run test:unit:run",
     "test:unit": "vitest",
     "test:unit:ui": "vitest --ui",
