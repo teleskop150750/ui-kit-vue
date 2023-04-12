@@ -31,6 +31,9 @@ importers:
       typescript:
         specifier: ^5.0.4
         version: 5.0.4
+      vite:
+        specifier: ^4.2.1
+        version: 4.2.1(@types/node@18.15.11)
 
   config/eslint-config-base-ts:
     dependencies:
@@ -297,9 +300,6 @@ importers:
       storybook-addon-themes:
         specifier: ^6.1.0
         version: 6.1.0(react-dom@18.2.0)(react@18.2.0)(vue@3.2.47)
-      vite:
-        specifier: ^4.2.1
-        version: 4.2.1(@types/node@18.15.11)
       vue-tsc:
         specifier: ^1.2.0
         version: 1.2.0(typescript@5.0.4)
@@ -361,9 +361,6 @@ importers:
       stylelint:
         specifier: ^15.4.0
         version: 15.4.0
-      vite:
-        specifier: ^4.2.1
-        version: 4.2.1(@types/node@18.15.11)
       vue-tsc:
         specifier: ^1.2.0
         version: 1.2.0(typescript@5.0.4)
@@ -406,9 +403,6 @@ importers:
       prettier:
         specifier: ^2.8.7
         version: 2.8.7
-      vite:
-        specifier: ^4.2.1
-        version: 4.2.1(@types/node@18.15.11)
       vitest:
         specifier: ^0.29.8
         version: 0.29.8(@vitest/ui@0.29.8)(jsdom@21.1.1)
@@ -475,9 +469,6 @@ importers:
       start-server-and-test:
         specifier: ^2.0.0
         version: 2.0.0
-      vite:
-        specifier: ^4.2.1
-        version: 4.2.1(@types/node@18.15.11)
       vitest:
         specifier: ^0.29.8
         version: 0.29.8(@vitest/ui@0.29.8)(jsdom@21.1.1)
@@ -538,9 +529,6 @@ importers:
       unbuild:
         specifier: ^1.2.0
         version: 1.2.0
-      vite:
-        specifier: ^4.2.1
-        version: 4.2.1(@types/node@18.15.11)
       vitest:
         specifier: ^0.29.8
         version: 0.29.8(@vitest/ui@0.29.8)(jsdom@21.1.1)
@@ -633,9 +621,6 @@ importers:
       stylelint:
         specifier: ^15.4.0
         version: 15.4.0
-      vite:
-        specifier: ^4.2.1
-        version: 4.2.1(@types/node@18.15.11)
       vue-tsc:
         specifier: ^1.2.0
         version: 1.2.0(typescript@5.0.4)
@@ -694,9 +679,6 @@ importers:
       stylelint:
         specifier: ^15.4.0
         version: 15.4.0
-      vite:
-        specifier: ^4.2.1
-        version: 4.2.1(@types/node@18.15.11)
       vue-tsc:
         specifier: ^1.2.0
         version: 1.2.0(typescript@5.0.4)
@@ -803,9 +785,6 @@ importers:
       type-fest:
         specifier: ^3.8.0
         version: 3.8.0
-      vite:
-        specifier: ^4.2.1
-        version: 4.2.1(@types/node@18.15.11)
       vitest:
         specifier: ^0.29.8
         version: 0.29.8(@vitest/ui@0.29.8)(jsdom@21.1.1)
@@ -907,9 +886,6 @@ importers:
       type-fest:
         specifier: ^3.8.0
         version: 3.8.0
-      vite:
-        specifier: ^4.2.1
-        version: 4.2.1(@types/node@18.15.11)
       vitest:
         specifier: ^0.29.8
         version: 0.29.8(@vitest/ui@0.29.8)(jsdom@21.1.1)
@@ -983,9 +959,6 @@ importers:
       prettier:
         specifier: ^2.8.7
         version: 2.8.7
-      vite:
-        specifier: ^4.2.1
-        version: 4.2.1(@types/node@18.15.11)
       vitest:
         specifier: ^0.29.8
         version: 0.29.8(@vitest/ui@0.29.8)(jsdom@21.1.1)
@@ -1076,9 +1049,6 @@ importers:
       tsx:
         specifier: ^3.12.6
         version: 3.12.6
-      vite:
-        specifier: ^4.2.1
-        version: 4.2.1(@types/node@18.15.11)
       vitest:
         specifier: ^0.29.8
         version: 0.29.8(@vitest/ui@0.29.8)(jsdom@21.1.1)
@@ -1272,9 +1242,6 @@ importers:
       prettier:
         specifier: ^2.8.7
         version: 2.8.7
-      vite:
-        specifier: ^4.2.1
-        version: 4.2.1(@types/node@18.15.11)
       vue-tsc:
         specifier: ^1.2.0
         version: 1.2.0(typescript@5.0.4)
@@ -1345,9 +1312,6 @@ importers:
       type-fest:
         specifier: ^3.8.0
         version: 3.8.0
-      vite:
-        specifier: ^4.2.1
-        version: 4.2.1(@types/node@18.15.11)
       vitest:
         specifier: ^0.29.8
         version: 0.29.8(@vitest/ui@0.29.8)(jsdom@21.1.1)

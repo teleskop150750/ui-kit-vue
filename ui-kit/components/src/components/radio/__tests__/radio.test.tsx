@@ -12,10 +12,7 @@ describe('Radio', () => {
   test('create', async () => {
     const radio = ref('')
 
-    function handleClick() {
-      console.log('click')
-    }
-    const wrapper = mount(() => <NRadio v-model={radio.value} value="a" onClick={handleClick} />, {
+    const wrapper = mount(() => <NRadio v-model={radio.value} value="a" />, {
       attachTo: document.body,
     })
 
@@ -185,8 +182,6 @@ describe('Radio group', () => {
     const data = ref<NRadioProps['modelValue']>(0)
 
     function onChange(val: NRadioProps['modelValue']) {
-      console.log('val', val)
-
       data.value = val
     }
     const wrapper = mount(
