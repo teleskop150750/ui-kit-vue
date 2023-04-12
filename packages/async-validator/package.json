@@ -9,10 +9,11 @@
   "types": "./src/index.ts",
   "scripts": {
     "type-check": "tsc --noEmit -p ./tsconfig.json --composite false",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
-    "test:run": "vitest run",
-    "test:coverage": "vitest run --coverage",
+    "test": "pnpm run test:unit:run",
+    "test:unit": "vitest",
+    "test:unit:ui": "vitest --ui",
+    "test:unit:run": "vitest run",
+    "test:unit:coverage": "vitest run --coverage",
     "prettier": "prettier --check --ignore-unknown \"**/*\"",
     "prettier:fix": "prettier --write --ignore-unknown \"**/*\"",
     "eslint": "eslint \"**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,json,vue}\"",
@@ -28,7 +29,6 @@
     "@vitest/coverage-c8": "^0.29.8",
     "@vitest/ui": "^0.29.8",
     "jsdom": "^21.1.1",
-    "npm-run-all": "^4.1.5",
-    "vitest": "^0.29.8"
+    "npm-run-all": "^4.1.5"
   }
 }

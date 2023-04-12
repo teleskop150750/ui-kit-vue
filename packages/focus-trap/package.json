@@ -13,8 +13,7 @@
     "clean": "rimraf dist",
     "dts": "tsc -p tsconfig.app.json --outDir dist/types --declaration --emitDeclarationOnly --composite false",
     "type-check": "tsc --noEmit -p ./tsconfig.app.json --composite false",
-    "cypress": "start-server-and-test dev 5173 'cypress open'",
-    "test:ci": "cypress run --browser electron",
+    "test": "pnpm run test:e2e",
     "test:e2e": "pnpm build && ELECTRON_ENABLE_LOGGING=1 cypress run --browser electron",
     "test:e2e:dev": "pnpm build && cypress open",
     "prettier": "prettier --check --ignore-unknown \"**/*\"",
@@ -40,7 +39,6 @@
     "jsdom": "^21.1.1",
     "npm-run-all": "^4.1.5",
     "rimraf": "^4.4.1",
-    "start-server-and-test": "^2.0.0",
-    "vitest": "^0.29.8"
+    "start-server-and-test": "^2.0.0"
   }
 }

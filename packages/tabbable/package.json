@@ -13,9 +13,12 @@
     "clean": "rimraf dist",
     "dts": "tsc -p tsconfig.app.json --outDir dist/types --declaration --emitDeclarationOnly --composite false",
     "type-check": "tsc --noEmit -p ./tsconfig.app.json --composite false",
-    "test:ui": "vitest --ui",
-    "test:run": "vitest run",
-    "test:e2e": "ELECTRON_ENABLE_LOGGING=1 cypress run",
+    "test": "pnpm run test:unit:run && pnpm run test:e2e",
+    "test:unit": "vitest",
+    "test:unit:ui": "vitest --ui",
+    "test:unit:run": "vitest run",
+    "test:unit:coverage": "vitest run --coverage",
+    "test:e2e": "ELECTRON_ENABLE_LOGGING=1 cypress run --browser electron",
     "test:e2e:dev": "cypress open",
     "prettier": "prettier --check --ignore-unknown \"**/*\"",
     "prettier:fix": "prettier --write --ignore-unknown \"**/*\"",
@@ -38,7 +41,6 @@
     "npm-run-all": "^4.1.5",
     "rimraf": "^4.4.1",
     "start-server-and-test": "^2.0.0",
-    "unbuild": "^1.2.0",
-    "vitest": "^0.29.8"
+    "unbuild": "^1.2.0"
   }
 }
