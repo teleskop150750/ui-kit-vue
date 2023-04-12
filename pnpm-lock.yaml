@@ -19,6 +19,9 @@ importers:
       editorconfig-checker:
         specifier: ^5.0.1
         version: 5.0.1
+      eslint:
+        specifier: ^8.38.0
+        version: 8.38.0
       husky:
         specifier: ^8.0.3
         version: 8.0.3
@@ -46,6 +49,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^5.57.1
         version: 5.57.1(eslint@8.38.0)(typescript@5.0.3)
+      eslint:
+        specifier: '>=8.20.0'
+        version: 8.38.0
       eslint-import-resolver-typescript:
         specifier: ^3.5.5
         version: 3.5.5(@typescript-eslint/parser@5.57.1)(eslint-plugin-import@2.27.5)(eslint@8.38.0)
@@ -56,15 +62,15 @@ importers:
         specifier: '>=4.9'
         version: 5.0.3
     devDependencies:
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       prettier:
         specifier: ^2.8.7
         version: 2.8.7
 
   config/eslint-config-basic:
     dependencies:
+      eslint:
+        specifier: '>=8.20.0'
+        version: 8.38.0
       eslint-config-airbnb-base:
         specifier: ^15.0.0
         version: 15.0.0(eslint-plugin-import@2.27.5)(eslint@8.38.0)
@@ -110,16 +116,15 @@ importers:
       yaml-eslint-parser:
         specifier: ^1.2.0
         version: 1.2.0
-    devDependencies:
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
 
   config/eslint-config-ts:
     dependencies:
       '@nado/eslint-config-basic-ts':
         specifier: workspace:*
         version: link:../eslint-config-base-ts
+      eslint:
+        specifier: '>=8.20.0'
+        version: 8.38.0
       eslint-config-prettier:
         specifier: ^8.8.0
         version: 8.8.0(eslint@8.38.0)
@@ -130,9 +135,6 @@ importers:
         specifier: '>=4.9'
         version: 5.0.3
     devDependencies:
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       prettier:
         specifier: ^2.8.7
         version: 2.8.7
@@ -145,6 +147,9 @@ importers:
       '@nado/eslint-config-basic-ts':
         specifier: workspace:*
         version: link:../eslint-config-base-ts
+      eslint:
+        specifier: '>=8.20.0'
+        version: 8.38.0
       eslint-config-prettier:
         specifier: ^8.8.0
         version: 8.8.0(eslint@8.38.0)
@@ -155,9 +160,6 @@ importers:
         specifier: ^9.10.0
         version: 9.10.0(eslint@8.38.0)
     devDependencies:
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       prettier:
         specifier: ^2.8.7
         version: 2.8.7
@@ -273,9 +275,6 @@ importers:
       '@vue/eslint-config-typescript':
         specifier: ^11.0.2
         version: 11.0.2(eslint-plugin-vue@9.10.0)(eslint@8.38.0)(typescript@5.0.4)
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       eslint-plugin-storybook:
         specifier: ^0.6.11
         version: 0.6.11(eslint@8.38.0)(typescript@5.0.4)
@@ -346,9 +345,6 @@ importers:
       '@vitejs/plugin-vue-jsx':
         specifier: ^3.0.1
         version: 3.0.1(vite@4.2.1)(vue@3.2.47)
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       histoire:
         specifier: ^0.15.9
         version: 0.15.9(@types/node@18.15.11)(vite@4.2.1)
@@ -391,9 +387,6 @@ importers:
       '@vitest/ui':
         specifier: ^0.29.8
         version: 0.29.8
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       jsdom:
         specifier: ^21.1.1
         version: 21.1.1
@@ -448,9 +441,6 @@ importers:
       cypress-plugin-tab:
         specifier: ^1.0.5
         version: 1.0.5
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       eslint-plugin-cypress:
         specifier: ^2.13.2
         version: 2.13.2(eslint@8.38.0)
@@ -505,9 +495,6 @@ importers:
       cypress:
         specifier: ^12.9.0
         version: 12.9.0
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       eslint-plugin-cypress:
         specifier: ^2.13.2
         version: 2.13.2(eslint@8.38.0)
@@ -764,9 +751,6 @@ importers:
       '@vue/test-utils':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.2.47)
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       jsdom:
         specifier: ^21.1.1
         version: 21.1.1
@@ -819,9 +803,6 @@ importers:
       '@types/node':
         specifier: ^18.15.11
         version: 18.15.11
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       prettier:
         specifier: ^2.8.7
         version: 2.8.7
@@ -871,9 +852,6 @@ importers:
       '@vue/test-utils':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.2.47)
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       jsdom:
         specifier: ^21.1.1
         version: 21.1.1
@@ -947,9 +925,6 @@ importers:
       '@vue/test-utils':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.2.47)
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       jsdom:
         specifier: ^21.1.1
         version: 21.1.1
@@ -1031,9 +1006,6 @@ importers:
       consola:
         specifier: ^2.15.3
         version: 2.15.3
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       fast-glob:
         specifier: ^3.2.12
         version: 3.2.12
@@ -1076,9 +1048,6 @@ importers:
       '@types/node':
         specifier: ^18.15.11
         version: 18.15.11
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       jsdom:
         specifier: ^21.1.1
         version: 21.1.1
@@ -1112,9 +1081,6 @@ importers:
       '@vue/test-utils':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.2.47)
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -1148,9 +1114,6 @@ importers:
       del:
         specifier: 5.1.0
         version: 5.1.0
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       gulp:
         specifier: ^4.0.2
         version: 4.0.2
@@ -1230,9 +1193,6 @@ importers:
       '@vue/test-utils':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.2.47)
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       jsdom:
         specifier: ^21.1.1
         version: 21.1.1
@@ -1294,9 +1254,6 @@ importers:
       '@vue/test-utils':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.2.47)
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       expect-type:
         specifier: ^0.15.0
         version: 0.15.0

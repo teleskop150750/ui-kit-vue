@@ -23,7 +23,6 @@
     "@types/lodash-es": "^4.17.7",
     "@types/node": "^18.15.11",
     "@vue/test-utils": "^2.3.2",
-    "eslint": "^8.38.0",
     "lodash-es": "^4.17.21",
     "prettier": "^2.8.7",
     "vitest": "^0.29.8",

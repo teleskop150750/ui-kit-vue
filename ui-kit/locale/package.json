@@ -19,7 +19,6 @@
     "@nado/tsconfig": "workspace:*",
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/node": "^18.15.11",
-    "eslint": "^8.38.0",
     "jsdom": "^21.1.1",
     "prettier": "^2.8.7"
   }
