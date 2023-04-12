@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest'
 import { nextTick, ref } from 'vue'
 
 import { useRestoreActive } from '../use-restore-active'

@@ -3,7 +3,6 @@
 // import English from '@element-plus/locale/lang/en'
 // import Chinese from '@element-plus/locale/lang/zh-cn'
 // import { mount, type VueWrapper } from '@vue/test-utils'
-import { describe, it } from 'vitest'
 // import type { ComponentPublicInstance, PropType } from 'vue'
 // import { computed, defineComponent, nextTick } from 'vue'
 

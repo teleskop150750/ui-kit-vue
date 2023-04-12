@@ -1,33 +1,38 @@
-import { describe, expect, it } from 'vitest'
-
 import { useAsyncValidator } from '../src'
 
-describe('url', () => {
-  it('works for empty string', async () => {
-    let res
+const required = true
+
+describe('required', () => {
+  it('works for array required=true', async () => {
+    let res: any
 
     const validate = useAsyncValidator()
 
     try {
       await validate
         .useSchema({
-          v: {
-            type: 'url',
-          },
+          v: [
+            {
+              required,
+              message: 'no',
+            },
+          ],
         })
         .validate(
           {
-            v: '',
+            v: [],
           },
           (errors) => {
             res = errors
           },
         )
     } catch {}
-    expect(res).toBe(undefined)
+    expect(res.length).toBe(1)
+    expect(res[0].message).toBe('no')
   })
 
-  it('works for ip url', async () => {
+  it('works for array required=true & custom message', async () => {
+    // allow custom message
     let res
 
     const validate = useAsyncValidator()
@@ -35,23 +40,26 @@ describe('url', () => {
     try {
       await validate
         .useSchema({
-          v: {
-            type: 'url',
-          },
+          v: [
+            {
+              required,
+              message: 'no',
+            },
+          ],
         })
         .validate(
           {
-            v: 'http://10.218.136.29/talent-tree/src/index.html',
+            v: [1],
           },
           (errors) => {
             res = errors
           },
         )
     } catch {}
-    expect(res).toBe(undefined)
+    expect(res).toBeFalsy()
   })
 
-  it('works for required empty string', async () => {
+  it('works for array required=false', async () => {
     let res
 
     const validate = useAsyncValidator()
@@ -60,8 +68,31 @@ describe('url', () => {
       await validate
         .useSchema({
           v: {
-            type: 'url',
-            required: true,
+            required: false,
+          },
+        })
+        .validate(
+          {
+            v: [],
+          },
+          (errors) => {
+            res = errors
+          },
+        )
+    } catch {}
+    expect(res).toBeFalsy()
+  })
+
+  it('works for string required=true', async () => {
+    let res: any
+
+    const validate = useAsyncValidator()
+
+    try {
+      await validate
+        .useSchema({
+          v: {
+            required,
           },
         })
         .validate(
@@ -77,7 +108,7 @@ describe('url', () => {
     expect(res[0].message).toBe('v is required')
   })
 
-  it('works for type url', async () => {
+  it('works for string required=false', async () => {
     let res
 
     const validate = useAsyncValidator()
@@ -86,22 +117,22 @@ describe('url', () => {
       await validate
         .useSchema({
           v: {
-            type: 'url',
+            required: false,
           },
         })
         .validate(
           {
-            v: 'http://www.taobao.com',
+            v: '',
           },
           (errors) => {
             res = errors
           },
         )
     } catch {}
-    expect(res).toBe(undefined)
+    expect(res).toBeFalsy()
   })
 
-  it('works for type url has query', async () => {
+  it('works for number required=true', async () => {
     let res
 
     const validate = useAsyncValidator()
@@ -110,22 +141,22 @@ describe('url', () => {
       await validate
         .useSchema({
           v: {
-            type: 'url',
+            required,
           },
         })
         .validate(
           {
-            v: 'http://www.taobao.com/abc?a=a',
+            v: 1,
           },
           (errors) => {
             res = errors
           },
         )
     } catch {}
-    expect(res).toBe(undefined)
+    expect(res).toBeFalsy()
   })
 
-  it('works for type url has hash', async () => {
+  it('works for number required=false', async () => {
     let res
 
     const validate = useAsyncValidator()
@@ -134,23 +165,23 @@ describe('url', () => {
       await validate
         .useSchema({
           v: {
-            type: 'url',
+            required: false,
           },
         })
         .validate(
           {
-            v: 'http://www.taobao.com/abc#!abc',
+            v: 1,
           },
           (errors) => {
             res = errors
           },
         )
     } catch {}
-    expect(res).toBe(undefined)
+    expect(res).toBeFalsy()
   })
 
-  it('works for type url has query and has', async () => {
-    let res
+  it('works for null required=true', async () => {
+    let res: any
 
     const validate = useAsyncValidator()
 
@@ -158,60 +189,12 @@ describe('url', () => {
       await validate
         .useSchema({
           v: {
-            type: 'url',
+            required,
           },
         })
         .validate(
           {
-            v: 'http://www.taobao.com/abc?abc=%23&b=a~c#abc',
-          },
-          (errors) => {
-            res = errors
-          },
-        )
-    } catch {}
-    expect(res).toBe(undefined)
-  })
-
-  it('works for type url has multi hyphen', async () => {
-    let res
-
-    const validate = useAsyncValidator()
-
-    try {
-      await validate
-        .useSchema({
-          v: {
-            type: 'url',
-          },
-        })
-        .validate(
-          {
-            v: 'https://www.tao---bao.com',
-          },
-          (errors) => {
-            res = errors
-          },
-        )
-    } catch {}
-    expect(res).toBe(undefined)
-  })
-
-  it('works for type not a valid url', async () => {
-    let res
-
-    const validate = useAsyncValidator()
-
-    try {
-      await validate
-        .useSchema({
-          v: {
-            type: 'url',
-          },
-        })
-        .validate(
-          {
-            v: 'http://www.taobao.com/abc?abc=%23&b=  a~c#abc    ',
+            v: undefined,
           },
           (errors) => {
             res = errors
@@ -219,10 +202,10 @@ describe('url', () => {
         )
     } catch {}
     expect(res.length).toBe(1)
-    expect(res[0].message).toBe('v is not a valid url')
+    expect(res[0].message).toBe('v is required')
   })
 
-  it('support skip schema', async () => {
+  it('works for null required=false', async () => {
     let res
 
     const validate = useAsyncValidator()
@@ -231,18 +214,93 @@ describe('url', () => {
       await validate
         .useSchema({
           v: {
-            type: 'url',
+            required: false,
           },
         })
         .validate(
           {
-            v: '//g.cn',
+            v: undefined,
           },
           (errors) => {
             res = errors
           },
         )
     } catch {}
-    expect(res).toBe(undefined)
+    expect(res).toBeFalsy()
+  })
+
+  it('works for undefined required=true', async () => {
+    let res: any
+
+    const validate = useAsyncValidator()
+
+    try {
+      await validate
+        .useSchema({
+          v: {
+            required,
+          },
+        })
+        .validate(
+          {
+            v: undefined,
+          },
+          (errors) => {
+            res = errors
+          },
+        )
+    } catch {}
+    expect(res.length).toBe(1)
+    expect(res[0].message).toBe('v is required')
+  })
+
+  it('works for undefined required=false', async () => {
+    let res
+
+    const validate = useAsyncValidator()
+
+    try {
+      await validate
+        .useSchema({
+          v: {
+            required: false,
+          },
+        })
+        .validate(
+          {
+            v: undefined,
+          },
+          (errors) => {
+            res = errors
+          },
+        )
+    } catch {}
+    expect(res).toBeFalsy()
+  })
+
+  it('should support empty string message', async () => {
+    let res: any
+
+    const validate = useAsyncValidator()
+
+    try {
+      await validate
+        .useSchema({
+          v: {
+            required,
+            message: '',
+          },
+        })
+        .validate(
+          {
+            v: '',
+          },
+          (errors) => {
+            res = errors
+          },
+        )
+    } catch {}
+    expect(res.length).toBe(1)
+    expect(res[0].message).toBe('')
   })
 })

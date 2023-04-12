@@ -1,6 +1,5 @@
 import { defineGetter, makeScroll } from '@nado/ui-kit-test-utils'
 import { mount } from '@vue/test-utils'
-import { describe, expect, test } from 'vitest'
 import { nextTick } from 'vue'
 
 import NScrollbar from '../src/NScrollbar.vue'

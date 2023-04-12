@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest'
 import { ref } from 'vue'
 
 import { useFocus } from '../use-focus'

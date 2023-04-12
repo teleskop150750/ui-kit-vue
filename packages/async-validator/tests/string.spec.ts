@@ -1,115 +1,10 @@
-import { describe, expect, it } from 'vitest'
-
 import { useAsyncValidator } from '../src'
 
-describe('pattern', () => {
-  it('works for non-required empty string', async () => {
-    let res
-
-    const validate = useAsyncValidator()
-
-    try {
-      await validate
-        .useSchema({
-          v: {
-            pattern: /^\d+$/,
-            message: 'haha',
-          },
-        })
-        .validate(
-          {
-            // useful for web, input's value defaults to ''
-            v: '',
-          },
-          (errors) => {
-            res = errors
-          },
-        )
-    } catch {}
-    expect(res).toBe(undefined)
-  })
-
-  it('work for non-required empty string with string regexp', async () => {
-    let res
-
-    const validate = useAsyncValidator()
-
-    try {
-      await validate
-        .useSchema({
-          v: {
-            pattern: '^\\d+$',
-            message: 'haha',
-          },
-        })
-        .validate(
-          {
-            // useful for web, input's value defaults to ''
-            v: 's',
-          },
-          (errors) => {
-            res = errors
-          },
-        )
-    } catch {}
-    expect(res.length).toBe(1)
-    expect(res[0].message).toBe('haha')
-  })
-
-  it('works for required empty string', async () => {
-    let res
-
-    const validate = useAsyncValidator()
-
-    try {
-      await validate
-        .useSchema({
-          v: {
-            pattern: /^\d+$/,
-            message: 'haha',
-            required: true,
-          },
-        })
-        .validate(
-          {
-            // useful for web, input's value defaults to ''
-            v: '',
-          },
-          (errors) => {
-            res = errors
-          },
-        )
-    } catch {}
-    expect(res.length).toBe(1)
-    expect(res[0].message).toBe('haha')
-  })
-
-  it('works for non-required null', async () => {
-    let res
-
-    const validate = useAsyncValidator()
-
-    try {
-      await validate
-        .useSchema({
-          v: {
-            pattern: /^\d+$/,
-            message: 'haha',
-          },
-        })
-        .validate(
-          {
-            v: undefined,
-          },
-          (errors) => {
-            res = errors
-          },
-        )
-    } catch {}
-    expect(res).toBe(undefined)
-  })
-
-  it('works for non-required undefined', async () => {
+describe('string', () => {
+  it('works for none require', async () => {
+    const data = {
+      v: '',
+    }
     let res: any
 
     const validate = useAsyncValidator()
@@ -118,7 +13,109 @@ describe('pattern', () => {
       await validate
         .useSchema({
           v: {
-            pattern: /^\d+$/,
+            type: 'string',
+          },
+        })
+        .validate(data, (errors, d) => {
+          res = {
+            errors,
+            d,
+          }
+        })
+    } catch {}
+    expect(res.errors).toBe(undefined)
+    expect(res.d).toEqual(data)
+  })
+
+  it('works for empty string', async () => {
+    let res: any
+
+    const validate = useAsyncValidator()
+
+    try {
+      await validate
+        .useSchema({
+          v: {
+            required: true,
+            type: 'string',
+          },
+        })
+        .validate(
+          {
+            v: '',
+          },
+          (errors) => {
+            res = errors
+          },
+        )
+    } catch {}
+    expect(res.length).toBe(1)
+    expect(res[0].message).toBe('v is required')
+  })
+
+  it('works for undefined string', async () => {
+    let res: any
+
+    const validate = useAsyncValidator()
+
+    try {
+      await validate
+        .useSchema({
+          v: {
+            required: true,
+            type: 'string',
+          },
+        })
+        .validate(
+          {
+            v: undefined,
+          },
+          (errors) => {
+            res = errors
+          },
+        )
+    } catch {}
+    expect(res.length).toBe(1)
+    expect(res[0].message).toBe('v is required')
+  })
+
+  it('works for null string', async () => {
+    let res: any
+
+    const validate = useAsyncValidator()
+
+    try {
+      await validate
+        .useSchema({
+          v: {
+            required: true,
+            type: 'string',
+          },
+        })
+        .validate(
+          {
+            v: undefined,
+          },
+          (errors) => {
+            res = errors
+          },
+        )
+    } catch {}
+    expect(res.length).toBe(1)
+    expect(res[0].message).toBe('v is required')
+  })
+
+  it('works for message', async () => {
+    let res: any
+
+    const validate = useAsyncValidator()
+
+    try {
+      await validate
+        .useSchema({
+          v: {
+            required: true,
+            type: 'string',
             message: 'haha',
           },
         })
@@ -131,11 +128,12 @@ describe('pattern', () => {
           },
         )
     } catch {}
-    expect(res).toBe(undefined)
+    expect(res.length).toBe(1)
+    expect(res[0].message).toBe('haha')
   })
 
-  it('works', async () => {
-    let res
+  it('works for none empty', async () => {
+    let res: any
 
     const validate = useAsyncValidator()
 
@@ -143,7 +141,35 @@ describe('pattern', () => {
       await validate
         .useSchema({
           v: {
-            pattern: /^\d+$/,
+            required: true,
+            type: 'string',
+            message: 'haha',
+          },
+        })
+        .validate(
+          {
+            v: ' ',
+          },
+          (errors) => {
+            res = errors
+          },
+        )
+    } catch {}
+    expect(res).toBe(undefined)
+  })
+
+  it('works for whitespace empty', async () => {
+    let res: any
+
+    const validate = useAsyncValidator()
+
+    try {
+      await validate
+        .useSchema({
+          v: {
+            required: true,
+            type: 'string',
+            whitespace: true,
             message: 'haha',
           },
         })
@@ -158,41 +184,5 @@ describe('pattern', () => {
     } catch {}
     expect(res.length).toBe(1)
     expect(res[0].message).toBe('haha')
-  })
-
-  it('works for RegExp with global flag', async () => {
-    let res
-    let res2
-
-    const validator = useAsyncValidator()
-
-    try {
-      const schema = validator.useSchema({
-        v: {
-          pattern: /global/g,
-          message: 'haha',
-        },
-      })
-
-      await schema.validate(
-        {
-          v: 'globalflag',
-        },
-        (errors) => {
-          res = errors
-        },
-      )
-
-      await schema.validate(
-        {
-          v: 'globalflag',
-        },
-        (errors) => {
-          res2 = errors
-        },
-      )
-    } catch {}
-    expect(res).toBe(undefined)
-    expect(res2).toBe(undefined)
   })
 })

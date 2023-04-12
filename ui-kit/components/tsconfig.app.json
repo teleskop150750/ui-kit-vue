@@ -6,6 +6,6 @@
     "composite": true,
     "outDir": "./dist",
     "baseUrl": ".",
-    "types": ["node"]
+    "types": ["node", "unplugin-vue-macros/macros-global", "vitest/importMeta"]
   }
 }

@@ -1,5 +1,3 @@
-import { afterEach, beforeEach, describe, it, vi } from 'vitest'
-
 // const assertElementsExistence = (wrapper: VueWrapper<any>, selectors: string[], existence: boolean) => {
 //   selectors.forEach((selector) => {
 //     expect(wrapper.find(selector).exists()).toBe(existence)

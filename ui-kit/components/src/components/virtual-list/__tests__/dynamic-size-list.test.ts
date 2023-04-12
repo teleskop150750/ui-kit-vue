@@ -1,5 +1,4 @@
 import { makeMount } from '@nado/ui-kit-test-utils'
-import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest'
 import { nextTick } from 'vue'
 
 import { NVirtualList } from '..'

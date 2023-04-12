@@ -1,10 +1,8 @@
-import { describe, expect, it } from 'vitest'
-
 import { useAsyncValidator } from '../src'
 
 describe('validator', () => {
   it('works', async () => {
-    let res
+    let res: any
 
     const validate = useAsyncValidator()
 
@@ -13,19 +11,19 @@ describe('validator', () => {
         .useSchema({
           v: [
             {
-              validator(rule, value, callback) {
+              validator(_rule, _value, callback) {
                 callback(new Error('e1'))
               },
             },
             {
-              validator(rule, value, callback) {
+              validator(_rule, _value, callback) {
                 callback(new Error('e2'))
               },
             },
           ],
           v2: [
             {
-              validator(rule, value, callback) {
+              validator(_rule, _value, callback) {
                 callback(new Error('e3'))
               },
             },
@@ -81,7 +79,7 @@ describe('validator', () => {
   })
 
   it('first works', async () => {
-    let res
+    let res: any
 
     const validate = useAsyncValidator()
 
@@ -90,19 +88,19 @@ describe('validator', () => {
         .useSchema({
           v: [
             {
-              validator(rule, value, callback) {
+              validator(_rule, _value, callback) {
                 callback(new Error('e1'))
               },
             },
             {
-              validator(rule, value, callback) {
+              validator(_rule, _value, callback) {
                 callback(new Error('e2'))
               },
             },
           ],
           v2: [
             {
-              validator(rule, value, callback) {
+              validator(_rule, _value, callback) {
                 callback(new Error('e3'))
               },
             },
@@ -128,7 +126,7 @@ describe('validator', () => {
 
   describe('firstFields', () => {
     it('works for true', async () => {
-      let res
+      let res: any
 
       const validate = useAsyncValidator()
 
@@ -137,12 +135,12 @@ describe('validator', () => {
           .useSchema({
             v: [
               {
-                validator(rule, value, callback) {
+                validator(_rule, _value, callback) {
                   callback(new Error('e1'))
                 },
               },
               {
-                validator(rule, value, callback) {
+                validator(_rule, _value, callback) {
                   callback(new Error('e2'))
                 },
               },
@@ -150,19 +148,19 @@ describe('validator', () => {
 
             v2: [
               {
-                validator(rule, value, callback) {
+                validator(_rule, _value, callback) {
                   callback(new Error('e3'))
                 },
               },
             ],
             v3: [
               {
-                validator(rule, value, callback) {
+                validator(_rule, _value, callback) {
                   callback(new Error('e4'))
                 },
               },
               {
-                validator(rule, value, callback) {
+                validator(_rule, _value, callback) {
                   callback(new Error('e5'))
                 },
               },
@@ -189,7 +187,7 @@ describe('validator', () => {
     })
 
     it('works for array', async () => {
-      let res
+      let res: any
 
       const validate = useAsyncValidator()
 
@@ -198,12 +196,12 @@ describe('validator', () => {
           .useSchema({
             v: [
               {
-                validator(rule, value, callback) {
+                validator(_rule, _value, callback) {
                   callback(new Error('e1'))
                 },
               },
               {
-                validator(rule, value, callback) {
+                validator(_rule, _value, callback) {
                   callback(new Error('e2'))
                 },
               },
@@ -211,19 +209,19 @@ describe('validator', () => {
 
             v2: [
               {
-                validator(rule, value, callback) {
+                validator(_rule, _value, callback) {
                   callback(new Error('e3'))
                 },
               },
             ],
             v3: [
               {
-                validator(rule, value, callback) {
+                validator(_rule, _value, callback) {
                   callback(new Error('e4'))
                 },
               },
               {
-                validator(rule, value, callback) {
+                validator(_rule, _value, callback) {
                   callback(new Error('e5'))
                 },
               },
@@ -271,7 +269,7 @@ describe('validator', () => {
           suppressValidatorError: true,
         },
       )
-    } catch ({ errors }) {
+    } catch ({ errors }: any) {
       expect(errors.length).toBe(1)
       expect(errors[0].message).toBe('something wrong')
     }

@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest'
-
 import { useAsyncValidator } from '../src'
 
 describe('asyncValidator', () => {
@@ -201,13 +199,13 @@ describe('asyncValidator', () => {
               },
               {
                 asyncValidator: () =>
-                  new Promise((resolve, reject) => {
+                  new Promise((_resolve, reject) => {
                     setTimeout(() => reject(new Error('e6')), 100)
                   }),
               },
               {
                 asyncValidator: () =>
-                  new Promise((resolve, reject) => {
+                  new Promise((_resolve, reject) => {
                     // eslint-disable-next-line unicorn/error-message
                     setTimeout(() => reject(new Error('')), 100)
                   }),
@@ -246,7 +244,7 @@ describe('asyncValidator', () => {
           .useSchema({
             async: {
               asyncValidator(rule) {
-                return new Promise((resolve, reject) => {
+                return new Promise((_resolve, reject) => {
                   setTimeout(() => {
                     // eslint-disable-next-line prefer-promise-reject-errors
                     reject([new Error(typeof rule.message === 'function' ? rule.message() : rule.message)])
@@ -259,7 +257,7 @@ describe('asyncValidator', () => {
           .validate({
             v: 1,
           })
-      } catch ({ errors }) {
+      } catch ({ errors }: any) {
         allCorrect = errors.length === 1
       }
       expect(allCorrect).toBe(true)

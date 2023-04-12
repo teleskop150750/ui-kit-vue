@@ -1,9 +1,7 @@
-import { describe, expect, it } from 'vitest'
-
 import { useAsyncValidator } from '../src'
 
 const validate = useAsyncValidator()
-const testNoErrorsFor = (value) => async () => {
+const testNoErrorsFor = (value: any) => async () => {
   let res: any
 
   try {
@@ -25,7 +23,7 @@ const testNoErrorsFor = (value) => async () => {
   expect(res).toBe(undefined)
 }
 
-const testRequiredErrorFor = (value) => async () => {
+const testRequiredErrorFor = (value: any) => async () => {
   let res: any
 
   try {

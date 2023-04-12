@@ -1,6 +1,5 @@
 /* eslint-disable vue/one-component-per-file */
 import { mount, type VueWrapper } from '@vue/test-utils'
-import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { defineComponent, nextTick } from 'vue'
 
 import { useNamespace } from '..'

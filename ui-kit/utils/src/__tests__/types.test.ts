@@ -1,5 +1,4 @@
 import * as vueShared from '@vue/shared'
-import { describe, expect, it } from 'vitest'
 import * as vue from 'vue'
 
 import { isArray, isElement, isEmpty, isPropAbsent, isUndefined, isVNode } from '..'

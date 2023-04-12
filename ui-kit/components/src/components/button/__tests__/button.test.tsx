@@ -1,7 +1,6 @@
 import type { ComponentSize } from '@nado/ui-kit-constants'
 import { NIconSearch } from '@nado/ui-kit-icons-vue'
 import { mount } from '@vue/test-utils'
-import { describe, expect, it, test } from 'vitest'
 import { markRaw, nextTick, ref } from 'vue'
 
 import Button from '../src/NButton.vue'

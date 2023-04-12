@@ -1,5 +1,4 @@
 import { EVENT_CODE } from '@nado/ui-kit-constants'
-import { describe, expect, it, vi } from 'vitest'
 import { nextTick, ref } from 'vue'
 
 import { useModal } from '../use-modal'

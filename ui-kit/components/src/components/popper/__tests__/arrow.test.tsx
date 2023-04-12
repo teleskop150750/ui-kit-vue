@@ -1,5 +1,4 @@
 // import { mount, type VueWrapper } from '@vue/test-utils'
-import { describe, it } from 'vitest'
 
 // import { nextTick, ref } from 'vue'
 // import NPopperArrowTest from '../src/NPopperArrowTest.vue'

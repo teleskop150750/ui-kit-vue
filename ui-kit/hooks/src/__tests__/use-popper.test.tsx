@@ -1,6 +1,5 @@
 import type { State } from '@popperjs/core'
 import { mount } from '@vue/test-utils'
-import { afterEach, beforeEach, describe, expect, it, vitest } from 'vitest'
 import { defineComponent, nextTick, ref } from 'vue'
 
 import { type PartialOptions, usePopper } from '../use-popper'

@@ -1,5 +1,4 @@
 import { mount, type VueWrapper } from '@vue/test-utils'
-import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { computed, nextTick, ref } from 'vue'
 
 import NPopperContent from '../src/NPopperContent.vue'

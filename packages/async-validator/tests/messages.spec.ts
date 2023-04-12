@@ -1,14 +1,12 @@
-import { describe, expect, it } from 'vitest'
-
 import { useAsyncValidator } from '../src'
 
 describe('messages', () => {
   it('can call messages', async () => {
     const messages = {
-      required(f) {
+      required(f: any) {
         return `${f} required!`
       },
-    }
+    } as any
     let res: any
 
     const validate = useAsyncValidator()
@@ -42,7 +40,7 @@ describe('messages', () => {
 
   it('can use options.messages', async () => {
     const messages = {
-      required(f) {
+      required(f: any) {
         return `${f} required!`
       },
     }
@@ -144,7 +142,7 @@ describe('messages', () => {
 
   it('message can be a function', async () => {
     const message = 'this is a function'
-    let res
+    let res: any
     const validate = useAsyncValidator()
 
     try {

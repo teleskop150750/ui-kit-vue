@@ -1,8 +1,6 @@
 /* eslint-disable import/first */
 let isClientMocked = false
 
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-
 import { cAF, rAF } from '..'
 
 vi.mock('@vueuse/core', () => ({

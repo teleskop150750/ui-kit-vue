@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest'
-
 import { addClass, hasClass, removeClass } from '../..'
 
 const getClass = (el: Element) => {

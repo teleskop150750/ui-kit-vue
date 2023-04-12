@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest'
-
 import { useAsyncValidator } from '../src'
 
 describe('unicode', () => {

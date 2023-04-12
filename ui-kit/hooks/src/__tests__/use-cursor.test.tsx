@@ -1,5 +1,4 @@
 import { isNil } from '@nado/ui-kit-utils'
-import { describe, expect, it } from 'vitest'
 import { nextTick, shallowRef } from 'vue'
 
 import { useCursor } from '../use-cursor'

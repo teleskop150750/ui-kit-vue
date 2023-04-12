@@ -1,5 +1,4 @@
 import * as vueShared from '@vue/shared'
-import { describe, expect, it } from 'vitest'
 
 import { camelize, capitalize, escapeStringRegexp, hyphenate, kebabCase } from '..'
 

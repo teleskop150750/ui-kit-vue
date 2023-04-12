@@ -1,5 +1,4 @@
 import { config, mount } from '@vue/test-utils'
-import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
 import { ID_INJECTION_KEY, useId, useIdInjection } from '../use-id'
 

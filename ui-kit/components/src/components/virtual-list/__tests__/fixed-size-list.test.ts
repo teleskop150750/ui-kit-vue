@@ -1,5 +1,5 @@
 import { makeMount, makeScroll } from '@nado/ui-kit-test-utils'
-import { afterAll, beforeAll, describe, expect, it, type SpyInstance, vi } from 'vitest'
+import type { SpyInstance } from 'vitest'
 import { nextTick } from 'vue'
 
 import { NVirtualList } from '..'

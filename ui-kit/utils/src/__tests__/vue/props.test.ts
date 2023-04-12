@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils'
 import { expectTypeOf } from 'expect-type'
-import { describe, expect, it, vi } from 'vitest'
 import { defineComponent, type ExtractPropTypes, type PropType } from 'vue'
 
 import { buildProp, buildProps, definePropType, keysOf, mutable } from '../..'

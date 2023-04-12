@@ -1,5 +1,3 @@
-import { afterEach, describe, expect, it } from 'vitest'
-
 import { changeGlobalNodesTarget, createGlobalNode, removeGlobalNode } from '../..'
 
 describe('global-nodes', () => {

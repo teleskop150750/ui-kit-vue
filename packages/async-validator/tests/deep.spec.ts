@@ -1,10 +1,8 @@
-import { describe, expect, it } from 'vitest'
-
 import { type Rules, useAsyncValidator } from '../src'
 
 describe('deep', () => {
   it('deep array specific validation', async () => {
-    let res
+    let res: any
     const { useSchema } = useAsyncValidator()
 
     try {
@@ -42,7 +40,7 @@ describe('deep', () => {
   })
 
   it('deep object specific validation', async () => {
-    let res
+    let res: any
 
     const validator = useAsyncValidator()
 
@@ -87,7 +85,7 @@ describe('deep', () => {
 
   describe('defaultField', () => {
     it('deep array all values validation', async () => {
-      let res
+      let res: any
 
       const validator = useAsyncValidator()
 
@@ -133,7 +131,7 @@ describe('deep', () => {
     })
 
     it('deep transform array all values validation', async () => {
-      let res
+      let res: any
 
       const validator = useAsyncValidator()
 
@@ -269,7 +267,7 @@ describe('deep', () => {
     })
 
     it('deep object all values validation', async () => {
-      let res
+      let res: any
 
       const validator = useAsyncValidator()
 
