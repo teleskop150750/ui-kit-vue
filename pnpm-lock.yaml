@@ -31,6 +31,9 @@ importers:
       prettier:
         specifier: ^2.8.7
         version: 2.8.7
+      stylelint:
+        specifier: ^15.4.0
+        version: 15.4.0
       turbo:
         specifier: ^1.8.8
         version: 1.8.8
@@ -64,10 +67,6 @@ importers:
       typescript:
         specifier: '>=4.9'
         version: 5.0.3
-    devDependencies:
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
 
   config/eslint-config-basic:
     dependencies:
@@ -137,10 +136,6 @@ importers:
       typescript:
         specifier: '>=4.9'
         version: 5.0.3
-    devDependencies:
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
 
   config/eslint-config-vue:
     dependencies:
@@ -162,22 +157,20 @@ importers:
       eslint-plugin-vue:
         specifier: ^9.10.0
         version: 9.10.0(eslint@8.38.0)
-    devDependencies:
       prettier:
-        specifier: ^2.8.7
+        specifier: '>=2.8.4'
         version: 2.8.7
 
-  config/prettier-config:
-    dependencies:
-      prettier:
-        specifier: ^2.5.1
-        version: 2.8.7
+  config/prettier-config: {}
 
   config/stylelint-config-css:
     dependencies:
       postcss-html:
         specifier: ^1.5.0
         version: 1.5.0
+      stylelint:
+        specifier: '>=15.2.0'
+        version: 15.4.0
       stylelint-color-format:
         specifier: ^1.1.0
         version: 1.1.0(stylelint@15.4.0)
@@ -202,10 +195,6 @@ importers:
       stylelint-semantic-groups:
         specifier: ^1.2.0
         version: 1.2.0
-    devDependencies:
-      stylelint:
-        specifier: ^15.4.0
-        version: 15.4.0
 
   config/tsconfig: {}
 
@@ -287,9 +276,6 @@ importers:
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -354,12 +340,6 @@ importers:
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
-      stylelint:
-        specifier: ^15.4.0
-        version: 15.4.0
       vue-tsc:
         specifier: ^1.2.0
         version: 1.2.0(typescript@5.0.4)
@@ -396,9 +376,6 @@ importers:
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
       vitest:
         specifier: ^0.29.8
         version: 0.29.8(@vitest/ui@0.29.8)(jsdom@21.1.1)
@@ -453,9 +430,6 @@ importers:
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
       rimraf:
         specifier: ^4.4.1
         version: 4.4.1
@@ -507,9 +481,6 @@ importers:
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
       rimraf:
         specifier: ^4.4.1
         version: 4.4.1
@@ -760,15 +731,9 @@ importers:
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
       rimraf:
         specifier: ^4.4.1
         version: 4.4.1
-      stylelint:
-        specifier: ^15.4.0
-        version: 15.4.0
       type-fest:
         specifier: ^3.8.0
         version: 3.8.0
@@ -806,9 +771,6 @@ importers:
       '@types/node':
         specifier: ^18.15.11
         version: 18.15.11
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
       vue:
         specifier: ^3.2.47
         version: 3.2.47
@@ -861,9 +823,6 @@ importers:
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
       type-fest:
         specifier: ^3.8.0
         version: 3.8.0
@@ -934,9 +893,6 @@ importers:
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
       vitest:
         specifier: ^0.29.8
         version: 0.29.8(@vitest/ui@0.29.8)(jsdom@21.1.1)
@@ -961,6 +917,9 @@ importers:
       '@nado/prettier-config':
         specifier: workspace:*
         version: link:../../config/prettier-config
+      '@nado/stylelint-config-css':
+        specifier: workspace:*
+        version: link:../../config/stylelint-config-css
       '@nado/tsconfig':
         specifier: workspace:*
         version: link:../../config/tsconfig
@@ -1018,9 +977,6 @@ importers:
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
       tsx:
         specifier: ^3.12.6
         version: 3.12.6
@@ -1054,9 +1010,6 @@ importers:
       jsdom:
         specifier: ^21.1.1
         version: 21.1.1
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
 
   ui-kit/test-utils:
     devDependencies:
@@ -1087,9 +1040,6 @@ importers:
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
       vitest:
         specifier: ^0.29.8
         version: 0.29.8(@vitest/ui@0.29.8)(jsdom@21.1.1)
@@ -1141,12 +1091,6 @@ importers:
       postcss-nested:
         specifier: ^6.0.1
         version: 6.0.1(postcss@8.4.21)
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
-      stylelint:
-        specifier: ^15.4.0
-        version: 15.4.0
 
   ui-kit/ui-kit-vue:
     dependencies:
@@ -1202,9 +1146,6 @@ importers:
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
       vue-tsc:
         specifier: ^1.2.0
         version: 1.2.0(typescript@5.0.4)
@@ -1266,9 +1207,6 @@ importers:
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
       type-fest:
         specifier: ^3.8.0
         version: 3.8.0

@@ -22,6 +22,7 @@
   "devDependencies": {
     "@nado/eslint-config-vue": "workspace:*",
     "@nado/prettier-config": "workspace:*",
+    "@nado/stylelint-config-css": "workspace:*",
     "@nado/tsconfig": "workspace:*",
     "@nado/ui-kit-icons-svg": "workspace:*",
     "@pnpm/find-workspace-dir": "^4.0.3",
