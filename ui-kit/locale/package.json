@@ -17,8 +17,6 @@
     "@nado/eslint-config-vue": "workspace:*",
     "@nado/prettier-config": "workspace:*",
     "@nado/tsconfig": "workspace:*",
-    "@rushstack/eslint-patch": "^1.2.0",
-    "@types/node": "^18.15.11",
-    "jsdom": "^21.1.1"
+    "@rushstack/eslint-patch": "^1.2.0"
   }
 }
