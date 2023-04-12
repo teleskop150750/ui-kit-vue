@@ -10,6 +10,12 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^17.4.4
         version: 17.4.4
+      '@vitest/coverage-c8':
+        specifier: ^0.30.1
+        version: 0.30.1(vitest@0.30.1)
+      '@vitest/ui':
+        specifier: ^0.30.1
+        version: 0.30.1
       commitizen:
         specifier: ^4.3.0
         version: 4.3.0
@@ -45,7 +51,7 @@ importers:
         version: 4.2.1(@types/node@18.15.11)
       vitest:
         specifier: ^0.30.1
-        version: 0.30.1(@vitest/ui@0.29.8)(jsdom@21.1.1)
+        version: 0.30.1(@vitest/ui@0.30.1)
 
   config/eslint-config-base-ts:
     dependencies:
@@ -273,9 +279,6 @@ importers:
       eslint-plugin-storybook:
         specifier: ^0.6.11
         version: 0.6.11(eslint@8.38.0)(typescript@5.0.4)
-      eslint-plugin-vue:
-        specifier: ^9.10.0
-        version: 9.10.0(eslint@8.38.0)
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
@@ -367,12 +370,6 @@ importers:
       '@types/node':
         specifier: ^18.15.11
         version: 18.15.11
-      '@vitest/coverage-c8':
-        specifier: ^0.29.8
-        version: 0.29.8(vitest@0.30.1)
-      '@vitest/ui':
-        specifier: ^0.29.8
-        version: 0.29.8
       jsdom:
         specifier: ^21.1.1
         version: 21.1.1
@@ -409,12 +406,6 @@ importers:
       '@types/node':
         specifier: ^18.15.11
         version: 18.15.11
-      '@vitest/coverage-c8':
-        specifier: ^0.29.8
-        version: 0.29.8(vitest@0.30.1)
-      '@vitest/ui':
-        specifier: ^0.29.8
-        version: 0.29.8
       cypress:
         specifier: ^12.9.0
         version: 12.9.0
@@ -460,12 +451,6 @@ importers:
       '@types/node':
         specifier: ^18.15.11
         version: 18.15.11
-      '@vitest/coverage-c8':
-        specifier: ^0.29.8
-        version: 0.29.8(vitest@0.30.1)
-      '@vitest/ui':
-        specifier: ^0.29.8
-        version: 0.29.8
       cypress:
         specifier: ^12.9.0
         version: 12.9.0
@@ -506,18 +491,9 @@ importers:
       '@nado/stylelint-config-css':
         specifier: workspace:*
         version: link:../../config/stylelint-config-css
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
       nuxt:
         specifier: ^3.3.3
         version: 3.3.3(@types/node@18.15.11)(eslint@8.38.0)(stylelint@15.4.0)(typescript@5.0.4)
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
-      stylelint:
-        specifier: ^15.4.0
-        version: 15.4.0
 
   play/vue:
     dependencies:
@@ -561,21 +537,9 @@ importers:
       '@vitejs/plugin-vue-jsx':
         specifier: ^3.0.1
         version: 3.0.1(vite@4.2.1)(vue@3.2.47)
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
-      eslint-plugin-vue:
-        specifier: ^9.10.0
-        version: 9.10.0(eslint@8.38.0)
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
-      stylelint:
-        specifier: ^15.4.0
-        version: 15.4.0
       vue-tsc:
         specifier: ^1.2.0
         version: 1.2.0(typescript@5.0.4)
@@ -619,21 +583,9 @@ importers:
       '@vitejs/plugin-vue-jsx':
         specifier: ^3.0.1
         version: 3.0.1(vite@4.2.1)(vue@3.2.47)
-      eslint:
-        specifier: ^8.38.0
-        version: 8.38.0
-      eslint-plugin-vue:
-        specifier: ^9.10.0
-        version: 9.10.0(eslint@8.38.0)
       npm-run-all:
         specifier: ^4.1.5
         version: 4.1.5
-      prettier:
-        specifier: ^2.8.7
-        version: 2.8.7
-      stylelint:
-        specifier: ^15.4.0
-        version: 15.4.0
       vue-tsc:
         specifier: ^1.2.0
         version: 1.2.0(typescript@5.0.4)
@@ -713,9 +665,6 @@ importers:
       '@vitejs/plugin-vue-jsx':
         specifier: ^3.0.1
         version: 3.0.1(vite@4.2.1)(vue@3.2.47)
-      '@vitest/coverage-c8':
-        specifier: ^0.29.8
-        version: 0.29.8(vitest@0.30.1)
       '@vue/test-utils':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.2.47)
@@ -802,9 +751,6 @@ importers:
       '@vitejs/plugin-vue-jsx':
         specifier: ^3.0.1
         version: 3.0.1(vite@4.2.1)(vue@3.2.47)
-      '@vitest/coverage-c8':
-        specifier: ^0.29.8
-        version: 0.29.8(vitest@0.30.1)
       '@vue/test-utils':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.2.47)
@@ -866,12 +812,6 @@ importers:
       '@vitejs/plugin-vue-jsx':
         specifier: ^3.0.1
         version: 3.0.1(vite@4.2.1)(vue@3.2.47)
-      '@vitest/coverage-c8':
-        specifier: ^0.29.8
-        version: 0.29.8(vitest@0.30.1)
-      '@vitest/ui':
-        specifier: ^0.29.8
-        version: 0.29.8
       '@vue/test-utils':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.2.47)
@@ -1165,12 +1105,6 @@ importers:
       '@vitejs/plugin-vue-jsx':
         specifier: ^3.0.1
         version: 3.0.1(vite@4.2.1)(vue@3.2.47)
-      '@vitest/coverage-c8':
-        specifier: ^0.29.8
-        version: 0.29.8(vitest@0.30.1)
-      '@vitest/ui':
-        specifier: ^0.29.8
-        version: 0.29.8
       '@vue/test-utils':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.2.47)
@@ -6583,15 +6517,15 @@ packages:
       vue: 3.2.47
     dev: true
 
-  /@vitest/coverage-c8@0.29.8(vitest@0.30.1):
-    resolution: {integrity: sha512-y+sEMQMctWokjnSqm3FCQEYFkjLrYaznsxEZHxcx8z2aftpYg3A5tvI1S5himfdEFo7o+OeHzh40bPSWZHW4oQ==}
+  /@vitest/coverage-c8@0.30.1(vitest@0.30.1):
+    resolution: {integrity: sha512-/Wa3dtSuckpdngAmiCwowaEXXgJkqPrtfvrs9HTB9QoEfNbZWPu4E4cjEn4lJZb4qcGf4fxFtUA2f9DnDNAzBA==}
     peerDependencies:
-      vitest: '>=0.29.0 <1'
+      vitest: '>=0.30.0 <1'
     dependencies:
       c8: 7.13.0
       picocolors: 1.0.0
       std-env: 3.3.2
-      vitest: 0.30.1(@vitest/ui@0.29.8)(jsdom@21.1.1)
+      vitest: 0.30.1(@vitest/ui@0.30.1)
     dev: true
 
   /@vitest/expect@0.30.1:
@@ -6625,10 +6559,12 @@ packages:
       tinyspy: 2.1.0
     dev: true
 
-  /@vitest/ui@0.29.8:
-    resolution: {integrity: sha512-+vbLd+c1R/XUWfzJsWeyjeiw13fwJ95I5tguxaqXRg61y9iYUKesVljg7Pttp2uo7VK+kAjvY91J41NZ1Vx3vg==}
+  /@vitest/ui@0.30.1:
+    resolution: {integrity: sha512-Izz4ElDmdvX02KImSC2nCJI6CsGo9aETbKqxli55M0rbbPPAMtF0zDcJIqgEP5V6Y+4Ysf6wvsjLbLCTnaBvKw==}
     dependencies:
+      '@vitest/utils': 0.30.1
       fast-glob: 3.2.12
+      fflate: 0.7.4
       flatted: 3.2.7
       pathe: 1.1.0
       picocolors: 1.0.0
@@ -10878,6 +10814,10 @@ packages:
 
   /fetch-retry@5.0.4:
     resolution: {integrity: sha512-LXcdgpdcVedccGg0AZqg+S8lX/FCdwXD92WNZ5k5qsb0irRhSFsBOpcJt7oevyqT2/C2nEE0zSFNdBEpj3YOSw==}
+    dev: true
+
+  /fflate@0.7.4:
+    resolution: {integrity: sha512-5u2V/CDW15QM1XbbgS+0DfPxVB+jUKhWEKuuFuHncbk3tEEqzmoXL+2KyOFuKGqOnmdIy0/davWF1CkuwtibCw==}
     dev: true
 
   /figures@3.2.0:
@@ -19397,7 +19337,7 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest@0.30.1(@vitest/ui@0.29.8)(jsdom@21.1.1):
+  /vitest@0.30.1(@vitest/ui@0.30.1):
     resolution: {integrity: sha512-y35WTrSTlTxfMLttgQk4rHcaDkbHQwDP++SNwPb+7H8yb13Q3cu2EixrtHzF27iZ8v0XCciSsLg00RkPAzB/aA==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -19435,7 +19375,7 @@ packages:
       '@vitest/runner': 0.30.1
       '@vitest/snapshot': 0.30.1
       '@vitest/spy': 0.30.1
-      '@vitest/ui': 0.29.8
+      '@vitest/ui': 0.30.1
       '@vitest/utils': 0.30.1
       acorn: 8.8.2
       acorn-walk: 8.2.0
@@ -19443,7 +19383,6 @@ packages:
       chai: 4.3.7
       concordance: 5.0.4
       debug: 4.3.4(supports-color@8.1.1)
-      jsdom: 21.1.1
       local-pkg: 0.4.3
       magic-string: 0.30.0
       pathe: 1.1.0
