@@ -4,6 +4,7 @@ import { isElement, isNil } from '@nado/ui-kit-utils'
 import { unrefElement } from '@vueuse/core'
 import { computed, inject, onBeforeUnmount, onMounted, watch, type WatchStopHandle } from 'vue'
 
+import { NOnlyChild } from '../../only-child'
 import { nPopperTriggerProps } from './popper-trigger.model'
 import { POPPER_INJECTION_KEY } from './tokens'
 
@@ -106,7 +107,7 @@ export default {
 </script>
 
 <template>
-  <ElOnlyChild
+  <NOnlyChild
     v-if="!virtualTriggering"
     v-bind="$attrs"
     :aria-controls="ariaControls"
@@ -115,5 +116,5 @@ export default {
     :aria-haspopup="ariaHaspopup"
   >
     <slot />
-  </ElOnlyChild>
+  </NOnlyChild>
 </template>

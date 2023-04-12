@@ -12,14 +12,14 @@ const props = defineProps(popperContentProps)
 const emit = defineEmits(popperContentEmits)
 
 const {
-  focusStartRef,
+  // focusStartRef,
   trapped,
 
-  onFocusAfterReleased,
-  onFocusAfterTrapped,
-  onFocusInTrap,
-  onFocusoutPrevented,
-  onReleaseRequested,
+  // onFocusAfterReleased,
+  // onFocusAfterTrapped,
+  // onFocusInTrap,
+  // onFocusoutPrevented,
+  // onReleaseRequested,
 } = usePopperContentFocusTrap(props, emit)
 
 const { attributes, arrowRef, contentRef, styles, instanceRef, role, update } = usePopperContent(props)
@@ -128,7 +128,7 @@ export default {
     @mouseenter="(e) => $emit('mouseenter', e)"
     @mouseleave="(e) => $emit('mouseleave', e)"
   >
-    <ElFocusTrap
+    <!-- <ElFocusTrap
       :trapped="trapped"
       :trap-on-focus-in="true"
       :focus-trap-el="contentRef"
@@ -138,8 +138,8 @@ export default {
       @focusin="onFocusInTrap"
       @focusout-prevented="onFocusoutPrevented"
       @release-requested="onReleaseRequested"
-    >
-      <slot />
-    </ElFocusTrap>
+    > -->
+    <slot />
+    <!-- </ElFocusTrap> -->
   </div>
 </template>

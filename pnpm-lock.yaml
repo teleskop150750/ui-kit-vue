@@ -764,6 +764,9 @@ importers:
       '@rushstack/eslint-patch':
         specifier: ^1.2.0
         version: 1.2.0
+      '@testing-library/vue':
+        specifier: ^7.0.0
+        version: 7.0.0(@vue/compiler-sfc@3.2.47)(vue@3.2.47)
       '@types/jsdom':
         specifier: ^21.1.1
         version: 21.1.1
@@ -5958,6 +5961,20 @@ packages:
     dependencies:
       '@babel/runtime': 7.21.0
       '@testing-library/dom': 8.20.0
+    dev: true
+
+  /@testing-library/vue@7.0.0(@vue/compiler-sfc@3.2.47)(vue@3.2.47):
+    resolution: {integrity: sha512-JU/q93HGo2qdm1dCgWymkeQlfpC0/0/DBZ2nAHgEAsVZxX11xVIxT7gbXdI7HACQpUbsUWt1zABGU075Fzt9XQ==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@vue/compiler-sfc': '>= 3'
+      vue: '>= 3'
+    dependencies:
+      '@babel/runtime': 7.21.0
+      '@testing-library/dom': 9.2.0
+      '@vue/compiler-sfc': 3.2.47
+      '@vue/test-utils': 2.3.2(vue@3.2.47)
+      vue: 3.2.47
     dev: true
 
   /@tootallnate/once@1.1.2:

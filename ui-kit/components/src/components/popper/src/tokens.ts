@@ -18,7 +18,7 @@ export interface NPopperInjectionContext {
   role: ComputedRef<string>
 }
 
-export interface ElPopperContentInjectionContext {
+export interface NPopperContentInjectionContext {
   arrowRef: Ref<HTMLElement | undefined>
   arrowOffset: Ref<number | undefined>
   arrowStyle: ComputedRef<CSSProperties>
@@ -26,4 +26,4 @@ export interface ElPopperContentInjectionContext {
 
 export const POPPER_INJECTION_KEY: InjectionKey<NPopperInjectionContext> = Symbol('popper')
 
-export const POPPER_CONTENT_INJECTION_KEY: InjectionKey<ElPopperContentInjectionContext> = Symbol('popperContent')
+export const POPPER_CONTENT_INJECTION_KEY: InjectionKey<NPopperContentInjectionContext> = Symbol('popperContent')
