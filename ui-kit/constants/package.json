@@ -8,8 +8,8 @@
   "module": "./src/index.ts",
   "types": "./src/index.ts",
   "scripts": {
-    "type-check": "vue-tsc --noEmit -p ./tsconfig.json",
-    "prettier": "prettier --check --ignore-unknown",
+    "type-check": "vue-tsc --noEmit -p ./tsconfig.vitest.json --composite false",
+    "prettier": "prettier --check --ignore-unknown \"**/*\"",
     "prettier:fix": "prettier --write --ignore-unknown \"**/*\"",
     "eslint": "eslint \"**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,json,vue}\"",
     "eslint:fix": "eslint --fix \"**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,json,vue}\" --fix"
@@ -23,8 +23,6 @@
     "@nado/tsconfig": "workspace:*",
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/node": "^18.15.11",
-    "eslint": "^8.38.0",
-    "prettier": "^2.8.7",
     "vue": "^3.2.47",
     "vue-tsc": "^1.2.0"
   }

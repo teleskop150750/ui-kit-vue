@@ -1,6 +1,6 @@
 {
   "files": [],
-  "extends": "@nado/tsconfig/tsconfig.json",
+  "extends": "@nado/tsconfig/tsconfig.web.json",
   "include": ["env.d.ts", "src/**/*", "src/**/*.ts"],
   "exclude": ["test/**/*", "cypress/**/*"],
   "compilerOptions": {

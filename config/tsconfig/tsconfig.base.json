@@ -12,7 +12,6 @@
 
     /* Language and Environment */
     "target": "ESNext",                                  /* Установите версию языка JavaScript для испускаемого JavaScript и включите объявления совместимых библиотек.. */
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "jsx": "preserve",                                   /* Укажите, какой код JSX генерируется. */
     "experimentalDecorators": false,                     /* Включить экспериментальную поддержку для декораторов проекта TC39 stage 2. */
     "emitDecoratorMetadata": false,                      /* Включает экспериментальную поддержку выделения метаданных типа для декораторов in source files. */

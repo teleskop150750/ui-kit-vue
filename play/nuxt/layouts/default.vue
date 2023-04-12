@@ -16,13 +16,9 @@ watch(
 </script>
 
 <template>
-  <div>
-    <div>
-      <!-- <Lay /> -->
-      <!-- <pre>{{ instance.appContext.config.globalProperties.$route }}</pre> -->
-    </div>
-    <div>
-      <slot />
-    </div>
-  </div>
+  <Html class="nado-theme n-page" lang="ru">
+    <Body class="n-page__body">
+      <NuxtPage />
+    </Body>
+  </Html>
 </template>
