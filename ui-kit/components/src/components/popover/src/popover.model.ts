@@ -2,13 +2,13 @@ import { buildProps, isBoolean } from '@nado/ui-kit-utils'
 import type { ExtractPropTypes, PropType } from 'vue'
 
 import { dropdownProps } from '../../dropdown'
-import { popperFocusTrapPops } from '../../popper'
 import { useTooltipContentProps, useTooltipTriggerProps } from '../../tooltip'
 import type Popover from './NPopover.vue'
 
 // TODO: merger props Tooltip
 export const popoverProps = buildProps({
-  ...popperFocusTrapPops,
+  escapeDeactivates: useTooltipContentProps.escapeDeactivates,
+  isTrapping: useTooltipContentProps.isTrapping,
   trigger: useTooltipTriggerProps.trigger,
   placement: dropdownProps.placement,
   disabled: useTooltipTriggerProps.disabled,
@@ -62,6 +62,7 @@ export const popoverProps = buildProps({
     type: Function as PropType<(visible: boolean) => void>,
   },
 } as const)
+
 export type PopoverProps = ExtractPropTypes<typeof popoverProps>
 
 export const popoverEmits = {

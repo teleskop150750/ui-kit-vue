@@ -739,6 +739,12 @@ importers:
 
   ui-kit/hooks:
     dependencies:
+      '@nado/focus-trap':
+        specifier: workspace:*
+        version: link:../../packages/focus-trap
+      '@nado/tabbable':
+        specifier: workspace:*
+        version: link:../../packages/tabbable
       '@nado/ui-kit-constants':
         specifier: workspace:*
         version: link:../constants

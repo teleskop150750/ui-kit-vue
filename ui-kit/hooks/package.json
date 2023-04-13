@@ -20,6 +20,8 @@
     "eslint:fix": "eslint --fix \"**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts,json,vue}\" --fix"
   },
   "dependencies": {
+    "@nado/focus-trap": "workspace:*",
+    "@nado/tabbable": "workspace:*",
     "@nado/ui-kit-constants": "workspace:*",
     "@nado/ui-kit-locale": "workspace:*",
     "@nado/ui-kit-utils": "workspace:*",

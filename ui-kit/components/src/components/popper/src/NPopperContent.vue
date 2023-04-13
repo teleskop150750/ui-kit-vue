@@ -1,33 +1,35 @@
 <script lang="ts" setup>
+import { useFocusTrap } from '@nado/ui-kit-hooks'
 import { isElement, isNil, NOOP } from '@nado/ui-kit-utils'
 import { inject, onBeforeUnmount, onMounted, provide, ref, unref, watch, type WatchStopHandle } from 'vue'
 
 import { FORM_ITEM_INJECTION_KEY } from '../../form'
-import { usePopperContent, usePopperContentDOM, usePopperContentFocusTrap } from './hooks'
+import { usePopperContent, usePopperContentDOM } from './hooks'
 import { nPopperContentProps, popperContentEmits } from './popper-content.model'
 import { POPPER_CONTENT_INJECTION_KEY } from './tokens'
 
 const props = defineProps(nPopperContentProps)
 
-const emit = defineEmits(popperContentEmits)
+defineEmits(popperContentEmits)
 
 const {
-  // focusStartRef,
-  trapped,
-
-  // onFocusAfterReleased,
-  // onFocusAfterTrapped,
-  // onFocusInTrap,
-  // onFocusoutPrevented,
-  // onReleaseRequested,
-} = usePopperContentFocusTrap(props, emit)
-
-const { attributes, arrowRef, contentRef, styles, instanceRef, role, update } = usePopperContent(props)
+  attributes,
+  arrowRef,
+  contentRef: popperContentRef,
+  styles,
+  instanceRef,
+  role,
+  update,
+} = usePopperContent(props)
 
 const { ariaModal, arrowStyle, contentAttrs, contentClass, contentStyle, updateZIndex } = usePopperContentDOM(props, {
   styles,
   attributes,
   role,
+})
+
+const { activate, deactivate } = useFocusTrap(popperContentRef, {
+  escapeDeactivates: props.escapeDeactivates,
 })
 
 const formItemContext = inject(FORM_ITEM_INJECTION_KEY, undefined)
@@ -50,20 +52,30 @@ if (formItemContext && (!isNil(formItemContext.addInputId) || !isNil(formItemCon
 
 let triggerTargetAriaStopWatch: WatchStopHandle | undefined = undefined
 
-const updatePopper = (shouldUpdateZIndex = true) => {
+function updatePopper(shouldUpdateZIndex = true) {
   update()
   shouldUpdateZIndex && updateZIndex()
 }
 
-const togglePopperAlive = () => {
+function togglePopperAlive() {
   updatePopper(false)
 
-  if (props.visible && props.focusOnShow) {
-    trapped.value = true
-  } else if (props.visible === false) {
-    trapped.value = false
+  // if (props.visible && props.focusOnShow) {
+  //   trapped.value = true
+  // } else if (props.visible === false) {
+  //   trapped.value = false
+  // }
+}
+
+function toggleTrapping(val: boolean) {
+  if (val) {
+    activate()
+  } else {
+    deactivate()
   }
 }
+
+watch(() => props.isTrapping, toggleTrapping, { immediate: true })
 
 onMounted(() => {
   watch(
@@ -72,8 +84,8 @@ onMounted(() => {
       triggerTargetAriaStopWatch?.()
       triggerTargetAriaStopWatch = undefined
 
-      const el = unref(triggerTargetEl || contentRef.value)
-      const prevEl = unref(prevTriggerTargetEl || contentRef.value)
+      const el = unref(triggerTargetEl || popperContentRef.value)
+      const prevEl = unref(prevTriggerTargetEl || popperContentRef.value)
 
       if (isElement(el)) {
         triggerTargetAriaStopWatch = watch(
@@ -105,7 +117,7 @@ onBeforeUnmount(() => {
 })
 
 defineExpose({
-  popperContentRef: contentRef,
+  popperContentRef,
   popperInstanceRef: instanceRef,
   updatePopper,
   contentStyle,
@@ -120,7 +132,7 @@ export default {
 
 <template>
   <div
-    ref="contentRef"
+    ref="popperContentRef"
     v-bind="contentAttrs"
     :style="contentStyle"
     :class="contentClass"
@@ -128,18 +140,6 @@ export default {
     @mouseenter="(e) => $emit('mouseenter', e)"
     @mouseleave="(e) => $emit('mouseleave', e)"
   >
-    <!-- <ElFocusTrap
-      :trapped="trapped"
-      :trap-on-focus-in="true"
-      :focus-trap-el="contentRef"
-      :focus-start-el="focusStartRef"
-      @focus-after-trapped="onFocusAfterTrapped"
-      @focus-after-released="onFocusAfterReleased"
-      @focusin="onFocusInTrap"
-      @focusout-prevented="onFocusoutPrevented"
-      @release-requested="onReleaseRequested"
-    > -->
     <slot />
-    <!-- </ElFocusTrap> -->
   </div>
 </template>

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { NButton, NPopover, vClickOutside } from '@nado/ui-kit-vue'
-import { ref, unref } from 'vue'
+import { ref, type StyleValue, unref } from 'vue'
 
 const visible = ref(false)
 const nested = ref(false)
@@ -9,6 +9,11 @@ const buttonRef = ref()
 const popoverRef = ref()
 const onClickOutside = () => {
   unref(popoverRef).popperRef?.delayHide?.()
+}
+
+const st: StyleValue = {
+  margin: 0,
+  textAlign: 'right',
 }
 </script>
 
@@ -97,26 +102,11 @@ const onClickOutside = () => {
       >
         <template #reference>
           <NButton>1111111</NButton>
-          <!-- <NAvatar src="https://github.githubassets.com/images/modules/profile/achievements/quickdraw-default.png" /> -->
         </template>
         <template #default>
           <div class="demo-rich-conent" style="display: flex; flex-direction: column; gap: 16px">
-            <!-- <NAvatar
-              :size="60"
-              src="https://github.githubassets.com/images/modules/profile/achievements/quickdraw-default.png"
-              style="margin-bottom: 8px"
-            /> -->
             <div>
-              <p
-                class="demo-rich-content__name"
-                style="
-                  margin: 0;
-
-                  font-weight: 500;
-                "
-              >
-                Nado Ui
-              </p>
+              <p class="demo-rich-content__name" :style="st">Nado Ui</p>
               <p
                 class="demo-rich-content__mention"
                 style="
@@ -140,15 +130,9 @@ const onClickOutside = () => {
 
     <div class="tooltip-base-box-m">
       <h3>Nested operation</h3>
-      <NPopover :visible="nested" placement="top" :escape-deactivates="false" is-trappable :width="180">
+      <NPopover :visible="nested" placement="top" is-trapping :escape-deactivates="false" :width="180">
         <p>Are you sure to delete this?</p>
-        <div
-          style="
-            margin: 0;
-
-            text-align: right;
-          "
-        >
+        <div :style="st">
           <NButton size="small" plain @click="nested = false">cancel</NButton>
           <NButton size="small" @click="nested = false">confirm</NButton>
         </div>

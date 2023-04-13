@@ -75,6 +75,11 @@ const router = createRouter({
       name: 'popover',
       component: () => import('../views/PopoverView.vue'),
     },
+    {
+      path: '/focus-trap',
+      name: 'focus-trap',
+      component: () => import('../views/FocusTrapView.vue'),
+    },
   ],
 })
 
