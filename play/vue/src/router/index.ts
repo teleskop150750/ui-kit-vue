@@ -68,7 +68,12 @@ const router = createRouter({
     {
       path: '/tooltip',
       name: 'tooltip',
-      component: () => import('../views/TooltiplView.vue'),
+      component: () => import('../views/TooltipView.vue'),
+    },
+    {
+      path: '/popover',
+      name: 'popover',
+      component: () => import('../views/PopoverView.vue'),
     },
   ],
 })

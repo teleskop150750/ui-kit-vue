@@ -56,6 +56,10 @@ export const popperFocusTrapPops = buildProps({
     type: definePropType<FocusTrapOptions['escapeDeactivates']>([Function, Boolean]),
     default: true,
   },
+  isTrapping: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 export const nPopperContentProps = buildProps({
@@ -79,10 +83,6 @@ export const nPopperContentProps = buildProps({
   },
   pure: Boolean,
   focusOnShow: {
-    type: Boolean,
-    default: false,
-  },
-  isTrapping: {
     type: Boolean,
     default: false,
   },
