@@ -7,7 +7,7 @@ const advanced = ref(false)
 
 <template>
   <div class="tooltip-base-box-m">
-    <h3>Advanced usage</h3>
+    <h2>Advanced usage</h2>
     <NTooltip :disabled="advanced" content="click to close tooltip function" placement="bottom" effect="light">
       <NButton @click="advanced = !advanced">click to {{ advanced ? 'active' : 'close' }} tooltip function</NButton>
     </NTooltip>

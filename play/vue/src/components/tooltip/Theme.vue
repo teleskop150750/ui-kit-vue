@@ -30,4 +30,12 @@ import { NButton, NTooltip } from '@nado/ui-kit-vue'
 
   background: linear-gradient(45deg, hsl(95deg 64% 73%), hsl(87deg 65% 72%));
 }
+
+.tooltip-base-box-m {
+  padding: 0 80px;
+}
+
+.tooltip-base-box-m .n-button {
+  margin: 8px;
+}
 </style>
