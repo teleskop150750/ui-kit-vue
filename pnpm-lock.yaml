@@ -10,6 +10,9 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^17.4.4
         version: 17.4.4
+      '@nado/prettier-config':
+        specifier: workspace:*
+        version: link:config/prettier-config
       '@types/jsdom':
         specifier: ^21.1.1
         version: 21.1.1

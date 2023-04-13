@@ -1,11 +1,11 @@
 {
-  "extends": "@nado/tsconfig/tsconfig.web.json",
+  "extends": "@nado/tsconfig/tsconfig.json",
   "include": ["env.d.ts", "src/**/*"],
   "exclude": ["test/**/*"],
   "compilerOptions": {
     "composite": true,
     "outDir": "./dist",
     "baseUrl": ".",
-    "types": ["node", "unplugin-vue-macros/macros-global", "vitest/importMeta"]
+    "types": ["node"]
   }
 }

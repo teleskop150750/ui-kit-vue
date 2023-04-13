@@ -1,5 +1,5 @@
 {
-  "extends": "@nado/tsconfig/tsconfig.web.json",
+  "extends": "@nado/tsconfig/tsconfig.json",
   "include": ["env.d.ts", "src/**/*", "src/**/*.ts"],
   "exclude": ["test/**/*", "cypress/**/*"],
   "compilerOptions": {

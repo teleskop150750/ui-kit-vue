@@ -83,7 +83,6 @@ describe('virtual scrollbar', () => {
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-
     e.initMouseEvent('mousedown', false, false, null, 0, 0, 0, 0, clientY, false, false, false, false, 0, null)
     el.dispatchEvent(e)
 

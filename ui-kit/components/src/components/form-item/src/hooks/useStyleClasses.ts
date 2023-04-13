@@ -1,7 +1,7 @@
 import { useNamespace } from '@nado/ui-kit-hooks'
 import { computed, type ComputedRef, inject, type Ref } from 'vue'
 
-import { type useFormSize } from '../../../form/src/shared'
+import type { useFormSize } from '../../../form/src/shared'
 import { FORM_CONTEXT_INJECTION_KEY } from '../../../form/src/tokens'
 import type { NFormItemProps, NFormItemValidateState } from '../form-item.model'
 

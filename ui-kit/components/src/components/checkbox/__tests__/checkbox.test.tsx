@@ -3,14 +3,14 @@ import { nextTick, ref } from 'vue'
 
 import { NFormItem } from '../../form-item'
 import type { CheckboxValueType } from '../src/checkbox.model'
-import Checkbox from '../src/NCheckbox.vue'
-import CheckboxButton from '../src/NCheckboxButton.vue'
-import CheckboxGroup from '../src/NCheckboxGroup.vue'
+import NCheckbox from '../src/NCheckbox.vue'
+import NCheckboxButton from '../src/NCheckboxButton.vue'
+import NCheckboxGroup from '../src/NCheckboxGroup.vue'
 
 describe('Checkbox', () => {
   test('create', async () => {
     const checked = ref(false)
-    const wrapper = mount(() => <Checkbox v-model={checked.value} label="a" />, { attachTo: document.body })
+    const wrapper = mount(() => <NCheckbox v-model={checked.value} label="a" />, { attachTo: document.body })
 
     expect(wrapper.classes()).toContain('n-checkbox')
     expect(wrapper.classes()).not.toContain('n-checkbox--is-disabled')
@@ -25,14 +25,14 @@ describe('Checkbox', () => {
   describe('no v-model', () => {
     test('checkbox without label', async () => {
       const checked = ref(false)
-      const wrapper = mount(() => <Checkbox checked={checked.value} />)
+      const wrapper = mount(() => <NCheckbox checked={checked.value} />)
 
       expect(wrapper.classes('n-checkbox--is-checked')).toBe(false)
     })
 
     test('checkbox with label attribute', async () => {
       const checked = ref(false)
-      const wrapper = mount(() => <Checkbox checked={checked.value} val="a" />)
+      const wrapper = mount(() => <NCheckbox checked={checked.value} val="a" />)
 
       expect(wrapper.classes('n-checkbox--is-checked')).toBe(false)
     })
@@ -44,13 +44,13 @@ describe('Checkbox', () => {
       const wrapper = mount(
         () => (
           <NFormItem label="test">
-            <Checkbox v-model={checked.value} disabled />
+            <NCheckbox v-model={checked.value} disabled />
           </NFormItem>
         ),
         { attachTo: document.body },
       )
 
-      const checkbox = wrapper.findComponent(Checkbox)
+      const checkbox = wrapper.findComponent(NCheckbox)
 
       expect(checkbox.classes()).toContain('n-checkbox--is-disabled')
       expect(checked.value).toBe(false)
@@ -62,7 +62,7 @@ describe('Checkbox', () => {
 
     test('checkbox with label attribute', async () => {
       const checked = ref(false)
-      const wrapper = mount(() => <Checkbox v-model={checked.value} disabled val="a" />, { attachTo: document.body })
+      const wrapper = mount(() => <NCheckbox v-model={checked.value} disabled val="a" />, { attachTo: document.body })
 
       expect(wrapper.classes()).toContain('n-checkbox--is-disabled')
       expect(checked.value).toBe(false)
@@ -85,13 +85,13 @@ describe('Checkbox', () => {
       const wrapper = mount(
         () => (
           <NFormItem label="test">
-            <Checkbox v-model={checked.value} onChange={onChange} />
+            <NCheckbox v-model={checked.value} onChange={onChange} />
           </NFormItem>
         ),
         { attachTo: document.body },
       )
 
-      await wrapper.findComponent(Checkbox).trigger('click')
+      await wrapper.findComponent(NCheckbox).trigger('click')
       expect(data.value).toBe(true)
     })
 
@@ -102,7 +102,7 @@ describe('Checkbox', () => {
       function onChange(val: CheckboxValueType) {
         data.value = val
       }
-      const wrapper = mount(() => <Checkbox v-model={checked.value} onChange={onChange} val="Foobar" />, {
+      const wrapper = mount(() => <NCheckbox v-model={checked.value} onChange={onChange} val="Foobar" />, {
         attachTo: document.body,
       })
 
@@ -119,9 +119,9 @@ describe('Checkbox', () => {
       }
       const wrapper = mount(
         () => (
-          <Checkbox v-model={checked.value} onChange={onChange}>
+          <NCheckbox v-model={checked.value} onChange={onChange}>
             Foobar
-          </Checkbox>
+          </NCheckbox>
         ),
         { attachTo: document.body },
       )
@@ -141,14 +141,14 @@ describe('Checkbox', () => {
         () => (
           <NFormItem label="test">
             <label>
-              <Checkbox v-model={checked.value} onChange={onChange} />
+              <NCheckbox v-model={checked.value} onChange={onChange} />
             </label>
           </NFormItem>
         ),
         { attachTo: document.body },
       )
 
-      await wrapper.findComponent(Checkbox).trigger('click')
+      await wrapper.findComponent(NCheckbox).trigger('click')
       expect(data.value).toBe(false)
     })
   })
@@ -159,12 +159,12 @@ describe('Checkbox', () => {
       {
         setup() {
           return () => (
-            <CheckboxGroup v-model={checkList.value}>
-              <Checkbox val="a" ref="a" />
-              <Checkbox val="b" ref="b" />
-              <Checkbox val="c" ref="c" />
-              <Checkbox val="d" ref="d" />
-            </CheckboxGroup>
+            <NCheckboxGroup v-model={checkList.value}>
+              <NCheckbox val="a" ref="a" />
+              <NCheckbox val="b" ref="b" />
+              <NCheckbox val="c" ref="c" />
+              <NCheckbox val="d" ref="d" />
+            </NCheckboxGroup>
           )
         },
       },
@@ -189,12 +189,12 @@ describe('Checkbox', () => {
       {
         setup() {
           return () => (
-            <CheckboxGroup v-model={checkList.value}>
-              <Checkbox val="a" ref="a" />
-              <Checkbox val="b" ref="b" />
-              <Checkbox val="c" ref="c" />
-              <Checkbox val="d" ref="d" />
-            </CheckboxGroup>
+            <NCheckboxGroup v-model={checkList.value}>
+              <NCheckbox val="a" ref="a" />
+              <NCheckbox val="b" ref="b" />
+              <NCheckbox val="c" ref="c" />
+              <NCheckbox val="d" ref="d" />
+            </NCheckboxGroup>
           )
         },
       },
@@ -218,10 +218,10 @@ describe('Checkbox', () => {
       {
         setup() {
           return () => (
-            <CheckboxGroup v-model={checkList.value} onChange={onChange}>
-              <Checkbox val="a" ref="a" />
-              <Checkbox val="b" ref="b" />
-            </CheckboxGroup>
+            <NCheckboxGroup v-model={checkList.value} onChange={onChange}>
+              <NCheckbox val="a" ref="a" />
+              <NCheckbox val="b" ref="b" />
+            </NCheckboxGroup>
           )
         },
       },
@@ -240,12 +240,12 @@ describe('Checkbox', () => {
       {
         setup() {
           return () => (
-            <CheckboxGroup v-model={checkList.value}>
-              <Checkbox val="a" ref="a" />
-              <Checkbox val="b" ref="b" />
-              <Checkbox val="c" ref="c" />
-              <Checkbox val="d" ref="d" />
-            </CheckboxGroup>
+            <NCheckboxGroup v-model={checkList.value}>
+              <NCheckbox val="a" ref="a" />
+              <NCheckbox val="b" ref="b" />
+              <NCheckbox val="c" ref="c" />
+              <NCheckbox val="d" ref="d" />
+            </NCheckboxGroup>
           )
         },
       },
@@ -263,13 +263,13 @@ describe('Checkbox', () => {
       const wrapper = mount(
         () => (
           <NFormItem label="test">
-            <Checkbox true-value="a" false-value={3} v-model={checked.value} />
+            <NCheckbox true-value="a" false-value={3} v-model={checked.value} />
           </NFormItem>
         ),
         { attachTo: document.body },
       )
 
-      const checkbox = wrapper.findComponent(Checkbox)
+      const checkbox = wrapper.findComponent(NCheckbox)
 
       await checkbox.trigger('click')
       await nextTick()
@@ -281,7 +281,7 @@ describe('Checkbox', () => {
 
     test('with val attribute', async () => {
       const checked = ref('a')
-      const wrapper = mount(() => <Checkbox val="Foobar" true-value="a" false-value={3} v-model={checked.value} />, {
+      const wrapper = mount(() => <NCheckbox val="Foobar" true-value="a" false-value={3} v-model={checked.value} />, {
         attachTo: document.body,
       })
 
@@ -297,9 +297,9 @@ describe('Checkbox', () => {
       const checked = ref('a')
       const wrapper = mount(
         () => (
-          <Checkbox true-value="a" false-value={3} v-model={checked.value}>
+          <NCheckbox true-value="a" false-value={3} v-model={checked.value}>
             Foobar
-          </Checkbox>
+          </NCheckbox>
         ),
         { attachTo: document.body },
       )
@@ -320,10 +320,10 @@ describe('Checkbox', () => {
     mount(
       () => (
         <div>
-          <Checkbox v-model={checked.value} checked />
-          <CheckboxGroup v-model={checklist.value}>
-            <Checkbox checked val="a" />
-          </CheckboxGroup>
+          <NCheckbox v-model={checked.value} checked />
+          <NCheckboxGroup v-model={checklist.value}>
+            <NCheckbox checked val="a" />
+          </NCheckboxGroup>
         </div>
       ),
       { attachTo: document.body },
@@ -337,11 +337,11 @@ describe('Checkbox', () => {
     const checklist = ref([])
     const wrapper = mount(
       () => (
-        <CheckboxGroup v-model={checklist.value}>
-          <Checkbox val="">all</Checkbox>
-          <Checkbox val="a">a</Checkbox>
-          <Checkbox val="b">b</Checkbox>
-        </CheckboxGroup>
+        <NCheckboxGroup v-model={checklist.value}>
+          <NCheckbox val="">all</NCheckbox>
+          <NCheckbox val="a">a</NCheckbox>
+          <NCheckbox val="b">b</NCheckbox>
+        </NCheckboxGroup>
       ),
       { attachTo: document.body },
     )
@@ -356,11 +356,11 @@ describe('Checkbox', () => {
     const checklist = ref([])
     const wrapper = mount(
       () => (
-        <CheckboxGroup v-model={checklist.value}>
-          <Checkbox val={{ a: 1 }}>all</Checkbox>
-          <Checkbox val={{ a: 2 }}>a</Checkbox>
-          <Checkbox val={{ b: 1 }}>b</Checkbox>
-        </CheckboxGroup>
+        <NCheckboxGroup v-model={checklist.value}>
+          <NCheckbox val={{ a: 1 }}>all</NCheckbox>
+          <NCheckbox val={{ a: 2 }}>a</NCheckbox>
+          <NCheckbox val={{ b: 1 }}>b</NCheckbox>
+        </NCheckboxGroup>
       ),
       { attachTo: document.body },
     )
@@ -378,17 +378,17 @@ describe('Checkbox', () => {
       {
         setup() {
           return () => (
-            <CheckboxGroup v-model={checklist.value}>
-              <Checkbox val={{ a: 1 }} ref="a1">
+            <NCheckboxGroup v-model={checklist.value}>
+              <NCheckbox val={{ a: 1 }} ref="a1">
                 a1
-              </Checkbox>
-              <Checkbox val={{ a: 2 }} ref="a2">
+              </NCheckbox>
+              <NCheckbox val={{ a: 2 }} ref="a2">
                 a2
-              </Checkbox>
-              <Checkbox val={{ b: 1 }} ref="b1">
+              </NCheckbox>
+              <NCheckbox val={{ b: 1 }} ref="b1">
                 b1
-              </Checkbox>
-            </CheckboxGroup>
+              </NCheckbox>
+            </NCheckboxGroup>
           )
         },
       },
@@ -412,7 +412,7 @@ describe('Checkbox', () => {
 describe('check-button', () => {
   test('create', async () => {
     const checked = ref(false)
-    const wrapper = mount(() => <CheckboxButton v-model={checked.value} val="a" />, { attachTo: document.body })
+    const wrapper = mount(() => <NCheckboxButton v-model={checked.value} val="a" />, { attachTo: document.body })
 
     expect(wrapper.classes()).toContain('n-checkbox-button')
     await wrapper.trigger('click')
@@ -423,7 +423,7 @@ describe('check-button', () => {
 
   test('disabled', async () => {
     const checked = ref(false)
-    const wrapper = mount(() => <CheckboxButton v-model={checked.value} disabled val="a" />)
+    const wrapper = mount(() => <NCheckboxButton v-model={checked.value} disabled val="a" />)
 
     expect(wrapper.classes()).toContain('n-checkbox-button--is-disabled')
     await wrapper.trigger('click')
@@ -438,7 +438,7 @@ describe('check-button', () => {
       data.value = val
     }
 
-    const wrapper = mount(() => <CheckboxButton v-model={checked.value} onChange={onChange} />, {
+    const wrapper = mount(() => <NCheckboxButton v-model={checked.value} onChange={onChange} />, {
       attachTo: document.body,
     })
 
@@ -458,12 +458,12 @@ describe('check-button', () => {
       {
         setup() {
           return () => (
-            <CheckboxGroup v-model={checkList.value} onChange={onChange}>
-              <CheckboxButton val="a" ref="a" />
-              <CheckboxButton val="b" ref="b" />
-              <CheckboxButton val="c" ref="c" />
-              <CheckboxButton val="d" ref="d" />
-            </CheckboxGroup>
+            <NCheckboxGroup v-model={checkList.value} onChange={onChange}>
+              <NCheckboxButton val="a" ref="a" />
+              <NCheckboxButton val="b" ref="b" />
+              <NCheckboxButton val="c" ref="c" />
+              <NCheckboxButton val="d" ref="d" />
+            </NCheckboxGroup>
           )
         },
       },
@@ -482,12 +482,12 @@ describe('check-button', () => {
       {
         setup() {
           return () => (
-            <CheckboxGroup v-model={checkList.value} size="large">
-              <CheckboxButton val="a" ref="a" />
-              <CheckboxButton val="b" ref="b" />
-              <CheckboxButton val="c" ref="c" />
-              <CheckboxButton val="d" ref="d" />
-            </CheckboxGroup>
+            <NCheckboxGroup v-model={checkList.value} size="large">
+              <NCheckboxButton val="a" ref="a" />
+              <NCheckboxButton val="b" ref="b" />
+              <NCheckboxButton val="c" ref="c" />
+              <NCheckboxButton val="d" ref="d" />
+            </NCheckboxGroup>
           )
         },
       },
@@ -504,12 +504,12 @@ describe('check-button', () => {
     const checkList = ref(['a', 'b'])
     const wrapper = mount(
       () => (
-        <CheckboxGroup v-model={checkList.value} tag="tr">
-          <CheckboxButton val="a" ref="a" />
-          <CheckboxButton val="b" ref="b" />
-          <CheckboxButton val="c" ref="c" />
-          <CheckboxButton val="d" ref="d" />
-        </CheckboxGroup>
+        <NCheckboxGroup v-model={checkList.value} tag="tr">
+          <NCheckboxButton val="a" ref="a" />
+          <NCheckboxButton val="b" ref="b" />
+          <NCheckboxButton val="c" ref="c" />
+          <NCheckboxButton val="d" ref="d" />
+        </NCheckboxGroup>
       ),
       { attachTo: document.body },
     )
@@ -523,13 +523,13 @@ describe('check-button', () => {
       {
         setup() {
           return () => (
-            <CheckboxGroup v-model={checkList.value} min={2} max={3}>
-              <CheckboxButton val="a" ref="a" />
-              <CheckboxButton val="b" ref="b" />
-              <CheckboxButton val="c" ref="c" />
-              <CheckboxButton val="d" ref="d" />
-              <CheckboxButton val="e" ref="e" />
-            </CheckboxGroup>
+            <NCheckboxGroup v-model={checkList.value} min={2} max={3}>
+              <NCheckboxButton val="a" ref="a" />
+              <NCheckboxButton val="b" ref="b" />
+              <NCheckboxButton val="c" ref="c" />
+              <NCheckboxButton val="d" ref="d" />
+              <NCheckboxButton val="e" ref="e" />
+            </NCheckboxGroup>
           )
         },
       },
@@ -564,12 +564,12 @@ describe('check-button', () => {
       {
         setup() {
           return () => (
-            <CheckboxGroup v-model={checkList.value}>
-              <CheckboxButton val="a" ref="a" />
-              <CheckboxButton val="b" ref="b" />
-              <CheckboxButton val="c" ref="c" />
-              <CheckboxButton val="d" ref="d" />
-            </CheckboxGroup>
+            <NCheckboxGroup v-model={checkList.value}>
+              <NCheckboxButton val="a" ref="a" />
+              <NCheckboxButton val="b" ref="b" />
+              <NCheckboxButton val="c" ref="c" />
+              <NCheckboxButton val="d" ref="d" />
+            </NCheckboxGroup>
           )
         },
       },
@@ -589,10 +589,10 @@ describe('check-button', () => {
       mount(
         () => (
           <div>
-            <Checkbox v-model={checked.value} checked />
-            <CheckboxGroup v-model={checklist.value}>
-              <CheckboxButton checked val="a" />
-            </CheckboxGroup>
+            <NCheckbox v-model={checked.value} checked />
+            <NCheckboxGroup v-model={checklist.value}>
+              <NCheckboxButton checked val="a" />
+            </NCheckboxGroup>
           </div>
         ),
         { attachTo: document.body },
@@ -603,7 +603,7 @@ describe('check-button', () => {
     })
 
     test('checked', () => {
-      const wrapper = mount(() => <Checkbox checked />)
+      const wrapper = mount(() => <NCheckbox checked />)
 
       expect(wrapper.find('.n-checkbox').classes()).contains('n-checkbox--is-checked')
     })
@@ -614,14 +614,14 @@ describe('check-button', () => {
       const wrapper = mount(
         () => (
           <NFormItem label="test">
-            <Checkbox />
+            <NCheckbox />
           </NFormItem>
         ),
         { attachTo: document.body },
       )
 
       const formItem = await wrapper.findComponent(NFormItem)
-      const checkbox = await wrapper.findComponent(Checkbox)
+      const checkbox = await wrapper.findComponent(NCheckbox)
       const formItemLabel = formItem.find('.n-form-item__label')
       const checkboxInput = checkbox.find('.n-checkbox__native')
 
@@ -632,14 +632,14 @@ describe('check-button', () => {
       const wrapper = mount(
         () => (
           <NFormItem label="test">
-            <Checkbox val="Foo">Foo</Checkbox>
+            <NCheckbox val="Foo">Foo</NCheckbox>
           </NFormItem>
         ),
         { attachTo: document.body },
       )
 
       const formItem = await wrapper.findComponent(NFormItem)
-      const checkbox = await wrapper.findComponent(Checkbox)
+      const checkbox = await wrapper.findComponent(NCheckbox)
       const checkboxLabel = checkbox.find('.n-checkbox__label')
       const checkboxInput = checkbox.find('.n-checkbox__native')
 
@@ -652,17 +652,17 @@ describe('check-button', () => {
       const wrapper = mount(
         () => (
           <NFormItem label="test">
-            <CheckboxGroup>
-              <Checkbox val="Foo" />
-              <Checkbox val="Bar" />
-            </CheckboxGroup>
+            <NCheckboxGroup>
+              <NCheckbox val="Foo" />
+              <NCheckbox val="Bar" />
+            </NCheckboxGroup>
           </NFormItem>
         ),
         { attachTo: document.body },
       )
 
       const formItem = await wrapper.findComponent(NFormItem)
-      const checkboxGroup = await wrapper.findComponent(CheckboxGroup)
+      const checkboxGroup = await wrapper.findComponent(NCheckboxGroup)
       const formItemLabel = formItem.find('.n-form-item__label')
 
       expect(formItem.attributes('role')).toBeFalsy()
@@ -675,17 +675,17 @@ describe('check-button', () => {
       const wrapper = mount(
         () => (
           <NFormItem label="test">
-            <CheckboxGroup label="Foo">
-              <Checkbox val="Foo">Foo</Checkbox>
-              <Checkbox val="Bar">Bar</Checkbox>
-            </CheckboxGroup>
+            <NCheckboxGroup label="Foo">
+              <NCheckbox val="Foo">Foo</NCheckbox>
+              <NCheckbox val="Bar">Bar</NCheckbox>
+            </NCheckboxGroup>
           </NFormItem>
         ),
         { attachTo: document.body },
       )
 
       const formItem = await wrapper.findComponent(NFormItem)
-      const checkboxGroup = await wrapper.findComponent(CheckboxGroup)
+      const checkboxGroup = await wrapper.findComponent(NCheckboxGroup)
       const formItemLabel = formItem.find('.n-form-item__label')
 
       expect(formItemLabel.attributes('for')).toBe(checkboxGroup.attributes('id'))
@@ -700,14 +700,14 @@ describe('check-button', () => {
           setup() {
             return () => (
               <NFormItem label="test">
-                <CheckboxGroup label="Foo" ref="checkboxGroup1">
-                  <Checkbox val="Foo">Foo</Checkbox>
-                  <Checkbox val="Bar">Bar</Checkbox>
-                </CheckboxGroup>
-                <CheckboxGroup label="Bar" ref="checkboxGroup2">
-                  <Checkbox val="Foo">Foo</Checkbox>
-                  <Checkbox val="Bar">Bar</Checkbox>
-                </CheckboxGroup>
+                <NCheckboxGroup label="Foo" ref="checkboxGroup1">
+                  <NCheckbox val="Foo">Foo</NCheckbox>
+                  <NCheckbox val="Bar">Bar</NCheckbox>
+                </NCheckboxGroup>
+                <NCheckboxGroup label="Bar" ref="checkboxGroup2">
+                  <NCheckbox val="Foo">Foo</NCheckbox>
+                  <NCheckbox val="Bar">Bar</NCheckbox>
+                </NCheckboxGroup>
               </NFormItem>
             )
           },

@@ -22,6 +22,7 @@
     "commit": "cz"
   },
   "devDependencies": {
+    "@nado/prettier-config": "workspace:*",
     "@commitlint/cli": "^17.5.1",
     "@commitlint/config-conventional": "^17.4.4",
     "@types/jsdom": "^21.1.1",

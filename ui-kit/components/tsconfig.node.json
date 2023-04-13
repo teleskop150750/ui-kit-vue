@@ -1,8 +1,8 @@
 {
-  "extends": "@nado/tsconfig/tsconfig.node.json",
+  "extends": "@nado/tsconfig/tsconfig.json",
   "include": ["vite.config.*", "vitest.config.*", "cypress.config.*"],
   "compilerOptions": {
     "composite": true,
-    "types": ["node", "unplugin-vue-macros/macros-global"]
+    "types": ["node"]
   }
 }

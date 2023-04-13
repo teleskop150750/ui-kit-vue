@@ -20,21 +20,21 @@ module.exports = {
   ],
   extends: ['plugin:vue/vue3-recommended', '@nado/eslint-config-basic-ts', 'prettier'],
   plugins: ['prettier'],
-  "rules": {
-    "prettier/prettier": "error",
-    'curly': 'error',
-    'vue/html-self-closing': [
-      'error',
-      {
-        html: {
-          void: 'always',
-          normal: 'always',
-          component: 'always',
-        },
-        svg: 'always',
-        math: 'always',
-      },
-    ],
+  rules: {
+    'prettier/prettier': 'error',
+    curly: 'error',
+    // "vue/html-self-closing": [
+    //   "error",
+    //   {
+    //     html: {
+    //       void: "never",
+    //       normal: "always",
+    //       component: "always",
+    //     },
+    //     svg: "always",
+    //     math: "always",
+    //   },
+    // ],
     'vue/max-attributes-per-line': 'off',
     // 'vue/no-v-html': 'off',
     // 'vue/require-prop-types': 'off',
