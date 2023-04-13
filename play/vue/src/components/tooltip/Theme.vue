@@ -17,8 +17,8 @@ import { NButton, NTooltip } from '@nado/ui-kit-vue'
   </div>
 </template>
 
-<style>
-.n-popper--effect-customized {
+<style scoped>
+:global(.n-popper--effect-customized) {
   /* Set padding to ensure the height is 32px */
   padding: 6px 12px;
 
