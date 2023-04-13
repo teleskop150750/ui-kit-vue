@@ -36,3 +36,7 @@ export default {
 <template>
   <slot />
 </template>
+
+<style>
+@import url('@nado/ui-kit-theme/src/components/n-popper/index.css');
+</style>

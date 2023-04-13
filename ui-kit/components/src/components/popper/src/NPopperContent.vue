@@ -4,10 +4,10 @@ import { inject, onBeforeUnmount, onMounted, provide, ref, unref, watch, type Wa
 
 import { FORM_ITEM_INJECTION_KEY } from '../../form'
 import { usePopperContent, usePopperContentDOM, usePopperContentFocusTrap } from './hooks'
-import { popperContentEmits, popperContentProps } from './popper-content.model'
+import { nPopperContentProps, popperContentEmits } from './popper-content.model'
 import { POPPER_CONTENT_INJECTION_KEY } from './tokens'
 
-const props = defineProps(popperContentProps)
+const props = defineProps(nPopperContentProps)
 
 const emit = defineEmits(popperContentEmits)
 

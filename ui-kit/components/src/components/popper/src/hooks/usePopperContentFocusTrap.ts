@@ -1,9 +1,9 @@
 import { ref, type SetupContext } from 'vue'
 
-import type { NPopperContentEmits, PopperContentProps } from '../popper-content.model'
+import type { NPopperContentEmits, NPopperContentProps } from '../popper-content.model'
 
 export const usePopperContentFocusTrap = (
-  props: PopperContentProps,
+  props: NPopperContentProps,
   emit: SetupContext<NPopperContentEmits>['emit'],
 ) => {
   const trapped = ref(false)
@@ -31,7 +31,7 @@ export const usePopperContentFocusTrap = (
   }
 
   const onFocusoutPrevented = (event: CustomEvent) => {
-    if (!props.trapping) {
+    if (!props.isTrapping) {
       if (event.detail.focusReason === 'pointer') {
         event.preventDefault()
       }

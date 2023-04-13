@@ -1,9 +1,6 @@
+import type { Measurable } from '@nado/ui-kit-hooks'
 import type { Instance } from '@popperjs/core'
 import type { ComputedRef, CSSProperties, InjectionKey, Ref } from 'vue'
-
-export interface Measurable {
-  getBoundingClientRect: () => DOMRect
-}
 
 /**
  * triggerRef indicates the element that triggers popper

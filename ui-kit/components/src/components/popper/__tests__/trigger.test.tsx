@@ -46,7 +46,7 @@ describe('<NPopperTrigger />', () => {
 
     it('should be able to render for virtual ref', async () => {
       wrapper = mountTrigger({
-        virtualTriggering: true,
+        isVirtualTriggering: true,
       })
 
       await nextTick()

@@ -1,13 +1,13 @@
+import type { Measurable } from '@nado/ui-kit-hooks'
 import { buildProps, definePropType } from '@nado/ui-kit-utils'
 
 import type Trigger from './NPopperTrigger.vue'
-import type { Measurable } from './tokens'
 
 export const nPopperTriggerProps = buildProps({
   virtualRef: {
     type: definePropType<Measurable>(Object),
   },
-  virtualTriggering: Boolean,
+  isVirtualTriggering: Boolean,
   onMouseenter: {
     type: definePropType<(e: Event) => void>(Function),
   },
@@ -30,7 +30,7 @@ export const nPopperTriggerProps = buildProps({
     type: definePropType<(e: Event) => void>(Function),
   },
   id: String,
-  open: Boolean,
+  isOpen: Boolean,
 } as const)
 
 export type NPopperTriggerProps = typeof nPopperTriggerProps

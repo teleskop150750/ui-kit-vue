@@ -4,13 +4,13 @@ import { isUndefined } from '@nado/ui-kit-utils'
 import type { Modifier } from '@popperjs/core'
 import { computed, inject, onMounted, ref, unref, watch } from 'vue'
 
-import type { PopperContentProps } from '../popper-content.model'
+import type { NPopperContentProps } from '../popper-content.model'
 import { POPPER_INJECTION_KEY } from '../tokens'
 import { buildPopperOptions, unwrapMeasurableEl } from '../utils'
 
 const DEFAULT_ARROW_OFFSET = 0
 
-export const usePopperContent = (props: PopperContentProps) => {
+export const usePopperContent = (props: NPopperContentProps) => {
   const { popperInstanceRef, contentRef, triggerRef, role } = inject(POPPER_INJECTION_KEY, undefined)!
 
   const arrowRef = ref<HTMLElement>()

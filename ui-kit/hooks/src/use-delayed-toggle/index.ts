@@ -36,7 +36,7 @@ export function useDelayedToggle({ showAfter, hideAfter, autoClose, open, close 
   const { registerTimeout } = useTimeout()
   const { registerTimeout: registerTimeoutForAutoClose, cancelTimeout: cancelTimeoutForAutoClose } = useTimeout()
 
-  function onOpen(event?: Event) {
+  function delayOpen(event?: Event) {
     registerTimeout(() => {
       open(event)
 
@@ -50,7 +50,7 @@ export function useDelayedToggle({ showAfter, hideAfter, autoClose, open, close 
     }, unref(showAfter))
   }
 
-  function onClose(event?: Event) {
+  function delayClose(event?: Event) {
     cancelTimeoutForAutoClose()
 
     registerTimeout(() => {
@@ -59,7 +59,7 @@ export function useDelayedToggle({ showAfter, hideAfter, autoClose, open, close 
   }
 
   return {
-    onOpen,
-    onClose,
+    delayOpen,
+    delayClose,
   }
 }

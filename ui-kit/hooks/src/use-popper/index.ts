@@ -9,8 +9,19 @@ import {
 } from '@popperjs/core'
 import { computed, onBeforeUnmount, type Ref, ref, shallowRef, unref, watch } from 'vue'
 
+interface MeasurableRect {
+  height: number
+  width: number
+  x: number
+  y: number
+}
+
+export interface Measurable {
+  getBoundingClientRect: () => MeasurableRect
+}
+
 type ElementType = Nillable<HTMLElement>
-type ReferenceElement = ElementType | VirtualElement
+type ReferenceElement = ElementType | VirtualElement | Measurable
 export type PartialOptions = Partial<Options>
 
 export function usePopper(
@@ -88,7 +99,7 @@ export function usePopper(
       return
     }
 
-    instanceRef.value = createPopper(referenceElement, popperElement, unref(options))
+    instanceRef.value = createPopper(referenceElement as Element | VirtualElement, popperElement, unref(options))
   })
 
   onBeforeUnmount(() => {

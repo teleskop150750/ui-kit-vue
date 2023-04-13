@@ -65,6 +65,11 @@ const router = createRouter({
       name: 'table',
       component: () => import('../views/TableView.vue'),
     },
+    {
+      path: '/tooltip',
+      name: 'tooltip',
+      component: () => import('../views/TooltiplView.vue'),
+    },
   ],
 })
 
