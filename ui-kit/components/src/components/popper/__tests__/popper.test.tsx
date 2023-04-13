@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/no-null */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import { defineComponent, inject, nextTick } from 'vue'
@@ -19,11 +19,11 @@ const TestChild = defineComponent({
 
 describe('<NPopper />', () => {
   it('should be able to provide instance to its children', async () => {
-    const wrapper = mount(() => (
-      <NPopper>
-        <TestChild />
-      </NPopper>
-    )) as any
+    const wrapper = mount(NPopper as any, {
+      slots: {
+        default: TestChild,
+      },
+    })
 
     await nextTick()
 
