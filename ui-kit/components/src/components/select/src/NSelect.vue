@@ -323,7 +323,6 @@ export default defineComponent({
       :effect="effect"
       pure
       trigger="click"
-      :transition="`${nsSelect.namespace}-zoom-in-top`"
       :stop-popper-mouse-event="false"
       :gpu-acceleration="false"
       :persistent="persistent"
@@ -338,7 +337,12 @@ export default defineComponent({
             :style="selectTagsStyle"
           >
             <transition v-if="collapseTags && selected.length > 0" @after-leave="resetInputHeight">
-              <span :class="[nsSelect.b('tags-wrapper'), { 'has-prefix': prefixWidth && selected.length > 0 }]">
+              <span
+                :class="[
+                  nsSelect.s('tags-wrapper'),
+                  nsSelect.sHas('tags-wrapper', 'prefix', prefixWidth && selected.length > 0),
+                ]"
+              >
                 <NBadge
                   v-for="item in showTagList"
                   :key="getValueKey(item)"
@@ -404,7 +408,12 @@ export default defineComponent({
               </span>
             </transition>
             <transition v-if="!collapseTags" @after-leave="resetInputHeight">
-              <span :class="[nsSelect.b('tags-wrapper'), { 'has-prefix': prefixWidth && selected.length > 0 }]">
+              <span
+                :class="[
+                  nsSelect.b('tags-wrapper'),
+                  nsSelect.sHas('tags-wrapper', 'prefix', prefixWidth && selected.length > 0),
+                ]"
+              >
                 <NBadge
                   v-for="item in selected"
                   :key="getValueKey(item)"
