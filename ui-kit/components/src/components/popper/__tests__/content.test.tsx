@@ -81,7 +81,7 @@ describe('<NPopperContent />', () => {
       expect(popperInjection.triggerRef).toBeDefined()
       expect(wrapper.html()).toContain(AXIOM)
       expect(popperInjection.popperInstanceRef.value).toBeDefined()
-      expect(wrapper.classes()).toEqual(['n-popper', 'n-popper--is-dark'])
+      expect(wrapper.classes()).toEqual(['n-popper', 'n-popper--effect-dark'])
       expect(wrapper.vm.contentStyle).toHaveLength(3)
       expect(wrapper.vm.contentStyle[0]).toHaveProperty('zIndex')
       expect(wrapper.vm.contentStyle[1]).toEqual({})
@@ -103,7 +103,7 @@ describe('<NPopperContent />', () => {
         effect: 'custom',
       })
 
-      expect(wrapper.classes()).toEqual(['n-popper', 'n-popper--is-pure', 'n-popper--is-custom'])
+      expect(wrapper.classes()).toEqual(['n-popper', 'n-popper--is-pure', 'n-popper--effect-custom'])
     })
 
     it('should be able to set customized styles', async () => {

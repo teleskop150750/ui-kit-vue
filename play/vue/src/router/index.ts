@@ -26,6 +26,11 @@ const router = createRouter({
       component: () => import('../views/InputView.vue'),
     },
     {
+      path: '/select',
+      name: 'select',
+      component: () => import('../views/SelectView.vue'),
+    },
+    {
       path: '/radio',
       name: 'radio',
       component: () => import('../views/RadioView.vue'),

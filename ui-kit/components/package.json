@@ -26,6 +26,7 @@
     "@nado/focus-trap": "workspace:*",
     "@nado/tabbable": "workspace:*",
     "@nado/ui-kit-constants": "workspace:*",
+    "@nado/ui-kit-directives": "workspace:*",
     "@nado/ui-kit-hooks": "workspace:*",
     "@nado/ui-kit-icons-vue": "workspace:*",
     "@nado/ui-kit-locale": "workspace:*",

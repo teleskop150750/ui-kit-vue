@@ -51,7 +51,7 @@
   }
 
   .n-select-dropdown__item--is-disabled {
-    color: var(--n-sys-color-text-disabled);
+    color: var(--n-sys-text-color-disabled);
 
     cursor: not-allowed;
   }

@@ -604,6 +604,9 @@ importers:
       '@nado/ui-kit-constants':
         specifier: workspace:*
         version: link:../constants
+      '@nado/ui-kit-directives':
+        specifier: workspace:*
+        version: link:../directives
       '@nado/ui-kit-hooks':
         specifier: workspace:*
         version: link:../hooks
