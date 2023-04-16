@@ -9,7 +9,7 @@ export function useShouldShowError(props: NFormItemProps, validateState: Ref<NFo
   const validateStateDebounced = refDebounced(validateState, 100)
 
   const shouldShowError = computed(
-    () => validateStateDebounced.value === 'error' && props.showMessage && (formContext?.showMessage ?? true),
+    () => validateStateDebounced.value === 'danger' && props.showMessage && (formContext?.showMessage ?? true),
   )
 
   return {

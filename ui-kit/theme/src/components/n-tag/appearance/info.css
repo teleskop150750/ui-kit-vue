@@ -1,0 +1,49 @@
+@layer components {
+  /* soft */
+  .n-tag--appearance-soft-info {
+    /* bg */
+    --n-comp-tag-container-bg-color: var(--n-sys-color-info-50);
+    --n-comp-tag-close-bg-color: var(--n-sys-color-info-50);
+    --n-comp-tag-close-bg-color-hovered: var(--n-sys-color-info);
+
+    /* border */
+    --n-comp-tag-container-border-color: var(--n-sys-color-info-50);
+
+    /* text */
+    --n-comp-tag-container-text-color: var(--n-sys-color-info);
+    --n-comp-tag-close-color: var(--n-sys-color-info);
+    --n-comp-tag-close-color-hovered: var(--n-sys-color-white);
+  }
+
+  /* solid */
+  .n-tag--appearance-solid-info {
+    /* bg */
+    --n-comp-tag-container-bg-color: var(--n-sys-color-info);
+    --n-comp-tag-close-bg-color: var(--n-sys-color-info);
+    --n-comp-tag-close-bg-color-hovered: var(--n-sys-color-info-50);
+
+    /* border */
+    --n-comp-tag-container-border-color: var(--n-sys-color-info);
+
+    /* text */
+    --n-comp-tag-container-text-color: var(--n-sys-color-white);
+    --n-comp-tag-close-color: var(--n-sys-color-white);
+    --n-comp-tag-close-color-hovered: var(--n-sys-color-info);
+  }
+
+  /* outline */
+  .n-tag--appearance-outline-info {
+    /* bg */
+    --n-comp-tag-container-bg-color: transparent;
+    --n-comp-tag-close-bg-color: transparent;
+    --n-comp-tag-close-bg-color-hovered: var(--n-sys-color-info);
+
+    /* border */
+    --n-comp-tag-container-border-color: var(--n-sys-color-info);
+
+    /* text */
+    --n-comp-tag-container-text-color: var(--n-sys-color-info);
+    --n-comp-tag-close-color: var(--n-sys-color-info);
+    --n-comp-tag-close-color-hovered: var(--n-sys-color-white);
+  }
+}

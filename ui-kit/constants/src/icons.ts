@@ -24,12 +24,12 @@ export const TypeComponents = {
 export const TypeComponentsMap = {
   success: NIconSuccessFilled,
   warning: NIconWarningFilled,
-  error: NIconCircleCloseFilled,
+  danger: NIconCircleCloseFilled,
   info: NIconInfoFilled,
 } as const
 
 export const ValidateComponentsMap = {
   validating: NIconLoading,
   success: NIconCircleCheck,
-  error: NIconCircleClose,
+  danger: NIconCircleClose,
 } as const

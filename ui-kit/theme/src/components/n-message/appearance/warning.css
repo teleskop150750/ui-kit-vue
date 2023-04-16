@@ -1,0 +1,15 @@
+.n-message--appearance-warning {
+  --n-comp-message-bg-color: var(--n-sys-color-warning-50);
+  --n-comp-message-border-color: var(--n-sys-color-warning-300);
+  --n-comp-message-text-color: var(--n-sys-color-warning);
+  --n-comp-message-close-icon-color: var(--n-sys-color-warning);
+}
+
+.n-message--appearance-warning .n-message__content {
+  color: var(--n-comp-message-text-color);
+  overflow-wrap: anywhere;
+}
+
+.n-message .n-message-icon--appearance-warning {
+  color: var(--n-comp-message-text-color);
+}

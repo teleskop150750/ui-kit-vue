@@ -18,7 +18,7 @@ export function useStyleClasses({ props, validateState, size, isRequired }: Para
   const formItemClasses = computed(() => [
     ns.b(),
     ns.m(size.value),
-    ns.is('error', validateState.value === 'error'),
+    ns.is('error', validateState.value === 'danger'),
     ns.is('validating', validateState.value === 'validating'),
     ns.is('success', validateState.value === 'success'),
     ns.is('required', isRequired.value || props.required || false),

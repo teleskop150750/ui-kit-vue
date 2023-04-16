@@ -1,11 +1,18 @@
 import { mount } from '@vue/test-utils'
+import { nextTick, ref } from 'vue'
 
 import NBadge from '../src/NBadge.vue'
 
 const AXIOM = 'Rem is the best girl'
 
-describe('NBadge.vue', () => {
-  test('render text & class', () => {
+describe('Badge', () => {
+  it('has value', () => {
+    const wrapper = mount(() => <NBadge value={80} />)
+
+    expect(wrapper.find('.n-badge__content').text()).toEqual('80')
+  })
+
+  it('is fixed', () => {
     const wrapper = mount(() => (
       <NBadge
         v-slots={{
@@ -14,54 +21,46 @@ describe('NBadge.vue', () => {
       />
     ))
 
-    expect(wrapper.text()).toEqual(AXIOM)
-
-    const { vm } = wrapper
-
-    expect(vm.$el.classList.contains('n-badge')).toEqual(true)
-    expect(vm.$el.classList.contains('n-badge__close')).toEqual(false)
+    expect(wrapper.find('.n-badge__content--is-fixed').exists()).toBe(true)
+    expect(wrapper.find('.n-badge').text()).toBe(AXIOM)
   })
 
-  test('type', () => {
-    const wrapper = mount(() => <NBadge type="success" />)
-    const { vm } = wrapper
+  it('is dot', () => {
+    const wrapper = mount(() => (
+      <NBadge
+        isDot={true}
+        v-slots={{
+          default: () => AXIOM,
+        }}
+      />
+    ))
 
-    expect(vm.$el.classList.contains('n-badge--appearance-soft-primary')).toEqual(true)
+    expect(wrapper.find('.n-badge__content--is-dot').exists()).toBe(true)
+    expect(wrapper.find('.n-badge__content--appearance-danger').exists()).toBe(true)
   })
 
-  test('closable', async () => {
-    const wrapper = mount(() => <NBadge closable={true} />)
-    const comp = wrapper.getComponent(NBadge)
-    const closeBtn = comp.find('.n-badge .n-badge__close')
+  it('is dot with type', () => {
+    const wrapper = mount(() => (
+      <NBadge
+        isDot={true}
+        appearance={'success'}
+        v-slots={{
+          default: () => AXIOM,
+        }}
+      />
+    ))
 
-    expect(closeBtn.exists()).toBe(true)
-
-    await closeBtn.trigger('click')
-    expect(comp.emitted().close).toBeTruthy()
+    expect(wrapper.find('.n-badge__content--is-dot').exists()).toBe(true)
+    expect(wrapper.find('.n-badge__content--appearance-success').exists()).toBe(true)
   })
 
-  test('closeTransition', () => {
-    const wrapper = mount(() => <NBadge closeTransition={true} />)
-    const { vm } = wrapper
+  it('max', async () => {
+    const badgeValue = ref(200)
+    const wrapper = mount(() => <NBadge max={100} value={badgeValue.value} />)
 
-    expect(vm.$el.classList.contains('md-fade-center')).toEqual(false)
-  })
-
-  test('color', () => {
-    const wrapper = mount(() => <NBadge color="rgb(0, 0, 0)" />)
-    const { vm } = wrapper
-
-    expect(vm.$el.style.backgroundColor).toEqual('rgb(0, 0, 0)')
-  })
-
-  // should also support large size
-  test('size', () => {
-    const wrapper = mount(() => <NBadge size="large" />)
-    const { vm } = wrapper
-    const el = vm.$el
-
-    expect(el.className.includes('n-badge--size-large')).toEqual(true)
-    expect(el.className.includes('n-badge--size-default')).toEqual(false)
-    expect(el.className.includes('n-badge--size-small')).toEqual(false)
+    expect(wrapper.find('.n-badge__content').text()).toEqual('100+')
+    badgeValue.value = 80
+    await nextTick()
+    expect(wrapper.find('.n-badge__content').text()).toEqual('80')
   })
 })

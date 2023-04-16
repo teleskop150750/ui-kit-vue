@@ -1,53 +1,54 @@
 <script lang="ts" setup>
 import { useNamespace } from '@nado/ui-kit-hooks'
-import { NIconClose } from '@nado/ui-kit-icons-vue'
+import { isNumber } from '@nado/ui-kit-utils'
 import { computed } from 'vue'
 
-import { useFormSize } from '../../form'
-import { nBadgeEmits, nBadgeProps } from './badge.model'
+import { nBadgeProps } from './badge.model'
 
 const props = defineProps(nBadgeProps)
-const emit = defineEmits(nBadgeEmits)
 
-const tagSize = useFormSize()
 const ns = useNamespace('badge')
-const classes = computed(() => {
-  const { appearance, mod, closable, round } = props
 
-  return [
-    ns.b(),
-    ns.is('closable', closable),
-    ns.m(`appearance-${mod}-${appearance}`),
-    ns.type('size', tagSize.value),
-    ns.is('round', round),
-  ]
+const content = computed<string>(() => {
+  if (props.isDot) {
+    return ''
+  }
+
+  if (isNumber(props.value) && isNumber(props.max)) {
+    return props.max < props.value ? `${props.max}+` : `${props.value}`
+  }
+
+  return `${props.value}`
 })
 
-// methods
-function handleClose(event: MouseEvent) {
-  emit('close', event)
-}
-
-function handleClick(event: MouseEvent) {
-  emit('click', event)
-}
+defineExpose({
+  /** @description badge content */
+  content,
+})
 </script>
 
 <script lang="ts">
 export default {
-  name: 'NTag',
+  name: 'NBadge',
 }
 </script>
 
 <template>
-  <span :class="classes" :style="{ backgroundColor: color }" @click="handleClick">
-    <span :class="ns.e('content')">
-      <slot />
-    </span>
-    <button v-if="closable" type="button" :class="ns.e('close')" @click.stop="handleClose">
-      <NIconClose class="n-icon" :class="ns.e('close-icon')" />
-    </button>
-  </span>
+  <div :class="ns.b()">
+    <slot />
+    <transition :name="`${ns.namespace}-zoom-in-center`">
+      <sup
+        v-show="!hidden && (content || isDot)"
+        :class="[
+          ns.e('content'),
+          ns.eType('content', 'appearance', appearance),
+          ns.eIs('content', 'fixed', !!$slots.default),
+          ns.eIs('content', 'dot', isDot),
+        ]"
+        v-text="content"
+      />
+    </transition>
+  </div>
 </template>
 
 <style>
