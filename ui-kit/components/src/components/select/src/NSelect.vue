@@ -7,9 +7,9 @@ import { useFocus, useLocale, useNamespace } from '@nado/ui-kit-hooks'
 import { isIOS, useResizeObserver } from '@vueuse/core'
 import { computed, defineComponent, nextTick, onMounted, provide, reactive, toRefs, unref } from 'vue'
 
-import { NBadge } from '../../badge'
 import { NInput } from '../../input'
 import { NScrollbar } from '../../scrollbar'
+import { NTag } from '../../tag'
 import NTooltip from '../../tooltip/src/NTooltip.vue'
 import NOption from './NOption.vue'
 import { NOptions } from './NOptions'
@@ -28,7 +28,7 @@ export default defineComponent({
     NSelectMenu,
     NOption,
     NOptions,
-    NBadge,
+    NTag,
     NScrollbar,
     NTooltip,
   },
@@ -343,23 +343,23 @@ export default defineComponent({
                   nsSelect.sHas('tags-wrapper', 'prefix', prefixWidth && selected.length > 0),
                 ]"
               >
-                <NBadge
+                <NTag
                   v-for="item in showTagList"
                   :key="getValueKey(item)"
                   :closable="!selectDisabled && !item.isDisabled"
                   :size="collapseTagSize"
-                  :mod="badgeMod"
+                  :mod="tagMod"
                   @close="deleteTag($event, item)"
                 >
                   <span :class="nsSelect.e('tags-text')" :style="tagTextStyle">
                     {{ item.currentLabel }}
                   </span>
-                </NBadge>
-                <NBadge
+                </NTag>
+                <NTag
                   v-if="selected.length > maxCollapseTags"
                   :closable="false"
                   :size="collapseTagSize"
-                  :type="badgeMod"
+                  :type="tagMod"
                   disable-transitions
                 >
                   <NTooltip
@@ -380,12 +380,12 @@ export default defineComponent({
                           :key="getValueKey(item)"
                           :class="nsSelect.e('collapse-tag')"
                         >
-                          <NBadge
+                          <NTag
                             class="in-tooltip"
                             :closable="!selectDisabled && !item.isDisabled"
                             :size="collapseTagSize"
                             :hit="item.hitState"
-                            :type="badgeMod"
+                            :type="tagMod"
                             disable-transitions
                             :style="{ margin: '2px' }"
                             @close="deleteTag($event, item)"
@@ -398,13 +398,13 @@ export default defineComponent({
                             >
                               {{ item.currentLabel }}
                             </span>
-                          </NBadge>
+                          </NTag>
                         </div>
                       </div>
                     </template>
                   </NTooltip>
                   <span v-else :class="nsSelect.e('tags-text')">+ {{ selected.length - maxCollapseTags }}</span>
-                </NBadge>
+                </NTag>
               </span>
             </transition>
             <transition v-if="!collapseTags" @after-leave="resetInputHeight">
@@ -414,20 +414,20 @@ export default defineComponent({
                   nsSelect.sHas('tags-wrapper', 'prefix', prefixWidth && selected.length > 0),
                 ]"
               >
-                <NBadge
+                <NTag
                   v-for="item in selected"
                   :key="getValueKey(item)"
                   :closable="!selectDisabled && !item.isDisabled"
                   :size="collapseTagSize"
                   :hit="item.hitState"
-                  :type="badgeMod"
+                  :type="tagMod"
                   disable-transitions
                   @close="deleteTag($event, item)"
                 >
                   <span :class="nsSelect.e('tags-text')" :style="{ maxWidth: `${inputWidth - 75}px` }">{{
                     item.currentLabel
                   }}</span>
-                </NBadge>
+                </NTag>
               </span>
             </transition>
             <input

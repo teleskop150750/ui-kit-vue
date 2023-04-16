@@ -4,7 +4,7 @@ import { buildProps, iconPropType, isValidComponentSize } from '@nado/ui-kit-uti
 import { type Options, placements } from '@popperjs/core'
 import type { ExtractPropTypes, PropType } from 'vue'
 
-import { nBadgeProps } from '../../badge'
+import { nTagProps } from '../../tag'
 import { useTooltipContentProps } from '../../tooltip'
 import type NSelect from './NOption.vue'
 
@@ -90,7 +90,7 @@ export const selectProps = buildProps({
     type: iconPropType,
     default: NIconArrowDown,
   },
-  badgeMod: { ...nBadgeProps.mod, default: 'solid' },
+  tagMod: { ...nTagProps.mod, default: 'solid' },
   validateEvent: {
     type: Boolean,
     default: true,
