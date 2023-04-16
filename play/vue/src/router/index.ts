@@ -16,6 +16,11 @@ const router = createRouter({
       component: () => import('../views/ButtonView.vue'),
     },
     {
+      path: '/tag',
+      name: 'tag',
+      component: () => import('../views/TagView.vue'),
+    },
+    {
       path: '/badge',
       name: 'badge',
       component: () => import('../views/BadgeView.vue'),
@@ -83,7 +88,12 @@ const router = createRouter({
     {
       path: '/focus-trap',
       name: 'focus-trap',
-      component: () => import('../views/FocusTrapView.vue'),
+      component: () => import('../views/MessageView.vue'),
+    },
+    {
+      path: '/message',
+      name: 'message',
+      component: () => import('../views/MessageView.vue'),
     },
   ],
 })

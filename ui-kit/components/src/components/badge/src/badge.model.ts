@@ -1,48 +1,40 @@
-import { componentSizes } from '@nado/ui-kit-constants'
 import { buildProps } from '@nado/ui-kit-utils'
 import type { ExtractPropTypes } from 'vue'
 
-import type Tag from './NBadge.vue'
-
-export const badgeAppearances = ['primary', 'secondary', 'success', 'warning', 'danger', 'info'] as const
-export const badgeMods = ['soft', 'solid', 'outline'] as const
+import type NBadge from './NBadge.vue'
 
 export const nBadgeProps = buildProps({
-  closable: {
-    type: Boolean,
-    default: false,
+  /**
+   * @description display value.
+   */
+  value: {
+    type: [String, Number],
+    default: '',
   },
+  /**
+   * @description maximum value, shows `{max}+` when exceeded. Only works if value is a number.
+   */
+  max: {
+    type: Number,
+    default: 99,
+  },
+  /**
+   * @description if a little dot is displayed.
+   */
+  isDot: Boolean,
+  /**
+   * @description hidden badge.
+   */
+  hidden: Boolean,
+  /**
+   * @description badge type.
+   */
   appearance: {
     type: String,
-    values: badgeAppearances,
-    default: 'primary',
-  },
-  color: {
-    type: String,
-    default: '',
-  },
-  size: {
-    type: String,
-    values: componentSizes,
-    default: '',
-  },
-  mod: {
-    type: String,
-    values: badgeMods,
-    default: 'soft',
-  },
-  round: {
-    type: Boolean,
-    default: false,
+    values: ['primary', 'success', 'warning', 'info', 'danger'],
+    default: 'danger',
   },
 } as const)
 
 export type NBadgeProps = ExtractPropTypes<typeof nBadgeProps>
-
-export const nBadgeEmits = {
-  close: (evt: MouseEvent) => evt instanceof MouseEvent,
-  click: (evt: MouseEvent) => evt instanceof MouseEvent,
-}
-export type NBadgeEmits = typeof nBadgeEmits
-
-export type NTagInstance = InstanceType<typeof Tag>
+export type NBadgeInstance = InstanceType<typeof NBadge>

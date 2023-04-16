@@ -1,3 +1,2 @@
 @import url('./core.css');
-@import url('./appearance/index.css');
-@import url('./size.css');
+@import url('./appearance.css');

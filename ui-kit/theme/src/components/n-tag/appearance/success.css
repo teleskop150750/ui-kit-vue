@@ -1,0 +1,49 @@
+@layer components {
+  /* soft */
+  .n-tag--appearance-soft-success {
+    /* bg */
+    --n-comp-tag-container-bg-color: var(--n-sys-color-success-50);
+    --n-comp-tag-close-bg-color: var(--n-sys-color-success-50);
+    --n-comp-tag-close-bg-color-hovered: var(--n-sys-color-success);
+
+    /* border */
+    --n-comp-tag-container-border-color: var(--n-sys-color-success-50);
+
+    /* text */
+    --n-comp-tag-container-text-color: var(--n-sys-color-success);
+    --n-comp-tag-close-color: var(--n-sys-color-success);
+    --n-comp-tag-close-color-hovered: var(--n-sys-color-white);
+  }
+
+  /* solid */
+  .n-tag--appearance-solid-success {
+    /* bg */
+    --n-comp-tag-container-bg-color: var(--n-sys-color-success);
+    --n-comp-tag-close-bg-color: var(--n-sys-color-success);
+    --n-comp-tag-close-bg-color-hovered: var(--n-sys-color-success-50);
+
+    /* border */
+    --n-comp-tag-container-border-color: var(--n-sys-color-success);
+
+    /* text */
+    --n-comp-tag-container-text-color: var(--n-sys-color-white);
+    --n-comp-tag-close-color: var(--n-sys-color-white);
+    --n-comp-tag-close-color-hovered: var(--n-sys-color-success);
+  }
+
+  /* outline */
+  .n-tag--appearance-outline-success {
+    /* bg */
+    --n-comp-tag-container-bg-color: transparent;
+    --n-comp-tag-close-bg-color: transparent;
+    --n-comp-tag-close-bg-color-hovered: var(--n-sys-color-success);
+
+    /* border */
+    --n-comp-tag-container-border-color: var(--n-sys-color-success);
+
+    /* text */
+    --n-comp-tag-container-text-color: var(--n-sys-color-success);
+    --n-comp-tag-close-color: var(--n-sys-color-success);
+    --n-comp-tag-close-color-hovered: var(--n-sys-color-white);
+  }
+}

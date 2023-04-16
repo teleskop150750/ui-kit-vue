@@ -1,0 +1,15 @@
+.n-message--appearance-info {
+  --n-comp-message-bg-color: var(--n-sys-color-secondary-50);
+  --n-comp-message-border-color: var(--n-sys-color-secondary-300);
+  --n-comp-message-text-color: var(--n-sys-color-secondary);
+  --n-comp-message-close-icon-color: var(--n-sys-color-secondary);
+}
+
+.n-message--appearance-info .n-message__content {
+  color: var(--n-comp-message-text-color);
+  overflow-wrap: anywhere;
+}
+
+.n-message-icon--appearance-info {
+  color: var(--n-comp-message-text-color);
+}

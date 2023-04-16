@@ -1,7 +1,7 @@
 @layer components {
   @layer defaults {
     .n-icon {
-      --color: inherit;
+      --n-comp-icon-color: inherit;
 
       position: relative;
 
@@ -12,11 +12,16 @@
       width: 1em;
       height: 1em;
 
-      color: var(--color);
+      color: var(--n-comp-icon-color);
       font-size: inherit;
       line-height: 1em;
 
       fill: currentcolor;
+    }
+
+    .n-icon svg {
+      width: 1em;
+      height: 1em;
     }
   }
 }

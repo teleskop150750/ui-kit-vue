@@ -1,68 +1,54 @@
-<script setup lang="ts">
-import { badgeAppearances, badgeMods, NBadge } from '@nado/ui-kit-vue'
+<script lang="ts" setup>
+import { NIconShare } from '@nado/ui-kit-icons-vue'
+import { NBadge, NButton } from '@nado/ui-kit-vue'
 </script>
 
 <template>
-  <div>
-    <h2 class="n-title-2">Badge</h2>
-    <h3 class="n-title-3">Basic usage</h3>
+  <h1>NBadge</h1>
+  <div class="row">
+    <NBadge :value="12" class="item">
+      <NButton>comments</NButton>
+    </NBadge>
+    <NBadge :value="3" class="item" appearance="success">
+      <NButton>replies</NButton>
+    </NBadge>
+    <NBadge :value="1" class="item" appearance="primary">
+      <NButton>comments</NButton>
+    </NBadge>
+    <NBadge :value="2" class="item" appearance="warning">
+      <NButton>replies</NButton>
+    </NBadge>
+  </div>
 
-    <template v-for="mode in badgeMods" :key="mode">
-      <div class="row">
-        <template v-for="appearance in badgeAppearances" :key="appearance">
-          <div class="col">
-            <NBadge :mod="mode" :appearance="appearance">Badge</NBadge>
-          </div>
-        </template>
-      </div>
-    </template>
+  <h2>Max Value</h2>
+  <div class="row">
+    <NBadge :value="100" :max="10" class="item" appearance="warning">
+      <NButton>replies</NButton>
+    </NBadge>
+  </div>
 
-    <template v-for="mode in badgeMods" :key="mode">
-      <div class="row">
-        <template v-for="appearance in badgeAppearances" :key="appearance">
-          <div class="col">
-            <NBadge :mod="mode" :appearance="appearance" closable>Badge</NBadge>
-          </div>
-        </template>
-      </div>
-    </template>
+  <h2>Customizations</h2>
+  <div class="row">
+    <NBadge value="new" class="item">
+      <NButton>comments</NButton>
+    </NBadge>
+    <NBadge value="hot" class="item">
+      <NButton>replies</NButton>
+    </NBadge>
+  </div>
 
-    <template v-for="mode in badgeMods" :key="mode">
-      <div class="row">
-        <template v-for="appearance in badgeAppearances" :key="appearance">
-          <div class="col">
-            <NBadge :mod="mode" :appearance="appearance" round>Badge</NBadge>
-          </div>
-        </template>
-      </div>
-    </template>
-
-    <template v-for="mode in badgeMods" :key="mode">
-      <div class="row">
-        <template v-for="appearance in badgeAppearances" :key="appearance">
-          <div class="col">
-            <NBadge :mod="mode" :appearance="appearance" round closable>Badge</NBadge>
-          </div>
-        </template>
-      </div>
-    </template>
-
-    <div class="row">
-      <NBadge size="small">Small</NBadge>
-      <NBadge>Default</NBadge>
-      <NBadge size="large">Large</NBadge>
-    </div>
-
-    <div class="row">
-      <NBadge size="small" closable>Small</NBadge>
-      <NBadge closable>Default</NBadge>
-      <NBadge size="large" closable>Large</NBadge>
-    </div>
-
-    <div class="row">
-      <NBadge round size="small" closable>Small</NBadge>
-      <NBadge round closable>Default</NBadge>
-      <NBadge round size="large" closable>Large</NBadge>
-    </div>
+  <h2>Red Dot</h2>
+  <div class="row">
+    <NBadge is-dot class="item">query</NBadge>
+    <NBadge is-dot class="item">
+      <NButton class="share-button" :icon="NIconShare" appearance="primary" />
+    </NBadge>
   </div>
 </template>
+
+<style scoped>
+.item {
+  margin-top: 10px;
+  margin-right: 40px;
+}
+</style>
