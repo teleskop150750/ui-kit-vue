@@ -80,7 +80,7 @@ describe('<dynamic-size-list />', () => {
     it("should update inner container's height after scroll dispatched", async () => {
       const wrapper = mount()
 
-      const listRef = wrapper.vm.$refs.listRef as any
+      const { listRef } = wrapper.vm.$refs
 
       await nextTick()
       const estimatedTotalSize = Number.parseInt(listRef.innerRef.style.height)
@@ -120,7 +120,7 @@ describe('<dynamic-size-list />', () => {
         },
       })
 
-      const listRef = wrapper.vm.$refs.listRef as any
+      const { listRef } = wrapper.vm.$refs
 
       await nextTick()
       const estimatedTotalSize = Number.parseInt(listRef.innerRef.style.width)

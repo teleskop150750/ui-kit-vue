@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-shadow */
 import { mount, type VueWrapper } from '@vue/test-utils'
 import { flatten } from 'lodash-es'
@@ -15,6 +16,7 @@ describe('options', () => {
   const samples = Array.from({ length: 3 })
 
   const createWrapper = (slotsProps = {}) => {
+    // @ts-expect-error
     wrapper = mount((_, { slots }) => <NOptions onUpdate-options={onOptionsChange}>{slots?.default?.()}</NOptions>, {
       global: {
         components: {

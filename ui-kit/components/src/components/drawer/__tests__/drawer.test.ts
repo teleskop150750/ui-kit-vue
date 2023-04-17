@@ -87,7 +87,7 @@ describe('Drawer', () => {
         visible: false,
       }),
     )
-    const vm = wrapper.vm as any
+    const { vm } = wrapper
 
     vm.visible = true
     await nextTick()
@@ -119,7 +119,7 @@ describe('Drawer', () => {
         },
       },
     )
-    const vm = wrapper.vm as any
+    const { vm } = wrapper
 
     await nextTick()
     await rAF()
@@ -156,7 +156,7 @@ describe('Drawer', () => {
         visible: true,
       }),
     )
-    // const vm = wrapper.vm as any
+    // const vm = wrapper.vm
 
     await nextTick()
     await rAF()
@@ -188,7 +188,7 @@ describe('Drawer', () => {
     await nextTick()
     await rAF()
     await nextTick()
-    const vm = wrapper.vm as any
+    const { vm } = wrapper
 
     await wrapper.find('.n-drawer__close-btn').trigger('click')
     await nextTick()
@@ -219,7 +219,7 @@ describe('Drawer', () => {
         beforeClose,
       }),
     )
-    const vm = wrapper.vm as any
+    const { vm } = wrapper
 
     vm.$refs.drawer.handleClose()
 
@@ -361,8 +361,9 @@ describe('Drawer', () => {
         },
       },
     )
-    const vm = wrapper.vm as any
-    const drawer = wrapper.vm.$refs.drawer as any
+    const { vm } = wrapper
+    // eslint-disable-next-line unicorn/consistent-destructuring
+    const { drawer } = wrapper.vm.$refs
 
     vm.visible = true
     await nextTick()

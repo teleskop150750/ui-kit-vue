@@ -9,7 +9,7 @@ const AXIOM = 'Rem is the best girl'
 
 describe('Dialog.vue', () => {
   test('render test', async () => {
-    const wrapper = mount(NDialog as any, {
+    const wrapper = mount(NDialog, {
       props: {
         modelValue: true,
       },
@@ -27,27 +27,23 @@ describe('Dialog.vue', () => {
   test('dialog should have a title and header when it has been given', async () => {
     const HEADER = 'I am header'
     const wrapper = mount(
-      (
-        <NDialog
-          modelValue={true}
-          v-slots={{
-            header: () => HEADER,
-          }}
-        >
-          {AXIOM}
-        </NDialog>
-      ) as any,
+      <NDialog
+        modelValue={true}
+        v-slots={{
+          header: () => HEADER,
+        }}
+      >
+        {AXIOM}
+      </NDialog>,
     )
 
     await nextTick()
     expect(wrapper.find('.n-dialog__header').text()).toBe(HEADER)
 
     mount(
-      (
-        <NDialog modelValue={true} title={HEADER}>
-          {AXIOM}
-        </NDialog>
-      ) as any,
+      <NDialog modelValue={true} title={HEADER}>
+        {AXIOM}
+      </NDialog>,
     )
     await nextTick()
 
@@ -56,12 +52,14 @@ describe('Dialog.vue', () => {
 
   // TODO: fix
   test('dialog header should have slot props', async () => {
-    const wrapper = mount(NDialog as any, {
+    const wrapper = mount(NDialog, {
       attachTo: document.body,
       props: {
         modelValue: true,
       },
       slots: {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         header: ({ titleId, titleClass, close }) => (
           <button data-title-id={titleId} data-title-class={titleClass} onClick={close} />
         ),
@@ -81,11 +79,9 @@ describe('Dialog.vue', () => {
 
   test('dialog should have a footer when footer has been given', async () => {
     const wrapper = mount(
-      (
-        <NDialog modelValue={true} v-slots={{ footer: () => AXIOM }}>
-          {AXIOM}
-        </NDialog>
-      ) as any,
+      <NDialog modelValue={true} v-slots={{ footer: () => AXIOM }}>
+        {AXIOM}
+      </NDialog>,
     )
 
     await nextTick()
@@ -96,11 +92,9 @@ describe('Dialog.vue', () => {
   // TODO fix
   test.todo('should append dialog to body when appendToBody is true', async () => {
     const wrapper = mount(
-      (
-        <NDialog modelValue={true} appendToBody={true}>
-          {AXIOM}
-        </NDialog>
-      ) as any,
+      <NDialog modelValue={true} appendToBody={true}>
+        {AXIOM}
+      </NDialog>,
       {
         attachTo: document.body,
       },
@@ -114,11 +108,9 @@ describe('Dialog.vue', () => {
 
   test('should center dialog', async () => {
     const wrapper = mount(
-      (
-        <NDialog modelValue={true} center={true}>
-          {AXIOM}
-        </NDialog>
-      ) as any,
+      <NDialog modelValue={true} center={true}>
+        {AXIOM}
+      </NDialog>,
     )
 
     await nextTick()
@@ -126,7 +118,7 @@ describe('Dialog.vue', () => {
   })
 
   test('should show close button', async () => {
-    const wrapper = mount((<NDialog modelValue={true}>{AXIOM}</NDialog>) as any)
+    const wrapper = mount(<NDialog modelValue={true}>{AXIOM}</NDialog>)
 
     await nextTick()
     expect(wrapper.find('.n-dialog__close').exists()).toBe(true)
@@ -134,11 +126,9 @@ describe('Dialog.vue', () => {
 
   test('should hide close button when showClose = false', async () => {
     const wrapper = mount(
-      (
-        <NDialog modelValue={true} showClose={false}>
-          {AXIOM}
-        </NDialog>
-      ) as any,
+      <NDialog modelValue={true} showClose={false}>
+        {AXIOM}
+      </NDialog>,
     )
 
     await nextTick()
@@ -146,7 +136,7 @@ describe('Dialog.vue', () => {
   })
 
   test('should close dialog when click on close button', async () => {
-    const wrapper = mount((<NDialog modelValue={true}>{AXIOM}</NDialog>) as any)
+    const wrapper = mount(<NDialog modelValue={true}>{AXIOM}</NDialog>)
 
     await nextTick()
     await wrapper.find('.n-dialog__header-btn').trigger('click')
@@ -156,11 +146,9 @@ describe('Dialog.vue', () => {
   describe('mask related', () => {
     test('should not have overlay mask when mask is false', async () => {
       const wrapper = mount(
-        (
-          <NDialog modal={false} modelValue={true}>
-            {AXIOM}
-          </NDialog>
-        ) as any,
+        <NDialog modal={false} modelValue={true}>
+          {AXIOM}
+        </NDialog>,
       )
 
       await nextTick()
@@ -168,7 +156,7 @@ describe('Dialog.vue', () => {
     })
 
     test('should close the modal when clicking on mask when `closeOnClickModal` is true', async () => {
-      const wrapper = mount((<NDialog modelValue={true}>{AXIOM}</NDialog>) as any)
+      const wrapper = mount(<NDialog modelValue={true}>{AXIOM}</NDialog>)
 
       await nextTick()
       expect(wrapper.find('.n-overlay').exists()).toBe(true)
@@ -183,11 +171,9 @@ describe('Dialog.vue', () => {
     test('should call before close', async () => {
       const beforeClose = vi.fn()
       const wrapper = mount(
-        (
-          <NDialog modelValue={true} beforeClose={beforeClose}>
-            {AXIOM}
-          </NDialog>
-        ) as any,
+        <NDialog modelValue={true} beforeClose={beforeClose}>
+          {AXIOM}
+        </NDialog>,
       )
 
       await nextTick()
@@ -197,11 +183,9 @@ describe('Dialog.vue', () => {
     test('should not close dialog when user cancelled', async () => {
       const beforeClose = vi.fn().mockImplementation((hide: (cancel: boolean) => void) => hide(true))
       const wrapper = mount(
-        (
-          <NDialog modelValue={true} beforeClose={beforeClose}>
-            {AXIOM}
-          </NDialog>
-        ) as any,
+        <NDialog modelValue={true} beforeClose={beforeClose}>
+          {AXIOM}
+        </NDialog>,
       )
 
       await nextTick()
@@ -211,11 +195,9 @@ describe('Dialog.vue', () => {
     })
     test('should open and close with delay', async () => {
       const wrapper = mount(
-        (
-          <NDialog openDelay={200} closeDelay={200} modelValue={false}>
-            {AXIOM}
-          </NDialog>
-        ) as any,
+        <NDialog openDelay={200} closeDelay={200} modelValue={false}>
+          {AXIOM}
+        </NDialog>,
       )
 
       expect(wrapper.vm.visible).toBe(false)
@@ -227,11 +209,9 @@ describe('Dialog.vue', () => {
     // TODO fix
     test.todo('should destroy on close', async () => {
       const wrapper = mount(
-        (
-          <NDialog modelValue={true} destroyOnClose={true}>
-            {AXIOM}
-          </NDialog>
-        ) as any,
+        <NDialog modelValue={true} destroyOnClose={true}>
+          {AXIOM}
+        </NDialog>,
       )
 
       expect(wrapper.vm.visible).toBe(true)
@@ -256,18 +236,16 @@ describe('Dialog.vue', () => {
       const onClose = vi.fn()
       const onClosed = vi.fn()
       const wrapper = mount(
-        (
-          <NDialog
-            modelValue={true}
-            onUpdate:modelValue={(val: boolean) => {
-              visible = val
-            }}
-            onClose={onClose}
-            onClosed={onClosed}
-          >
-            {AXIOM}
-          </NDialog>
-        ) as any,
+        <NDialog
+          modelValue={true}
+          onUpdate:modelValue={(val: boolean) => {
+            visible = val
+          }}
+          onClose={onClose}
+          onClosed={onClosed}
+        >
+          {AXIOM}
+        </NDialog>,
         {
           attachTo: document.body,
         },
@@ -289,11 +267,9 @@ describe('Dialog.vue', () => {
 
     test('closeIcon', async () => {
       const wrapper = mount(
-        (
-          <NDialog modelValue={true} closeIcon={markRaw(NIconDelete)}>
-            {AXIOM}
-          </NDialog>
-        ) as any,
+        <NDialog modelValue={true} closeIcon={markRaw(NIconDelete)}>
+          {AXIOM}
+        </NDialog>,
       )
 
       await nextTick()
@@ -324,11 +300,9 @@ describe('Dialog.vue', () => {
     test('title attribute should set aria-label', async () => {
       const title = 'Hello World'
       const wrapper = mount(
-        (
-          <NDialog modelValue={true} title={title}>
-            {AXIOM}
-          </NDialog>
-        ) as any,
+        <NDialog modelValue={true} title={title}>
+          {AXIOM}
+        </NDialog>,
       )
 
       await nextTick()
@@ -340,18 +314,16 @@ describe('Dialog.vue', () => {
 
     test('missing title attribute should point to header slot content', async () => {
       const wrapper = mount(
-        (
-          <NDialog
-            modelValue={true}
-            v-slots={{
-              header: ({ titleId, titleClass }: { titleId: string; titleClass: string }) => (
-                <h5 id={titleId} class={titleClass} />
-              ),
-            }}
-          >
-            {AXIOM}
-          </NDialog>
-        ) as any,
+        <NDialog
+          modelValue={true}
+          v-slots={{
+            header: ({ titleId, titleClass }: { titleId: string; titleClass: string }) => (
+              <h5 id={titleId} class={titleClass} />
+            ),
+          }}
+        >
+          {AXIOM}
+        </NDialog>,
       )
 
       await nextTick()
@@ -363,7 +335,7 @@ describe('Dialog.vue', () => {
     })
 
     test('aria-describedby should point to modal body', async () => {
-      const wrapper = mount((<NDialog modelValue={true}>{AXIOM}</NDialog>) as any)
+      const wrapper = mount(<NDialog modelValue={true}>{AXIOM}</NDialog>)
 
       await nextTick()
       const dialog = wrapper.find('[role="dialog"]')

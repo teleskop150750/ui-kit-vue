@@ -318,7 +318,7 @@ describe('Select', () => {
     await select.trigger('mouseenter')
     await select.trigger('click')
     await nextTick()
-    expect((select.vm as any).visible).toBe(true)
+    expect(select.vm.visible).toBe(true)
   })
 
   it('options rendered correctly', () => {
@@ -326,7 +326,7 @@ describe('Select', () => {
     const options = wrapper.element.querySelectorAll('.n-select-dropdown__item')
     const result = Array.prototype.every.call(options, (option, index) => {
       const text = option.querySelector('span').textContent
-      const vm = wrapper.vm as any
+      const { vm } = wrapper
 
       return text === vm.options[index].label
     })
@@ -499,7 +499,7 @@ describe('Select', () => {
         value: '选项2',
       }),
     )
-    const vm = wrapper.vm as any
+    const { vm } = wrapper
 
     vm.options = [
       {
@@ -564,7 +564,7 @@ describe('Select', () => {
     await wrapper.find('.select-trigger').trigger('click')
     const options = getOptions()
 
-    const vm = wrapper.vm as any
+    const { vm } = wrapper
 
     expect(vm.value).toBe('')
     expect(findInnerInput().value).toBe('')
@@ -583,7 +583,7 @@ describe('Select', () => {
   // TODO: fix
   test.todo('disabled option', async () => {
     wrapper = getSelectVm()
-    const vm = wrapper.vm as any
+    const { vm } = wrapper
 
     vm.options[1].disabled = true
 
@@ -670,7 +670,7 @@ describe('Select', () => {
 
     wrapper = getGroupSelectVm({}, optionGroupData)
     const select = wrapper.findComponent({ name: 'NSelect' })
-    const vm = select.vm as any
+    const { vm } = select
     let i = 8
 
     while (i--) {
@@ -683,7 +683,7 @@ describe('Select', () => {
     await nextTick()
     vm.selectOption()
     await nextTick()
-    expect((wrapper.vm as any).value).toBe('Dalian')
+    expect(wrapper.vm.value).toBe('Dalian')
   })
 
   test('visible event', async () => {
@@ -712,8 +712,8 @@ describe('Select', () => {
       },
     )
     const select = wrapper.findComponent({ name: 'NSelect' })
-    const vm = wrapper.vm as any
-    const selectVm = select.vm as any
+    const { vm } = wrapper
+    const selectVm = select.vm
 
     selectVm.visible = true
     await selectVm.$nextTick()
@@ -724,7 +724,7 @@ describe('Select', () => {
     vi.useFakeTimers()
     wrapper = getSelectVm()
     const select = wrapper.findComponent({ name: 'NSelect' })
-    const vm = select.vm as any
+    const { vm } = select
     let i = 8
 
     while (i--) {
@@ -738,7 +738,7 @@ describe('Select', () => {
     expect(vm.hoverIndex).toBe(3)
     vm.selectOption()
     await nextTick()
-    expect((wrapper.vm as any).value).toBe('选项4')
+    expect(wrapper.vm.value).toBe('选项4')
     vm.toggleMenu()
 
     vi.runAllTimers()
@@ -753,8 +753,8 @@ describe('Select', () => {
   test('clearable', async () => {
     wrapper = getSelectVm({ clearable: true })
     const select = wrapper.findComponent({ name: 'NSelect' })
-    const vm = wrapper.vm as any
-    const selectVm = select.vm as any
+    const { vm } = wrapper
+    const selectVm = select.vm
 
     vm.value = '选项1'
     await nextTick()
@@ -816,7 +816,7 @@ describe('Select', () => {
       defaultFirstOption: true,
     })
     const select = wrapper.findComponent({ name: 'NSelect' })
-    const selectVm = select.vm as any
+    const selectVm = select.vm
     const input = wrapper.find('input')
 
     input.element.focus()
@@ -853,7 +853,7 @@ describe('Select', () => {
       demoOptions,
     )
     const select = wrapper.findComponent({ name: 'NSelect' })
-    const selectVm = select.vm as any
+    const selectVm = select.vm
     const input = wrapper.find('input')
 
     input.element.focus()
@@ -868,7 +868,7 @@ describe('Select', () => {
   test('allow create', async () => {
     wrapper = getSelectVm({ filterable: true, allowCreate: true })
     const select = wrapper.findComponent({ name: 'NSelect' })
-    const selectVm = select.vm as any
+    const selectVm = select.vm
     const input = wrapper.find('input')
 
     input.element.focus()
@@ -879,7 +879,7 @@ describe('Select', () => {
     const target = options.find((option) => option.textContent === 'new')!
 
     target.click()
-    expect((wrapper.vm as any).value).toBe('new')
+    expect(wrapper.vm.value).toBe('new')
   })
 
   test('allow create async option', async () => {
@@ -927,7 +927,7 @@ describe('Select', () => {
     wrapper = getSelectVm({ multiple: true })
     await wrapper.find('.select-trigger').trigger('click')
     const options = getOptions()
-    const vm = wrapper.vm as any
+    const { vm } = wrapper
 
     vm.value = ['选项1']
     nextTick()
@@ -1210,7 +1210,7 @@ describe('Select', () => {
       },
     )
 
-    const vm = wrapper.vm as any
+    const { vm } = wrapper
 
     await nextTick()
     expect(vm.value.length).toBe(2)
@@ -1320,7 +1320,7 @@ describe('Select', () => {
       },
     )
 
-    const vm = wrapper.vm as any
+    const { vm } = wrapper
 
     await nextTick()
     expect(vm.value.length).toBe(2)
@@ -1334,7 +1334,7 @@ describe('Select', () => {
 
   test('multiple limit', async () => {
     wrapper = getSelectVm({ multiple: true, multipleLimit: 1 })
-    const vm = wrapper.vm as any
+    const { vm } = wrapper
 
     await wrapper.find('.select-trigger').trigger('click')
     const options = getOptions()
@@ -1402,7 +1402,7 @@ describe('Select', () => {
     const select = wrapper.findComponent({ name: 'NSelect' })
 
     await select.findComponent({ ref: 'reference' }).find('input').element.focus()
-    expect((select.vm as any).visible).toBe(false)
+    expect(select.vm.visible).toBe(false)
   })
 
   test('should open popper when automatic-dropdown is set', async () => {
@@ -1410,7 +1410,7 @@ describe('Select', () => {
     const select = wrapper.findComponent({ name: 'NSelect' })
 
     await select.findComponent({ ref: 'reference' }).find('input').trigger('focusin')
-    expect((select.vm as any).visible).toBe(true)
+    expect(select.vm.visible).toBe(true)
   })
 
   test('only emit change on user input', async () => {
@@ -1461,11 +1461,11 @@ describe('Select', () => {
       </NSelect>`,
       () => ({ value: 'test' }),
     )
-    const vm = wrapper.vm as any
+    const { vm } = wrapper
 
     await wrapper.trigger('mouseenter')
     await wrapper.trigger('click')
-    const selectVm = wrapper.findComponent({ name: 'NSelect' }).vm as any
+    const selectVm = wrapper.findComponent({ name: 'NSelect' }).vm
 
     expect(selectVm.visible).toBe(true)
     expect(findInnerInput().placeholder).toBe('test')
@@ -1497,7 +1497,7 @@ describe('Select', () => {
         value: undefined,
       }),
     )
-    const vm = wrapper.vm as any
+    const { vm } = wrapper
 
     vm.value = null
     await nextTick()
@@ -1643,13 +1643,16 @@ describe('Select', () => {
         // @ts-ignore
         remoteMethod(query) {
           if (query !== '') {
+            // @ts-ignore
             this.loading = true
             setTimeout(() => {
+              // @ts-ignore
               this.loading = false
               // @ts-ignore
               this.options = this.list.filter((item) => item.label.toLowerCase().includes(query.toLowerCase()))
             }, 200)
           } else {
+            // @ts-ignore
             this.options = []
           }
         },
@@ -1732,7 +1735,7 @@ describe('Select', () => {
       }),
     )
 
-    const vm = wrapper.vm as any
+    const { vm } = wrapper
 
     wrapper.find('.select-trigger').trigger('click')
     await nextTick()
@@ -1777,10 +1780,10 @@ describe('Select', () => {
         ],
       }),
     )
-    const vm = wrapper.vm as any
+    const { vm } = wrapper
 
     await nextTick()
-    const selectVm = wrapper.findComponent({ name: 'NSelect' }).vm as any
+    const selectVm = wrapper.findComponent({ name: 'NSelect' }).vm
 
     expect(wrapper.findAll('.n-tag').length).toBe(3)
     const tagCloseIcons = wrapper.findAll('.n-tag__close')
@@ -1886,7 +1889,7 @@ describe('Select', () => {
         ],
       }),
     )
-    const vm = wrapper.vm as any
+    const { vm } = wrapper
 
     await nextTick()
     console.log('FF', wrapper.findAll('.n-tag'))
@@ -1957,9 +1960,9 @@ describe('Select', () => {
     const suffixIcon = select.find('.n-input__suffix')
 
     await suffixIcon.trigger('click')
-    expect((select.vm as any).visible).toBe(true)
+    expect(select.vm.visible).toBe(true)
     await suffixIcon.trigger('click')
-    expect((select.vm as any).visible).toBe(false)
+    expect(select.vm.visible).toBe(false)
   })
 
   test('mouseenter click', async () => {
@@ -1970,11 +1973,11 @@ describe('Select', () => {
     const select = wrapper.findComponent({ name: 'NSelect' })
 
     await select.trigger('click')
-    expect((select.vm as any).visible).toBe(false)
+    expect(select.vm.visible).toBe(false)
 
     await select.trigger('mouseenter')
     await select.trigger('click')
-    expect((select.vm as any).visible).toBe(true)
+    expect(select.vm.visible).toBe(true)
   })
 
   describe('should show all options when open select dropdown', () => {
@@ -2018,7 +2021,7 @@ describe('Select', () => {
 
       expect(
         groups.filter((group) => {
-          const vm_ = group.vm as any
+          const vm_ = group.vm
 
           return vm_.visible
         }).length,
@@ -2174,8 +2177,8 @@ describe('Select', () => {
   test('should reset selectedLabel when toggle multiple', async () => {
     wrapper = getSelectVm({ multiple: false })
     const select = wrapper.findComponent({ name: 'NSelect' })
-    const vm = wrapper.vm as any
-    const selectVm = select.vm as any
+    const { vm } = wrapper
+    const selectVm = select.vm
 
     vm.value = '选项1'
     await nextTick()
@@ -2297,7 +2300,7 @@ describe('Select', () => {
       ])
       await wrapper.find('.select-trigger').trigger('click')
       let options = getOptions()
-      const vm = wrapper.vm as any
+      const { vm } = wrapper
 
       expect(vm.value).toBe('')
       expect(findInnerInput().value).toBe('')
@@ -2306,7 +2309,7 @@ describe('Select', () => {
       await nextTick()
       expect(vm.value).toBe(1)
       expect(findInnerInput().value).toBe('y')
-      // eslint-disable-next-line require-atomic-updates
+      // eslint-disable-next-line require-atomic-updates, unicorn/consistent-destructuring
       wrapper.vm.options = [
         {
           label: 'group2',

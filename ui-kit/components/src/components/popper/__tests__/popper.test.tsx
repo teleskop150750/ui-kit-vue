@@ -17,7 +17,7 @@ const TestChild = defineComponent({
 
 describe('<NPopper />', () => {
   it('should be able to provide instance to its children', async () => {
-    const wrapper = mount(NPopper as any, {
+    const wrapper = mount(NPopper, {
       slots: {
         default: TestChild,
       },

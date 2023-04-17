@@ -15,7 +15,7 @@ const popperInjection = {
 }
 
 const mountTrigger = (props = {}) =>
-  mount(NPopperTrigger as any, {
+  mount(NPopperTrigger, {
     props: {
       ...props,
     },

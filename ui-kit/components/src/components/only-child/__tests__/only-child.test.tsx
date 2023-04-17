@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { FORWARD_REF_INJECTION_KEY } from '@nado/ui-kit-hooks'
 import { debugWarn } from '@nado/ui-kit-utils'
 import { type MountingOptions, shallowMount } from '@vue/test-utils'
@@ -21,6 +22,7 @@ const createComponent = (slot: Slot) =>
       provide: defaultProvide,
     },
     // vue test utils adds the entry for us even though default's value is null
+    // @ts-expect-error
     slots: slot ? { default: slot } : undefined,
   })
 
