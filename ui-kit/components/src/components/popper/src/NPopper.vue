@@ -13,13 +13,13 @@ const contentRef = ref<HTMLElement>()
 const referenceRef = ref<HTMLElement>()
 const role = computed(() => props.role)
 
-const popperProvides = {
+const popperProvides: NPopperInjectionContext = {
   triggerRef,
   popperInstanceRef,
   contentRef,
   referenceRef,
   role,
-} as NPopperInjectionContext
+}
 
 defineExpose(popperProvides)
 

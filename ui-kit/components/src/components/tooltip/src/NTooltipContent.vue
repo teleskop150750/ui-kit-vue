@@ -13,6 +13,7 @@ import { useTooltipContentProps } from './tooltip-content.model'
 const props = defineProps(useTooltipContentProps)
 
 const ns = useNamespace('tooltip')
+// TODO move to popper ??
 const { isTrapping, activate: activateFocusTrap, deactivate: deactivateFocusTrap } = useFocusTrap(props)
 const { selector } = usePopperContainerId()
 const contentRef = ref<Nillable<NPopperContentInstance>>()
