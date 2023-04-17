@@ -100,6 +100,11 @@ const router = createRouter({
       name: 'dialog',
       component: () => import('../views/DialogView.vue'),
     },
+    {
+      path: '/drawer',
+      name: 'drawer',
+      component: () => import('../views/DrawerView.vue'),
+    },
   ],
 })
 

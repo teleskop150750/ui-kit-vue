@@ -51,7 +51,7 @@ export default {
       </slot>
       <button
         v-if="showClose"
-        :aria-label="t('el.dialog.close')"
+        :aria-label="t('nado.dialog.close')"
         :class="ns.e('header-btn')"
         type="button"
         @click="$emit('close')"

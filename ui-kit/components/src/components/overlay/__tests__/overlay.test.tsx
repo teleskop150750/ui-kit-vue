@@ -20,8 +20,6 @@ describe('Overlay.vue', () => {
       overlayClass: testClass,
     })
 
-    console.log(wrapper.html())
-
     expect(wrapper.find(`.${testClass}`)).toBeTruthy()
   })
 

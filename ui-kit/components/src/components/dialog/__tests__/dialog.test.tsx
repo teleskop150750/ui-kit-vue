@@ -94,7 +94,7 @@ describe('Dialog.vue', () => {
   })
 
   // TODO fix
-  test.skip('should append dialog to body when appendToBody is true', async () => {
+  test.todo('should append dialog to body when appendToBody is true', async () => {
     const wrapper = mount(
       (
         <NDialog modelValue={true} appendToBody={true}>
@@ -225,7 +225,7 @@ describe('Dialog.vue', () => {
     })
 
     // TODO fix
-    test.skip('should destroy on close', async () => {
+    test.todo('should destroy on close', async () => {
       const wrapper = mount(
         (
           <NDialog modelValue={true} destroyOnClose={true}>
@@ -251,7 +251,7 @@ describe('Dialog.vue', () => {
     })
 
     // TODO fix
-    test.skip('should emit close event', async () => {
+    test.todo('should emit close event', async () => {
       let visible = true
       const onClose = vi.fn()
       const onClosed = vi.fn()

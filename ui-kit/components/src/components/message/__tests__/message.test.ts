@@ -170,7 +170,7 @@ describe('Message.vue', () => {
     })
 
     // TODO: fix
-    it.skip('it should call close after transition ends', async () => {
+    it.todo('it should call close after transition ends', async () => {
       const onClose = vi.fn()
 
       const wrapper = _mount({

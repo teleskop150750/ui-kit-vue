@@ -1,0 +1,43 @@
+.n-drawer-fade-enter-active,
+.n-drawer-fade-leave-active {
+  transition: all var(--n-sys-transition-duration);
+}
+
+.n-drawer-fade-enter-active,
+.n-drawer-fade-enter-from,
+.n-drawer-fade-enter-to,
+.n-drawer-fade-leave-active,
+.n-drawer-fade-leave-from,
+.n-drawer-fade-leave-to {
+  overflow: hidden;
+}
+
+.n-drawer-fade-enter-from,
+.n-drawer-fade-leave-to {
+  opacity: 0;
+}
+
+.n-drawer-fade-enter-to,
+.n-drawer-fade-leave-from {
+  opacity: 1;
+}
+
+.n-drawer-fade-enter-from .rtl,
+.n-drawer-fade-leave-to .rtl {
+  transform: translateX(100%);
+}
+
+.n-drawer-fade-enter-from .ltr,
+.n-drawer-fade-leave-to .ltr {
+  transform: translateX(-100%);
+}
+
+.n-drawer-fade-enter-from .ttb,
+.n-drawer-fade-leave-to .ttb {
+  transform: translateY(-100%);
+}
+
+.n-drawer-fade-enter-from .btt,
+.n-drawer-fade-leave-to .btt {
+  transform: translateY(100%);
+}

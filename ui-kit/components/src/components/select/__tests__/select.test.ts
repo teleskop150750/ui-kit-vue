@@ -581,7 +581,7 @@ describe('Select', () => {
   })
 
   // TODO: fix
-  test.skip('disabled option', async () => {
+  test.todo('disabled option', async () => {
     wrapper = getSelectVm()
     const vm = wrapper.vm as any
 
@@ -1692,7 +1692,7 @@ describe('Select', () => {
   })
 
   // TODO: fix
-  test.skip('disabled group', async () => {
+  test.todo('disabled group', async () => {
     wrapper = _mount(
       `
     <NSelect v-model="value">
@@ -1864,7 +1864,7 @@ describe('Select', () => {
   })
 
   // TODO: fix
-  test.skip('modelValue should be deep reactive in multiple mode', async () => {
+  test.todo('modelValue should be deep reactive in multiple mode', async () => {
     wrapper = _mount(
       `
     <NSelect v-model="modelValue" multiple>

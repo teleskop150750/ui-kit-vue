@@ -9,6 +9,7 @@ const radio3 = ref('New York')
 
 <template>
   <h3>NRadioGroup</h3>
+  <div class="row">radio1 | {{ radio1 }}</div>
   <div class="row">
     <NRadioGroup v-model="radio1" size="large">
       <NRadioButton value="New York" />
