@@ -7,3 +7,4 @@ export const NConfigProvider = withInstall(ConfigProvider)
 export * from './src/config-provider.model'
 export * from './src/constants'
 export * from './src/hooks'
+export { messageConfig } from './src/NConfigProvider'

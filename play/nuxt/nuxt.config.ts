@@ -3,4 +3,5 @@ export default defineNuxtConfig({
   imports: {
     autoImport: true,
   },
+  css: ['@nado/ui-kit-theme/src/theme.css'],
 })

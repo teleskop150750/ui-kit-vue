@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest'
-
 import { isKorean } from '..'
 
 describe('i18n', () => {

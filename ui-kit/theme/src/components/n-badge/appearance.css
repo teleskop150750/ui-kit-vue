@@ -1,0 +1,21 @@
+@layer components {
+  .n-badge__content--appearance-primary {
+    background-color: var(--n-sys-color-primary);
+  }
+
+  .n-badge__content--appearance-success {
+    background-color: var(--n-sys-color-success);
+  }
+
+  .n-badge__content--appearance-warning {
+    background-color: var(--n-sys-color-warning);
+  }
+
+  .n-badge__content--appearance-info {
+    background-color: var(--n-sys-color-info);
+  }
+
+  .n-badge__content--appearance-danger {
+    background-color: var(--n-sys-color-danger);
+  }
+}

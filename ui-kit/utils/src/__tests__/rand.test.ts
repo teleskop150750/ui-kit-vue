@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest'
-
 import { generateId, getRandomInt } from '..'
 
 describe('rand', () => {

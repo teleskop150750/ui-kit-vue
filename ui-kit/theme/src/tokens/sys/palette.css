@@ -136,5 +136,8 @@
     --n-sys-color-warning-700: var(--n-ref-palette-orange-700);
     --n-sys-color-warning-800: var(--n-ref-palette-orange-800);
     --n-sys-color-warning-900: var(--n-ref-palette-orange-900);
+
+    /* ---------------- */
+    --n-sys-overlay-color: rgb(0 0 0 / 50%);
   }
 }

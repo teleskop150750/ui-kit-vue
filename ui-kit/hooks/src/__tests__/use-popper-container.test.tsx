@@ -1,5 +1,4 @@
 import { config, mount, shallowMount } from '@vue/test-utils'
-import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { defineComponent, nextTick } from 'vue'
 
 import { ID_INJECTION_KEY } from '../use-id'

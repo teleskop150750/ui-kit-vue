@@ -12,7 +12,7 @@ module.exports = {
   ],
   extends: ['stylelint-config-standard', 'stylelint-config-html'],
   rules: {
-    "prettier/prettier": true,
+    'prettier/prettier': true,
     'declaration-no-important': true,
     // 'scale-unlimited/declaration-strict-value': 'color',
     'scale-unlimited/declaration-strict-value': [

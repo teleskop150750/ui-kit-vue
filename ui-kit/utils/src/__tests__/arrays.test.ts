@@ -1,5 +1,4 @@
 import { castArray as lodashCastArray } from 'lodash-es'
-import { describe, expect, it } from 'vitest'
 
 import { castArray, ensureArray, unique } from '..'
 

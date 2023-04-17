@@ -16,8 +16,5 @@
     "stylelint-order": "^6.0.3",
     "stylelint-prettier": "^3.0.0",
     "stylelint-semantic-groups": "^1.2.0"
-  },
-  "devDependencies": {
-    "stylelint": "^15.4.0"
   }
 }

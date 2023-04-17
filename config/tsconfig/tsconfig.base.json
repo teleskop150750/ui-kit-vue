@@ -1,0 +1,111 @@
+{
+  "compilerOptions": {
+    /* Visit https://aka.ms/tsconfig to read more about this file */
+
+    /* Projects */
+    // "incremental": false,                             /* Сохраняйте файлы .tsbuildinfo, чтобы обеспечить пошаговую компиляцию проектов.. */
+    // "composite": true,                                /* Включить ограничения, позволяющие использовать проект TypeScript со ссылками на проект. */
+    // "tsBuildInfoFile": ".tsBuildInfo",                /* Укажите путь к файлу инкрементной компиляции .tsbuildinfo. */
+    // "disableSourceOfProjectReferenceRedirect": true,  /* Отключить предпочтение исходных файлов вместо файлов объявлений при ссылке на составные проекты. */
+    // "disableSolutionSearching": true,                 /* Отказ проекта от проверки ссылок на несколько проектов при редактировании. */
+    // "disableReferencedProjectLoad": true,             /* Уменьшите количество проектов, автоматически загружаемых TypeScript. */
+
+    /* Language and Environment */
+    "target": "ESNext",                                  /* Установите версию языка JavaScript для испускаемого JavaScript и включите объявления совместимых библиотек.. */
+    "jsx": "preserve",                                   /* Укажите, какой код JSX генерируется. */
+    "experimentalDecorators": false,                     /* Включить экспериментальную поддержку для декораторов проекта TC39 stage 2. */
+    "emitDecoratorMetadata": false,                      /* Включает экспериментальную поддержку выделения метаданных типа для декораторов in source files. */
+    // "jsxFactory": "",                                 /* Specify the JSX factory function used when targeting React JSX emit, e.g. 'React.createElement' or 'h'. */
+    // "jsxFragmentFactory": "",                         /* Specify the JSX Fragment reference used for fragments when targeting React JSX emit e.g. 'React.Fragment' or 'Fragment'. */
+    // "jsxImportSource": "",                            /* Specify module specifier used to import the JSX factory functions when using 'jsx: react-jsx*'. */
+    // "reactNamespace": "",                             /* Specify the object invoked for 'createElement'. This only applies when targeting 'react' JSX emit. */
+    // "noLib": true,                                    /* Отключите включение любых библиотечных файлов, в том числе lib.d.ts по умолчанию.. */
+    "useDefineForClassFields": true,                     /* Выдавать поля класса, соответствующие стандарту ECMAScript. */
+    // "moduleDetection": "auto",                        /* Контролируйте, какой метод используется для обнаружения JS-файлов модульного формата.. */
+
+    /* Modules */
+    "module": "ESNext",                                  /* Specify what module code is generated. */
+    // "rootDir": "./",                                  /* Укажите корневую папку в ваших исходных файлах. */
+    "moduleResolution": "node",                          /* Specify how TypeScript looks up a file from a given module specifier. */
+    // "baseUrl": "./",                                  /* Укажите базовый каталог для разрешения неродственных имен модулей.. */
+    // "paths": {},                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
+    // "rootDirs": [],                                   /* Разрешить обрабатывать несколько папок как одну при разрешении модулей. */
+    // "typeRoots": [],                                  /* Укажите несколько папок, которые действуют как './node_modules/@types'. */
+    // "types": [],                                      /* Укажите имена пакетов типов, которые будут включены без ссылок в исходном файле. */
+    // "allowUmdGlobalAccess": true,                     /* Разрешить доступ к глобальным UMD из модулей. */
+    // "moduleSuffixes": [],                             /* List of file name suffixes to search when resolving a module. */
+    "resolveJsonModule": true,                           /* Enable importing .json files. */
+    // "noResolve": true,                                /* Запретить 'import's, 'require's или <reference> для увеличения количества файлов, которые TypeScript должен добавить в проект.. */
+
+    /* JavaScript Support */
+    // "allowJs": true,                                     /* Разрешите файлам JavaScript быть частью вашей программы. Используйте опцию «checkJS», чтобы получить ошибки из этих файлов.. */
+    // "checkJs": false,                                    /* Включить отчеты об ошибках в файлах JavaScript с проверкой типов. */
+    // "maxNodeModuleJsDepth": 1,                           /* Укажите максимальную глубину папки, используемую для проверки файлов JavaScript из «node_modules». Применимо только с 'allowJs'. */
+
+    /* Emit */
+    "declaration": false,                                 /* Создавайте файлы .d.ts из файлов TypeScript и JavaScript в своем проекте.. */
+    "declarationMap": false,                              /* Создание исходных карт для файлов d.ts. */
+    // "emitDeclarationOnly": true,                      /* Выводить только файлы d.ts, а не файлы JavaScript. */
+    // "sourceMap": true,                                /* Создайте исходные файлы карт для выпущенных файлов JavaScript. */
+    // "outFile": "./",                                  /* Укажите файл, который объединяет все выходные данные в один файл JavaScript. Если «declaration» верно, также обозначает файл, который объединяет все выходные данные .d.ts.. */
+    // "outDir": "./dist",                                  /* Укажите выходную папку для всех выпущенных файлов. */
+    "removeComments": true,                              /* Отключить отправку комментариев. */
+    // "noEmit": true,                                   /* Отключить передачу файлов из компиляции. */
+    // "importHelpers": true,                               /* Разрешить импортировать вспомогательные функции из tslib один раз для каждого проекта, а не включать их для каждого файла.. */
+    // ||||||||||||||||
+    // "importsNotUsedAsValues": "error",                   /*  Укажите поведение выдачи/проверки для импорта, который используется только для типов. */
+    "downlevelIteration": false,                            /* Выпускать более совместимый, но многословный и менее производительный JavaScript для итерации. */
+    // "sourceRoot": "",                                 /* Укажите корневой путь, чтобы отладчики могли найти справочный исходный код.. */
+    // "mapRoot": "",                                    /* Укажите расположение, в котором отладчик должен найти файлы карт вместо созданных местоположений.. */
+    // "inlineSourceMap": true,                          /* Включить файлы исходной карты в испускаемый JavaScript. */
+    // "inlineSources": true,                            /* Включить исходный код в исходные карты внутри сгенерированного JavaScript. */
+    // "emitBOM": true,                                  /* Emit a UTF-8 Byte Order Mark (BOM) in the beginning of output files. */
+    "newLine": "lf",                                     /* Установите символ новой строки для создания файлов. */
+    // "stripInternal": true,                            /* Отключить генерирующие declarations, которые имеют «@internal» в своих комментариях JSDoc.. */
+    "noEmitHelpers": true,                               /* Отключить создание пользовательских вспомогательных функций, таких как «__extends», в скомпилированном выводе. */
+    // "noEmitOnError": true,                               /* Отключить создание файлов, если сообщается о каких-либо ошибках проверки типов. */
+    // "preserveConstEnums": true,                       /* Отключить стирание объявлений const enum в сгенерированном коде. */
+    // "declarationDir": "./",                           /* Укажите выходной каталог для сгенерированных файлов объявлений. */
+    // For `<script setup>`
+    // See <https://devblogs.microsoft.com/typescript/announcing-typescript-4-5-beta/#preserve-value-imports>
+    // ||||||||||||||||
+    // "preserveValueImports": true,                        /* Сохраняйте неиспользуемые импортированные значения в выходных данных JavaScript, которые в противном случае были бы удалены.. */
+    // ---------||||||||||||||||
+    "verbatimModuleSyntax": true,
+
+    /* Interop Constraints */
+    // Required in Vite
+    // ||||||||||||||||
+    // "isolatedModules": true,                            /* Убедитесь, что каждый файл может быть безопасно перенесен, не полагаясь на другие импорты.. */
+    "allowSyntheticDefaultImports": false,               /* Разрешить «импорт x из y», когда модуль не имеет экспорта по умолчанию. */
+    // Recommended true
+    "esModuleInterop": false,                            /* Добавьте дополнительный JavaScript, чтобы облегчить поддержку импорта модулей CommonJS. Это включает «allowSyntheticDefaultImports» для совместимости типов.. */
+    // "preserveSymlinks": true,                         /* Отключите разрешение символических ссылок на их реальный путь. Это соответствует тому же флагу в узле. */
+    "forceConsistentCasingInFileNames": true,            /* Убедитесь, что регистр правильный в импорте. */
+
+    /* Type Checking */
+    "strict": true,                                      /* Включить все параметры строгой проверки типов. */
+    "noImplicitAny": true,                               /* Включить отчеты об ошибках для выражений и объявлений с подразумеваемым типом «any». */
+    "strictNullChecks": true,                            /* При проверке типов учитывайте «null» и «undefined». */
+    "strictFunctionTypes": true,                         /* При назначении функций убедитесь, что параметры и возвращаемые значения совместимы с подтипами.. */
+    "strictBindCallApply": true,                         /* Убедитесь, что аргументы для методов «bind», «call» и «apply» соответствуют исходной функции.. */
+    "strictPropertyInitialization": true,                /* Проверка свойств класса, которые объявлены, но не заданы в конструкторе. */
+    "noImplicitThis": true,                              /* Включить отчеты об ошибках, когда «this» присвоен тип «any». */
+    "useUnknownInCatchVariables": true,                  /* Переменные предложения catch по умолчанию как «неизвестные» вместо «любые». */
+    "alwaysStrict": true,                                /* Убедитесь, что 'use strict' всегда испускается. */
+    "noUnusedLocals": true,                              /* Включить отчеты об ошибках, когда локальные переменные не читаются. */
+    "noUnusedParameters": true,                          /* Выдавать ошибку, когда параметр функции не читается. */
+    "exactOptionalPropertyTypes": false,                  /* Интерпретируйте необязательные типы свойств как записанные, а не добавляйте 'undefined'. */
+    "noImplicitReturns": true,                           /* Включить отчеты об ошибках для кодовых путей, которые не возвращаются явным образом в функции. */
+    "noFallthroughCasesInSwitch": true,                  /* Включить отчеты об ошибках для аварийных случаев в операторах switch. */
+    "noUncheckedIndexedAccess": true,                    /* Добавить `undefined` к типу при доступе с использованием индекса. */
+    "noImplicitOverride": true,                          /* Убедитесь, что переопределяющие члены в производных классах помечены модификатором переопределения.. */
+    "noPropertyAccessFromIndexSignature": false,         /* Принуждает использовать индексированные методы доступа для ключей, объявленных с использованием индексированного типа.. */
+    "allowUnusedLabels": false,                          /* Отключить отчеты об ошибках для неиспользуемых ярлыков. */
+    "allowUnreachableCode": false,                       /* Отключить отчеты об ошибках для недостижимого кода. */
+
+    /* Completeness */
+    // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
+    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+  }
+}

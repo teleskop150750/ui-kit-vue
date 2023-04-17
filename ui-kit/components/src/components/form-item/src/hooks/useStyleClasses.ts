@@ -1,7 +1,7 @@
 import { useNamespace } from '@nado/ui-kit-hooks'
 import { computed, type ComputedRef, inject, type Ref } from 'vue'
 
-import { type useFormSize } from '../../../form/src/shared'
+import type { useFormSize } from '../../../form/src/shared'
 import { FORM_CONTEXT_INJECTION_KEY } from '../../../form/src/tokens'
 import type { NFormItemProps, NFormItemValidateState } from '../form-item.model'
 
@@ -18,7 +18,7 @@ export function useStyleClasses({ props, validateState, size, isRequired }: Para
   const formItemClasses = computed(() => [
     ns.b(),
     ns.m(size.value),
-    ns.is('error', validateState.value === 'error'),
+    ns.is('error', validateState.value === 'danger'),
     ns.is('validating', validateState.value === 'validating'),
     ns.is('success', validateState.value === 'success'),
     ns.is('required', isRequired.value || props.required || false),

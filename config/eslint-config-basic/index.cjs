@@ -1327,7 +1327,6 @@ module.exports = {
     // Требовать или запрещать пробелы вокруг выражений *inyield*
     'yield-star-spacing': ['error', { before: false, after: true }],
 
-
     'no-spaced-func': 'off',
 
     // // ==================

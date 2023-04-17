@@ -2,7 +2,6 @@ import type { ComponentSize } from '@nado/ui-kit-constants'
 import { useLocale } from '@nado/ui-kit-hooks'
 import { en, type Language, zhCn } from '@nado/ui-kit-locale'
 import { mount, type VueWrapper } from '@vue/test-utils'
-import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { defineComponent, nextTick, ref } from 'vue'
 
 import { useGlobalComponentSettings } from '../src/hooks'

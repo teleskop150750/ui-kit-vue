@@ -16,6 +16,11 @@ const router = createRouter({
       component: () => import('../views/ButtonView.vue'),
     },
     {
+      path: '/tag',
+      name: 'tag',
+      component: () => import('../views/TagView.vue'),
+    },
+    {
       path: '/badge',
       name: 'badge',
       component: () => import('../views/BadgeView.vue'),
@@ -24,6 +29,11 @@ const router = createRouter({
       path: '/input',
       name: 'input',
       component: () => import('../views/InputView.vue'),
+    },
+    {
+      path: '/select',
+      name: 'select',
+      component: () => import('../views/SelectView.vue'),
     },
     {
       path: '/radio',
@@ -64,6 +74,36 @@ const router = createRouter({
       path: '/table',
       name: 'table',
       component: () => import('../views/TableView.vue'),
+    },
+    {
+      path: '/tooltip',
+      name: 'tooltip',
+      component: () => import('../views/TooltipView.vue'),
+    },
+    {
+      path: '/popover',
+      name: 'popover',
+      component: () => import('../views/PopoverView.vue'),
+    },
+    {
+      path: '/focus-trap',
+      name: 'focus-trap',
+      component: () => import('../views/MessageView.vue'),
+    },
+    {
+      path: '/message',
+      name: 'message',
+      component: () => import('../views/MessageView.vue'),
+    },
+    {
+      path: '/dialog',
+      name: 'dialog',
+      component: () => import('../views/DialogView.vue'),
+    },
+    {
+      path: '/drawer',
+      name: 'drawer',
+      component: () => import('../views/DrawerView.vue'),
     },
   ],
 })

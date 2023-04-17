@@ -3,6 +3,7 @@ import type { Language } from '@nado/ui-kit-locale'
 import { buildProps, definePropType } from '@nado/ui-kit-utils'
 import type { Component, ExtractPropTypes } from 'vue'
 
+import type { MessageConfigContext } from '../../message/src/message.model'
 import type { NConfigProvider } from '..'
 
 export interface ExperimentalFeatures {
@@ -21,6 +22,12 @@ export const nConfigProviderProps = buildProps({
    * @description global component size
    */
   size: useSizeProp,
+  /**
+   * @description message related configuration, [see the following table](#message-attributes)
+   */
+  message: {
+    type: definePropType<MessageConfigContext>(Object),
+  },
   /**
    * @description global Initial zIndex
    */

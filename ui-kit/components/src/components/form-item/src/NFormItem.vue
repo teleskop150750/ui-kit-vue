@@ -131,7 +131,7 @@ function onValidationFailed(error: NFormValidateFailure) {
     console.error(error)
   }
 
-  setValidationState('error')
+  setValidationState('danger')
 
   validateMessages.value = (errors || []).map((el) => el?.message || `${props.prop} is required`)
 
@@ -168,7 +168,7 @@ watch(
   () => props.error,
   (val) => {
     validateMessages.value = val ? arrWrap(val) : []
-    setValidationState(val ? 'error' : '')
+    setValidationState(val ? 'danger' : '')
   },
   { immediate: true },
 )

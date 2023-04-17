@@ -8,7 +8,7 @@
   "module": "./src/index.ts",
   "types": "./src/index.ts",
   "scripts": {
-    "type-check": "vue-tsc --noEmit -p ./tsconfig.json",
+    "type-check": "vue-tsc --noEmit -p ./tsconfig.app.json --composite false",
     "generate": "pnpm run generate-only && pnpm run prettier:fix && pnpm run eslint:fix && pnpm run type-check",
     "generate-only": "tsx build-icons/generate.ts",
     "prettier": "prettier --check --ignore-unknown \"**/*\"",
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@nado/eslint-config-vue": "workspace:*",
     "@nado/prettier-config": "workspace:*",
+    "@nado/stylelint-config-css": "workspace:*",
     "@nado/tsconfig": "workspace:*",
     "@nado/ui-kit-icons-svg": "workspace:*",
     "@pnpm/find-workspace-dir": "^4.0.3",
@@ -33,19 +34,14 @@
     "@types/prettier": "^2.7.2",
     "@vitejs/plugin-vue": "^4.1.0",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
-    "@vue/test-utils": "^2.3.2",
     "@yarnpkg/core": "4.0.0-rc.40",
     "camelcase": "^7.0.1",
     "chalk": "^5.2.0",
     "consola": "^2.15.3",
-    "eslint": "^8.38.0",
     "fast-glob": "^3.2.12",
     "fs-extra": "^10.1.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.8.7",
     "tsx": "^3.12.6",
-    "vite": "^4.2.1",
-    "vitest": "^0.29.8",
     "vue": "^3.2.47",
     "vue-tsc": "^1.2.0"
   }

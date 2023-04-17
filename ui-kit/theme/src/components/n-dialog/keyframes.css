@@ -1,0 +1,83 @@
+@keyframes v-modal-in {
+  0% {
+    opacity: 0;
+  }
+}
+
+@keyframes v-modal-in {
+  0% {
+    opacity: 0;
+  }
+}
+
+@keyframes v-modal-out {
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes v-modal-out {
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes dialog-fade-in {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes dialog-fade-out {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+  }
+}
+
+.dialog-fade-enter-active {
+  animation: modal-fade-in var(--n-sys-transition-duration);
+}
+
+.dialog-fade-enter-active .n-overlay-dialog {
+  animation: dialog-fade-in var(--n-sys-transition-duration);
+}
+
+.dialog-fade-leave-active {
+  animation: modal-fade-out var(--n-sys-transition-duration);
+}
+
+.dialog-fade-leave-active .n-overlay-dialog {
+  animation: dialog-fade-out var(--n-sys-transition-duration);
+}

@@ -5,7 +5,7 @@ import type { ExtractPropTypes } from 'vue'
 import type FormItem from './NFormItem.vue'
 import type { FormItemRule } from './types'
 
-export const formItemValidateStates = ['', 'error', 'validating', 'success'] as const
+export const formItemValidateStates = ['', 'danger', 'validating', 'success'] as const
 export type NFormItemValidateState = (typeof formItemValidateStates)[number]
 
 export type NFormItemProp = Arrayable<string>

@@ -1,4 +1,3 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { ref } from 'vue'
 
 import { useDelayedToggle } from '../use-delayed-toggle'
@@ -15,7 +14,7 @@ describe('use-delayed-toggle', () => {
   it('should can call open/close', () => {
     const cbOpen = vi.fn()
     const cbClose = vi.fn()
-    const { onOpen, onClose } = useDelayedToggle({
+    const { delayOpen, delayClose } = useDelayedToggle({
       open: cbOpen,
       close: cbClose,
       showAfter: ref(0),
@@ -26,13 +25,13 @@ describe('use-delayed-toggle', () => {
     expect(cbOpen).not.toHaveBeenCalled()
     expect(cbClose).not.toHaveBeenCalled()
 
-    onOpen()
+    delayOpen()
 
     vi.runAllTimers()
     expect(cbOpen).toHaveBeenCalled()
     expect(cbClose).not.toHaveBeenCalled()
 
-    onClose()
+    delayClose()
     vi.runAllTimers()
     expect(cbOpen).toHaveBeenCalledTimes(1)
     expect(cbClose).toHaveBeenCalledTimes(1)
@@ -41,7 +40,7 @@ describe('use-delayed-toggle', () => {
   it('should delay of appearance', () => {
     const cbOpen = vi.fn()
     const cbClose = vi.fn()
-    const { onOpen, onClose } = useDelayedToggle({
+    const { delayOpen, delayClose } = useDelayedToggle({
       open: cbOpen,
       close: cbClose,
       showAfter: ref(100),
@@ -52,7 +51,7 @@ describe('use-delayed-toggle', () => {
     expect(cbOpen).not.toHaveBeenCalled()
     expect(cbClose).not.toHaveBeenCalled()
 
-    onOpen()
+    delayOpen()
 
     vi.advanceTimersByTime(50)
     expect(cbOpen).not.toHaveBeenCalled()
@@ -61,7 +60,7 @@ describe('use-delayed-toggle', () => {
     expect(cbOpen).toHaveBeenCalled()
     expect(cbClose).not.toHaveBeenCalled()
 
-    onClose()
+    delayClose()
     vi.runAllTimers()
     expect(cbOpen).toHaveBeenCalledTimes(1)
     expect(cbClose).toHaveBeenCalledTimes(1)
@@ -70,7 +69,7 @@ describe('use-delayed-toggle', () => {
   it('should delay of disappear', () => {
     const cbOpen = vi.fn()
     const cbClose = vi.fn()
-    const { onClose } = useDelayedToggle({
+    const { delayClose } = useDelayedToggle({
       open: cbOpen,
       close: cbClose,
       showAfter: ref(0),
@@ -81,7 +80,7 @@ describe('use-delayed-toggle', () => {
     expect(cbOpen).not.toHaveBeenCalled()
     expect(cbClose).not.toHaveBeenCalled()
 
-    onClose()
+    delayClose()
     vi.advanceTimersByTime(50)
     expect(cbClose).not.toHaveBeenCalled()
     vi.advanceTimersByTime(50)
@@ -95,7 +94,7 @@ describe('use-delayed-toggle', () => {
   it('should disappear automatically', () => {
     const cbOpen = vi.fn()
     const cbClose = vi.fn()
-    const { onOpen } = useDelayedToggle({
+    const { delayOpen } = useDelayedToggle({
       open: cbOpen,
       close: cbClose,
       showAfter: ref(0),
@@ -106,7 +105,7 @@ describe('use-delayed-toggle', () => {
     expect(cbOpen).not.toHaveBeenCalled()
     expect(cbClose).not.toHaveBeenCalled()
 
-    onOpen()
+    delayOpen()
     vi.advanceTimersByTime(0)
     expect(cbOpen).toHaveBeenCalled()
     vi.advanceTimersByTime(50)
@@ -122,7 +121,7 @@ describe('use-delayed-toggle', () => {
   it('apply all time', () => {
     const cbOpen = vi.fn()
     const cbClose = vi.fn()
-    const { onOpen, onClose } = useDelayedToggle({
+    const { delayOpen, delayClose } = useDelayedToggle({
       open: cbOpen,
       close: cbClose,
       showAfter: ref(100),
@@ -133,13 +132,13 @@ describe('use-delayed-toggle', () => {
     expect(cbOpen).not.toHaveBeenCalled()
     expect(cbClose).not.toHaveBeenCalled()
 
-    onOpen()
+    delayOpen()
     vi.advanceTimersByTime(0)
     expect(cbOpen).not.toHaveBeenCalled()
     vi.advanceTimersByTime(50)
     expect(cbOpen).not.toHaveBeenCalled()
 
-    onClose()
+    delayClose()
     vi.advanceTimersByTime(50)
     expect(cbOpen).not.toHaveBeenCalled()
     expect(cbClose).not.toHaveBeenCalled()
@@ -152,7 +151,7 @@ describe('use-delayed-toggle', () => {
   it('the close function call once', () => {
     const cbOpen = vi.fn()
     const cbClose = vi.fn()
-    const { onOpen, onClose } = useDelayedToggle({
+    const { delayOpen, delayClose } = useDelayedToggle({
       open: cbOpen,
       close: cbClose,
       showAfter: ref(0),
@@ -163,12 +162,12 @@ describe('use-delayed-toggle', () => {
     expect(cbOpen).not.toHaveBeenCalled()
     expect(cbClose).not.toHaveBeenCalled()
 
-    onOpen()
+    delayOpen()
     vi.advanceTimersByTime(0)
     expect(cbOpen).toHaveBeenCalled()
     expect(cbClose).not.toHaveBeenCalled()
 
-    onClose()
+    delayClose()
 
     vi.advanceTimersByTime(50)
     expect(cbClose).not.toHaveBeenCalled()

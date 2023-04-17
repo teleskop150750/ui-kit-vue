@@ -1,5 +1,3 @@
-import { describe, expect, it } from 'vitest'
-
 import { entriesOf, getProp } from '..'
 
 const AXIOM = 'Rem is the best girl'

@@ -1,10 +1,10 @@
+import type { Measurable } from '@nado/ui-kit-hooks'
 import { isClient } from '@nado/ui-kit-utils'
 import type { Modifier } from '@popperjs/core'
 import { type MaybeRef, unrefElement } from '@vueuse/core'
 import type { ComponentPublicInstance } from 'vue'
 
 import type { PopperCoreConfigProps } from './popper-content.model'
-import type { Measurable } from './tokens'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function buildPopperOptions(props: PopperCoreConfigProps, modifiers: Modifier<any, any>[] = []) {

@@ -1,11 +1,11 @@
 import { useNamespace, type UsePopperReturn, useZIndex } from '@nado/ui-kit-hooks'
 import { computed, type CSSProperties, ref, type StyleValue, unref } from 'vue'
 
-import type { PopperContentProps } from '../popper-content.model'
+import type { NPopperContentProps } from '../popper-content.model'
 import type { UsePopperContentReturn } from './usePopperContent'
 
 export const usePopperContentDOM = (
-  props: PopperContentProps,
+  props: NPopperContentProps,
   { attributes, styles, role }: Pick<UsePopperReturn, 'attributes' | 'styles'> & Pick<UsePopperContentReturn, 'role'>,
 ) => {
   const { nextZIndex } = useZIndex()
@@ -13,7 +13,12 @@ export const usePopperContentDOM = (
 
   const contentAttrs = computed(() => unref(attributes).popper)
   const contentZIndex = ref<number>(props.zIndex || nextZIndex())
-  const contentClass = computed(() => [ns.b(), ns.is('pure', props.pure), ns.is(props.effect), props.popperClass])
+  const contentClass = computed(() => [
+    ns.b(),
+    ns.is('pure', props.pure),
+    ns.type('effect', props.effect),
+    props.popperClass,
+  ])
   const contentStyle = computed<StyleValue[]>(() => [
     { zIndex: unref(contentZIndex) } as CSSProperties,
     props.popperStyle || {},
@@ -33,7 +38,6 @@ export const usePopperContentDOM = (
     contentClass,
     contentStyle,
     contentZIndex,
-
     updateZIndex,
   }
 }

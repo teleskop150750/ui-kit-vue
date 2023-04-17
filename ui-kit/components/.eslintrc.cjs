@@ -9,5 +9,6 @@ module.exports = {
   extends: ['@nado/eslint-config-vue'],
   rules: {
     'vue/no-unused-vars': 'error',
+    'vue/no-v-html': 'off',
   },
 }

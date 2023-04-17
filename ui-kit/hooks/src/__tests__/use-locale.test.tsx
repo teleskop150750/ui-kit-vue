@@ -3,7 +3,6 @@
 // import English from '@element-plus/locale/lang/en'
 // import Chinese from '@element-plus/locale/lang/zh-cn'
 // import { mount, type VueWrapper } from '@vue/test-utils'
-import { describe, it } from 'vitest'
 // import type { ComponentPublicInstance, PropType } from 'vue'
 // import { computed, defineComponent, nextTick } from 'vue'
 
@@ -13,7 +12,7 @@ import { describe, it } from 'vitest'
 //   setup() {
 //     const { t } = useLocale()
 
-//     return () => <div class="locale-manifest">{t('el.popconfirm.confirmButtonText')}</div>
+//     return () => <div class="locale-manifest">{t('nado.popconfirm.confirmButtonText')}</div>
 //   },
 // })
 
@@ -53,7 +52,7 @@ describe('use-locale', () => {
   // })
   // it('return key name if not defined', () => {
   //   const t = buildTranslator(English)
-  //   expect(t('el.popconfirm.someThing')).toBe('el.popconfirm.someThing')
+  //   expect(t('nado.popconfirm.someThing')).toBe('nado.popconfirm.someThing')
   // })
   // describe('overrides', () => {
   //   it('should be override correctly', () => {

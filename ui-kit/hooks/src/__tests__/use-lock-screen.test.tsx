@@ -1,6 +1,5 @@
 import { hasClass } from '@nado/ui-kit-utils'
 import { mount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
 import { defineComponent, nextTick, onMounted, ref } from 'vue'
 
 import { useLockScreen } from '../use-lock-screen'

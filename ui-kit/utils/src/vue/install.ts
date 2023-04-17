@@ -2,7 +2,7 @@
 import type { App, Directive } from 'vue'
 
 import { NOOP } from '../shared'
-import type { SFCWithInstall } from './typescript'
+import type { SFCInstallWithContext, SFCWithInstall } from './typescript'
 
 export const withInstall = <T, E extends Record<string, any>>(main: T, extra?: E) => {
   ;(main as SFCWithInstall<T>).install = (app): void => {
@@ -18,6 +18,15 @@ export const withInstall = <T, E extends Record<string, any>>(main: T, extra?: E
   }
 
   return main as SFCWithInstall<T> & E
+}
+
+export const withInstallFunction = <T>(fn: T, name: string) => {
+  ;(fn as SFCWithInstall<T>).install = (app: App) => {
+    ;(fn as SFCInstallWithContext<T>)._context = app._context
+    app.config.globalProperties[name] = fn
+  }
+
+  return fn as SFCInstallWithContext<T>
 }
 
 export const withNoopInstall = <T>(component: T) => {

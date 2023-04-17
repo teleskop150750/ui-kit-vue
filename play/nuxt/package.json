@@ -22,9 +22,6 @@
     "@nado/eslint-config-vue": "workspace:*",
     "@nado/prettier-config": "workspace:*",
     "@nado/stylelint-config-css": "workspace:*",
-    "eslint": "^8.38.0",
-    "nuxt": "^3.3.3",
-    "prettier": "^2.8.7",
-    "stylelint": "^15.4.0"
+    "nuxt": "^3.3.3"
   }
 }

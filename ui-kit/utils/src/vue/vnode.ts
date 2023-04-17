@@ -24,7 +24,7 @@ export const PatchFlags = {
   DYNAMIC_SLOTS: 1024,
   HOISTED: -1,
   BAIL: -2,
-}
+} as const
 
 export type VNodeChildAtom = Exclude<VNodeChild, Array<any>>
 export type RawSlots = Exclude<VNodeNormalizedChildren, Array<any> | null | string>

@@ -1,5 +1,3 @@
-import { describe, expect, it, vi } from 'vitest'
-
 import { isFirefox } from '..'
 
 describe('browser', () => {

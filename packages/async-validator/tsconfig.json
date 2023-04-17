@@ -1,16 +1,14 @@
 {
   "files": [],
-  "extends": "@nado/tsconfig/tsconfig.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.ts"],
-  "exclude": ["test/**/*", "cypress/**/*"],
-  "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist",
-    "types": ["node", "jsdom"]
-  },
   "references": [
     {
       "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.vitest.json"
     }
   ]
 }

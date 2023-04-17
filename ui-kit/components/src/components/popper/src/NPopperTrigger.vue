@@ -1,27 +1,18 @@
 <script lang="ts" setup>
 import { useForwardRef } from '@nado/ui-kit-hooks'
-import { isElement, isNil } from '@nado/ui-kit-utils'
+import { isElement, isNil, type Nillable } from '@nado/ui-kit-utils'
 import { unrefElement } from '@vueuse/core'
 import { computed, inject, onBeforeUnmount, onMounted, watch, type WatchStopHandle } from 'vue'
 
-import { popperTriggerProps } from './popper-trigger.model'
+import { NOnlyChild } from '../../only-child'
+import { nPopperTriggerProps } from './popper-trigger.model'
 import { POPPER_INJECTION_KEY } from './tokens'
 
-const props = defineProps(popperTriggerProps)
+const props = defineProps(nPopperTriggerProps)
 
 const { role, triggerRef } = inject(POPPER_INJECTION_KEY, undefined)!
 
 useForwardRef(triggerRef)
-
-const ariaControls = computed<string | undefined>(() => (ariaHaspopup.value ? props.id : undefined))
-
-const ariaDescribedby = computed<string | undefined>(() => {
-  if (role && role.value === 'tooltip') {
-    return props.open && props.id ? props.id : undefined
-  }
-
-  return undefined
-})
 
 const ariaHaspopup = computed<string | undefined>(() => {
   if (role && role.value !== 'tooltip') {
@@ -31,12 +22,24 @@ const ariaHaspopup = computed<string | undefined>(() => {
   return undefined
 })
 
-const ariaExpanded = computed<string | undefined>(() => (ariaHaspopup.value ? `${props.open}` : undefined))
+const ariaControls = computed<string | undefined>(() => (ariaHaspopup.value ? props.id : undefined))
 
-let virtualTriggerAriaStopWatch: WatchStopHandle | undefined = undefined
+const ariaDescribedby = computed<string | undefined>(() => {
+  if (role && role.value === 'tooltip') {
+    return props.isOpen && props.id ? props.id : undefined
+  }
+
+  return undefined
+})
+
+const ariaExpanded = computed<Nillable<string>>(() => (ariaHaspopup.value ? `${props.isOpen}` : undefined))
+
+let virtualStopWatch: Nillable<WatchStopHandle> = undefined
+let triggerStopWatch: Nillable<WatchStopHandle> = undefined
+let virtualTriggerAriaStopWatch: Nillable<WatchStopHandle> = undefined
 
 onMounted(() => {
-  watch(
+  virtualStopWatch = watch(
     () => props.virtualRef,
     (virtualEl) => {
       if (virtualEl) {
@@ -48,7 +51,7 @@ onMounted(() => {
     },
   )
 
-  watch(
+  triggerStopWatch = watch(
     triggerRef,
     (el, prevEl) => {
       virtualTriggerAriaStopWatch?.()
@@ -90,13 +93,14 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   virtualTriggerAriaStopWatch?.()
+  virtualStopWatch?.()
+  triggerStopWatch?.()
   virtualTriggerAriaStopWatch = undefined
+  virtualStopWatch = undefined
+  triggerStopWatch = undefined
 })
 
 defineExpose({
-  /**
-   * @description trigger element
-   */
   triggerRef,
 })
 </script>
@@ -109,8 +113,8 @@ export default {
 </script>
 
 <template>
-  <ElOnlyChild
-    v-if="!virtualTriggering"
+  <NOnlyChild
+    v-if="!isVirtualTriggering"
     v-bind="$attrs"
     :aria-controls="ariaControls"
     :aria-describedby="ariaDescribedby"
@@ -118,5 +122,5 @@ export default {
     :aria-haspopup="ariaHaspopup"
   >
     <slot />
-  </ElOnlyChild>
+  </NOnlyChild>
 </template>

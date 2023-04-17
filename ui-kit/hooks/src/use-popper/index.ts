@@ -1,4 +1,4 @@
-import type { Nillable } from '@nado/ui-kit-utils'
+import { fromPairs, type Nillable } from '@nado/ui-kit-utils'
 import {
   createPopper,
   type Instance,
@@ -9,15 +9,26 @@ import {
 } from '@popperjs/core'
 import { computed, onBeforeUnmount, type Ref, ref, shallowRef, unref, watch } from 'vue'
 
+interface MeasurableRect {
+  height: number
+  width: number
+  x: number
+  y: number
+}
+
+export interface Measurable {
+  getBoundingClientRect: () => MeasurableRect
+}
+
 type ElementType = Nillable<HTMLElement>
-type ReferenceElement = ElementType | VirtualElement
+type ReferenceElement = ElementType | VirtualElement | Measurable
 export type PartialOptions = Partial<Options>
 
-export function usePopper(
+export const usePopper = (
   referenceElementRef: Ref<ReferenceElement>,
   popperElementRef: Ref<ElementType>,
   opts: Ref<PartialOptions> | PartialOptions = {} as PartialOptions,
-) {
+) => {
   const stateUpdater = {
     name: 'updateState',
     enabled: true,
@@ -88,7 +99,7 @@ export function usePopper(
       return
     }
 
-    instanceRef.value = createPopper(referenceElement, popperElement, unref(options))
+    instanceRef.value = createPopper(referenceElement as Element | VirtualElement, popperElement, unref(options))
   })
 
   onBeforeUnmount(() => {
@@ -109,13 +120,13 @@ export function usePopper(
 function deriveState(state: State) {
   const elements = Object.keys(state.elements) as unknown as Array<keyof State['elements']>
 
-  const styles = Object.fromEntries(
+  const styles = fromPairs(
     elements.map(
       (element) => [element, state.styles[element] || {}] as [string, State['styles'][keyof State['styles']]],
     ),
   )
 
-  const attributes = Object.fromEntries(
+  const attributes = fromPairs(
     elements.map(
       (element) => [element, state.attributes[element]] as [string, State['attributes'][keyof State['attributes']]],
     ),

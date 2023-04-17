@@ -2,10 +2,10 @@
 import { useNamespace } from '@nado/ui-kit-hooks'
 import { inject, onBeforeUnmount, watch } from 'vue'
 
-import { popperArrowProps } from './popper-arrow.model'
+import { nPopperArrowProps } from './popper-arrow.model'
 import { POPPER_CONTENT_INJECTION_KEY } from './tokens'
 
-const props = defineProps(popperArrowProps)
+const props = defineProps(nPopperArrowProps)
 
 const ns = useNamespace('popper')
 const { arrowOffset, arrowRef, arrowStyle } = inject(POPPER_CONTENT_INJECTION_KEY, undefined)!

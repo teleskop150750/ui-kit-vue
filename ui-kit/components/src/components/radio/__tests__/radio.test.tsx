@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils'
-import { describe, expect, test } from 'vitest'
 import { nextTick, ref } from 'vue'
 
 import { NFormItem } from '../../form-item'
@@ -12,10 +11,7 @@ describe('Radio', () => {
   test('create', async () => {
     const radio = ref('')
 
-    function handleClick() {
-      console.log('click')
-    }
-    const wrapper = mount(() => <NRadio v-model={radio.value} value="a" onClick={handleClick} />, {
+    const wrapper = mount(() => <NRadio v-model={radio.value} value="a" />, {
       attachTo: document.body,
     })
 
@@ -185,8 +181,6 @@ describe('Radio group', () => {
     const data = ref<NRadioProps['modelValue']>(0)
 
     function onChange(val: NRadioProps['modelValue']) {
-      console.log('val', val)
-
       data.value = val
     }
     const wrapper = mount(
@@ -265,7 +259,7 @@ describe('Radio group', () => {
 })
 
 describe('Radio Button', () => {
-  test.skip('create', async () => {
+  test.todo('create', async () => {
     const radio = ref(3)
     const wrapper = mount(
       () => (
