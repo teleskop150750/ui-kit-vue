@@ -1,7 +1,6 @@
 import { EVENT_CODE } from '@nado/ui-kit-constants'
-import { buildProps, definePropType, iconPropType } from '@nado/ui-kit-utils'
+import { buildProps, definePropType, iconPropType, type Nullable } from '@nado/ui-kit-utils'
 import type { Options, Placement } from '@popperjs/core'
-import type { Nullable } from 'vitest'
 // import { createCollectionWithScope } from '@ui/components/collection'
 import type { ComponentInternalInstance, ComputedRef } from 'vue'
 

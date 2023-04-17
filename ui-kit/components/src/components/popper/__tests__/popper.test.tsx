@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
 import { defineComponent, inject, nextTick } from 'vue'
 
 import NPopper from '../src/NPopper.vue'
