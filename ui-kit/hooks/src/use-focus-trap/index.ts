@@ -72,17 +72,22 @@ export function useFocusTrap(target: MaybeElementRef, options: UseFocusTrapOptio
   const hasFocus = ref(false)
   const isPaused = ref(false)
 
-  const activate = (opts?: ActivateOptions) => trap && trap.activate(opts)
-  const deactivate = (opts?: DeactivateOptions) => trap && trap.deactivate(opts)
+  function activate(opts?: ActivateOptions) {
+    trap && trap.activate(opts)
+  }
 
-  const pause = () => {
+  function deactivate(opts?: DeactivateOptions) {
+    trap && trap.deactivate(opts)
+  }
+
+  function pause() {
     if (trap) {
       trap.pause()
       isPaused.value = true
     }
   }
 
-  const unpause = () => {
+  function unpause() {
     if (trap) {
       trap.unpause()
       isPaused.value = false

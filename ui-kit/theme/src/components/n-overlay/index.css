@@ -1,0 +1,19 @@
+/* stylelint-disable declaration-block-no-redundant-longhand-properties */
+.n-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2000;
+
+  height: 100%;
+
+  background-color: var(--n-sys-overlay-color);
+
+  overflow: auto;
+}
+
+.n-overlay .n-overlay-root {
+  height: 0;
+}

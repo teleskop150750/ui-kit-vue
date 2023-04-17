@@ -95,6 +95,11 @@ const router = createRouter({
       name: 'message',
       component: () => import('../views/MessageView.vue'),
     },
+    {
+      path: '/dialog',
+      name: 'dialog',
+      component: () => import('../views/DialogView.vue'),
+    },
   ],
 })
 

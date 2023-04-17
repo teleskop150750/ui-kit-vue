@@ -936,7 +936,7 @@ describe('Select', () => {
     options[3]!.click()
     await nextTick()
     expect(vm.value.includes('选项2') && vm.value.includes('选项4')).toBe(true)
-    const tagCloseIcons = wrapper.findAll('.n-badge__close')
+    const tagCloseIcons = wrapper.findAll('.n-tag__close')
 
     await tagCloseIcons[0]!.trigger('click')
     expect(vm.value.indexOf('选项1')).toBe(-1)
@@ -1214,7 +1214,7 @@ describe('Select', () => {
 
     await nextTick()
     expect(vm.value.length).toBe(2)
-    const tagCloseIcons = wrapper.findAll('.n-badge__close')
+    const tagCloseIcons = wrapper.findAll('.n-tag__close')
 
     await tagCloseIcons[1]!.trigger('click')
     expect(vm.value.length).toBe(1)
@@ -1324,7 +1324,7 @@ describe('Select', () => {
 
     await nextTick()
     expect(vm.value.length).toBe(2)
-    const tagCloseIcons = wrapper.findAll('.n-badge__close')
+    const tagCloseIcons = wrapper.findAll('.n-tag__close')
 
     await tagCloseIcons[1]!.trigger('click')
     expect(vm.value.length).toBe(1)
@@ -1782,13 +1782,13 @@ describe('Select', () => {
     await nextTick()
     const selectVm = wrapper.findComponent({ name: 'NSelect' }).vm as any
 
-    expect(wrapper.findAll('.n-badge').length).toBe(3)
-    const tagCloseIcons = wrapper.findAll('.n-badge__close')
+    expect(wrapper.findAll('.n-tag').length).toBe(3)
+    const tagCloseIcons = wrapper.findAll('.n-tag__close')
 
     expect(tagCloseIcons.length).toBe(1)
     await tagCloseIcons[0]!.trigger('click')
-    expect(wrapper.findAll('.n-badge__close').length).toBe(0)
-    expect(wrapper.findAll('.n-badge').length).toBe(2)
+    expect(wrapper.findAll('.n-tag__close').length).toBe(0)
+    expect(wrapper.findAll('.n-tag').length).toBe(2)
 
     // test if is clearable
     vm.isClearable = true
@@ -1798,19 +1798,19 @@ describe('Select', () => {
     await selectVm.$nextTick()
     const iconClear = wrapper.findComponent(NIconCircleClose)
 
-    expect(wrapper.findAll('.n-badge').length).toBe(3)
+    expect(wrapper.findAll('.n-tag').length).toBe(3)
     await iconClear.trigger('click')
-    expect(wrapper.findAll('.n-badge').length).toBe(2)
+    expect(wrapper.findAll('.n-tag').length).toBe(2)
 
     // test for collapse select
     vm.vendors = [1, 2, 4]
     vm.isCollapsed = true
     vm.isClearable = false
     await nextTick()
-    expect(wrapper.findAll('.n-badge').filter((item) => !hasClass(item.element, 'in-tooltip')).length).toBe(2)
-    await wrapper.find('.n-badge__close').trigger('click')
-    expect(wrapper.findAll('.n-badge').filter((item) => !hasClass(item.element, 'in-tooltip')).length).toBe(2)
-    expect(wrapper.findAll('.n-badge__close').length).toBe(0)
+    expect(wrapper.findAll('.n-tag').filter((item) => !hasClass(item.element, 'in-tooltip')).length).toBe(2)
+    await wrapper.find('.n-tag__close').trigger('click')
+    expect(wrapper.findAll('.n-tag').filter((item) => !hasClass(item.element, 'in-tooltip')).length).toBe(2)
+    expect(wrapper.findAll('.n-tag__close').length).toBe(0)
 
     // test for collapse select if is clearable
     vm.vendors = [1, 2, 4]
@@ -1819,11 +1819,11 @@ describe('Select', () => {
     await nextTick()
     expect(
       // @ts-ignore
-      wrapper.findAll('.n-badge__close').filter((item) => !hasClass(item.element.parentElement, 'in-tooltip')).length,
+      wrapper.findAll('.n-tag__close').filter((item) => !hasClass(item.element.parentElement, 'in-tooltip')).length,
     ).toBe(1)
-    await wrapper.find('.n-badge__close').trigger('click')
-    expect(wrapper.findAll('.n-badge').filter((item) => !hasClass(item.element, 'in-tooltip')).length).toBe(2)
-    expect(wrapper.findAll('.n-badge__close').length).toBe(0)
+    await wrapper.find('.n-tag__close').trigger('click')
+    expect(wrapper.findAll('.n-tag').filter((item) => !hasClass(item.element, 'in-tooltip')).length).toBe(2)
+    expect(wrapper.findAll('.n-tag__close').length).toBe(0)
   })
 
   test('tag type', async () => {
@@ -1860,7 +1860,7 @@ describe('Select', () => {
     options[1]!.click()
     await nextTick()
 
-    expect(wrapper.find('.n-badge').classes()).toContain('n-badge--appearance-soft-primary')
+    expect(wrapper.find('.n-tag').classes()).toContain('n-tag--appearance-soft-primary')
   })
 
   // TODO: fix
@@ -1889,14 +1889,14 @@ describe('Select', () => {
     const vm = wrapper.vm as any
 
     await nextTick()
-    console.log('FF', wrapper.findAll('.n-badge'))
+    console.log('FF', wrapper.findAll('.n-tag'))
 
-    expect(wrapper.findAll('.n-badge').length).toBe(1)
+    expect(wrapper.findAll('.n-tag').length).toBe(1)
 
     vm.modelValue.splice(0, 1)
 
     await nextTick()
-    expect(wrapper.findAll('.n-badge').length).toBe(0)
+    expect(wrapper.findAll('.n-tag').length).toBe(0)
   })
 
   test('should reset placeholder after clear when both multiple and filterable are true', async () => {
@@ -1921,7 +1921,7 @@ describe('Select', () => {
 
     expect(innerInputEl.placeholder).toBe('')
 
-    const tagCloseIcon = wrapper.find('.n-badge__close')
+    const tagCloseIcon = wrapper.find('.n-tag__close')
 
     await tagCloseIcon.trigger('click')
     expect(innerInputEl.placeholder).toBe(placeholder)

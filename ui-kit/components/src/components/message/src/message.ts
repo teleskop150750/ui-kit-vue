@@ -79,6 +79,7 @@ function createMessage(
     vnode,
     vm,
     handler,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     props: (vnode.component as any).props,
   }
 

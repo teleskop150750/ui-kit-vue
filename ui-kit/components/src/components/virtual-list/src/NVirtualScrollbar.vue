@@ -257,3 +257,7 @@ onBeforeUnmount(() => {
     />
   </div>
 </template>
+
+<style>
+@import url('@nado/ui-kit-theme/src/components/n-virtual-list/index.css');
+</style>

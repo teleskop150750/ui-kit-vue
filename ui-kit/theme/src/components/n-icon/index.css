@@ -23,5 +23,13 @@
       width: 1em;
       height: 1em;
     }
+
+    .n-icon--right {
+      margin-left: 6px;
+    }
+
+    .n-icon--left {
+      margin-right: 6px;
+    }
   }
 }

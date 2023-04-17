@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { getCurrentInstance } from 'vue'
 
-import Docs from '@/components/badge/Docs.vue'
+import Docs from '@/components/tag/Docs.vue'
 
 const instance = getCurrentInstance()!
 
