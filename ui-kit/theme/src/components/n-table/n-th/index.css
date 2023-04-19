@@ -14,7 +14,7 @@
 
   .n-th--is-move {
     position: relative;
-    z-index: 10;
+    z-index: 1;
   }
 
   .n-table--is-column-ordering .n-th:not(.n-th--is-move) {
