@@ -14,8 +14,8 @@ const emit = defineEmits(['scroll', 'startMove', 'stopMove'])
 const nsVirtualScrollbar = useNamespace('virtual-scrollbar')
 
 // DOM refs
-const trackRef = ref()
-const thumbRef = ref()
+const trackRef = ref<HTMLElement>()
+const thumbRef = ref<HTMLElement>()
 
 // local variables
 
@@ -94,10 +94,6 @@ function attachEvents() {
   onSelectstartStore = document.onselectstart
   // eslint-disable-next-line unicorn/prefer-add-event-listener
   document.onselectstart = () => false
-  thumbEl.addEventListener('touchmove', handleMouseMoveWindow, {
-    passive: true,
-  })
-  thumbEl.addEventListener('touchend', handleMouseUpWindow)
 }
 
 function detachEvents() {
@@ -108,14 +104,6 @@ function detachEvents() {
 
   // eslint-disable-next-line unicorn/no-null
   onSelectstartStore = null
-  const thumbEl = unref(thumbRef)
-
-  if (!thumbEl) {
-    return
-  }
-
-  thumbEl.removeEventListener('touchmove', handleMouseMoveWindow)
-  thumbEl.removeEventListener('touchend', handleMouseUpWindow)
 }
 
 function handleMouseDownThumb(evt: MouseEvent | TouchEvent | Event) {
@@ -145,7 +133,7 @@ function handleMouseUpWindow() {
   detachEvents()
 }
 
-function handleMouseMoveWindow(evt: MouseEvent | TouchEvent) {
+function handleMouseMoveWindow(evt: MouseEvent) {
   const { isDragging } = state
 
   if (!isDragging) {
@@ -168,9 +156,9 @@ function handleMouseMoveWindow(evt: MouseEvent | TouchEvent) {
 
   // используя смещение текущего трека top/left - текущий
   // указатель clientY/clientX, чтобы получить относительное положение указателя на трек
-  const direction = trackRef.value.getBoundingClientRect()[bar.value.direction]
-  const client = (evt as MouseEvent)[bar.value.client]
-  const offset = (direction - client) * -1
+  const start = trackRef.value.getBoundingClientRect()[bar.value.direction]
+  const client = evt[bar.value.client]
+  const offset = client - start
   // найдите место, на которое был нажат thumb.
   const thumbClickPosition = thumbRef.value[bar.value.offset] - (prevPage as number)
   /**
@@ -205,8 +193,8 @@ function handleMouseDownTrack(evt: MouseEvent) {
   const client = evt[bar.value.client]
 
   const offset = Math.abs(direction - client)
-  const thumbHalf = thumbRef.value[bar.value.offset] / 2
-  const distance = offset - thumbHalf
+  const thumbCenter = thumbRef.value![bar.value.offset] / 2
+  const distance = offset - thumbCenter
 
   state.traveled = Math.max(0, Math.min(distance, totalSteps.value))
   emit('scroll', distance, totalSteps.value)
@@ -247,7 +235,6 @@ onBeforeUnmount(() => {
     :class="[nsVirtualScrollbar.b(), (alwaysOn || state.isDragging) && nsVirtualScrollbar.m('always-on')]"
     :style="trackStyle"
     @mousedown.stop.prevent="handleMouseDownTrack"
-    @touchstart.passive.prevent="handleMouseDownThumb"
   >
     <div
       ref="thumbRef"

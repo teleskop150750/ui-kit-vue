@@ -20,7 +20,7 @@ import { useCache, useDynamicList, useFixedList } from './hooks'
 import NVirtualScrollbar from './NVirtualScrollbar.vue'
 import type { Alignment } from './types'
 import { getIsHorizontal, getRTLOffsetType, getScrollDir } from './utils'
-import { virtualizedListProps } from './virtual-list.model'
+import { type NVirtualScrollbarInstance, virtualizedListProps } from './virtual-list.model'
 
 const props = defineProps(virtualizedListProps)
 const emit = defineEmits([ITEM_RENDER_EVT, SCROLL_EVT])
@@ -73,9 +73,9 @@ const getItemStyleCache = useCache()
 // здесь windowRef и innerRef могут быть типом HTMLElement
 // или определенный пользователем тип компонента, зависит от переданного типа
 // пользователем
-const containerRef = ref()
-const innerRef = ref()
-const scrollbarRef = ref()
+const containerRef = ref<HTMLElement>()
+const innerRef = ref<HTMLElement>()
+const scrollbarRef = ref<NVirtualScrollbarInstance>()
 const states = ref({
   isScrolling: false,
   scrollDir: FORWARD,
@@ -143,7 +143,6 @@ const clientSize = computed(() => {
 })
 
 // methods
-
 // TODO: NADO
 // const { onWheel } = useWheel({
 //   atStartEdge: computed(() => states.value.scrollOffset <= 0),
