@@ -1,9 +1,9 @@
 import { useLocale } from '@nado/ui-kit-hooks'
-import { debugWarn, isEqual } from '@nado/ui-kit-utils'
+import { debugWarn, isEqual, isNil } from '@nado/ui-kit-utils'
 import { computed, getCurrentInstance, ref, type SetupContext, watch } from 'vue'
 
+import { DEFAULT_CURRENT_PAGE, DEFAULT_PAGE_COUNT, DEFAULT_PAGE_SIZE } from '../constants'
 import type { NPaginationEmits, NPaginationProps } from '../pagination.model'
-import { isAbsent } from '../utils'
 import { usePaginationQuery } from './usePaginationQuery'
 import { usePaginationRoute } from './usePaginationRoute'
 import { useRouteLocation } from './useRouteLocation'
@@ -33,11 +33,11 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
       'onUpdate:currentPage' in vNodeProps || 'onUpdate:current-page' in vNodeProps || 'onCurrentChange' in vNodeProps
 
     const isValid = computed(() => {
-      if (isAbsent(props.total) && isAbsent(props.pageCount)) {
+      if (isNil(props.total) && isNil(props.pageCount)) {
         return false
       }
 
-      if (!isAbsent(props.currentPage) && !hasCurrentPageListener) {
+      if (!isNil(props.currentPage) && !hasCurrentPageListener) {
         return false
       }
 
@@ -54,40 +54,38 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
   function usePaginationPage() {
     const { pageNumberQueryVal, pageSizeQueryVal, pageNumberOrOffsetQueryVal } = getPageInQuery()
 
-    const innerPageSize = ref(
-      (props.defaultPageSize !== undefined ? props.defaultPageSize : pageSizeQueryVal.value) || 10,
-    )
+    const innerPageSize = ref(getInitPageSize())
 
-    const innerCurrentPage = ref(
-      (props.defaultCurrentPage !== undefined ? props.defaultCurrentPage : pageNumberQueryVal.value) || 1,
-    )
+    const innerCurrentPage = ref(getInitCurrentPage())
 
     const pageSizeBridge = computed({
       get() {
-        return isAbsent(props.pageSize) ? innerPageSize.value : props.pageSize
+        return isNil(props.pageSize) ? innerPageSize.value : props.pageSize
       },
       set(v: number) {
-        if (isAbsent(props.pageSize)) {
+        if (isNil(props.pageSize)) {
           innerPageSize.value = v
         }
+
+        emit('update:page-size', v)
       },
     })
 
     const pageCountBridge = computed<number>(() => {
-      if (!isAbsent(props.pageCount)) {
+      if (!isNil(props.pageCount)) {
         return props.pageCount
       }
 
-      if (!isAbsent(props.total)) {
+      if (!isNil(props.total)) {
         return Math.max(1, Math.ceil(props.total / pageSizeBridge.value))
       }
 
-      return 0
+      return DEFAULT_PAGE_COUNT
     })
 
     const currentPageBridge = computed<number>({
       get() {
-        return isAbsent(props.currentPage) ? innerCurrentPage.value : props.currentPage
+        return isNil(props.currentPage) ? innerCurrentPage.value : props.currentPage
       },
       set(v) {
         let newCurrentPage = v
@@ -98,12 +96,11 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
           newCurrentPage = pageCountBridge.value
         }
 
-        if (isAbsent(props.currentPage)) {
+        if (isNil(props.currentPage)) {
           innerCurrentPage.value = newCurrentPage
         }
 
         emit('update:current-page', newCurrentPage)
-        emit('currentChange', newCurrentPage)
       },
     })
 
@@ -192,6 +189,8 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
       currentPageBridge.value = 1
     }
 
+    changeCurrentPage(innerCurrentPage.value)
+
     function changeCurrentPage(val: number) {
       if (!paginationRoute.value) {
         currentPageBridge.value = val
@@ -210,18 +209,50 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
 
     function changePageSize(val: number) {
       if (!paginationRoute.value) {
-        pageSizeBridge.value = val
+        currentPageBridge.value = val
 
         return
       }
 
-      const link = makeLocation(currentPageBridge.value, val)
+      const location = makeLocation(val, pageSizeBridge.value)
 
-      if (!link) {
+      if (!location) {
         return
       }
 
-      router.push(link)
+      router.push(location)
+    }
+
+    function getInitPageSize() {
+      if (props.defaultPageSize !== undefined) {
+        return props.defaultPageSize
+      }
+
+      if (pageSizeQueryVal.value !== undefined) {
+        return pageSizeQueryVal.value
+      }
+
+      if (props.pageSize !== undefined) {
+        return props.pageSize
+      }
+
+      return DEFAULT_PAGE_SIZE
+    }
+
+    function getInitCurrentPage() {
+      if (props.defaultCurrentPage !== undefined) {
+        return props.defaultCurrentPage
+      }
+
+      if (pageNumberQueryVal.value !== undefined) {
+        return pageNumberQueryVal.value
+      }
+
+      if (props.currentPage !== undefined) {
+        return props.currentPage
+      }
+
+      return DEFAULT_CURRENT_PAGE
     }
 
     return {

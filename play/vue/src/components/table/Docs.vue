@@ -12,7 +12,11 @@ const columns = ref<NTableColumn[]>([
     isSortable: true,
     isResizable: true,
     isOrderable: false,
-    width: 100,
+    width: 181,
+    align: 'right',
+    minWidth: 100,
+    sortOrder: 'ASC',
+    isRequired: true,
   },
   {
     field: 'name',
@@ -45,29 +49,13 @@ const columns = ref<NTableColumn[]>([
   },
 ])
 
-const rows = [
-  {
-    id: 1,
-    name: 'name 1',
-    age: 20,
-    foo: 1,
-    bar: 'bar',
-  },
-  {
-    id: 2,
-    name: 'name 1',
-    age: 40,
-    foo: 1,
-    bar: 'bar',
-  },
-  {
-    id: 3,
-    name: 'name 1',
-    age: 30,
-    foo: 1,
-    bar: 'bar',
-  },
-]
+const rows = Array.from({ length: 100 }).map((id) => ({
+  id,
+  name: 'name',
+  age: 20,
+  foo: 'foo',
+  bar: 'bar',
+}))
 </script>
 
 <template>
@@ -76,7 +64,7 @@ const rows = [
 
     <hr />
 
-    <div class="table-wrapper">
+    <div class="body">
       <NTable v-model:columns="columns" :rows="rows">
         <template #body-cell-name>
           <NTd>
@@ -86,6 +74,7 @@ const rows = [
       </NTable>
     </div>
   </div>
+  <pre>{{ columns }}</pre>
 </template>
 
 <style scoped>

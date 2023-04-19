@@ -97,6 +97,7 @@ export default {
       goto: 'Перейти',
       pagesize: ' на странице',
       total: 'Всего {total}',
+      info: 'Записи с {start} по {end} из {total}',
       pageClassifier: '',
       page: 'Page',
       prev: 'Go to previous page',
