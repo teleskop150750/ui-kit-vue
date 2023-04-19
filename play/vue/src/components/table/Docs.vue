@@ -19,6 +19,7 @@ const columns = ref<NTableColumn[]>([
     name: 'name',
     isSortable: true,
     isResizable: true,
+    isOrderable: true,
     width: 300,
     minWidth: 100,
   },
@@ -34,6 +35,7 @@ const columns = ref<NTableColumn[]>([
     label: 'foo',
     name: 'foo',
     isSortable: true,
+    isOrderable: true,
     width: 200,
   },
   {

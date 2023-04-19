@@ -36,6 +36,7 @@ export function useTableColumn(props: NTableProps) {
       minWidth: DEFAULT_WIDTH,
       isResizable: false,
       isSortable: false,
+      isOrderable: false,
       isRequired: false,
     }))
   })
@@ -66,22 +67,14 @@ export function useTableColumn(props: NTableProps) {
 }
 
 function formatColumns(columns: NTableColumn[]): NTableColumnInner[] {
-  return columns.map((col) => {
-    const minWidth = isNumber(col.minWidth) ? col.minWidth : col.width
-    const align = col.align || 'right'
-    const sortOrder = col.sortOrder || ''
-    const isResizable = col.isResizable || false
-    const isSortable = col.isSortable || false
-    const isRequired = col.isSortable || false
-
-    return {
-      ...col,
-      align,
-      minWidth,
-      sortOrder,
-      isResizable,
-      isSortable,
-      isRequired,
-    }
-  })
+  return columns.map((col) => ({
+    ...col,
+    align: col.align || 'right',
+    minWidth: isNumber(col.minWidth) ? col.minWidth : col.width,
+    sortOrder: col.sortOrder || '',
+    isResizable: col.isResizable || false,
+    isOrderable: col.isOrderable || true,
+    isSortable: col.isSortable || false,
+    isRequired: col.isSortable || false,
+  }))
 }

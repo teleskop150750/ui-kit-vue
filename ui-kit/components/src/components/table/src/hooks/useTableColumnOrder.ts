@@ -7,16 +7,19 @@ import { type ComputedRef, ref, type SetupContext } from 'vue'
 import type { NTableEmits } from '../table.model'
 import type { NTableColumnInner } from '../types'
 
-interface Column {
+interface ColumnBase {
   readonly index: number
+  readonly width: number
+  readonly center: number
+  readonly isOrderable: boolean
+}
+
+interface Column extends ColumnBase {
   newIndex: number
-  width: number
-  center: number
-  distance: number
-  isCurrent: boolean
+  readonly distance: number
+  readonly isOrderable: boolean
+  readonly isCurrent: boolean
   isMoved: boolean
-  isPrev: boolean
-  isAfter: boolean
 }
 
 export function useTableColumnOrder(
@@ -27,6 +30,7 @@ export function useTableColumnOrder(
   const nsTh = useNamespace('th')
   const thMoveClasses = nsTh.is('move')!
   const tdMoveClasses = nsTable.eIs('td', 'move')!
+  const thIsOrderableClasses = nsTh.is('orderable', true)!
   const isColumnOrdering = ref(false)
   const isColumnOrderingActive = ref(false)
   let initCoordX = 0
@@ -73,11 +77,9 @@ export function useTableColumnOrder(
       return
     }
 
-    const columnSizeList = getColumnSizeList(table.value)
+    columnList.value = getColumnList(table.value, currentColumnIndex)
 
-    columnList.value = getColumnList(columnSizeList, currentColumnIndex)
-
-    rangeDistance = getRangeDistance(columnSizeList, currentColumnIndex)
+    rangeDistance = getRangeDistance(columnList.value, currentColumnIndex)
 
     currentColumnCellList = getColumnCellList(table.value, currentColumnIndex)
 
@@ -276,6 +278,45 @@ export function useTableColumnOrder(
     })
   }
 
+  // utils
+  function getColumnList(tableEl: HTMLTableElement, index: number): Column[] {
+    if (!tableEl.tHead || !tableEl.tHead.rows[0]) {
+      return []
+    }
+
+    const before: Column[] = []
+    const after: Column[] = []
+
+    const columnSizeList = [...tableEl.tHead.rows[0].cells].map((cell, idx) => ({
+      index: idx,
+      width: cell.offsetWidth,
+      center: Math.round(cell.offsetWidth / 2),
+      isOrderable: cell.classList.contains(thIsOrderableClasses),
+    }))
+
+    const current: Column = {
+      ...columnSizeList[index]!,
+      newIndex: index,
+      distance: 0,
+      isCurrent: true,
+      isMoved: false,
+    }
+
+    for (let idx = index - 1; idx >= 0; idx--) {
+      const element = columnSizeList[idx]!
+
+      before.push(getDistanceToColumn(element, before, true))
+    }
+
+    for (let idx = index + 1; idx < columnSizeList.length; idx++) {
+      const element = columnSizeList[idx]!
+
+      after.push(getDistanceToColumn(element, after, false))
+    }
+
+    return [...before, current, ...after]
+  }
+
   return {
     isColumnOrdering,
     isColumnOrderingActive,
@@ -283,7 +324,7 @@ export function useTableColumnOrder(
   }
 }
 
-function getRangeDistance(columnList: ColumnSize[], currentColumnIndex: number) {
+function getRangeDistance(columnList: Column[], currentColumnIndex: number) {
   let min = 0
   let max = 0
 
@@ -305,53 +346,7 @@ function getRangeDistance(columnList: ColumnSize[], currentColumnIndex: number) 
   }
 }
 
-interface ColumnSize {
-  index: number
-  width: number
-  center: number
-}
-
-function getColumnSizeList(table: HTMLTableElement): ColumnSize[] {
-  if (!table.tHead || !table.tHead.rows[0]) {
-    return []
-  }
-
-  return [...table.tHead.rows[0].cells].map((el, idx) => ({
-    index: idx,
-    width: el.offsetWidth,
-    center: Math.round(el.offsetWidth / 2),
-  }))
-}
-
-function getColumnList(columnList: ColumnSize[], currentColumnIndex: number) {
-  const before: Column[] = []
-  const after: Column[] = []
-  const current: Column = {
-    ...columnList[currentColumnIndex]!,
-    newIndex: currentColumnIndex,
-    distance: 0,
-    isCurrent: true,
-    isMoved: false,
-    isPrev: false,
-    isAfter: false,
-  }
-
-  for (let index = currentColumnIndex - 1; index >= 0; index--) {
-    const element = columnList[index]!
-
-    before.push(getDistanceToColumn(element, before, true))
-  }
-
-  for (let index = currentColumnIndex + 1; index < columnList.length; index++) {
-    const element = columnList[index]!
-
-    after.push(getDistanceToColumn(element, after, false))
-  }
-
-  return [...before, current, ...after]
-}
-
-function getDistanceToColumn(column: ColumnSize, prevColumns: Column[], isPrev = true): Column {
+function getDistanceToColumn(column: ColumnBase, prevColumns: Column[], isPrev = true): Column {
   const prev = [...prevColumns]
   const direction = isPrev ? -1 : 1
   let distance = 0
@@ -371,8 +366,6 @@ function getDistanceToColumn(column: ColumnSize, prevColumns: Column[], isPrev =
     distance,
     isCurrent: false,
     isMoved: false,
-    isPrev,
-    isAfter: !isPrev,
   }
 }
 

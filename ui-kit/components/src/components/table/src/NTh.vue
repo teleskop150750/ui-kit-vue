@@ -55,6 +55,18 @@ function handleSort(event: MouseEvent) {
   emit('click', event)
 }
 
+function handlePointerDown(event: PointerEvent) {
+  if (!col.value) {
+    return
+  }
+
+  if (col.value.isOrderable) {
+    emit('orderDown', event)
+  }
+
+  emit('pointerdown', event)
+}
+
 function handleResizerDown(event: PointerEvent) {
   if (!col.value) {
     return
@@ -104,7 +116,11 @@ const Th = () => {
   }
 
   return (
-    <th class={[ns.b()]} onClick={handleSort}>
+    <th
+      class={[ns.b(), ns.is('orderable'), col.value.isOrderable]}
+      onPointerdown={handlePointerDown}
+      onClick={handleSort}
+    >
       <div class={ns.e('inner')}>{child}</div>
       {Resizer()}
     </th>

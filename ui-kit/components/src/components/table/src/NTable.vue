@@ -88,7 +88,7 @@ function getTHeadTR() {
         key={col.name}
         isDisableClick={isDisableClick.value}
         options={thScope}
-        onPointerdown={handleColumnDown}
+        onOrderDown={handleColumnDown}
         onResizerDown={handleColumnResizerDown}
       >
         {col.label}

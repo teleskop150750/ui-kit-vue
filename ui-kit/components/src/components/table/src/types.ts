@@ -22,7 +22,9 @@ export interface NTableColumn {
 }
 
 export type NTableColumnInner = NTableColumn &
-  Required<Pick<NTableColumn, 'minWidth' | 'align' | 'sortOrder' | 'isResizable' | 'isSortable' | 'isRequired'>>
+  Required<
+    Pick<NTableColumn, 'minWidth' | 'align' | 'sortOrder' | 'isResizable' | 'isOrderable' | 'isSortable' | 'isRequired'>
+  >
 
 export type NTableColumnMap = Record<string, NTableColumn>
 
