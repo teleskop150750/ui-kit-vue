@@ -190,6 +190,7 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
     }
 
     changeCurrentPage(innerCurrentPage.value)
+    changePageSize(innerPageSize.value)
 
     function changeCurrentPage(val: number) {
       if (!paginationRoute.value) {
@@ -209,7 +210,7 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
 
     function changePageSize(val: number) {
       if (!paginationRoute.value) {
-        currentPageBridge.value = val
+        pageSizeBridge.value = val
 
         return
       }
