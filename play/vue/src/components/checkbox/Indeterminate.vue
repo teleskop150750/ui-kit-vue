@@ -27,7 +27,7 @@ function handleCheckedCitiesChange(value: Array<string | number | boolean>) {
   </div>
   <div class="row">
     <NCheckboxGroup v-model="checkedCities" class="line" @change="handleCheckedCitiesChange">
-      <NCheckbox v-for="city in cities" :key="city" :label="city">{{ city }}</NCheckbox>
+      <NCheckbox v-for="city in cities" :key="city" :val="city">{{ city }}</NCheckbox>
     </NCheckboxGroup>
   </div>
 </template>

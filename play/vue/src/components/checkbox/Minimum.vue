@@ -10,7 +10,7 @@ const cities = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen']
   <h3>Minimum / Maximum items checked</h3>
   <div class="row">
     <NCheckboxGroup v-model="checkedCities" :min="1" :max="2" class="line">
-      <NCheckbox v-for="city in cities" :key="city" :label="city">{{ city }}</NCheckbox>
+      <NCheckbox v-for="city in cities" :key="city" :val="city">{{ city }}</NCheckbox>
     </NCheckboxGroup>
   </div>
 </template>
