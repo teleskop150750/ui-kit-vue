@@ -121,6 +121,9 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
 
         pageSizeBridge.value = newValue
       },
+      {
+        immediate: true,
+      },
     )
 
     watch(
@@ -149,6 +152,9 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
 
           currentPageBridge.value = newPage
         }
+      },
+      {
+        immediate: true,
       },
     )
 
@@ -215,7 +221,7 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
         return
       }
 
-      const location = makeLocation(val, pageSizeBridge.value)
+      const location = makeLocation(currentPageBridge.value, val)
 
       if (!location) {
         return
