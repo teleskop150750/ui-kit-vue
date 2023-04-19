@@ -1,4 +1,4 @@
-import { definePropType, isNumber } from '@nado/ui-kit-utils'
+import { definePropType, isNil, isNumber } from '@nado/ui-kit-utils'
 import { computed } from 'vue'
 
 import type { NTableProps } from '../table.model'
@@ -73,7 +73,7 @@ function formatColumns(columns: NTableColumn[]): NTableColumnInner[] {
     minWidth: isNumber(col.minWidth) ? col.minWidth : col.width,
     sortOrder: col.sortOrder || '',
     isResizable: col.isResizable || false,
-    isOrderable: col.isOrderable || true,
+    isOrderable: isNil(col.isOrderable) ? true : col.isOrderable,
     isSortable: col.isSortable || false,
     isRequired: col.isSortable || false,
   }))
