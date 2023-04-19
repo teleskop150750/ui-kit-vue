@@ -27,7 +27,7 @@ export function useTableColumnOrder(
   const nsTh = useNamespace('th')
   const thMoveClasses = nsTh.is('move')!
   const tdMoveClasses = nsTable.eIs('td', 'move')!
-  const isMove = ref(false)
+  const isColumnOrdering = ref(false)
   const isDisableThClick = ref(false)
   let clientX = 0
   let currentColumnIndex = -1
@@ -57,7 +57,7 @@ export function useTableColumnOrder(
       return
     }
 
-    const columnSizeList = getColumnsSizeList(table.value)
+    const columnSizeList = getColumnSizeList(table.value)
 
     columnList.value = getColumnList(columnSizeList, currentColumnIndex)
 
@@ -71,20 +71,13 @@ export function useTableColumnOrder(
   }
 
   function processMove(event: PointerEvent) {
-    isMove.value = true
+    isColumnOrdering.value = true
     isDisableThClick.value = true
 
     const distance = Math.max(Math.min(Math.round(event.clientX - clientX), rangeDistance.max), rangeDistance.min)
 
     processMoveColumn(distance)
-
-    columnList.value.forEach((el) => {
-      if (el.isCurrent) {
-        transformCurrentColumn(distance)
-      } else {
-        transformMovedColumn(el)
-      }
-    })
+    addTransformStylesForColumns(distance)
   }
 
   const processMoveThrottle = throttle(processMove, 10)
@@ -94,10 +87,10 @@ export function useTableColumnOrder(
   }
 
   function handleColumnUp(event: MouseEvent) {
-    isMove.value = false
-    removeClassesToCurrentColumn(currentColumnCellList)
-    updateColumnOrders(columnList.value)
-    removeTransformColumns(columnList.value)
+    isColumnOrdering.value = false
+    removeClassesFromCurrentColumn(currentColumnCellList)
+    updateTableColumnsOrder(columnList.value)
+    removeTransformStylesFromColumns(columnList.value)
     document.removeEventListener('pointermove', handleColumnMove)
     document.addEventListener('click', handleColumnClick, { once: true })
 
@@ -117,7 +110,7 @@ export function useTableColumnOrder(
     isDisableThClick.value = false
   }
 
-  function updateColumnOrders(payload: Array<{ index: number; newIndex: number }>) {
+  function updateTableColumnsOrder(payload: Array<{ index: number; newIndex: number }>) {
     payload.filter((el) => el.index !== el.newIndex)
 
     if (!payload) {
@@ -203,11 +196,22 @@ export function useTableColumnOrder(
     })
   }
 
-  function transformCurrentColumn(distance: number) {
-    transformColumn(currentColumnCellList, distance)
+  // TransformStyles
+  function addTransformStylesForColumns(distance: number) {
+    columnList.value.forEach((el) => {
+      if (el.isCurrent) {
+        addTransformStylesForCurrentColumn(distance)
+      } else {
+        addTransformStylesForMovedColumn(el)
+      }
+    })
   }
 
-  function transformMovedColumn(column: Column) {
+  function addTransformStylesForCurrentColumn(distance: number) {
+    addTransformStylesForColumn(currentColumnCellList, distance)
+  }
+
+  function addTransformStylesForMovedColumn(column: Column) {
     if (!table.value) {
       return
     }
@@ -215,10 +219,10 @@ export function useTableColumnOrder(
     const distance = getDistanceMovedColumn(column)
     const cellList = getColumnCellList(table.value, column.index)
 
-    transformColumn(cellList, distance)
+    addTransformStylesForColumn(cellList, distance)
   }
 
-  function transformColumn(cellList: HTMLTableCellElement[], distance: number) {
+  function addTransformStylesForColumn(cellList: HTMLTableCellElement[], distance: number) {
     cellList.forEach((cell) => {
       if (distance === 0) {
         cell.removeAttribute('style')
@@ -228,7 +232,7 @@ export function useTableColumnOrder(
     })
   }
 
-  function removeTransformColumns(cols: Column[]) {
+  function removeTransformStylesFromColumns(cols: Column[]) {
     cols.forEach((col) => {
       if (!col.isMoved && !col.isCurrent) {
         return
@@ -252,6 +256,7 @@ export function useTableColumnOrder(
     return columnList.value.find((el) => el.isCurrent)!.width * direction
   }
 
+  // Classes
   function addClassesToCurrentColumn(cellList: HTMLTableCellElement[]) {
     cellList.forEach((cell) => {
       if (cell.tagName === 'TD') {
@@ -262,7 +267,7 @@ export function useTableColumnOrder(
     })
   }
 
-  function removeClassesToCurrentColumn(cellList: HTMLTableCellElement[]) {
+  function removeClassesFromCurrentColumn(cellList: HTMLTableCellElement[]) {
     cellList.forEach((cell) => {
       if (cell.tagName === 'TD') {
         cell.classList.remove(tdMoveClasses)
@@ -273,7 +278,7 @@ export function useTableColumnOrder(
   }
 
   return {
-    isMove,
+    isColumnOrdering,
     isDisableThClick,
     handleColumnDown,
   }
@@ -307,7 +312,7 @@ interface ColumnSize {
   center: number
 }
 
-function getColumnsSizeList(table: HTMLTableElement): ColumnSize[] {
+function getColumnSizeList(table: HTMLTableElement): ColumnSize[] {
   if (!table.tHead || !table.tHead.rows[0]) {
     return []
   }

@@ -30,7 +30,7 @@
     background-color: antiquewhite;
   }
 
-  .n-table--is-column-move .n-table__td:not(.n-table__td--is-move) {
+  .n-table--is-column-ordering .n-table__td:not(.n-table__td--is-move) {
     transition: transform var(--n-sys-transition-duration) var(--n-sys-transition-function-fast-bezier);
   }
 }

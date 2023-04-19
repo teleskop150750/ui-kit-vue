@@ -17,7 +17,7 @@
     z-index: 10;
   }
 
-  .n-table--is-column-move .n-th:not(.n-th--is-move) {
+  .n-table--is-column-ordering .n-th:not(.n-th--is-move) {
     transition: transform var(--n-sys-transition-duration) var(--n-sys-transition-function-fast-bezier);
   }
 

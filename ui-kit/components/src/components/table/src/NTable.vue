@@ -16,7 +16,7 @@ const ns = useNamespace('table')
 const slots = useSlots()
 
 const { columnList, visibleColumnList, computedColsMap } = useTableColumn(props)
-const { handleColumnDown, isMove, isDisableThClick } = useTableColumnOrder(columnList, emit)
+const { handleColumnDown, isColumnOrdering, isDisableThClick } = useTableColumnOrder(columnList, emit)
 const { sort } = useTableOrderSort(columnList, emit)
 const getRowKey = computed<(row: NTableRow) => NTableRowKey>(() =>
   typeof props.rowKey === 'function' ? props.rowKey : (row: NTableRow) => row[props.rowKey as NTableRowKey],
@@ -184,7 +184,7 @@ export default {
 </script>
 
 <template>
-  <div :class="[ns.b(), ns.is('column-move', isMove)]">
+  <div :class="[ns.b(), ns.is('column-ordering', isColumnOrdering)]">
     <table :class="ns.e('table')">
       <NColgroup :columns="visibleColumnList" />
       <TableTHead />
