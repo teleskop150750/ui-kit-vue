@@ -3,8 +3,8 @@ import { useNamespace } from '@nado/ui-kit-hooks'
 import { injectProp, type Nillable } from '@nado/ui-kit-utils'
 import { computed, type Slot, useSlots } from 'vue'
 
-import { useTableColumn } from './hooks'
-import { useTableSort } from './hooks/useTableSort'
+import { useTableColumn, useTableColumnOrder, useTableOrderSort } from './hooks'
+import NColgroup from './NColgroup.vue'
 import NTh from './NTh.vue'
 import { nTableEmits, nTableProps } from './table.model'
 import type { BodyCellScopeData, NTableColumn, NTableRow, NTableRowKey, SlotData } from './types'
@@ -16,7 +16,8 @@ const ns = useNamespace('table')
 const slots = useSlots()
 
 const { columnList, visibleColumnList, computedColsMap } = useTableColumn(props)
-const { sort } = useTableSort(columnList, emit)
+const { handleColumnDown, isMove, isDisableThClick } = useTableColumnOrder(columnList, emit)
+const { sort } = useTableOrderSort(columnList, emit)
 const getRowKey = computed<(row: NTableRow) => NTableRowKey>(() =>
   typeof props.rowKey === 'function' ? props.rowKey : (row: NTableRow) => row[props.rowKey as NTableRowKey],
 )
@@ -81,13 +82,13 @@ function getTHeadTR() {
     return slot !== undefined ? (
       slot(thScope)
     ) : (
-      <NTh key={col.name} options={thScope}>
+      <NTh key={col.name} isDisableClick={isDisableThClick.value} options={thScope} onPointerdown={handleColumnDown}>
         {col.label}
       </NTh>
     )
   })
 
-  return <tr class={ns.e('thead-tr')}>{child}</tr>
+  return <tr class={ns.e('tr')}>{child}</tr>
 }
 
 function getHeaderCellScope() {
@@ -183,8 +184,9 @@ export default {
 </script>
 
 <template>
-  <div :class="ns.b()">
+  <div :class="[ns.b(), ns.is('column-move', isMove)]">
     <table :class="ns.e('table')">
+      <NColgroup :columns="visibleColumnList" />
       <TableTHead />
       <TableTBody />
     </table>

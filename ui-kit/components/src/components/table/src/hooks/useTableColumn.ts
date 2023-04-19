@@ -11,6 +11,8 @@ export const useTableColumnProps = {
   },
 }
 
+const DEFAULT_WIDTH = 200
+
 export function useTableColumn(props: NTableProps) {
   const columnList = computed<NTableColumnInner[]>(() => {
     if (props.columns !== undefined) {
@@ -28,6 +30,7 @@ export function useTableColumn(props: NTableProps) {
       name,
       label: name.toUpperCase(),
       field: name,
+      width: DEFAULT_WIDTH,
       align: isNumber(row[name]) ? 'right' : 'left',
       sortOrder: '',
       sortable: false,

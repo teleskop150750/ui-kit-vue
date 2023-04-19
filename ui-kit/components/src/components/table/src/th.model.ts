@@ -5,6 +5,10 @@ import type NTh from './NTh.vue'
 import type { NTableColumn, NTableColumnMap } from './types'
 
 export const nThProps = buildProps({
+  isDisableClick: {
+    type: Boolean,
+    default: false,
+  },
   options: {
     type: definePropType<{
       col: NTableColumn

@@ -12,7 +12,6 @@ const emit = defineEmits(nThEmits)
 const slots = useSlots()
 const ns = useNamespace('th')
 const instance = getCurrentInstance()!
-
 const col = computed(() => {
   if (!props.options) {
     return undefined
@@ -40,25 +39,26 @@ const SortIcon = computed(() => {
   return NIconSort
 })
 
-function handleClick(event: MouseEvent) {
-  emit('click', event)
-}
-
 function handleSort(event: MouseEvent) {
-  if (col.value && props.options) {
-    const { options } = props
-    const { sort } = options
-
-    col.value!.sortable === true && sort(col.value)
+  if (props.isDisableClick) {
+    return
   }
 
+  if (!col.value || !props.options) {
+    return
+  }
+
+  const { options } = props
+  const { sort } = options
+
+  col.value!.sortable === true && sort(col.value)
   emit('click', event)
 }
 
 const Th = () => {
   if (props.options === undefined) {
     return (
-      <th class={ns.b()} onClick={handleClick}>
+      <th class={[ns.b()]}>
         <div class={ns.e('inner')}>{hSlot(slots.default)}</div>
       </th>
     )
@@ -82,7 +82,7 @@ const Th = () => {
   }
 
   return (
-    <th class={ns.b()} onClick={handleSort}>
+    <th class={[ns.b()]} onClick={handleSort}>
       <div class={ns.e('inner')}>{child}</div>
     </th>
   )

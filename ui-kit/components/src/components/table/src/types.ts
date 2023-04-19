@@ -1,4 +1,4 @@
-import type { NTableColumnSortOrder } from './hooks/useTableSort'
+import type { NTableColumnSortOrder } from './hooks/useTableOrderSort'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type NTableRowVal = any
 export type NTableRow = Record<string, NTableRowVal>
@@ -7,7 +7,7 @@ export type NTableRowCellVal = string | number
 
 export interface NTableColumn {
   name: string
-  width?: number
+  width: number
   label: string
   field: string | ((row: NTableRow) => string)
 

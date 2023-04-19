@@ -8,7 +8,10 @@ export const SORT_ORDER_LIST = ['', 'ASC', 'DESC'] as const
 
 export type NTableColumnSortOrder = (typeof SORT_ORDER_LIST)[number]
 
-export function useTableSort(columnList: ComputedRef<NTableColumnInner[]>, emit: SetupContext<NTableEmits>['emit']) {
+export function useTableOrderSort(
+  columnList: ComputedRef<NTableColumnInner[]>,
+  emit: SetupContext<NTableEmits>['emit'],
+) {
   function sort(column: NTableColumn | NTableColumn['name'], sortOrder?: NTableColumnInner['sortOrder']) {
     emit('update:columns', changeSortColumnInList(column, columnList, sortOrder))
 

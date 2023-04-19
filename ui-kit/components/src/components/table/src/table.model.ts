@@ -37,7 +37,6 @@ export const nTableEmits = {
   rowClick: (evt: Event, row: NTableRow, pageIndex: number) => !!evt && !!row && !!pageIndex,
 }
 
-export type NTableEmits = typeof nTableEmits
-
 export type NTableProps = ExtractPropTypes<typeof nTableProps>
+export type NTableEmits = typeof nTableEmits
 export type NTableInstance = ExtractPropTypes<typeof NTable>
