@@ -28,8 +28,8 @@ export function useTableColumnOrder(
   const thMoveClasses = nsTh.is('move')!
   const tdMoveClasses = nsTable.eIs('td', 'move')!
   const isColumnOrdering = ref(false)
-  const isDisableThClick = ref(false)
-  let clientX = 0
+  const isColumnOrderingActive = ref(false)
+  let initCoordX = 0
   let currentColumnIndex = -1
   const table = ref<Nillable<HTMLTableElement>>(undefined)
   let currentColumnCellList: HTMLTableCellElement[] = []
@@ -45,12 +45,28 @@ export function useTableColumnOrder(
     max: 0,
   }
 
+  function processMove(event: PointerEvent) {
+    if (!isColumnOrdering.value) {
+      addClassesToCurrentColumn(currentColumnCellList)
+    }
+
+    isColumnOrdering.value = true
+    isColumnOrderingActive.value = true
+
+    const distance = Math.max(Math.min(Math.round(event.clientX - initCoordX), rangeDistance.max), rangeDistance.min)
+
+    processMoveColumn(distance)
+    addTransformStylesForColumns(distance)
+  }
+
+  const processMoveThrottle = throttle(processMove, 10)
+
   function handleColumnDown(event: MouseEvent) {
     const th = event.currentTarget as HTMLTableCellElement
 
     table.value = th.closest('table')!
 
-    clientX = event.clientX
+    initCoordX = event.clientX
     currentColumnIndex = getColumnIndex(table.value, th)
 
     if (currentColumnIndex < 0) {
@@ -64,50 +80,33 @@ export function useTableColumnOrder(
     rangeDistance = getRangeDistance(columnSizeList, currentColumnIndex)
 
     currentColumnCellList = getColumnCellList(table.value, currentColumnIndex)
-    addClassesToCurrentColumn(currentColumnCellList)
 
-    document.addEventListener('pointermove', handleColumnMove)
-    document.addEventListener('pointerup', handleColumnUp, { once: true })
+    document.addEventListener('pointermove', processMoveThrottle)
+    document.addEventListener('pointerup', handleDocumentUp, { once: true })
   }
 
-  function processMove(event: PointerEvent) {
-    isColumnOrdering.value = true
-    isDisableThClick.value = true
-
-    const distance = Math.max(Math.min(Math.round(event.clientX - clientX), rangeDistance.max), rangeDistance.min)
-
-    processMoveColumn(distance)
-    addTransformStylesForColumns(distance)
-  }
-
-  const processMoveThrottle = throttle(processMove, 10)
-
-  function handleColumnMove(event: PointerEvent) {
-    processMoveThrottle(event)
-  }
-
-  function handleColumnUp(event: MouseEvent) {
+  function handleDocumentUp() {
     isColumnOrdering.value = false
     removeClassesFromCurrentColumn(currentColumnCellList)
     updateTableColumnsOrder(columnList.value)
     removeTransformStylesFromColumns(columnList.value)
-    document.removeEventListener('pointermove', handleColumnMove)
-    document.addEventListener('click', handleColumnClick, { once: true })
+    document.removeEventListener('pointermove', processMoveThrottle)
+    document.addEventListener('click', handleDocumentClick, { once: true })
 
     table.value = undefined
     columnList.value = []
-    clientX = 0
+    initCoordX = 0
     currentColumnIndex -= 1
     rangeDistance = {
       min: 0,
       max: 0,
     }
-    clientX = event.clientX
+    initCoordX = 0
     currentColumnCellList = []
   }
 
-  function handleColumnClick() {
-    isDisableThClick.value = false
+  function handleDocumentClick() {
+    isColumnOrderingActive.value = false
   }
 
   function updateTableColumnsOrder(payload: Array<{ index: number; newIndex: number }>) {
@@ -279,7 +278,7 @@ export function useTableColumnOrder(
 
   return {
     isColumnOrdering,
-    isDisableThClick,
+    isColumnOrderingActive,
     handleColumnDown,
   }
 }

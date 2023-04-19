@@ -3,7 +3,7 @@ import { useNamespace } from '@nado/ui-kit-hooks'
 import { injectProp, type Nillable } from '@nado/ui-kit-utils'
 import { computed, type Slot, useSlots } from 'vue'
 
-import { useTableColumn, useTableColumnOrder, useTableOrderSort } from './hooks'
+import { useTableColumn, useTableColumnOrder, useTableColumnResize, useTableOrderSort } from './hooks'
 import NColgroup from './NColgroup.vue'
 import NTh from './NTh.vue'
 import { nTableEmits, nTableProps } from './table.model'
@@ -14,10 +14,12 @@ const emit = defineEmits(nTableEmits)
 
 const ns = useNamespace('table')
 const slots = useSlots()
-
 const { columnList, visibleColumnList, computedColsMap } = useTableColumn(props)
-const { handleColumnDown, isColumnOrdering, isDisableThClick } = useTableColumnOrder(columnList, emit)
+const { handleColumnResizerDown, isColumnResizeActive } = useTableColumnResize(columnList, emit)
+const { handleColumnDown, isColumnOrdering, isColumnOrderingActive } = useTableColumnOrder(columnList, emit)
 const { sort } = useTableOrderSort(columnList, emit)
+
+const isDisableClick = computed(() => isColumnOrderingActive.value || isColumnResizeActive.value)
 const getRowKey = computed<(row: NTableRow) => NTableRowKey>(() =>
   typeof props.rowKey === 'function' ? props.rowKey : (row: NTableRow) => row[props.rowKey as NTableRowKey],
 )
@@ -82,7 +84,13 @@ function getTHeadTR() {
     return slot !== undefined ? (
       slot(thScope)
     ) : (
-      <NTh key={col.name} isDisableClick={isDisableThClick.value} options={thScope} onPointerdown={handleColumnDown}>
+      <NTh
+        key={col.name}
+        isDisableClick={isDisableClick.value}
+        options={thScope}
+        onPointerdown={handleColumnDown}
+        onResizerDown={handleColumnResizerDown}
+      >
         {col.label}
       </NTh>
     )
@@ -185,11 +193,13 @@ export default {
 
 <template>
   <div :class="[ns.b(), ns.is('column-ordering', isColumnOrdering)]">
-    <table :class="ns.e('table')">
-      <NColgroup :columns="visibleColumnList" />
-      <TableTHead />
-      <TableTBody />
-    </table>
+    <div :class="ns.e('table-wrapper')">
+      <table :class="ns.e('table')">
+        <NColgroup :columns="visibleColumnList" />
+        <TableTHead />
+        <TableTBody />
+      </table>
+    </div>
   </div>
 </template>
 

@@ -11,15 +11,18 @@ export interface NTableColumn {
   label: string
   field: string | ((row: NTableRow) => string)
 
-  required?: boolean
+  isRequired?: boolean
+  isResizable?: boolean
+  isOrderable?: boolean
+  isSortable?: boolean
+  minWidth?: number
   align?: 'left' | 'right' | 'center'
-  sortable?: boolean
   sortOrder?: NTableColumnSortOrder
   format?: (val: NTableRowVal, row: NTableRow) => string | number
 }
 
 export type NTableColumnInner = NTableColumn &
-  Required<Pick<NTableColumn, 'align' | 'sortable' | 'sortOrder' | 'required'>>
+  Required<Pick<NTableColumn, 'minWidth' | 'align' | 'sortOrder' | 'isResizable' | 'isSortable' | 'isRequired'>>
 
 export type NTableColumnMap = Record<string, NTableColumn>
 

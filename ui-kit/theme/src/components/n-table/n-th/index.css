@@ -1,5 +1,7 @@
 @layer components {
   .n-th {
+    position: relative;
+
     padding: 0.75rem;
 
     vertical-align: top;
@@ -13,7 +15,6 @@
   }
 
   .n-th--is-move {
-    position: relative;
     z-index: 1;
   }
 
@@ -24,6 +25,27 @@
   .n-th__inner {
     display: flex;
     gap: 1rem;
+  }
+
+  .n-th__resizer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -4px;
+    z-index: 1;
+
+    display: block;
+
+    width: 11px;
+
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
+    background-color: red;
+
+    cursor: col-resize;
+
+    /* opacity: 0; */
+
+    transition: opacity 800ms;
   }
 
   .n-th__sort {

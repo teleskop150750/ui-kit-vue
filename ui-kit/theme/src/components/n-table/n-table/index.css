@@ -1,11 +1,18 @@
 @layer components {
+  .n-table__table-wrapper {
+    overflow-x: auto;
+  }
+
   .n-table__table {
+    width: max-content;
     margin-bottom: 1rem;
 
     border-collapse: separate;
     border-spacing: 0;
 
     background-color: transparent;
+
+    table-layout: fixed;
   }
 
   .n-table__tr {

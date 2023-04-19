@@ -33,8 +33,10 @@ export function useTableColumn(props: NTableProps) {
       width: DEFAULT_WIDTH,
       align: isNumber(row[name]) ? 'right' : 'left',
       sortOrder: '',
-      sortable: false,
-      required: false,
+      minWidth: DEFAULT_WIDTH,
+      isResizable: false,
+      isSortable: false,
+      isRequired: false,
     }))
   })
 
@@ -42,7 +44,7 @@ export function useTableColumn(props: NTableProps) {
     const { visibleColumns } = props
 
     return visibleColumns !== undefined
-      ? columnList.value.filter((col) => col.required === true || visibleColumns.includes(col.name) === true)
+      ? columnList.value.filter((col) => col.isRequired === true || visibleColumns.includes(col.name) === true)
       : columnList.value
   })
 
@@ -65,17 +67,21 @@ export function useTableColumn(props: NTableProps) {
 
 function formatColumns(columns: NTableColumn[]): NTableColumnInner[] {
   return columns.map((col) => {
+    const minWidth = isNumber(col.minWidth) ? col.minWidth : col.width
     const align = col.align || 'right'
     const sortOrder = col.sortOrder || ''
-    const sortable = col.sortable || false
-    const required = col.sortable || false
+    const isResizable = col.isResizable || false
+    const isSortable = col.isSortable || false
+    const isRequired = col.isSortable || false
 
     return {
       ...col,
       align,
-      sortable,
+      minWidth,
       sortOrder,
-      required,
+      isResizable,
+      isSortable,
+      isRequired,
     }
   })
 }

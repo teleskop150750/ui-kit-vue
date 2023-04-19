@@ -24,7 +24,7 @@ const col = computed(() => {
 })
 
 const SortIcon = computed(() => {
-  if (!col.value || !col.value.sortable) {
+  if (!col.value || !col.value.isSortable) {
     return undefined
   }
 
@@ -51,8 +51,30 @@ function handleSort(event: MouseEvent) {
   const { options } = props
   const { sort } = options
 
-  col.value!.sortable === true && sort(col.value)
+  col.value!.isSortable === true && sort(col.value)
   emit('click', event)
+}
+
+function handleResizerDown(event: PointerEvent) {
+  if (!col.value) {
+    return
+  }
+
+  event.stopPropagation()
+
+  emit('resizerDown', event, col.value.name)
+}
+
+const Resizer = () => {
+  if (!col.value) {
+    return undefined
+  }
+
+  if (!col.value.isResizable) {
+    return undefined
+  }
+
+  return <span class={ns.e('resizer')} onPointerdown={handleResizerDown}></span>
 }
 
 const Th = () => {
@@ -70,7 +92,7 @@ const Th = () => {
 
   let child = undefined
 
-  if (col.value.sortable === true && SortIcon.value) {
+  if (col.value.isSortable === true && SortIcon.value) {
     child = hUniqueSlot(slots.default, [])
     child.push(
       <span class={ns.e('sort')}>
@@ -84,6 +106,7 @@ const Th = () => {
   return (
     <th class={[ns.b()]} onClick={handleSort}>
       <div class={ns.e('inner')}>{child}</div>
+      {Resizer()}
     </th>
   )
 }

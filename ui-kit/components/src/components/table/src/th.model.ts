@@ -21,6 +21,7 @@ export const nThProps = buildProps({
 
 export const nThEmits = {
   click: (evt: MouseEvent) => evt instanceof MouseEvent,
+  resizerDown: (evt: PointerEvent, columnName: string) => evt instanceof PointerEvent && !!columnName,
 }
 
 export type NThProps = ExtractPropTypes<typeof nThProps>
