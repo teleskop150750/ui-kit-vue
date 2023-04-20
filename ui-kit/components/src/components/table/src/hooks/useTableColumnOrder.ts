@@ -1,5 +1,5 @@
 import { useNamespace } from '@nado/ui-kit-hooks'
-import type { Nillable } from '@nado/ui-kit-utils'
+import { isNil, type Nillable } from '@nado/ui-kit-utils'
 import { computed } from '@vue/reactivity'
 import { throttle } from 'lodash-es'
 import { type ComputedRef, ref, type SetupContext } from 'vue'
@@ -8,29 +8,30 @@ import type { NTableEmits } from '../table.model'
 import type { NTableColumnInner } from '../types'
 
 interface ColumnBase {
+  readonly name: string
   readonly index: number
   readonly width: number
   readonly center: number
-  readonly isOrderable: boolean
+  readonly isDraggable: boolean
 }
 
 interface Column extends ColumnBase {
   newIndex: number
   readonly distance: number
-  readonly isOrderable: boolean
   readonly isCurrent: boolean
+  readonly isOrderable: boolean
   isMoved: boolean
 }
 
 export function useTableColumnOrder(
   tableColumnList: ComputedRef<NTableColumnInner[]>,
+  tableVisibleColumnList: ComputedRef<NTableColumnInner[]>,
   emit: SetupContext<NTableEmits>['emit'],
 ) {
   const nsTable = useNamespace('table')
-  const nsTh = useNamespace('th')
-  const thMoveClasses = nsTh.is('move')!
+  const thMoveClasses = nsTable.eIs('th', 'move')!
   const tdMoveClasses = nsTable.eIs('td', 'move')!
-  const thIsOrderableClasses = nsTh.is('orderable', true)!
+  const thIsDraggableClasses = nsTable.eIs('th', 'orderable', true)!
   const isColumnOrdering = ref(false)
   const isColumnOrderingActive = ref(false)
   let initCoordX = 0
@@ -77,9 +78,11 @@ export function useTableColumnOrder(
       return
     }
 
-    columnList.value = getColumnList(table.value, currentColumnIndex)
+    const allColumnList = getColumnList(table.value, currentColumnIndex)
 
-    rangeDistance = getRangeDistance(columnList.value, currentColumnIndex)
+    columnList.value = allColumnList.filter((el) => el.isOrderable)
+
+    rangeDistance = getRangeDistance(allColumnList, currentColumnIndex)
 
     currentColumnCellList = getColumnCellList(table.value, currentColumnIndex)
 
@@ -111,19 +114,27 @@ export function useTableColumnOrder(
     isColumnOrderingActive.value = false
   }
 
-  function updateTableColumnsOrder(payload: Array<{ index: number; newIndex: number }>) {
-    payload.filter((el) => el.index !== el.newIndex)
+  function updateTableColumnsOrder(payload: Array<{ index: number; newIndex: number; name: string }>) {
+    const filteredPayload = payload.filter((el) => el.index !== el.newIndex && el.name !== '')
 
-    if (!payload) {
+    if (!filteredPayload) {
       return
     }
 
     const newList = [...tableColumnList.value]
-    const newListCopy = [...tableColumnList.value]
+      .map((col) => {
+        const foundEl = payload.find((item) => col.name === item.name)
 
-    payload.forEach((el) => {
-      newList[el.newIndex] = newListCopy[el.index]!
-    })
+        if (foundEl) {
+          return {
+            ...col,
+            index: foundEl.newIndex,
+          }
+        }
+
+        return col
+      })
+      .sort((a, b) => a.index - b.index)
 
     emit('update:columns', newList)
   }
@@ -175,7 +186,7 @@ export function useTableColumnOrder(
     const currentColumn = columnList.value.find((el) => el.isCurrent)!
 
     const lastMoved = isPrev
-      ? prevColumnList.value.findLast((el) => el.isMoved)
+      ? prevColumnList.value.find((el) => el.isMoved)
       : afterColumnList.value.findLast((el) => el.isMoved)
 
     if (lastMoved !== undefined) {
@@ -284,20 +295,26 @@ export function useTableColumnOrder(
       return []
     }
 
-    const before: Column[] = []
-    const after: Column[] = []
+    let before: Column[] = []
+    let after: Column[] = []
 
-    const columnSizeList = [...tableEl.tHead.rows[0].cells].map((cell, idx) => ({
-      index: idx,
-      width: cell.offsetWidth,
-      center: Math.round(cell.offsetWidth / 2),
-      isOrderable: cell.classList.contains(thIsOrderableClasses),
-    }))
+    const columnSizeList: ColumnBase[] = [...tableEl.tHead.rows[0].cells].map((cell, idx) => {
+      const col = tableVisibleColumnList.value[idx]
+
+      return {
+        name: isNil(col) ? '' : col.name,
+        index: isNil(col) ? -1 : col.index,
+        width: cell.offsetWidth,
+        center: Math.round(cell.offsetWidth / 2),
+        isDraggable: cell.classList.contains(thIsDraggableClasses),
+      }
+    })
 
     const current: Column = {
       ...columnSizeList[index]!,
       newIndex: index,
       distance: 0,
+      isOrderable: true,
       isCurrent: true,
       isMoved: false,
     }
@@ -313,6 +330,37 @@ export function useTableColumnOrder(
 
       after.push(getDistanceToColumn(element, after, false))
     }
+
+    before = before.reverse().map((el, idx) => {
+      let isOrderable = true
+      const prevEl = columnSizeList[idx - 1]
+
+      if ((!el.isDraggable && prevEl?.isDraggable === false) || prevEl === undefined) {
+        isOrderable = false
+      }
+
+      return {
+        ...el,
+        isOrderable,
+      }
+    })
+
+    after = after
+      .reverse()
+      .map((el, idx) => {
+        let isOrderable = true
+        const nextEl = columnSizeList[columnSizeList.length - idx]
+
+        if ((!el.isDraggable && nextEl?.isDraggable === false) || nextEl === undefined) {
+          isOrderable = false
+        }
+
+        return {
+          ...el,
+          isOrderable,
+        }
+      })
+      .reverse()
 
     return [...before, current, ...after]
   }
@@ -364,6 +412,7 @@ function getDistanceToColumn(column: ColumnBase, prevColumns: Column[], isPrev =
     ...column,
     newIndex: column.index,
     distance,
+    isOrderable: true,
     isCurrent: false,
     isMoved: false,
   }

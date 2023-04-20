@@ -13,5 +13,6 @@ export default {
 <template>
   <colgroup>
     <col v-for="col in columns" :key="col.name" :style="{ width: `${col.width}px` }" />
+    <col />
   </colgroup>
 </template>

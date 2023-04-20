@@ -591,8 +591,6 @@ describe('Select', () => {
     await nextTick()
     const options = getOptions()
 
-    console.log(options[1]!.className)
-
     expect(options[1]!.className).toContain('is-disabled')
     options[1]!.click()
     await nextTick()
@@ -1743,8 +1741,6 @@ describe('Select', () => {
     await nextTick()
     const options = getOptions()
 
-    console.log(options[0]!.className)
-
     expect(options[0]!.className).not.toContain('is-disabled')
     expect(options[2]!.className).toContain('is-disabled')
     options[0]!.click()
@@ -1892,7 +1888,6 @@ describe('Select', () => {
     const { vm } = wrapper
 
     await nextTick()
-    console.log('FF', wrapper.findAll('.n-tag'))
 
     expect(wrapper.findAll('.n-tag').length).toBe(1)
 
@@ -1917,8 +1912,6 @@ describe('Select', () => {
     await nextTick()
 
     const innerInput = wrapper.find('.n-input__native')
-
-    // console.log('fff', wrapper.html())
 
     const innerInputEl = innerInput.element as HTMLInputElement
 

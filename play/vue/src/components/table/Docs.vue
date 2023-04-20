@@ -2,8 +2,6 @@
 import { NTable, type NTableColumn, NTd } from '@nado/ui-kit-vue'
 import { ref } from 'vue'
 
-const isBody = ref(false)
-
 const columns = ref<NTableColumn[]>([
   {
     field: 'id',
@@ -32,6 +30,7 @@ const columns = ref<NTableColumn[]>([
     label: 'age',
     name: 'age',
     isResizable: true,
+    isOrderable: false,
     width: 200,
   },
   {
@@ -45,27 +44,30 @@ const columns = ref<NTableColumn[]>([
     field: 'bar',
     label: 'bar',
     name: 'bar',
+    isResizable: true,
     width: 200,
   },
 ])
 
-const rows = Array.from({ length: 100 }).map((id) => ({
-  id,
+const rows = Array.from({ length: 34 }).map((_, idx) => ({
+  id: idx + 1,
   name: 'name',
   age: 20,
   foo: 'foo',
   bar: 'bar',
 }))
+
+const page = ref(3)
 </script>
 
 <template>
   <div class="demo">
-    <button type="button" @click="isBody = !isBody">button</button>
+    <div>Page | {{ page }}</div>
 
     <hr />
 
     <div class="body">
-      <NTable v-model:columns="columns" :rows="rows">
+      <NTable v-model:columns="columns" v-model:current-page="page" :rows="rows" query-type="number">
         <template #body-cell-name>
           <NTd>
             <div class="my-table-details">1</div>

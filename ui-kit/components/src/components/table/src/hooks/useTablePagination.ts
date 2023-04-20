@@ -1,6 +1,10 @@
-// import { computed, nextTick, ref, watch } from 'vue'
+import { isNil } from '@nado/ui-kit-utils'
+import { computed } from '@vue/reactivity'
+import { ref, type SetupContext } from 'vue'
 
 import { nPaginationProps } from '../../../pagination'
+import type { NTableEmits, NTableProps } from '../table.model'
+import type { NTableRow } from '../types'
 
 // function samePagination(oldPag: number, newPag: number) {
 //   for (const prop in newPag) {
@@ -28,6 +32,96 @@ export const useTablePaginationProps = {
   ...nPaginationProps,
 
   'onUpdate:pagination': [Function, Array],
+}
+
+export function useTablePagination(props: NTableProps, emit: SetupContext<NTableEmits>['emit']) {
+  const innerCurrentPage = ref(getInitCurrentPage())
+  const innerPageSize = ref(getInitPageSize())
+
+  const totalRows = computed(() => {
+    if (props.total !== undefined) {
+      return props.total
+    }
+
+    return props.rows.length
+  })
+
+  const pageRows = computed<NTableRow[]>(() => {
+    if (isNil(innerPageSize.value)) {
+      return []
+    }
+
+    return props.rows.slice(0, innerPageSize.value)
+  })
+
+  const rowsStart = computed<number>(() => {
+    if (isNil(innerCurrentPage.value)) {
+      return 0
+    }
+
+    if (isNil(innerPageSize.value)) {
+      return 0
+    }
+
+    if (innerCurrentPage.value === 1) {
+      return 1
+    }
+
+    return (innerCurrentPage.value - 1) * innerPageSize.value + 1
+  })
+
+  const rowsEnd = computed(() => rowsStart.value - 1 + pageRows.value.length)
+
+  function setCurrentPage(val: number) {
+    if (innerCurrentPage.value === val) {
+      return
+    }
+
+    innerCurrentPage.value = val
+    emit('update:current-page', val)
+  }
+
+  function setPageSize(val: number) {
+    if (innerPageSize.value === val) {
+      return
+    }
+
+    innerPageSize.value = val
+    emit('update:page-size', val)
+  }
+
+  function getInitCurrentPage() {
+    if (props.defaultCurrentPage !== undefined) {
+      return props.defaultCurrentPage
+    }
+
+    if (props.currentPage !== undefined) {
+      return props.currentPage
+    }
+
+    return undefined
+  }
+
+  function getInitPageSize() {
+    if (props.defaultPageSize !== undefined) {
+      return props.defaultPageSize
+    }
+
+    if (props.pageSize !== undefined) {
+      return props.pageSize
+    }
+
+    return undefined
+  }
+
+  return {
+    rowsStart,
+    rowsEnd,
+    totalRows,
+    pageRows,
+    setCurrentPage,
+    setPageSize,
+  }
 }
 
 // export function useTablePaginationState(vm, getCellValue) {

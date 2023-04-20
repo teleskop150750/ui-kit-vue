@@ -74,7 +74,7 @@ export default {
         :disabled="isDisabled"
         :true-value="trueValue"
         :false-value="falseValue"
-        @change="handleChange"
+        @change.prevent="handleChange"
         @focus="isFocused = true"
         @blur="isFocused = false"
       />
@@ -89,7 +89,7 @@ export default {
         :tabindex="tabindex"
         :disabled="isDisabled"
         :value="val"
-        @change="handleChange"
+        @change.prevent="handleChange"
         @focus="isFocused = true"
         @blur="isFocused = false"
       />

@@ -11,6 +11,7 @@ export interface NTableColumn {
   label: string
   field: string | ((row: NTableRow) => string)
 
+  index?: number
   isRequired?: boolean
   isResizable?: boolean
   isOrderable?: boolean
@@ -23,7 +24,10 @@ export interface NTableColumn {
 
 export type NTableColumnInner = NTableColumn &
   Required<
-    Pick<NTableColumn, 'minWidth' | 'align' | 'sortOrder' | 'isResizable' | 'isOrderable' | 'isSortable' | 'isRequired'>
+    Pick<
+      NTableColumn,
+      'index' | 'minWidth' | 'align' | 'sortOrder' | 'isResizable' | 'isOrderable' | 'isSortable' | 'isRequired'
+    >
   >
 
 export type NTableColumnMap = Record<string, NTableColumn>
@@ -31,7 +35,7 @@ export type NTableColumnMap = Record<string, NTableColumn>
 export interface SlotData {
   key: NTableRowKey
   row: NTableRow
-  pageRowIndex: number
+  rowIndexOnPage: number
   col: NTableColumn
 }
 

@@ -26,7 +26,8 @@ export function useTableColumn(props: NTableProps) {
       return []
     }
 
-    return Object.keys(row).map((name) => ({
+    return Object.keys(row).map((name, index) => ({
+      index,
       name,
       label: name.toUpperCase(),
       field: name,
@@ -41,7 +42,7 @@ export function useTableColumn(props: NTableProps) {
     }))
   })
 
-  const visibleColumnList = computed<NTableColumn[]>(() => {
+  const visibleColumnList = computed<NTableColumnInner[]>(() => {
     const { visibleColumns } = props
 
     return visibleColumns !== undefined
@@ -67,8 +68,9 @@ export function useTableColumn(props: NTableProps) {
 }
 
 function formatColumns(columns: NTableColumn[]): NTableColumnInner[] {
-  return columns.map((col) => ({
+  return columns.map((col, index) => ({
     ...col,
+    index,
     align: col.align || 'right',
     minWidth: isNumber(col.minWidth) ? col.minWidth : col.width,
     sortOrder: col.sortOrder || '',

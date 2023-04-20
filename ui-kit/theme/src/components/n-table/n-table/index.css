@@ -1,10 +1,11 @@
 @layer components {
-  .n-table__table-wrapper {
+  .n-table__body {
     overflow-x: auto;
   }
 
   .n-table__table {
     width: max-content;
+    min-width: 100%;
     margin-bottom: 1rem;
 
     border-collapse: separate;
@@ -19,6 +20,68 @@
     background-color: hsl(214deg 26% 95%);
   }
 
+  .n-table__th {
+    position: relative;
+
+    padding: 0.75rem;
+
+    vertical-align: top;
+
+    border-top: 1px solid hsl(210deg 14% 89%);
+    border-bottom: 2px solid hsl(210deg 14% 89%);
+
+    background-color: var(--n-sys-color-white);
+
+    user-select: none;
+  }
+
+  .n-table__th--is-empty {
+    padding: 0;
+  }
+
+  .n-table__th--is-sortable {
+    cursor: pointer;
+  }
+
+  .n-table__th--is-move {
+    z-index: 2;
+  }
+
+  .n-table--is-column-ordering .n-table__th:not(.n-table__th--is-move) {
+    transition: transform var(--n-sys-transition-duration) var(--n-sys-transition-function-fast-bezier);
+  }
+
+  .n-table__th-inner {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .n-table__th-resizer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -4px;
+    z-index: 1;
+
+    display: block;
+
+    width: 11px;
+
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
+    background-color: red;
+
+    cursor: col-resize;
+
+    /* opacity: 0; */
+
+    transition: opacity 800ms;
+  }
+
+  .n-table__th-sort-icon {
+    width: 14px;
+    height: 14px;
+  }
+
   .n-table__td {
     padding: 0.75rem;
 
@@ -29,9 +92,13 @@
     background-color: var(--n-sys-color-white);
   }
 
+  .n-table__td--is-empty {
+    padding: 0;
+  }
+
   .n-table__td--is-move {
     position: relative;
-    z-index: 1;
+    z-index: 2;
 
     /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
     background-color: antiquewhite;
@@ -39,5 +106,11 @@
 
   .n-table--is-column-ordering .n-table__td:not(.n-table__td--is-move) {
     transition: transform var(--n-sys-transition-duration) var(--n-sys-transition-function-fast-bezier);
+  }
+
+  .n-table__pagination-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }

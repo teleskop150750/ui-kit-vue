@@ -1,9 +1,16 @@
 <script setup lang="tsx">
-import { useNamespace } from '@nado/ui-kit-hooks'
+import { useLocale, useNamespace } from '@nado/ui-kit-hooks'
 import { injectProp, type Nillable } from '@nado/ui-kit-utils'
 import { computed, type Slot, useSlots } from 'vue'
 
-import { useTableColumn, useTableColumnOrder, useTableColumnResize, useTableOrderSort } from './hooks'
+import { NPagination } from '../../pagination'
+import {
+  useTableColumn,
+  useTableColumnOrder,
+  useTableColumnResize,
+  useTableOrderSort,
+  useTablePagination,
+} from './hooks'
 import NColgroup from './NColgroup.vue'
 import NTh from './NTh.vue'
 import { nTableEmits, nTableProps } from './table.model'
@@ -12,18 +19,24 @@ import type { BodyCellScopeData, NTableColumn, NTableRow, NTableRowKey, SlotData
 const props = defineProps(nTableProps)
 const emit = defineEmits(nTableEmits)
 
+const { t } = useLocale()
 const ns = useNamespace('table')
 const slots = useSlots()
 const { columnList, visibleColumnList, computedColsMap } = useTableColumn(props)
+
 const { handleColumnResizerDown, isColumnResizeActive } = useTableColumnResize(columnList, emit)
-const { handleColumnDown, isColumnOrdering, isColumnOrderingActive } = useTableColumnOrder(columnList, emit)
+const { handleColumnDown, isColumnOrdering, isColumnOrderingActive } = useTableColumnOrder(
+  columnList,
+  visibleColumnList,
+  emit,
+)
+const { rowsStart, rowsEnd, totalRows, pageRows, setCurrentPage, setPageSize } = useTablePagination(props, emit)
 const { sort } = useTableOrderSort(columnList, emit)
 
 const isDisableClick = computed(() => isColumnOrderingActive.value || isColumnResizeActive.value)
 const getRowKey = computed<(row: NTableRow) => NTableRowKey>(() =>
   typeof props.rowKey === 'function' ? props.rowKey : (row: NTableRow) => row[props.rowKey as NTableRowKey],
 )
-const computedRows = computed(() => props.rows)
 
 function getBodyCellScope(data: SlotData): BodyCellScopeData {
   injectBodyCommonScope(data)
@@ -96,7 +109,12 @@ function getTHeadTR() {
     )
   })
 
-  return <tr class={ns.e('tr')}>{child}</tr>
+  return (
+    <tr class={ns.e('tr')}>
+      {child}
+      <th class={[ns.e('th'), ns.eIs('th', 'empty')]}></th>
+    </tr>
+  )
 }
 
 function getHeaderCellScope() {
@@ -114,12 +132,12 @@ function getHeaderNameCellScope(col: NTableColumn) {
 function TableTBody() {
   const { body: bodySlot } = slots
 
-  const child = computedRows.value.map((row, rowIndex) => getTBodyTR(row, bodySlot, rowIndex))
+  const child = pageRows.value.map((row, rowIndex) => getTBodyTR(row, bodySlot, rowIndex))
 
   return <tbody class={ns.e('tbody')}>{child}</tbody>
 }
 
-function getTBodyTR(row: NTableRow, _bodySlot: Nillable<Slot>, pageRowIndex: number) {
+function getTBodyTR(row: NTableRow, _bodySlot: Nillable<Slot>, rowIndexOnPage: number) {
   const key = getRowKey.value(row)
   // const selected = isRowSelected(key)
   // if (bodySlot !== undefined) {
@@ -133,12 +151,13 @@ function getTBodyTR(row: NTableRow, _bodySlot: Nillable<Slot>, pageRowIndex: num
   //   )
   // }
   const bodyCellSlot = slots['body-cell']
+
   const child = visibleColumnList.value.map((col) => {
     const bodyCellColSlot = slots[`body-cell-${col.name}`]
     const slot = bodyCellColSlot !== undefined ? bodyCellColSlot : bodyCellSlot
 
     return slot !== undefined ? (
-      slot(getBodyCellScope({ key, row, pageRowIndex, col }))
+      slot(getBodyCellScope({ key, row, rowIndexOnPage, col }))
     ) : (
       <td class={ns.e('td')}>{getCellValue(col, row)}</td>
     )
@@ -162,26 +181,35 @@ function getTBodyTR(row: NTableRow, _bodySlot: Nillable<Slot>, pageRowIndex: num
   //         ]
   //   child.unshift(h('td', { class: 'q-table--col-auto-width' }, content))
   // }
-  // const data = { key, class: { selected } }
-  // if (props.onRowClick !== void 0) {
-  //   data.class['cursor-pointer'] = true
-  //   data.onClick = (evt) => {
-  //     emit('RowClick', evt, row, pageIndex)
-  //   }
-  // }
-  // if (props.onRowDblclick !== void 0) {
-  //   data.class['cursor-pointer'] = true
-  //   data.onDblclick = (evt) => {
-  //     emit('RowDblclick', evt, row, pageIndex)
-  //   }
-  // }
-  // if (props.onRowContextmenu !== void 0) {
-  //   data.class['cursor-pointer'] = true
-  //   data.onContextmenu = (evt) => {
-  //     emit('RowContextmenu', evt, row, pageIndex)
-  //   }
-  // }
-  return <tr class={ns.e('tr')}>{child}</tr>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const data: Record<string, any> = { key }
+
+  if (props.onRowClick !== undefined) {
+    data.onClick = (evt: MouseEvent) => {
+      emit('rowClick', evt, row, rowIndexOnPage)
+    }
+  }
+
+  if (props.onRowDblclick !== undefined) {
+    data.class['cursor-pointer'] = true
+    data.onDblclick = (evt: MouseEvent) => {
+      emit('rowDblclick', evt, row, rowIndexOnPage)
+    }
+  }
+
+  if (props.onRowContextmenu !== undefined) {
+    data.class['cursor-pointer'] = true
+    data.onContextmenu = (evt: MouseEvent) => {
+      emit('rowContextmenu', evt, row, rowIndexOnPage)
+    }
+  }
+
+  return (
+    <tr class={ns.e('tr')} {...data}>
+      {child}
+      <td class={[ns.e('td'), ns.eIs('td', 'empty')]}></td>
+    </tr>
+  )
 }
 </script>
 
@@ -193,12 +221,38 @@ export default {
 
 <template>
   <div :class="[ns.b(), ns.is('column-ordering', isColumnOrdering)]">
-    <div :class="ns.e('table-wrapper')">
+    <div :class="ns.e('body')">
       <table :class="ns.e('table')">
         <NColgroup :columns="visibleColumnList" />
         <TableTHead />
         <TableTBody />
       </table>
+    </div>
+    <div :class="ns.e('footer')">
+      <div :class="ns.e('pagination-wrapper')">
+        <span>{{ t('nado.pagination.info', { start: rowsStart, end: rowsEnd, total: totalRows }) }}</span>
+        <NPagination
+          :total="totalRows"
+          :page-count="pageCount"
+          :default-page-size="defaultPageSize"
+          :default-current-page="defaultCurrentPage"
+          :pager-count="pagerCount"
+          :prev-text="prevText"
+          :prev-icon="prevIcon"
+          :next-text="nextText"
+          :next-icon="nextIcon"
+          :hide-on-single-page="hideOnSinglePage"
+          :current-page="currentPage"
+          :page-size="pageSize"
+          :query-type="queryType"
+          :query-page-number="queryPageNumber"
+          :query-page-size="queryPageSize"
+          :query-page-offset="queryPageOffset"
+          :query-page-limit="queryPageLimit"
+          @update:current-page="setCurrentPage"
+          @update:page-size="setPageSize"
+        />
+      </div>
     </div>
   </div>
 </template>

@@ -14,8 +14,6 @@ export function useTableOrderSort(
 ) {
   function sort(column: NTableColumn | NTableColumn['name'], sortOrder?: NTableColumnInner['sortOrder']) {
     emit('update:columns', changeSortColumnInList(column, columnList, sortOrder))
-
-    // setPagination({ sortBy, descending, page: 1 })
   }
 
   return {

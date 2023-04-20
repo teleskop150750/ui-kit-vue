@@ -10,7 +10,7 @@ const props = defineProps(nThProps)
 const emit = defineEmits(nThEmits)
 
 const slots = useSlots()
-const ns = useNamespace('th')
+const ns = useNamespace('table')
 const instance = getCurrentInstance()!
 const col = computed(() => {
   if (!props.options) {
@@ -86,13 +86,13 @@ const Resizer = () => {
     return undefined
   }
 
-  return <span class={ns.e('resizer')} onPointerdown={handleResizerDown}></span>
+  return <span class={ns.e('th-resizer')} onPointerdown={handleResizerDown}></span>
 }
 
 const Th = () => {
   if (props.options === undefined) {
     return (
-      <th class={[ns.b()]}>
+      <th class={[ns.e('th')]}>
         <div class={ns.e('inner')}>{hSlot(slots.default)}</div>
       </th>
     )
@@ -107,8 +107,8 @@ const Th = () => {
   if (col.value.isSortable === true && SortIcon.value) {
     child = hUniqueSlot(slots.default, [])
     child.push(
-      <span class={ns.e('sort')}>
-        <SortIcon.value class={ns.e('sort-icon')} />
+      <span class={ns.e('th-sort')}>
+        <SortIcon.value class={ns.e('th-sort-icon')} />
       </span>,
     )
   } else {
@@ -117,11 +117,15 @@ const Th = () => {
 
   return (
     <th
-      class={[ns.b(), ns.is('orderable'), col.value.isOrderable]}
+      class={[
+        ns.e('th'),
+        ns.eIs('th', 'orderable', col.value.isOrderable),
+        ns.eIs('th', 'sortable', col.value.isSortable),
+      ]}
       onPointerdown={handlePointerDown}
       onClick={handleSort}
     >
-      <div class={ns.e('inner')}>{child}</div>
+      <div class={ns.e('th-inner')}>{child}</div>
       {Resizer()}
     </th>
   )
@@ -137,7 +141,3 @@ export default {
 <template>
   <Th />
 </template>
-
-<style>
-@import url('@nado/ui-kit-theme/src/components/n-table/n-th/index.css');
-</style>
