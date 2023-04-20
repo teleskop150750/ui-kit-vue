@@ -7,11 +7,11 @@ const nScrollbarRef = ref<NScrollbarInstance>()
 const scrollContext = inject(SYNC_SCROLL_INJECTION_KEY, undefined)!
 
 onMounted(() => {
-  scrollContext!.addEl(nScrollbarRef.value!.wrapRef!)
+  scrollContext!.addElement(nScrollbarRef.value!.wrapRef!)
 })
 
 onBeforeUnmount(() => {
-  scrollContext.removeEl(nScrollbarRef.value!.wrapRef!)
+  scrollContext.removeElement(nScrollbarRef.value!.wrapRef!)
 })
 </script>
 
