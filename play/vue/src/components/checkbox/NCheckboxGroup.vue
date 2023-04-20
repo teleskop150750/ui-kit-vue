@@ -2,18 +2,18 @@
 import { NCheckbox, NCheckboxGroup } from '@nado/ui-kit-vue'
 import { ref } from 'vue'
 
-const checkList = ref(['selected and disabled', 'Option A'])
+const checkList = ref(['SD', 'A'])
 </script>
 
 <template>
   <h3>NCheckboxGroup</h3>
   <div class="row">
     <NCheckboxGroup v-model="checkList" class="line">
-      <NCheckbox label="Option A" />
-      <NCheckbox label="Option B" />
-      <NCheckbox label="Option C" />
-      <NCheckbox label="disabled" disabled />
-      <NCheckbox label="selected and disabled" disabled />
+      <NCheckbox val="A">A</NCheckbox>
+      <NCheckbox val="B">B</NCheckbox>
+      <NCheckbox val="C">C</NCheckbox>
+      <NCheckbox val="disabled" disabled>disabled</NCheckbox>
+      <NCheckbox val="SD" disabled>SD</NCheckbox>
     </NCheckboxGroup>
   </div>
   <div class="row">

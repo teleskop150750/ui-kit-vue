@@ -1,18 +1,18 @@
 <script lang="ts" setup>
-import V1 from './V1.vue'
-import V2 from './V2.vue'
-import V3 from './V3.vue'
-import V4 from './V4.vue'
-import V5 from './V5.vue'
+import Base from './Base.vue'
+import Indeterminate from './Indeterminate.vue'
+import Minimum from './Minimum.vue'
+import NCheckboxButton from './NCheckboxButton.vue'
+import NCheckboxGroup from './NCheckboxGroup.vue'
 </script>
 
 <template>
   <div>
     <h3>NCheckbox</h3>
-    <V1 />
-    <V2 />
-    <V3 />
-    <V4 />
-    <V5 />
+    <Base />
+    <NCheckboxGroup />
+    <Indeterminate />
+    <Minimum />
+    <NCheckboxButton />
   </div>
 </template>

@@ -2,6 +2,7 @@ import { buildProp, buildProps, definePropType, mutable } from '@nado/ui-kit-uti
 import type { ExtractPropTypes, StyleValue } from 'vue'
 
 import { HORIZONTAL, LTR, RTL, VERTICAL } from './defaults'
+import type NVirtualScrollbar from './NVirtualScrollbar.vue'
 import type { GridItemKeyGetter, ItemSize } from './types'
 
 const itemSize = buildProp({
@@ -168,3 +169,4 @@ export type VirtualizedListProps = ExtractPropTypes<typeof virtualizedListProps>
 export type VirtualizedGridProps = ExtractPropTypes<typeof virtualizedGridProps>
 
 export type VirtualizedScrollbarProps = ExtractPropTypes<typeof virtualizedScrollbarProps>
+export type NVirtualScrollbarInstance = InstanceType<typeof NVirtualScrollbar>

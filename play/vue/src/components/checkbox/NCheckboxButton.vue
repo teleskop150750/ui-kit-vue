@@ -13,26 +13,26 @@ const cities = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen']
   <h3>NCheckboxButton</h3>
   <div class="row">
     <NCheckboxGroup v-model="checkboxGroup1" size="large">
-      <NCheckboxButton v-for="city in cities" :key="city" :label="city">
+      <NCheckboxButton v-for="city in cities" :key="city" :val="city">
         {{ city }}
       </NCheckboxButton>
     </NCheckboxGroup>
   </div>
   <div class="row">
     <NCheckboxGroup v-model="checkboxGroup2">
-      <NCheckboxButton v-for="city in cities" :key="city" :label="city">{{ city }}</NCheckboxButton>
+      <NCheckboxButton v-for="city in cities" :key="city" :val="city">{{ city }}</NCheckboxButton>
     </NCheckboxGroup>
   </div>
   <div class="row">
     <NCheckboxGroup v-model="checkboxGroup3" size="small">
-      <NCheckboxButton v-for="city in cities" :key="city" :label="city" :disabled="city === 'Beijing'">
+      <NCheckboxButton v-for="city in cities" :key="city" :val="city" :disabled="city === 'Beijing'">
         {{ city }}
       </NCheckboxButton>
     </NCheckboxGroup>
   </div>
   <div class="row">
     <NCheckboxGroup v-model="checkboxGroup4" size="small" disabled>
-      <NCheckboxButton v-for="city in cities" :key="city" :label="city">{{ city }}</NCheckboxButton>
+      <NCheckboxButton v-for="city in cities" :key="city" :val="city">{{ city }}</NCheckboxButton>
     </NCheckboxGroup>
   </div>
 </template>
