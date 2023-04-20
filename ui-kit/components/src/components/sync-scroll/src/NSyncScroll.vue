@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide, reactive } from 'vue'
+import { provide } from 'vue'
 
 import { SYNC_SCROLL_INJECTION_KEY } from './tokens'
 
@@ -62,13 +62,15 @@ function removeEvents(el: Element) {
   el.removeEventListener('scroll', handleScroll)
 }
 
-provide(
-  SYNC_SCROLL_INJECTION_KEY,
-  reactive({
-    addEl,
-    removeEl,
-  }),
-)
+provide(SYNC_SCROLL_INJECTION_KEY, {
+  addEl,
+  removeEl,
+})
+
+defineExpose({
+  addEl,
+  removeEl,
+})
 </script>
 
 <template>
