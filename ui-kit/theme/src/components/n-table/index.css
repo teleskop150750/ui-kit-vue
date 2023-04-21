@@ -1,12 +1,17 @@
 @layer components {
-  .n-table__body {
+  .n-table__table-header-wrapper {
     overflow-x: auto;
+    scrollbar-width: none;
   }
 
-  .n-table__table {
+  .n-table__table-header-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .n-table__table-header,
+  .n-table__table-body {
     width: max-content;
     min-width: 100%;
-    margin-bottom: 1rem;
 
     border-collapse: separate;
     border-spacing: 0;
@@ -14,6 +19,8 @@
     background-color: transparent;
 
     table-layout: fixed;
+
+    will-change: scroll-position;
   }
 
   .n-table__tr {

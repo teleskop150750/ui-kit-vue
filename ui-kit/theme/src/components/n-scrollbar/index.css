@@ -7,13 +7,8 @@
       --n-comp-scrollbar-color-bg-hovered: var(--n-sys-color-primary-dark);
       --n-comp-scrollbar-bar-offset: 2px;
       --n-comp-scrollbar-bar-size: 12px;
-      --n-comp-scrollbar-max-height: none;
-      --n-comp-scrollbar-max-width: none;
 
       position: relative;
-
-      max-width: var(--n-comp-scrollbar-max-width);
-      max-height: var(--n-comp-scrollbar-max-height);
 
       overflow: hidden;
     }

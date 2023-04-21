@@ -1,4 +1,3 @@
-import { useNamespace } from '@nado/ui-kit-hooks'
 import { isNil, type Nillable } from '@nado/ui-kit-utils'
 import { computed } from '@vue/reactivity'
 import { throttle } from 'lodash-es'
@@ -23,21 +22,23 @@ interface Column extends ColumnBase {
   isMoved: boolean
 }
 
+const TABLE_WRAPPER_CLASS_NAME = 'n-table__table-wrapper'
+const TH_MOVE_CLASS_NAME = 'n-table__th--is-move'
+const TD_MOVE_CLASS_NAME = 'n-table__td--is-move'
+const TH_IS_DRAGGABLE_CLASS_NAME = 'n-table__th--is-orderable'
+
 export function useTableColumnOrder(
   tableColumnList: ComputedRef<NTableColumnInner[]>,
   tableVisibleColumnList: ComputedRef<NTableColumnInner[]>,
   emit: SetupContext<NTableEmits>['emit'],
 ) {
-  const nsTable = useNamespace('table')
-  const thMoveClasses = nsTable.eIs('th', 'move')!
-  const tdMoveClasses = nsTable.eIs('td', 'move')!
-  const thIsDraggableClasses = nsTable.eIs('th', 'orderable', true)!
   const isColumnOrdering = ref(false)
   const isColumnOrderingActive = ref(false)
   let initCoordX = 0
   let currentColumnIndex = -1
-  const table = ref<Nillable<HTMLTableElement>>(undefined)
+  let tableWrapper: Nillable<HTMLDivElement> = undefined
   let currentColumnCellList: HTMLTableCellElement[] = []
+  let rows: HTMLTableRowElement[] = []
   const columnList = ref<Column[]>([])
   const prevColumnList = computed(() => columnList.value.filter((el) => el.distance < 0))
   const afterColumnList = computed(() => columnList.value.filter((el) => el.distance > 0))
@@ -51,17 +52,19 @@ export function useTableColumnOrder(
   }
 
   function processMove(event: PointerEvent) {
-    if (!isColumnOrdering.value) {
-      addClassesToCurrentColumn(currentColumnCellList)
-    }
+    window.requestAnimationFrame(() => {
+      if (!isColumnOrdering.value) {
+        addClassesToCurrentColumn(currentColumnCellList)
+      }
 
-    isColumnOrdering.value = true
-    isColumnOrderingActive.value = true
+      isColumnOrdering.value = true
+      isColumnOrderingActive.value = true
 
-    const distance = Math.max(Math.min(Math.round(event.clientX - initCoordX), rangeDistance.max), rangeDistance.min)
+      const distance = Math.max(Math.min(Math.round(event.clientX - initCoordX), rangeDistance.max), rangeDistance.min)
 
-    processMoveColumn(distance)
-    addTransformStylesForColumns(distance)
+      processMoveColumn(distance)
+      addTransformStylesForColumns(distance)
+    })
   }
 
   const processMoveThrottle = throttle(processMove, 10)
@@ -69,22 +72,22 @@ export function useTableColumnOrder(
   function handleColumnDown(event: MouseEvent) {
     const th = event.currentTarget as HTMLTableCellElement
 
-    table.value = th.closest('table')!
+    tableWrapper = th.closest<HTMLDivElement>(`.${TABLE_WRAPPER_CLASS_NAME}`)!
 
     initCoordX = event.clientX
-    currentColumnIndex = getColumnIndex(table.value, th)
+    currentColumnIndex = getColumnIndex(tableWrapper, th)
 
     if (currentColumnIndex < 0) {
       return
     }
 
-    const allColumnList = getColumnList(table.value, currentColumnIndex)
+    const allColumnList = getColumnList(tableWrapper, currentColumnIndex)
 
     columnList.value = allColumnList.filter((el) => el.isOrderable)
 
     rangeDistance = getRangeDistance(allColumnList, currentColumnIndex)
 
-    currentColumnCellList = getColumnCellList(table.value, currentColumnIndex)
+    currentColumnCellList = getColumnCellList(tableWrapper, currentColumnIndex)
 
     document.addEventListener('pointermove', processMoveThrottle)
     document.addEventListener('pointerup', handleDocumentUp, { once: true })
@@ -98,7 +101,7 @@ export function useTableColumnOrder(
     document.removeEventListener('pointermove', processMoveThrottle)
     document.addEventListener('click', handleDocumentClick, { once: true })
 
-    table.value = undefined
+    tableWrapper = undefined
     columnList.value = []
     initCoordX = 0
     currentColumnIndex -= 1
@@ -108,6 +111,7 @@ export function useTableColumnOrder(
     }
     initCoordX = 0
     currentColumnCellList = []
+    rows = []
   }
 
   function handleDocumentClick() {
@@ -224,12 +228,12 @@ export function useTableColumnOrder(
   }
 
   function addTransformStylesForMovedColumn(column: Column) {
-    if (!table.value) {
+    if (!tableWrapper) {
       return
     }
 
     const distance = getDistanceMovedColumn(column)
-    const cellList = getColumnCellList(table.value, column.index)
+    const cellList = getColumnCellList(tableWrapper, column.index)
 
     addTransformStylesForColumn(cellList, distance)
   }
@@ -250,7 +254,7 @@ export function useTableColumnOrder(
         return
       }
 
-      const cells = getColumnCellList(table.value!, col.index)
+      const cells = getColumnCellList(tableWrapper!, col.index)
 
       cells.forEach((cell) => {
         cell.removeAttribute('style')
@@ -272,9 +276,9 @@ export function useTableColumnOrder(
   function addClassesToCurrentColumn(cellList: HTMLTableCellElement[]) {
     cellList.forEach((cell) => {
       if (cell.tagName === 'TD') {
-        cell.classList.add(tdMoveClasses)
+        cell.classList.add(TD_MOVE_CLASS_NAME)
       } else {
-        cell.classList.add(thMoveClasses)
+        cell.classList.add(TH_MOVE_CLASS_NAME)
       }
     })
   }
@@ -282,23 +286,25 @@ export function useTableColumnOrder(
   function removeClassesFromCurrentColumn(cellList: HTMLTableCellElement[]) {
     cellList.forEach((cell) => {
       if (cell.tagName === 'TD') {
-        cell.classList.remove(tdMoveClasses)
+        cell.classList.remove(TD_MOVE_CLASS_NAME)
       } else {
-        cell.classList.remove(thMoveClasses)
+        cell.classList.remove(TH_MOVE_CLASS_NAME)
       }
     })
   }
 
   // utils
-  function getColumnList(tableEl: HTMLTableElement, index: number): Column[] {
-    if (!tableEl.tHead || !tableEl.tHead.rows[0]) {
+  function getColumnList(tableWrapperThere: HTMLDivElement, index: number): Column[] {
+    const thisRows = getRows(tableWrapperThere)
+
+    if (!thisRows[0]) {
       return []
     }
 
     let before: Column[] = []
     let after: Column[] = []
 
-    const columnSizeList: ColumnBase[] = [...tableEl.tHead.rows[0].cells].map((cell, idx) => {
+    const columnSizeList: ColumnBase[] = [...thisRows[0].cells].map((cell, idx) => {
       const col = tableVisibleColumnList.value[idx]
 
       return {
@@ -306,7 +312,7 @@ export function useTableColumnOrder(
         index: isNil(col) ? -1 : col.index,
         width: cell.offsetWidth,
         center: Math.round(cell.offsetWidth / 2),
-        isDraggable: cell.classList.contains(thIsDraggableClasses),
+        isDraggable: cell.classList.contains(TH_IS_DRAGGABLE_CLASS_NAME),
       }
     })
 
@@ -365,6 +371,40 @@ export function useTableColumnOrder(
     return [...before, current, ...after]
   }
 
+  function getColumnIndex(tableWrapperThere: HTMLDivElement, td: HTMLTableCellElement) {
+    const thisRows = getRows(tableWrapperThere)
+
+    if (!thisRows[0]) {
+      return -1
+    }
+
+    return [...thisRows[0].cells].indexOf(td)
+  }
+
+  function getColumnCellList(tableWrapperThere: HTMLDivElement, index: number) {
+    const cellList: HTMLTableCellElement[] = []
+
+    getRows(tableWrapperThere).forEach((row) => {
+      const cell = row.cells[index]!
+
+      cellList.push(cell)
+    })
+
+    return cellList
+  }
+
+  function getRows(tableWrapperThere: HTMLDivElement) {
+    if (rows.length > 0) {
+      return rows
+    }
+
+    tableWrapperThere.querySelectorAll<HTMLTableElement>('table').forEach((table) => {
+      rows.push(...table.rows)
+    })
+
+    return rows
+  }
+
   return {
     isColumnOrdering,
     isColumnOrderingActive,
@@ -416,24 +456,4 @@ function getDistanceToColumn(column: ColumnBase, prevColumns: Column[], isPrev =
     isCurrent: false,
     isMoved: false,
   }
-}
-
-function getColumnIndex(table: HTMLTableElement, td: HTMLTableCellElement) {
-  if (!table.tHead || !table.tHead.rows || !table.tHead.rows[0]) {
-    return -1
-  }
-
-  return [...table.tHead.rows[0].cells].indexOf(td)
-}
-
-function getColumnCellList(table: HTMLTableElement, index: number) {
-  const cellList: HTMLTableCellElement[] = []
-
-  ;[...table.rows].forEach((row) => {
-    const cell = row.cells[index]!
-
-    cellList.push(cell)
-  })
-
-  return cellList
 }

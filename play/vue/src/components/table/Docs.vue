@@ -9,7 +9,6 @@ const columns = ref<NTableColumn[]>([
     name: 'id',
     isSortable: true,
     isResizable: true,
-    isOrderable: false,
     width: 181,
     align: 'right',
     minWidth: 100,
@@ -30,20 +29,33 @@ const columns = ref<NTableColumn[]>([
     label: 'age',
     name: 'age',
     isResizable: true,
-    isOrderable: false,
     width: 200,
   },
   {
     field: 'foo',
     label: 'foo',
     name: 'foo',
-    isSortable: true,
+    isResizable: true,
     width: 200,
   },
   {
     field: 'bar',
     label: 'bar',
     name: 'bar',
+    isResizable: true,
+    width: 200,
+  },
+  {
+    field: 'bar2',
+    label: 'bar2',
+    name: 'bar2',
+    isResizable: true,
+    width: 200,
+  },
+  {
+    field: 'bar3',
+    label: 'bar3',
+    name: 'bar3',
     isResizable: true,
     width: 200,
   },
@@ -55,6 +67,8 @@ const rows = Array.from({ length: 34 }).map((_, idx) => ({
   age: 20,
   foo: 'foo',
   bar: 'bar',
+  bar2: 'bar2',
+  bar3: 'bar3',
 }))
 
 const page = ref(3)

@@ -48,10 +48,12 @@ export function useTableColumnResize(
   }
 
   function processResize(event: PointerEvent) {
-    isColumnResizeActive.value = true
-    const distance = Math.max(Math.round(event.clientX - initCoordX), rangeDistance.min)
+    window.requestAnimationFrame(() => {
+      isColumnResizeActive.value = true
+      const distance = Math.max(Math.round(event.clientX - initCoordX), rangeDistance.min)
 
-    updateTableColumnsWidth(distance)
+      updateTableColumnsWidth(distance)
+    })
   }
 
   function updateTableColumnsWidth(distance: number) {

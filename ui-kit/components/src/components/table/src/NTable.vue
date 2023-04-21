@@ -1,9 +1,11 @@
 <script setup lang="tsx">
 import { useLocale, useNamespace } from '@nado/ui-kit-hooks'
 import { injectProp, type Nillable } from '@nado/ui-kit-utils'
-import { computed, type Slot, useSlots } from 'vue'
+import { computed, onMounted, ref, type Slot, useSlots } from 'vue'
 
 import { NPagination } from '../../pagination'
+import { NScrollbar, type NScrollbarInstance } from '../../scrollbar'
+import { NSyncScroll, type NSyncScrollInstance } from '../../sync-scroll'
 import {
   useTableColumn,
   useTableColumnOrder,
@@ -23,6 +25,7 @@ const { t } = useLocale()
 const ns = useNamespace('table')
 const slots = useSlots()
 const { columnList, visibleColumnList, computedColsMap } = useTableColumn(props)
+const { rowsStart, rowsEnd, totalRows, pageRows, setCurrentPage, setPageSize } = useTablePagination(props, emit)
 
 const { handleColumnResizerDown, isColumnResizeActive } = useTableColumnResize(columnList, emit)
 const { handleColumnDown, isColumnOrdering, isColumnOrderingActive } = useTableColumnOrder(
@@ -30,8 +33,11 @@ const { handleColumnDown, isColumnOrdering, isColumnOrderingActive } = useTableC
   visibleColumnList,
   emit,
 )
-const { rowsStart, rowsEnd, totalRows, pageRows, setCurrentPage, setPageSize } = useTablePagination(props, emit)
 const { sort } = useTableOrderSort(columnList, emit)
+
+const syncScrollRef = ref<NSyncScrollInstance>()
+const tableHeaderRef = ref<HTMLDivElement>()
+const tableBodyScrollbarRef = ref<NScrollbarInstance>()
 
 const isDisableClick = computed(() => isColumnOrderingActive.value || isColumnResizeActive.value)
 const getRowKey = computed<(row: NTableRow) => NTableRowKey>(() =>
@@ -60,8 +66,28 @@ function getCellValue(col: NTableColumn, row: NTableRow) {
   return col.format !== undefined ? col.format(val, row) : val
 }
 
-function TableTHead() {
-  const child = getTHeadTR()
+function getHeaderCellScope() {
+  return {
+    cols: visibleColumnList.value,
+    colsMap: computedColsMap.value,
+    sort,
+  }
+}
+
+function getHeaderNameCellScope(col: NTableColumn) {
+  return { col, ...getHeaderCellScope() }
+}
+
+// Lifecycle Hooks
+onMounted(() => {
+  if (syncScrollRef.value && tableHeaderRef.value && tableBodyScrollbarRef.value?.wrapRef) {
+    syncScrollRef.value?.addElement([tableHeaderRef.value, tableBodyScrollbarRef.value.wrapRef])
+  }
+})
+
+// Components
+function TableHead() {
+  const rows = TableHeadTr()
 
   // if (props.loading === true && slots.loading === void 0) {
   //   child.push(
@@ -78,10 +104,10 @@ function TableTHead() {
   //   )
   // }
 
-  return <thead class={ns.e('thead')}>{child}</thead>
+  return <thead class={ns.e('thead')}>{rows}</thead>
 }
 
-function getTHeadTR() {
+function TableHeadTr() {
   const { header } = slots
   const headerCell = slots['header-cell']
 
@@ -89,7 +115,7 @@ function getTHeadTR() {
     return [...header(getHeaderCellScope())]
   }
 
-  const child = visibleColumnList.value.map((col) => {
+  const cells = visibleColumnList.value.map((col) => {
     const headerCellCol = slots[`header-cell-${col.name}`]
     const slot = headerCellCol !== undefined ? headerCellCol : headerCell
     const thScope = getHeaderNameCellScope(col)
@@ -111,33 +137,21 @@ function getTHeadTR() {
 
   return (
     <tr class={ns.e('tr')}>
-      {child}
+      {cells}
       <th class={[ns.e('th'), ns.eIs('th', 'empty')]}></th>
     </tr>
   )
 }
 
-function getHeaderCellScope() {
-  return {
-    cols: visibleColumnList.value,
-    colsMap: computedColsMap.value,
-    sort,
-  }
-}
-
-function getHeaderNameCellScope(col: NTableColumn) {
-  return { col, ...getHeaderCellScope() }
-}
-
-function TableTBody() {
+function TableBody() {
   const { body: bodySlot } = slots
 
-  const child = pageRows.value.map((row, rowIndex) => getTBodyTR(row, bodySlot, rowIndex))
+  const child = pageRows.value.map((row, rowIndex) => TableBodyTr(row, bodySlot, rowIndex))
 
   return <tbody class={ns.e('tbody')}>{child}</tbody>
 }
 
-function getTBodyTR(row: NTableRow, _bodySlot: Nillable<Slot>, rowIndexOnPage: number) {
+function TableBodyTr(row: NTableRow, _bodySlot: Nillable<Slot>, rowIndexOnPage: number) {
   const key = getRowKey.value(row)
   // const selected = isRowSelected(key)
   // if (bodySlot !== undefined) {
@@ -221,12 +235,21 @@ export default {
 
 <template>
   <div :class="[ns.b(), ns.is('column-ordering', isColumnOrdering)]">
-    <div :class="ns.e('body')">
-      <table :class="ns.e('table')">
-        <NColgroup :columns="visibleColumnList" />
-        <TableTHead />
-        <TableTBody />
-      </table>
+    <div :class="ns.e('table-wrapper')">
+      <NSyncScroll ref="syncScrollRef">
+        <div ref="tableHeaderRef" :class="ns.e('table-header-wrapper')">
+          <table :class="ns.e('table-header')">
+            <NColgroup :columns="visibleColumnList" />
+            <TableHead />
+          </table>
+        </div>
+        <NScrollbar ref="tableBodyScrollbarRef" :class="ns.e('table-body-wrapper')" max-height="300">
+          <table :class="ns.e('table-body')">
+            <NColgroup :columns="visibleColumnList" />
+            <TableBody />
+          </table>
+        </NScrollbar>
+      </NSyncScroll>
     </div>
     <div :class="ns.e('footer')">
       <div :class="ns.e('pagination-wrapper')">
@@ -258,5 +281,5 @@ export default {
 </template>
 
 <style>
-@import url('@nado/ui-kit-theme/src/components/n-table/n-table/index.css');
+@import url('@nado/ui-kit-theme/src/components/n-table/index.css');
 </style>
