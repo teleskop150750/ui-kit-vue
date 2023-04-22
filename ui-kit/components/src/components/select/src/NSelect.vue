@@ -1,22 +1,21 @@
 <script lang="ts">
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import { UPDATE_MODEL_EVENT } from '@nado/ui-kit-constants'
 import { vClickOutside as ClickOutside } from '@nado/ui-kit-directives'
 import { useFocus, useLocale, useNamespace } from '@nado/ui-kit-hooks'
 import { isIOS, useResizeObserver } from '@vueuse/core'
-import { computed, defineComponent, nextTick, onMounted, provide, reactive, toRefs, unref } from 'vue'
+import { computed, defineComponent, nextTick, onMounted, provide, reactive, type Ref, toRefs, unref } from 'vue'
 
 import { NInput } from '../../input'
 import { NScrollbar } from '../../scrollbar'
 import { NTag } from '../../tag'
 import NTooltip from '../../tooltip/src/NTooltip.vue'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { type SelectedItem, useSelect, useSelectState } from './hooks'
 import NOption from './NOption.vue'
 import { NOptions } from './NOptions'
 import NSelectMenu from './NSelectDropdown.vue'
-import { selectEmits, selectProps } from './select.model'
+import { nSelectEmits, selectProps } from './select.model'
 import { SELECT_INJECTION_KEY, type SelectContext } from './token'
-import { useSelect, useSelectStates } from './useSelect'
 
 const COMPONENT_NAME = 'NSelect'
 
@@ -33,73 +32,71 @@ export default defineComponent({
     NTooltip,
   },
   directives: { ClickOutside },
-  props: {
-    ...selectProps,
-  },
-  emits: [...selectEmits],
+  props: selectProps,
+  emits: nSelectEmits,
 
   setup(props, ctx) {
     const nsSelect = useNamespace('select')
     const nsInput = useNamespace('input')
     const { t } = useLocale()
-    const states = useSelectStates(props)
+    const state = useSelectState(props)
     const {
-      optionList,
+      MENU_WRAPPER_CLASS_NAME,
+      optionLabelListInMenu,
       optionsArray,
       selectSize,
-      readonly,
+      isReadonly,
       handleResize,
       collapseTagSize,
-      debouncedOnInputChange,
-      debouncedQueryChange,
+      handleInputChangeDebounced,
+      handleQueryChangeDebounced,
       deletePrevTag,
       deleteTag,
-      deleteSelected,
       handleOptionSelect,
       scrollToOption,
       setSelected,
       resetInputHeight,
       managePlaceholder,
-      showClose,
-      selectDisabled,
-      iconComponent,
+      canShowClose,
+      isDisabled,
+      iconSuffix,
       iconReverse,
       showNewOption,
       emptyText,
       toggleLastOptionHitState,
       resetInputState,
       handleComposition,
-      onOptionCreate,
-      onOptionDestroy,
-      handleMenuEnter,
+      addOption,
+      deleteOption,
+      handleOpenMenu,
       handleFocus,
       blur,
       handleBlur,
       handleClearClick,
-      handleClose,
+      closeSelect,
       handleKeydownEscape,
       toggleMenu,
-      selectOption,
+      handleEnterSelect,
       getValueKey,
       navigateOptions,
-      dropMenuVisible,
+      isMenuVisible,
 
-      reference,
-      input,
-      iOSInput,
+      inputRef,
+      filterInputRef,
+      iOSInputRef,
       tooltipRef,
-      tags,
-      selectWrapper,
-      scrollbar,
+      tagsWrapperRef,
+      selectRootRef,
+      scrollbarRef,
       queryChange,
       groupQueryChange,
       handleMouseEnter,
       handleMouseLeave,
       showTagList,
       collapseTagList,
-    } = useSelect(props, states, ctx)
+    } = useSelect(props, state, ctx.emit)
 
-    const { focus } = useFocus(reference)
+    const { focus } = useFocus(inputRef)
 
     const {
       inputWidth,
@@ -111,7 +108,7 @@ export default defineComponent({
       selectedLabel,
       hoverIndex,
       query,
-      inputHovering,
+      isInputHover,
       currentPlaceholder,
       menuVisibleOnFocus,
       isOnComposition,
@@ -121,7 +118,7 @@ export default defineComponent({
       optionsCount,
       prefixWidth,
       tagInMultiLine,
-    } = toRefs(states)
+    } = toRefs(state)
 
     const wrapperClasses = computed(() => {
       const classList = [nsSelect.b()]
@@ -160,9 +157,9 @@ export default defineComponent({
         filteredOptionsCount,
         hoverIndex,
         handleOptionSelect,
-        onOptionCreate,
-        onOptionDestroy,
-        selectWrapper,
+        addOption,
+        deleteOption,
+        selectRootRef,
         selected,
         setSelected,
         queryChange,
@@ -172,20 +169,20 @@ export default defineComponent({
 
     onMounted(() => {
       // eslint-disable-next-line no-multi-assign
-      states.cachedPlaceHolder = currentPlaceholder.value = props.placeholder || (() => t('nado.select.placeholder'))
+      state.cachedPlaceHolder = currentPlaceholder.value = props.placeholder || (() => t('nado.select.placeholder'))
 
       if (props.multiple && Array.isArray(props.modelValue) && props.modelValue.length > 0) {
         currentPlaceholder.value = ''
       }
 
-      useResizeObserver(selectWrapper, handleResize)
+      useResizeObserver(selectRootRef, handleResize)
 
       if (props.remote && props.multiple) {
         resetInputHeight()
       }
 
       nextTick(() => {
-        const refEl = reference.value && reference.value.$el
+        const refEl = inputRef.value && inputRef.value.$el
 
         if (!refEl) {
           return
@@ -212,12 +209,12 @@ export default defineComponent({
 
     const popperPaneRef = computed(() => tooltipRef.value?.popperRef?.contentRef)
 
-    const onOptionsRendered = (v) => {
-      optionList.value = v
+    function onOptionsRendered(payload: Array<string | number>) {
+      optionLabelListInMenu.value = payload
     }
 
     // TODO: Fix
-    const fooStyle = {
+    const prefixStyles = {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -225,20 +222,20 @@ export default defineComponent({
     }
 
     return {
-      fooStyle,
+      MENU_WRAPPER_CLASS_NAME,
+      prefixStyles,
       isIOS,
       onOptionsRendered,
       tagInMultiLine,
       prefixWidth,
       selectSize,
-      readonly,
+      isReadonly,
       handleResize,
       collapseTagSize,
-      debouncedOnInputChange,
-      debouncedQueryChange,
+      handleInputChangeDebounced,
+      handleQueryChangeDebounced,
       deletePrevTag,
       deleteTag,
-      deleteSelected,
       handleOptionSelect,
       scrollToOption,
       inputWidth,
@@ -247,10 +244,10 @@ export default defineComponent({
       filteredOptionsCount,
       visible,
       softFocus,
-      selectedLabel,
+      selectedLabel: selectedLabel as Ref<string | number>,
       hoverIndex,
       query,
-      inputHovering,
+      isInputHover,
       currentPlaceholder,
       menuVisibleOnFocus,
       isOnComposition,
@@ -258,37 +255,37 @@ export default defineComponent({
       options,
       resetInputHeight,
       managePlaceholder,
-      showClose,
-      selectDisabled,
-      iconComponent,
+      canShowClose,
+      isDisabled,
+      iconSuffix,
       iconReverse,
       showNewOption,
       emptyText,
       toggleLastOptionHitState,
       resetInputState,
       handleComposition,
-      handleMenuEnter,
+      handleOpenMenu,
       handleFocus,
       blur,
       handleBlur,
       handleClearClick,
-      handleClose,
+      closeSelect,
       handleKeydownEscape,
       toggleMenu,
-      selectOption,
+      handleEnterSelect,
       getValueKey,
       navigateOptions,
-      dropMenuVisible,
+      isMenuVisible,
       focus,
 
-      reference,
-      input,
-      iOSInput,
+      inputRef,
+      filterInputRef,
+      iOSInputRef,
       tooltipRef,
       popperPaneRef,
-      tags,
-      selectWrapper,
-      scrollbar,
+      tagsWrapperRef,
+      selectRootRef,
+      scrollbarRef,
 
       wrapperClasses,
       selectTagsStyle,
@@ -305,8 +302,8 @@ export default defineComponent({
 
 <template>
   <div
-    ref="selectWrapper"
-    v-click-outside:[popperPaneRef]="handleClose"
+    ref="selectRootRef"
+    v-click-outside:[popperPaneRef]="closeSelect"
     :class="wrapperClasses"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
@@ -314,7 +311,7 @@ export default defineComponent({
   >
     <NTooltip
       ref="tooltipRef"
-      :visible="dropMenuVisible"
+      :visible="isMenuVisible"
       :placement="placement"
       :teleported="teleported"
       :popper-class="[nsSelect.e('popper'), popperClass]"
@@ -326,27 +323,34 @@ export default defineComponent({
       :stop-popper-mouse-event="false"
       :gpu-acceleration="false"
       :persistent="persistent"
-      @show="handleMenuEnter"
+      @show="handleOpenMenu"
     >
       <template #default>
-        <div class="select-trigger" @mouseenter="inputHovering = true" @mouseleave="inputHovering = false">
+        <div class="select-trigger" @mouseenter="isInputHover = true" @mouseleave="isInputHover = false">
           <div
             v-if="multiple"
-            ref="tags"
-            :class="[nsSelect.e('tags'), nsSelect.is('disabled', selectDisabled)]"
+            ref="tagsWrapperRef"
+            :class="[nsSelect.e('multiple-input-wrapper')]"
             :style="selectTagsStyle"
           >
-            <transition v-if="collapseTags && selected.length > 0" @after-leave="resetInputHeight">
+            <transition
+              v-if="collapseTags && Array.isArray(selected) && selected.length > 0"
+              @after-leave="resetInputHeight"
+            >
               <span
                 :class="[
-                  nsSelect.s('tags-wrapper'),
-                  nsSelect.sHas('tags-wrapper', 'prefix', prefixWidth && selected.length > 0),
+                  nsSelect.e('tags'),
+                  nsSelect.eHas(
+                    'tags',
+                    'prefix',
+                    Boolean(prefixWidth && Array.isArray(selected) && selected.length > 0),
+                  ),
                 ]"
               >
                 <NTag
                   v-for="item in showTagList"
                   :key="getValueKey(item)"
-                  :closable="!selectDisabled && !item.isDisabled"
+                  :closable="!isDisabled && !item.isDisabled"
                   :size="collapseTagSize"
                   :mod="tagMod"
                   @close="deleteTag($event, item)"
@@ -364,7 +368,7 @@ export default defineComponent({
                 >
                   <NTooltip
                     v-if="collapseTagsTooltip"
-                    :disabled="dropMenuVisible"
+                    :disabled="isMenuVisible"
                     :fallback-placements="['bottom', 'top', 'right', 'left']"
                     :effect="effect"
                     placement="bottom"
@@ -382,7 +386,7 @@ export default defineComponent({
                         >
                           <NTag
                             class="in-tooltip"
-                            :closable="!selectDisabled && !item.isDisabled"
+                            :closable="!isDisabled && !item.isDisabled"
                             :size="collapseTagSize"
                             :hit="item.hitState"
                             :type="tagMod"
@@ -410,14 +414,18 @@ export default defineComponent({
             <transition v-if="!collapseTags" @after-leave="resetInputHeight">
               <span
                 :class="[
-                  nsSelect.b('tags-wrapper'),
-                  nsSelect.sHas('tags-wrapper', 'prefix', prefixWidth && selected.length > 0),
+                  nsSelect.e('tags'),
+                  nsSelect.eHas(
+                    'tags',
+                    'prefix',
+                    Boolean(prefixWidth && Array.isArray(selected) && selected.length > 0),
+                  ),
                 ]"
               >
                 <NTag
-                  v-for="item in selected"
+                  v-for="item in selected as SelectedItem[]"
                   :key="getValueKey(item)"
-                  :closable="!selectDisabled && !item.isDisabled"
+                  :closable="!isDisabled && !item.isDisabled"
                   :size="collapseTagSize"
                   :hit="item.hitState"
                   :type="tagMod"
@@ -432,14 +440,17 @@ export default defineComponent({
             </transition>
             <input
               v-if="filterable"
-              ref="input"
+              ref="filterInputRef"
               v-model="query"
               type="text"
-              :class="[nsSelect.e('input'), nsSelect.is(selectSize), nsSelect.is('disabled', selectDisabled)]"
-              :disabled="selectDisabled"
+              :class="[nsSelect.e('input'), nsSelect.is(selectSize), nsSelect.is('disabled', isDisabled)]"
+              :disabled="isDisabled"
               :autocomplete="autocomplete"
               :style="{
-                marginLeft: (prefixWidth && selected.length === 0) || tagInMultiLine ? `${prefixWidth}px` : '',
+                marginLeft:
+                  (prefixWidth && Array.isArray(selected) && selected.length === 0) || tagInMultiLine
+                    ? `${prefixWidth}px`
+                    : '',
                 flexGrow: 1,
                 width: `${inputLength / (inputWidth - 32)}%`,
                 maxWidth: `${inputWidth - 42}px`,
@@ -451,65 +462,65 @@ export default defineComponent({
               @keydown.down.prevent="navigateOptions('next')"
               @keydown.up.prevent="navigateOptions('prev')"
               @keydown.esc="handleKeydownEscape"
-              @keydown.enter.stop.prevent="selectOption"
+              @keydown.enter.stop.prevent="handleEnterSelect"
               @keydown.delete="deletePrevTag"
               @keydown.tab="visible = false"
               @compositionstart="handleComposition"
               @compositionupdate="handleComposition"
               @compositionend="handleComposition"
-              @input="debouncedQueryChange"
+              @input="handleQueryChangeDebounced"
             />
           </div>
           <!-- fix: https://github.com/element-plus/element-plus/issues/11415 -->
           <input
-            v-if="isIOS && !multiple && filterable && readonly"
-            ref="iOSInput"
+            v-if="isIOS && !multiple && filterable && isReadonly"
+            ref="iOSInputRef"
             :class="[nsSelect.e('input'), nsSelect.is(selectSize), nsSelect.em('input', 'iOS')]"
-            :disabled="selectDisabled"
+            :disabled="isDisabled"
             type="text"
           />
           <NInput
             :id="id"
-            ref="reference"
+            ref="inputRef"
             v-model="selectedLabel"
             type="text"
             :placeholder="typeof currentPlaceholder === 'function' ? currentPlaceholder() : currentPlaceholder"
             :name="name"
             :autocomplete="autocomplete"
             :size="selectSize"
-            :disabled="selectDisabled"
-            :readonly="readonly"
+            :disabled="isDisabled"
+            :readonly="isReadonly"
             :validate-event="false"
             :class="[nsSelect.is('focus', visible)]"
             :tabindex="multiple && filterable ? -1 : undefined"
             @focus="handleFocus"
             @blur="handleBlur"
-            @input="debouncedOnInputChange"
-            @paste="debouncedOnInputChange"
+            @input="handleInputChangeDebounced"
+            @paste="handleInputChangeDebounced"
             @compositionstart="handleComposition"
             @compositionupdate="handleComposition"
             @compositionend="handleComposition"
             @keydown.down.stop.prevent="navigateOptions('next')"
             @keydown.up.stop.prevent="navigateOptions('prev')"
-            @keydown.enter.stop.prevent="selectOption"
+            @keydown.enter.stop.prevent="handleEnterSelect"
             @keydown.esc="handleKeydownEscape"
             @keydown.tab="visible = false"
           >
             <template v-if="$slots.prefix" #prefix>
-              <div :style="fooStyle">
+              <div :style="prefixStyles">
                 <slot name="prefix" />
               </div>
             </template>
             <template #suffix>
               <component
-                :is="iconComponent"
-                v-if="iconComponent && !showClose"
+                :is="iconSuffix"
+                v-if="iconSuffix && !canShowClose"
                 class="n-icon"
                 :class="[nsSelect.e('caret'), nsSelect.e('icon'), iconReverse]"
               />
               <component
                 :is="clearIcon"
-                v-if="showClose && clearIcon"
+                v-if="canShowClose && clearIcon"
                 class="n-icon"
                 :class="[nsSelect.e('caret'), nsSelect.e('icon')]"
                 @click="handleClearClick"
@@ -523,9 +534,9 @@ export default defineComponent({
           <NSelectMenu>
             <NScrollbar
               v-show="options.size > 0 && !loading"
-              ref="scrollbar"
+              ref="scrollbarRef"
               tag="ul"
-              :wrap-class="nsSelect.se('dropdown', 'wrap')"
+              :wrap-class="MENU_WRAPPER_CLASS_NAME"
               :view-class="nsSelect.se('dropdown', 'list')"
               :class="[nsSelect.is('empty', !allowCreate && Boolean(query) && filteredOptionsCount === 0)]"
             >

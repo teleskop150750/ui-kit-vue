@@ -591,8 +591,6 @@ describe('Select', () => {
     await nextTick()
     const options = getOptions()
 
-    console.log(options[1]!.className)
-
     expect(options[1]!.className).toContain('is-disabled')
     options[1]!.click()
     await nextTick()
@@ -681,7 +679,7 @@ describe('Select', () => {
     vm.navigateOptions('prev')
     vm.navigateOptions('prev')
     await nextTick()
-    vm.selectOption()
+    vm.handleEnterSelect()
     await nextTick()
     expect(wrapper.vm.value).toBe('Dalian')
   })
@@ -736,7 +734,7 @@ describe('Select', () => {
     vm.navigateOptions('prev')
     await nextTick()
     expect(vm.hoverIndex).toBe(3)
-    vm.selectOption()
+    vm.handleEnterSelect()
     await nextTick()
     expect(wrapper.vm.value).toBe('选项4')
     vm.toggleMenu()
@@ -758,7 +756,7 @@ describe('Select', () => {
 
     vm.value = '选项1'
     await nextTick()
-    selectVm.inputHovering = true
+    selectVm.isInputHover = true
     await selectVm.$nextTick()
     const iconClear = wrapper.findComponent(NIconCircleClose)
 
@@ -873,7 +871,7 @@ describe('Select', () => {
 
     input.element.focus()
     selectVm.selectedLabel = 'new'
-    selectVm.debouncedOnInputChange()
+    selectVm.handleInputChangeDebounced()
     await nextTick()
     const options = [...getOptions()]
     const target = options.find((option) => option.textContent === 'new')!
@@ -980,7 +978,7 @@ describe('Select', () => {
     await wrapper.find('.select-trigger').trigger('click')
     const options = getOptions()
     const selectWrapper = wrapper.findComponent(NSelect)
-    const inputWrapper = selectWrapper.findComponent({ ref: 'reference' })
+    const inputWrapper = selectWrapper.findComponent({ ref: 'inputRef' })
     const inputDom = inputWrapper.element
     const mockInputWidth = vi.spyOn(inputDom as HTMLElement, 'offsetWidth', 'get').mockReturnValue(200)
 
@@ -1041,7 +1039,7 @@ describe('Select', () => {
     await wrapper.find('.select-trigger').trigger('click')
     const options = getOptions()
     const selectWrapper = wrapper.findComponent(NSelect)
-    const inputWrapper = selectWrapper.findComponent({ ref: 'reference' })
+    const inputWrapper = selectWrapper.findComponent({ ref: 'inputRef' })
     const inputDom = inputWrapper.element
     const mockInputWidth = vi.spyOn(inputDom as HTMLElement, 'offsetWidth', 'get').mockReturnValue(200)
 
@@ -1401,7 +1399,7 @@ describe('Select', () => {
     wrapper = getSelectVm()
     const select = wrapper.findComponent({ name: 'NSelect' })
 
-    await select.findComponent({ ref: 'reference' }).find('input').element.focus()
+    await select.findComponent({ ref: 'inputRef' }).find('input').element.focus()
     expect(select.vm.visible).toBe(false)
   })
 
@@ -1409,7 +1407,7 @@ describe('Select', () => {
     wrapper = getSelectVm({ automaticDropdown: true })
     const select = wrapper.findComponent({ name: 'NSelect' })
 
-    await select.findComponent({ ref: 'reference' }).find('input').trigger('focusin')
+    await select.findComponent({ ref: 'inputRef' }).find('input').trigger('focusin')
     expect(select.vm.visible).toBe(true)
   })
 
@@ -1549,6 +1547,7 @@ describe('Select', () => {
     await select.trigger('mouseenter')
     await select.trigger('click')
     await nextTick()
+
     expect(!!(document.querySelector('.n-select__popper') as HTMLElement).style.display).toBeFalsy()
     expect(wrapper.findAll('.n-select-dropdown__empty').length).toBe(0)
   })
@@ -1661,13 +1660,13 @@ describe('Select', () => {
 
     const select = wrapper.findComponent({ name: 'NSelect' }).vm
 
-    select.debouncedQueryChange({
+    select.handleQueryChangeDebounced({
       target: {
         value: '',
       },
     })
 
-    select.debouncedQueryChange({
+    select.handleQueryChangeDebounced({
       target: {
         value: 'a',
       },
@@ -1678,7 +1677,7 @@ describe('Select', () => {
 
     options[0]!.click()
     await nextTick()
-    select.debouncedQueryChange({
+    select.handleQueryChangeDebounced({
       target: {
         value: 'n',
       },
@@ -1743,8 +1742,6 @@ describe('Select', () => {
     await nextTick()
     const options = getOptions()
 
-    console.log(options[0]!.className)
-
     expect(options[0]!.className).not.toContain('is-disabled')
     expect(options[2]!.className).toContain('is-disabled')
     options[0]!.click()
@@ -1797,7 +1794,7 @@ describe('Select', () => {
     vm.isClearable = true
     vm.vendors = [2, 3, 4]
     await nextTick()
-    selectVm.inputHovering = true
+    selectVm.isInputHover = true
     await selectVm.$nextTick()
     const iconClear = wrapper.findComponent(NIconCircleClose)
 
@@ -1892,7 +1889,6 @@ describe('Select', () => {
     const { vm } = wrapper
 
     await nextTick()
-    console.log('FF', wrapper.findAll('.n-tag'))
 
     expect(wrapper.findAll('.n-tag').length).toBe(1)
 
@@ -1916,11 +1912,9 @@ describe('Select', () => {
     )
     await nextTick()
 
-    const innerInput = wrapper.find('.n-input__native')
+    const innerInput = wrapper.find<HTMLInputElement>('.n-input__native')
 
-    // console.log('fff', wrapper.html())
-
-    const innerInputEl = innerInput.element as HTMLInputElement
+    const innerInputEl = innerInput.element
 
     expect(innerInputEl.placeholder).toBe('')
 
@@ -1929,8 +1923,8 @@ describe('Select', () => {
     await tagCloseIcon.trigger('click')
     expect(innerInputEl.placeholder).toBe(placeholder)
 
-    const selectInput = wrapper.find('.n-select__input')
-    const selectInputEl = selectInput.element as HTMLInputElement
+    const selectInput = wrapper.find<HTMLInputElement>('.n-select__input')
+    const selectInputEl = selectInput.element
 
     selectInputEl.value = 'a'
     vi.useFakeTimers()
@@ -2015,7 +2009,7 @@ describe('Select', () => {
       const { vm } = wrapper.findComponent(NSelect)
       const event = { target: { value: 'sh' } }
 
-      vm.debouncedQueryChange(event)
+      vm.handleQueryChangeDebounced(event)
       await nextTick()
       const groups = wrapper.findAllComponents(NOptionGroup)
 

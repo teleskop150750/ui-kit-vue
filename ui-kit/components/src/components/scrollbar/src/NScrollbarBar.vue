@@ -23,7 +23,7 @@ function handleScroll(wrap: Nillable<HTMLElement>) {
 }
 
 defineExpose({
-  handleScroll,
+  scroll: handleScroll,
 })
 </script>
 

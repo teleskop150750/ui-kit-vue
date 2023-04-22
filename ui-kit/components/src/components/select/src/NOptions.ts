@@ -1,14 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { isArray, isFunction, isString } from '@nado/ui-kit-utils'
-import { type Component, defineComponent, type VNode, type VNodeNormalizedChildren } from 'vue'
+import { type Component, defineComponent, type VNode } from 'vue'
 
 export const NOptions = defineComponent({
   name: 'NOptions',
   emits: ['update-options'],
   setup(_, { slots, emit }) {
-    let cachedOptions: any[] = []
+    let cachedOptions: Array<string | number> = []
 
-    function isSameOptions(a: any[], b: any[]) {
+    function isSameOptions(a: Array<string | number>, b: Array<string | number>) {
       if (a.length !== b.length) {
         return false
       }
@@ -24,33 +23,34 @@ export const NOptions = defineComponent({
     }
 
     return () => {
-      const children = slots.default?.()
-      const filteredOptions: any[] = []
+      const slotData = slots.default?.()
 
-      function filterOptions(options?: VNodeNormalizedChildren) {
+      const filteredOptions: Array<string | number> = []
+
+      function filterOptions(options?: VNode[]) {
         if (!isArray(options)) {
           return
         }
 
-        ;(options as VNode[]).forEach((item) => {
+        options.forEach((item) => {
           const name = ((item?.type || {}) as Component)?.name
 
           if (name === 'NOptionGroup') {
             filterOptions(
-              !isString(item.children) && !Array.isArray(item.children) && isFunction(item.children?.default)
+              !isString(item.children) && !isArray(item.children) && isFunction(item.children?.default)
                 ? item.children?.default()
                 : item.children,
             )
+          } else if (isArray(item.children)) {
+            filterOptions(item.children as VNode[])
           } else if (name === 'NOption') {
             filteredOptions.push(item.props?.label)
-          } else if (Array.isArray(item.children)) {
-            filterOptions(item.children)
           }
         })
       }
 
-      if (children && children.length > 0) {
-        filterOptions(children![0]?.children)
+      if (slotData && slotData.length > 0) {
+        filterOptions(slotData![0]?.children as VNode[])
       }
 
       if (!isSameOptions(filteredOptions, cachedOptions)) {
@@ -58,7 +58,7 @@ export const NOptions = defineComponent({
         emit('update-options', filteredOptions)
       }
 
-      return children
+      return slotData
     }
   },
 })

@@ -1,12 +1,13 @@
-import { buildProps } from '@nado/ui-kit-utils'
+import { buildProps, definePropType } from '@nado/ui-kit-utils'
 import type { ExtractPropTypes } from 'vue'
 
 import type Option from './NOption.vue'
+import type { SelectVModelValue } from './select.model'
 
 export const optionProps = buildProps({
   value: {
     required: true,
-    type: [String, Number, Boolean, Object],
+    type: definePropType<SelectVModelValue>([String, Number, Boolean, Object]),
   },
   label: {
     type: [String, Number],

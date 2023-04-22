@@ -1,21 +1,24 @@
 <script lang="ts">
 import { useNamespace } from '@nado/ui-kit-hooks'
-import { isArray } from 'lodash-es'
+import { isArray } from '@nado/ui-kit-utils'
 import {
   defineComponent,
   getCurrentInstance,
   inject,
+  isVNode,
   onMounted,
   provide,
   reactive,
+  type Ref,
   ref,
   toRaw,
   toRefs,
+  type VNode,
   watch,
 } from 'vue'
 
 import { optionGroupProps } from './option-group.model'
-import { SELECT_GROUP_INJECTION_KEY, SELECT_INJECTION_KEY } from './token'
+import { SELECT_GROUP_INJECTION_KEY, SELECT_INJECTION_KEY, type SelectOptionProxy } from './token'
 
 export default defineComponent({
   name: 'NOptionGroup',
@@ -28,8 +31,7 @@ export default defineComponent({
     const ns = useNamespace('select')
     const visible = ref(true)
     const instance = getCurrentInstance()!
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const children = ref<any>([])
+    const options: Ref<SelectOptionProxy[]> = ref([])
 
     provide(
       SELECT_GROUP_INJECTION_KEY,
@@ -38,20 +40,24 @@ export default defineComponent({
       }),
     )
 
-    const select = inject(SELECT_INJECTION_KEY)!
+    const selectContext = inject(SELECT_INJECTION_KEY)!
 
     // get all instances of options
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const flattedChildren = (node: any) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const list: any[] = []
+
+    function flattedChildren(node: VNode) {
+      const list: SelectOptionProxy[] = []
 
       if (isArray(node.children)) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        node.children.forEach((child: any) => {
-          if (child.type && child.type.name === 'NOption' && child.component && child.component.proxy) {
-            list.push(child.component.proxy)
-          } else if (child.children?.length) {
+        node.children.forEach((child) => {
+          if (
+            isVNode(child) &&
+            child.type &&
+            (child.type as any).name === 'NOption' &&
+            child.component &&
+            child.component.proxy
+          ) {
+            list.push(child.component.proxy as unknown as SelectOptionProxy)
+          } else if (isVNode(child) && child.children?.length) {
             list.push(...flattedChildren(child))
           }
         })
@@ -60,19 +66,19 @@ export default defineComponent({
       return list
     }
 
-    const { groupQueryChange } = toRaw(select)
+    const { groupQueryChange } = toRaw(selectContext)
 
     watch(
       groupQueryChange,
       () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        visible.value = children.value.some((option: any) => option.visible === true)
+        visible.value = options.value.some((option: any) => option.visible === true)
       },
       { flush: 'post' },
     )
 
     onMounted(() => {
-      children.value = flattedChildren(instance.subTree)
+      options.value = flattedChildren(instance.subTree)
     })
 
     return {

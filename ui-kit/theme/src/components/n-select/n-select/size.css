@@ -1,0 +1,17 @@
+@layer components {
+  .n-select--size-small {
+    --n-comp-select-container-height: var(--n-sys-component-size-small);
+  }
+
+  .n-select--size-large {
+    --n-comp-select-container-height: var(--n-sys-component-size-large);
+  }
+
+  .n-select--size-small .n-select__tags--has-prefix {
+    margin-left: 4px;
+  }
+
+  .n-select--size-large .n-select__tags--has-prefix {
+    margin-left: 8px;
+  }
+}

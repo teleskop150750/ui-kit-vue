@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isClient } from '@vueuse/core'
+import { isClient } from '@nado/ui-kit-utils'
 import { computed } from 'vue'
 
 import { nPortalProps } from './portal.model'

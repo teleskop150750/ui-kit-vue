@@ -49,13 +49,15 @@ const style = computed<StyleValue>(() => {
 })
 
 function handleScroll() {
-  if (wrapRef.value) {
-    barRef.value?.handleScroll(wrapRef.value)
-    emit('scroll', {
-      scrollTop: wrapRef.value.scrollTop,
-      scrollLeft: wrapRef.value.scrollLeft,
-    })
+  if (!wrapRef.value) {
+    return
   }
+
+  barRef.value?.scroll(wrapRef.value)
+  emit('scroll', {
+    scrollTop: wrapRef.value.scrollTop,
+    scrollLeft: wrapRef.value.scrollLeft,
+  })
 }
 
 const scrollTo: (x: number, y: number) => void | ((options: ScrollToOptions) => void) = (arg1, arg2) => {
@@ -162,7 +164,7 @@ watch(
         update()
 
         if (wrapRef.value) {
-          barRef.value?.handleScroll(wrapRef.value)
+          barRef.value?.scroll(wrapRef.value)
         }
       })
     }
@@ -199,7 +201,7 @@ defineExpose({
   /** @description set distance to scroll left */
   setScrollLeft,
   /** @description handle scroll event */
-  handleScroll,
+  scroll: handleScroll,
 })
 </script>
 

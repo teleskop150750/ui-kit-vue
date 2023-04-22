@@ -1,6 +1,13 @@
 import { CHANGE_EVENT, type ComponentSize, UPDATE_MODEL_EVENT } from '@nado/ui-kit-constants'
 import { NIconArrowDown, NIconCircleClose } from '@nado/ui-kit-icons-vue'
-import { buildProps, iconPropType, isValidComponentSize } from '@nado/ui-kit-utils'
+import {
+  buildProps,
+  definePropType,
+  iconPropType,
+  isBoolean,
+  isValidComponentSize,
+  type Nillable,
+} from '@nado/ui-kit-utils'
 import { type Options, placements } from '@popperjs/core'
 import type { ExtractPropTypes, PropType } from 'vue'
 
@@ -8,11 +15,19 @@ import { nTagProps } from '../../tag'
 import { useTooltipContentProps } from '../../tooltip'
 import type NSelect from './NOption.vue'
 
+export type SelectVModelObject = {
+  value: string | number | boolean
+  label: string
+} & Record<string, any>
+export type SelectVModelValue = undefined | string | number | boolean | SelectVModelObject
+export type SelectVModelList = Array<SelectVModelValue>
+export type SelectVModel = Nillable<SelectVModelList | string | number | boolean | SelectVModelObject>
+
 export const selectProps = buildProps({
   name: String,
   id: String,
   modelValue: {
-    type: [Array, String, Number, Boolean, Object],
+    type: definePropType<SelectVModel>([Array, String, Number, Boolean, Object]),
     default: undefined,
   },
   autocomplete: {
@@ -110,17 +125,17 @@ export const selectProps = buildProps({
   },
 })
 
-export const selectEmits = [
-  UPDATE_MODEL_EVENT,
-  CHANGE_EVENT,
-  'removeTag',
-  'clear',
-  'visibleChange',
-  'focus',
-  'blur',
-] as const
+export const nSelectEmits = {
+  [UPDATE_MODEL_EVENT]: (_val: SelectVModel) => true,
+  [CHANGE_EVENT]: (_val: SelectVModel) => true,
+  removeTag: (val: any) => !!val,
+  clear: () => true,
+  visibleChange: (val: boolean) => isBoolean(val),
+  focus: (event: FocusEvent) => event instanceof FocusEvent,
+  blur: (event: FocusEvent) => event instanceof FocusEvent,
+}
 
-export type NSelectEmits = typeof selectEmits
+export type NSelectEmits = typeof nSelectEmits
 
 export type NSelectProps = ExtractPropTypes<typeof selectProps>
 

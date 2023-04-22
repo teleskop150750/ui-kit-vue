@@ -1,7 +1,7 @@
 import { UPDATE_MODEL_EVENT } from '@nado/ui-kit-constants'
 import { namespace, useFocusTrap, useId, useLockScreen, useZIndex } from '@nado/ui-kit-hooks'
-import { addUnit } from '@nado/ui-kit-utils'
-import { isClient, useTimeoutFn } from '@vueuse/core'
+import { addUnit, isClient } from '@nado/ui-kit-utils'
+import { useTimeoutFn } from '@vueuse/core'
 import {
   computed,
   type CSSProperties,
