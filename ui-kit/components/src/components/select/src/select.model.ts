@@ -15,10 +15,8 @@ import { nTagProps } from '../../tag'
 import { useTooltipContentProps } from '../../tooltip'
 import type NSelect from './NOption.vue'
 
-export type SelectVModelObject = {
-  value: string | number | boolean
-  label: string
-} & Record<string, any>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type SelectVModelObject = Record<string, any>
 export type SelectVModelValue = undefined | string | number | boolean | SelectVModelObject
 export type SelectVModelList = Array<SelectVModelValue>
 export type SelectVModel = Nillable<SelectVModelList | string | number | boolean | SelectVModelObject>
@@ -128,7 +126,7 @@ export const selectProps = buildProps({
 export const nSelectEmits = {
   [UPDATE_MODEL_EVENT]: (_val: SelectVModel) => true,
   [CHANGE_EVENT]: (_val: SelectVModel) => true,
-  removeTag: (val: any) => !!val,
+  removeTag: (val: SelectVModelValue) => !!val,
   clear: () => true,
   visibleChange: (val: boolean) => isBoolean(val),
   focus: (event: FocusEvent) => event instanceof FocusEvent,

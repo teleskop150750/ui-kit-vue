@@ -20,6 +20,7 @@ const options = [
 </script>
 
 <template>
+  <h2>AllowCreate</h2>
   <NSelect v-model="value" multiple filterable :reserve-keyword="false" placeholder="Choose tags for your article">
     <NOption v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
   </NSelect>

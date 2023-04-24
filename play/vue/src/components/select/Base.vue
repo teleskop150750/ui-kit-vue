@@ -2,13 +2,13 @@
 import { NOption, NSelect } from '@nado/ui-kit-vue'
 import { ref } from 'vue'
 
-const value1 = ref([])
-const value2 = ref([])
-const value3 = ref([])
-const options = [
+const value = ref('')
+
+const options = ref([
   {
     value: 'Option1',
     label: 'Option1',
+    disabled: false,
   },
   {
     value: 'Option2',
@@ -26,25 +26,30 @@ const options = [
     value: 'Option5',
     label: 'Option5',
   },
-]
+])
+
+const onClick = () => {
+  options.value[0]!.disabled = true
+}
 </script>
 
 <template>
-  <div class="m-4">
-    <p>default</p>
-    <NSelect v-model="value1" multiple placeholder="Select" style="width: 240px">
+  <h2>Base</h2>
+  <button type="button" @click="onClick">onClick</button>
+  <div class="row">
+    <NSelect v-model="value" class="m-2" placeholder="Select" size="large">
+      <NOption
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+        :disabled="!!item.disabled"
+      />
+    </NSelect>
+    <NSelect v-model="value" class="m-2" placeholder="Select">
       <NOption v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
     </NSelect>
-  </div>
-  <div class="m-4">
-    <p>use collapse-tags</p>
-    <NSelect v-model="value2" multiple collapse-tags placeholder="Select" style="width: 240px">
-      <NOption v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
-    </NSelect>
-  </div>
-  <div class="m-4">
-    <p>use collapse-tags-tooltip</p>
-    <NSelect v-model="value3" multiple collapse-tags collapse-tags-tooltip placeholder="Select" style="width: 240px">
+    <NSelect v-model="value" class="m-2" placeholder="Select" size="small">
       <NOption v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
     </NSelect>
   </div>

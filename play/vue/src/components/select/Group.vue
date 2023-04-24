@@ -48,10 +48,15 @@ function foo(val: SelectVModel) {
 </script>
 
 <template>
-  <pre>{{ value }}</pre>
-  <NSelect :model-value="value" placeholder="Select" clearable :multiple="false" @update:model-value="foo">
-    <NOptionGroup v-for="group in options" :key="group.label" :label="group.label">
-      <NOption v-for="item in group.options" :key="item.value" :label="item.label" :value="item.value" />
-    </NOptionGroup>
-  </NSelect>
+  <h2>Group</h2>
+  <div>
+    <pre>{{ value }}</pre>
+  </div>
+  <div class="row">
+    <NSelect :model-value="value" placeholder="Select" @update:model-value="foo">
+      <NOptionGroup v-for="group in options" :key="group.label" :label="group.label">
+        <NOption v-for="item in group.options" :key="item.value" :label="item.label" :value="item.value" />
+      </NOptionGroup>
+    </NSelect>
+  </div>
 </template>

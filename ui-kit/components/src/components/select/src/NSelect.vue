@@ -1,303 +1,207 @@
-<script lang="ts">
+<script setup lang="ts">
 import { UPDATE_MODEL_EVENT } from '@nado/ui-kit-constants'
-import { vClickOutside as ClickOutside } from '@nado/ui-kit-directives'
-import { useFocus, useLocale, useNamespace } from '@nado/ui-kit-hooks'
+import { vClickOutside } from '@nado/ui-kit-directives'
+import { useLocale, useNamespace } from '@nado/ui-kit-hooks'
 import { isIOS, useResizeObserver } from '@vueuse/core'
-import { computed, defineComponent, nextTick, onMounted, provide, reactive, type Ref, toRefs, unref } from 'vue'
+import { computed, nextTick, onMounted, provide, reactive, toRefs, unref, useSlots } from 'vue'
 
 import { NInput } from '../../input'
 import { NScrollbar } from '../../scrollbar'
 import { NTag } from '../../tag'
 import NTooltip from '../../tooltip/src/NTooltip.vue'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { type SelectedItem, useSelect, useSelectState } from './hooks'
 import NOption from './NOption.vue'
 import { NOptions } from './NOptions'
-import NSelectMenu from './NSelectDropdown.vue'
+import NSelectDropdown from './NSelectDropdown.vue'
 import { nSelectEmits, selectProps } from './select.model'
 import { SELECT_INJECTION_KEY, type SelectContext } from './token'
 
-const COMPONENT_NAME = 'NSelect'
+const props = defineProps(selectProps)
+const emit = defineEmits(nSelectEmits)
+const slots = useSlots()
 
-export default defineComponent({
-  name: COMPONENT_NAME,
-  componentName: COMPONENT_NAME,
-  components: {
-    NInput,
-    NSelectMenu,
-    NOption,
-    NOptions,
-    NTag,
-    NScrollbar,
-    NTooltip,
-  },
-  directives: { ClickOutside },
-  props: selectProps,
-  emits: nSelectEmits,
+const nsSelect = useNamespace('select')
+const nsInput = useNamespace('input')
+const { t } = useLocale()
+const state = useSelectState(props)
+const {
+  MENU_WRAPPER_CLASS_NAME,
+  optionLabelListInMenu,
+  optionsArray,
+  selectSize,
+  isReadonly,
+  handleResize,
+  collapseTagSize,
+  handleInputChangeDebounced,
+  handleQueryChangeDebounced,
+  deletePrevTag,
+  deleteTag,
+  handleOptionSelect,
+  setSelected,
+  resetInputHeight,
+  managePlaceholder,
+  canShowClose,
+  isDisabled,
+  iconSuffix,
+  iconReverse,
+  showNewOption,
+  emptyText,
+  resetInputState,
+  handleComposition,
+  addOption,
+  deleteOption,
+  handleOpenMenu,
+  handleFocus,
+  handleBlur,
+  handleClearClick,
+  closeSelect,
+  handleKeydownEscape,
+  toggleMenu,
+  handleEnterSelect,
+  getValueKey,
+  navigateOptions,
+  isMenuVisible,
 
-  setup(props, ctx) {
-    const nsSelect = useNamespace('select')
-    const nsInput = useNamespace('input')
-    const { t } = useLocale()
-    const state = useSelectState(props)
-    const {
-      MENU_WRAPPER_CLASS_NAME,
-      optionLabelListInMenu,
-      optionsArray,
-      selectSize,
-      isReadonly,
-      handleResize,
-      collapseTagSize,
-      handleInputChangeDebounced,
-      handleQueryChangeDebounced,
-      deletePrevTag,
-      deleteTag,
-      handleOptionSelect,
-      scrollToOption,
-      setSelected,
-      resetInputHeight,
-      managePlaceholder,
-      canShowClose,
-      isDisabled,
-      iconSuffix,
-      iconReverse,
-      showNewOption,
-      emptyText,
-      toggleLastOptionHitState,
-      resetInputState,
-      handleComposition,
-      addOption,
-      deleteOption,
-      handleOpenMenu,
-      handleFocus,
-      blur,
-      handleBlur,
-      handleClearClick,
-      closeSelect,
-      handleKeydownEscape,
-      toggleMenu,
-      handleEnterSelect,
-      getValueKey,
-      navigateOptions,
-      isMenuVisible,
+  inputRef,
+  filterInputRef,
+  iOSInputRef,
+  tooltipRef,
+  tagsWrapperRef,
+  selectRootRef,
+  scrollbarRef,
+  queryChange,
+  groupQueryChange,
+  handleMouseEnter,
+  handleMouseLeave,
+  showTagList,
+  collapseTagList,
+} = useSelect(props, state, emit)
 
-      inputRef,
-      filterInputRef,
-      iOSInputRef,
-      tooltipRef,
-      tagsWrapperRef,
-      selectRootRef,
-      scrollbarRef,
-      queryChange,
-      groupQueryChange,
-      handleMouseEnter,
-      handleMouseLeave,
-      showTagList,
-      collapseTagList,
-    } = useSelect(props, state, ctx.emit)
+const {
+  inputWidth,
+  selected,
+  inputLength,
+  filteredOptionsCount,
+  visible,
+  selectedLabel,
+  hoverIndex,
+  query,
+  isInputHover,
+  currentPlaceholder,
+  options,
+  cachedOptions,
+  optionsCount,
+  prefixWidth,
+  tagInMultiLine,
+} = toRefs(state)
 
-    const { focus } = useFocus(inputRef)
+const wrapperClasses = computed(() => {
+  const classList = [nsSelect.b()]
+  const _selectSize = unref(selectSize)
 
-    const {
-      inputWidth,
-      selected,
-      inputLength,
-      filteredOptionsCount,
-      visible,
-      softFocus,
-      selectedLabel,
-      hoverIndex,
-      query,
-      isInputHover,
-      currentPlaceholder,
-      menuVisibleOnFocus,
-      isOnComposition,
-      isSilentBlur,
-      options,
-      cachedOptions,
-      optionsCount,
-      prefixWidth,
-      tagInMultiLine,
-    } = toRefs(state)
+  if (_selectSize) {
+    classList.push(nsSelect.m(_selectSize))
+  }
 
-    const wrapperClasses = computed(() => {
-      const classList = [nsSelect.b()]
-      const _selectSize = unref(selectSize)
+  if (props.disabled) {
+    classList.push(nsSelect.m('disabled'))
+  }
 
-      if (_selectSize) {
-        classList.push(nsSelect.m(_selectSize))
-      }
-
-      if (props.disabled) {
-        classList.push(nsSelect.m('disabled'))
-      }
-
-      return classList
-    })
-
-    const selectTagsStyle = computed(() => ({
-      maxWidth: `${unref(inputWidth) - 32}px`,
-      width: '100%',
-    }))
-
-    const tagTextStyle = computed(() => {
-      const maxWidth = unref(inputWidth) > 123 ? unref(inputWidth) - 123 : unref(inputWidth) - 75
-
-      return { maxWidth: `${maxWidth}px` }
-    })
-
-    provide(
-      SELECT_INJECTION_KEY,
-      reactive({
-        props,
-        options,
-        optionsArray,
-        cachedOptions,
-        optionsCount,
-        filteredOptionsCount,
-        hoverIndex,
-        handleOptionSelect,
-        addOption,
-        deleteOption,
-        selectRootRef,
-        selected,
-        setSelected,
-        queryChange,
-        groupQueryChange,
-      }) as unknown as SelectContext,
-    )
-
-    onMounted(() => {
-      // eslint-disable-next-line no-multi-assign
-      state.cachedPlaceHolder = currentPlaceholder.value = props.placeholder || (() => t('nado.select.placeholder'))
-
-      if (props.multiple && Array.isArray(props.modelValue) && props.modelValue.length > 0) {
-        currentPlaceholder.value = ''
-      }
-
-      useResizeObserver(selectRootRef, handleResize)
-
-      if (props.remote && props.multiple) {
-        resetInputHeight()
-      }
-
-      nextTick(() => {
-        const refEl = inputRef.value && inputRef.value.$el
-
-        if (!refEl) {
-          return
-        }
-
-        inputWidth.value = refEl.getBoundingClientRect().width
-
-        if (ctx.slots.prefix) {
-          const prefix = refEl.querySelector(`.${nsInput.e('prefix')}`)
-
-          prefixWidth.value = Math.max(prefix.getBoundingClientRect().width + 5, 30)
-        }
-      })
-      setSelected()
-    })
-
-    if (props.multiple && !Array.isArray(props.modelValue)) {
-      ctx.emit(UPDATE_MODEL_EVENT, [])
-    }
-
-    if (!props.multiple && Array.isArray(props.modelValue)) {
-      ctx.emit(UPDATE_MODEL_EVENT, '')
-    }
-
-    const popperPaneRef = computed(() => tooltipRef.value?.popperRef?.contentRef)
-
-    function onOptionsRendered(payload: Array<string | number>) {
-      optionLabelListInMenu.value = payload
-    }
-
-    // TODO: Fix
-    const prefixStyles = {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '100%',
-    }
-
-    return {
-      MENU_WRAPPER_CLASS_NAME,
-      prefixStyles,
-      isIOS,
-      onOptionsRendered,
-      tagInMultiLine,
-      prefixWidth,
-      selectSize,
-      isReadonly,
-      handleResize,
-      collapseTagSize,
-      handleInputChangeDebounced,
-      handleQueryChangeDebounced,
-      deletePrevTag,
-      deleteTag,
-      handleOptionSelect,
-      scrollToOption,
-      inputWidth,
-      selected,
-      inputLength,
-      filteredOptionsCount,
-      visible,
-      softFocus,
-      selectedLabel: selectedLabel as Ref<string | number>,
-      hoverIndex,
-      query,
-      isInputHover,
-      currentPlaceholder,
-      menuVisibleOnFocus,
-      isOnComposition,
-      isSilentBlur,
-      options,
-      resetInputHeight,
-      managePlaceholder,
-      canShowClose,
-      isDisabled,
-      iconSuffix,
-      iconReverse,
-      showNewOption,
-      emptyText,
-      toggleLastOptionHitState,
-      resetInputState,
-      handleComposition,
-      handleOpenMenu,
-      handleFocus,
-      blur,
-      handleBlur,
-      handleClearClick,
-      closeSelect,
-      handleKeydownEscape,
-      toggleMenu,
-      handleEnterSelect,
-      getValueKey,
-      navigateOptions,
-      isMenuVisible,
-      focus,
-
-      inputRef,
-      filterInputRef,
-      iOSInputRef,
-      tooltipRef,
-      popperPaneRef,
-      tagsWrapperRef,
-      selectRootRef,
-      scrollbarRef,
-
-      wrapperClasses,
-      selectTagsStyle,
-      nsSelect,
-      tagTextStyle,
-      handleMouseEnter,
-      handleMouseLeave,
-      showTagList,
-      collapseTagList,
-    }
-  },
+  return classList
 })
+
+const selectTagsStyle = computed(() => ({
+  maxWidth: `${unref(inputWidth) - 32}px`,
+  width: '100%',
+}))
+
+const tagTextStyle = computed(() => {
+  const maxWidth = unref(inputWidth) > 123 ? unref(inputWidth) - 123 : unref(inputWidth) - 75
+
+  return { maxWidth: `${maxWidth}px` }
+})
+
+provide(
+  SELECT_INJECTION_KEY,
+  reactive({
+    props,
+    options,
+    optionsArray,
+    cachedOptions,
+    optionsCount,
+    filteredOptionsCount,
+    hoverIndex,
+    handleOptionSelect,
+    addOption,
+    deleteOption,
+    selectRootRef,
+    selected,
+    setSelected,
+    queryChange,
+    groupQueryChange,
+  }) as unknown as SelectContext,
+)
+
+onMounted(() => {
+  // eslint-disable-next-line no-multi-assign
+  state.cachedPlaceHolder = currentPlaceholder.value = props.placeholder || (() => t('nado.select.placeholder'))
+
+  if (props.multiple && Array.isArray(props.modelValue) && props.modelValue.length > 0) {
+    currentPlaceholder.value = ''
+  }
+
+  useResizeObserver(selectRootRef, handleResize)
+
+  if (props.remote && props.multiple) {
+    resetInputHeight()
+  }
+
+  nextTick(() => {
+    const refEl = inputRef.value && inputRef.value.$el
+
+    if (!refEl) {
+      return
+    }
+
+    inputWidth.value = refEl.getBoundingClientRect().width
+
+    if (slots.prefix) {
+      const prefix = refEl.querySelector(`.${nsInput.e('prefix')}`)
+
+      prefixWidth.value = Math.max(prefix.getBoundingClientRect().width + 5, 30)
+    }
+  })
+  setSelected()
+})
+
+if (props.multiple && !Array.isArray(props.modelValue)) {
+  emit(UPDATE_MODEL_EVENT, [])
+}
+
+if (!props.multiple && Array.isArray(props.modelValue)) {
+  emit(UPDATE_MODEL_EVENT, '')
+}
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
+// @ts-ignore
+const popperPaneRef = computed(() => tooltipRef.value?.popperRef?.contentRef)
+
+function onOptionsRendered(payload: Array<string | number>) {
+  optionLabelListInMenu.value = payload
+}
+
+const prefixStyles = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100%',
+}
+</script>
+
+<script lang="ts">
+export default {
+  name: 'NSelect',
+}
 </script>
 
 <template>
@@ -530,29 +434,27 @@ export default defineComponent({
         </div>
       </template>
       <template #content>
-        <div>
-          <NSelectMenu>
-            <NScrollbar
-              v-show="options.size > 0 && !loading"
-              ref="scrollbarRef"
-              tag="ul"
-              :wrap-class="MENU_WRAPPER_CLASS_NAME"
-              :view-class="nsSelect.se('dropdown', 'list')"
-              :class="[nsSelect.is('empty', !allowCreate && Boolean(query) && filteredOptionsCount === 0)]"
-            >
-              <NOption v-if="showNewOption" :value="query" :created="true" />
-              <NOptions @update-options="onOptionsRendered">
-                <slot />
-              </NOptions>
-            </NScrollbar>
-            <template v-if="emptyText && (!allowCreate || loading || (allowCreate && options.size === 0))">
-              <slot v-if="$slots.empty" name="empty" />
-              <p v-else :class="nsSelect.se('dropdown', 'empty')">
-                {{ emptyText }}
-              </p>
-            </template>
-          </NSelectMenu>
-        </div>
+        <NSelectDropdown>
+          <NScrollbar
+            v-show="options.size > 0 && !loading"
+            ref="scrollbarRef"
+            tag="ul"
+            :wrap-class="MENU_WRAPPER_CLASS_NAME"
+            :view-class="nsSelect.se('dropdown', 'list')"
+            :class="[nsSelect.is('empty', !allowCreate && Boolean(query) && filteredOptionsCount === 0)]"
+          >
+            <NOption v-if="showNewOption" :value="query" :created="true" />
+            <NOptions @update-options="onOptionsRendered">
+              <slot />
+            </NOptions>
+          </NScrollbar>
+          <template v-if="emptyText && (!allowCreate || loading || (allowCreate && options.size === 0))">
+            <slot v-if="$slots.empty" name="empty" />
+            <p v-else :class="nsSelect.se('dropdown', 'empty')">
+              {{ emptyText }}
+            </p>
+          </template>
+        </NSelectDropdown>
       </template>
     </NTooltip>
   </div>

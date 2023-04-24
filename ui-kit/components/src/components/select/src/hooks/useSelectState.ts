@@ -6,7 +6,7 @@ import type { NSelectProps, SelectVModelValue } from '../select.model'
 import type { SelectOptionProxy } from '../token'
 
 export interface SelectedItem {
-  currentLabel: string | number | boolean
+  currentLabel: string | number
   hitState: boolean
   isDisabled: boolean
   value: SelectVModelValue
@@ -27,7 +27,7 @@ export function useSelectState(props: NSelectProps) {
     filteredOptionsCount: 0,
     visible: false,
     softFocus: false,
-    selectedLabel: '' as string | number | boolean,
+    selectedLabel: '' as string | number,
     hoverIndex: -1,
     query: '' as string | number | boolean,
     previousQuery: undefined as Nillable<string | number | boolean>,

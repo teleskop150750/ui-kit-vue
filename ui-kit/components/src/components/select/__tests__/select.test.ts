@@ -158,7 +158,8 @@ const getSelectVm = (configs: SelectProps & any = {}, options: any = undefined) 
       remote: configs.remote,
       remoteMethod: configs.remoteMethod,
       value: configs.multiple ? [] : '',
-      size: configs.size > 0 || 'default',
+      // eslint-disable-next-line unicorn/explicit-length-check
+      size: configs.size || 'default',
     }),
   )
 }
@@ -982,6 +983,7 @@ describe('Select', () => {
     const inputDom = inputWrapper.element
     const mockInputWidth = vi.spyOn(inputDom as HTMLElement, 'offsetWidth', 'get').mockReturnValue(200)
 
+    // @ts-ignore
     selectWrapper.vm.handleResize()
     options[0]!.click()
     await nextTick()
@@ -1043,6 +1045,7 @@ describe('Select', () => {
     const inputDom = inputWrapper.element
     const mockInputWidth = vi.spyOn(inputDom as HTMLElement, 'offsetWidth', 'get').mockReturnValue(200)
 
+    // @ts-ignore
     selectWrapper.vm.handleResize()
     options[0]!.click()
     await nextTick()
@@ -2009,6 +2012,7 @@ describe('Select', () => {
       const { vm } = wrapper.findComponent(NSelect)
       const event = { target: { value: 'sh' } }
 
+      // @ts-ignore
       vm.handleQueryChangeDebounced(event)
       await nextTick()
       const groups = wrapper.findAllComponents(NOptionGroup)
