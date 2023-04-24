@@ -2,3 +2,7 @@
   display: flex;
   align-items: center;
 }
+
+.n-pagination__sizes {
+  max-width: 80px;
+}

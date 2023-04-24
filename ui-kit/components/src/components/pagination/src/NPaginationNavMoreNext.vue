@@ -14,12 +14,12 @@ const ns = useNamespace('pagination-nav')
 const { t } = useLocale()
 const { quickHover, quickFocus, onMouseEnter, pagerCountOffset } = useMoreButton(props)
 
-const { paginationRoute: route } = usePaginationRoute(props)
+const { paginationRoute } = usePaginationRoute(props)
 const queryType = computed(() => props.queryType)
 const pageNumberOrOffsetQueryParamName = computed(() => props.pageNumberOrOffsetQueryParamName)
 const pageSizeQueryParamName = computed(() => props.pageSizeQueryParamName)
 
-const { makeLocation } = useRouteLocation(route, {
+const { makeLocation } = useRouteLocation(paginationRoute, {
   queryType,
   pageNumberOrOffsetQueryParamName,
   pageSizeQueryParamName,

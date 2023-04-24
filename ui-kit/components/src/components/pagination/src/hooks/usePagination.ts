@@ -162,7 +162,7 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
     })
 
     watch(
-      () => props.pageSize,
+      () => pageSizeBridge.value,
       (newVal, oldVal) => {
         if (isEqual(newVal, oldVal)) {
           return
@@ -224,11 +224,16 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
       router.push(link)
     }
 
+    function changeHandleSize(val: number) {
+      pageSizeBridge.value = val
+    }
+
     return {
       pageSizeBridge,
       pageCountBridge,
       currentPageBridge,
       changeCurrentPage,
+      changeHandleSize,
     }
   }
 
