@@ -1,45 +1,35 @@
-<script lang="ts">
+<script setup lang="ts">
 import { useNamespace } from '@nado/ui-kit-hooks'
 import { useResizeObserver } from '@vueuse/core'
-import { computed, defineComponent, inject, onMounted, ref } from 'vue'
+import { computed, inject, onMounted, ref } from 'vue'
 
 import { SELECT_INJECTION_KEY } from './token'
 
-export default defineComponent({
-  name: 'NSelectDropdown',
+const select = inject(SELECT_INJECTION_KEY)!
+const ns = useNamespace('select')
 
-  componentName: 'NSelectDropdown',
+// computed
+const popperClass = computed(() => select.props.popperClass)
+const isMultiple = computed(() => select.props.multiple)
+const isFitInputWidth = computed(() => select.props.fitInputWidth)
+const minWidth = ref('')
 
-  setup() {
-    const select = inject(SELECT_INJECTION_KEY)!
-    const ns = useNamespace('select')
+function updateMinWidth() {
+  minWidth.value = `${select.selectRootRef?.offsetWidth}px`
+}
 
-    // computed
-    const popperClass = computed(() => select.props.popperClass)
-    const isMultiple = computed(() => select.props.multiple)
-    const isFitInputWidth = computed(() => select.props.fitInputWidth)
-    const minWidth = ref('')
-
-    function updateMinWidth() {
-      minWidth.value = `${select.selectWrapper?.offsetWidth}px`
-    }
-
-    onMounted(() => {
-      // TODO: updatePopper
-      // popper.value.update()
-      updateMinWidth()
-      useResizeObserver(select.selectWrapper, updateMinWidth)
-    })
-
-    return {
-      ns,
-      minWidth,
-      popperClass,
-      isMultiple,
-      isFitInputWidth,
-    }
-  },
+onMounted(() => {
+  // TODO: updatePopper
+  // popper.value.update()
+  updateMinWidth()
+  useResizeObserver(select.selectRootRef, updateMinWidth)
 })
+</script>
+
+<script lang="ts">
+export default {
+  name: 'NSelectDropdown',
+}
 </script>
 
 <template>

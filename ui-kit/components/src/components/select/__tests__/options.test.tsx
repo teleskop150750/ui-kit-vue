@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/no-shadow */
-import { mount, type VueWrapper } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { flatten } from 'lodash-es'
 import { nextTick } from 'vue'
 
@@ -16,16 +14,18 @@ describe('options', () => {
   const samples = Array.from({ length: 3 })
 
   const createWrapper = (slotsProps = {}) => {
-    // @ts-expect-error
-    wrapper = mount((_, { slots }) => <NOptions onUpdate-options={onOptionsChange}>{slots?.default?.()}</NOptions>, {
-      global: {
-        components: {
-          NOption: NOptionStub,
-          NOptionGroup: NOptionGroupStub,
+    wrapper = mount(
+      (_: any, { slots }: any) => <NOptions onUpdateOptions={onOptionsChange}>{slots?.default?.()}</NOptions>,
+      {
+        global: {
+          components: {
+            NOption: NOptionStub,
+            NOptionGroup: NOptionGroupStub,
+          },
         },
+        slots: slotsProps,
       },
-      slots: slotsProps,
-    }) as VueWrapper<any>
+    )
   }
 
   afterEach(() => {
@@ -47,16 +47,16 @@ describe('options', () => {
     createWrapper({
       default: () =>
         samples.map((_, i) => (
-          <NOptionGroupStub label={getLabel(i)}>
+          <NOptionGroupStub>
             {{
-              default: () => samples.map((_, j) => <NOptionStub label={getLabel(`${i}-${j}`)} value={j}></NOptionStub>),
+              default: () => samples.map((_i, j) => <NOptionStub label={getLabel(`${i}-${j}`)}></NOptionStub>),
             }}
           </NOptionGroupStub>
         )),
     })
 
     expect(onOptionsChange).toHaveBeenCalledWith(
-      flatten(samples.map((_, i) => samples.map((_, j) => getLabel(`${i}-${j}`)))),
+      flatten(samples.map((_, i) => samples.map((_i, j) => getLabel(`${i}-${j}`)))),
     )
   })
 })

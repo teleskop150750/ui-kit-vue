@@ -1,9 +1,13 @@
 <script lang="ts" setup>
-import Select1 from './Select1.vue'
-import Select2 from './Select2.vue'
+import AllowCreate from './AllowCreate.vue'
+import Base from './Base.vue'
+import Group from './Group.vue'
+import Multiple from './Multiple.vue'
 </script>
 
 <template>
-  <Select1 />
-  <Select2 />
+  <Base />
+  <Multiple />
+  <Group />
+  <AllowCreate />
 </template>

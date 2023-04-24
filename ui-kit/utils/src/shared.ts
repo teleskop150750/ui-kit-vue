@@ -8,7 +8,6 @@ export function toTypeString(value: unknown) {
   return objectToString.call(value)
 }
 
-export const isClient = typeof window !== 'undefined'
 export const { isArray } = Array
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -55,10 +54,6 @@ export function isPromise(val: unknown): val is Promise<any> {
   return isObject(val) && isFunction(val.then) && isFunction(val.catch)
 }
 
-export function isUndefined(val: unknown): val is undefined {
-  return val === undefined
-}
-
 export function isNumber(val: unknown): val is number {
   return typeof val === 'number'
 }
@@ -82,7 +77,13 @@ export function isStringNumber(val: string): boolean {
 
   return !Number.isNaN(Number(val))
 }
+export function isNull(value: unknown): value is undefined {
+  return value === null
+}
 
+export function isUndefined(val: unknown): val is undefined {
+  return val === undefined
+}
 export function isNil(value: unknown): value is null | undefined {
   // eslint-disable-next-line unicorn/no-null, eqeqeq, no-eq-null
   return value == null
@@ -97,3 +98,8 @@ export function isPropAbsent(prop: unknown): prop is null | undefined {
 // }
 
 export function NOOP() {}
+
+export function toRawType(value: unknown): string {
+  // extract "RawType" from strings like "[object RawType]"
+  return toTypeString(value).slice(8, -1)
+}

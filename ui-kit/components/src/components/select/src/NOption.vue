@@ -1,22 +1,18 @@
 <script lang="ts">
 import { useNamespace } from '@nado/ui-kit-hooks'
-import { defineComponent, getCurrentInstance, nextTick, onBeforeUnmount, reactive, toRefs } from 'vue'
+import { defineComponent, nextTick, onBeforeUnmount, reactive, toRefs } from 'vue'
 
+import { type OptionSate, useOption } from './hooks'
 import { optionProps } from './option.model'
-import type { SelectOptionProxy } from './token'
-import { useOption } from './useOption'
 
 export default defineComponent({
   name: 'NOption',
-  componentName: 'NOption',
 
-  props: {
-    ...optionProps,
-  },
+  props: optionProps,
 
   setup(props) {
     const ns = useNamespace('select')
-    const states = reactive({
+    const state = reactive<OptionSate>({
       index: -1,
       groupDisabled: false,
       visible: true,
@@ -24,39 +20,35 @@ export default defineComponent({
       hover: false,
     })
 
-    const { currentLabel, itemSelected, isDisabled, select, hoverItem } = useOption(props, states)
+    const { proxy, currentLabel, itemSelected, isDisabled, selectContext, hoverItem } = useOption(props, state)
 
-    const { visible, hover } = toRefs(states)
+    const { visible, hover } = toRefs(state)
 
-    const vm = getCurrentInstance()!.proxy!
-
-    select.onOptionCreate(vm as unknown as SelectOptionProxy)
+    selectContext.addOption(proxy)
 
     onBeforeUnmount(() => {
-      const key = (vm as unknown as SelectOptionProxy).value
-      const { selected } = select
-      const selectedOptions = select.props.multiple ? selected : [selected]
+      const key = proxy.value
+      const { selected, cachedOptions, deleteOption } = selectContext
+      const selectedOptions = selectContext.props.multiple ? selected : [selected]
       const doesSelected = selectedOptions.some(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (item: any) => item.value === (vm as unknown as SelectOptionProxy).value,
+        (item: { value: string | number | boolean }) => item.value === proxy.value,
       )
 
       // if option is not selected, remove it from cache
       nextTick(() => {
-        // eslint-disable-next-line unicorn/consistent-destructuring
-        if (select.cachedOptions.get(key) === vm && !doesSelected) {
-          // eslint-disable-next-line unicorn/consistent-destructuring
-          select.cachedOptions.delete(key)
+        if (!doesSelected && cachedOptions.get(key) === proxy) {
+          cachedOptions.delete(key)
         }
       })
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      select.onOptionDestroy(key, vm as any)
+      deleteOption(key, proxy)
     })
 
     function selectOptionClick() {
-      if (props.disabled !== true && states.groupDisabled !== true) {
-        select.handleOptionSelect(vm, true)
+      if (isDisabled.value) {
+        return
       }
+
+      selectContext.handleOptionSelect(proxy, true)
     }
 
     return {
@@ -64,12 +56,12 @@ export default defineComponent({
       currentLabel,
       itemSelected,
       isDisabled,
-      select,
+      selectContext,
       hoverItem,
       visible,
       hover,
       selectOptionClick,
-      states,
+      states: state,
     }
   },
 })

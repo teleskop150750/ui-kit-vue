@@ -1,4 +1,4 @@
-import { isClient } from '../shared'
+import { isClient } from '../browser'
 import type { Nillable } from '../typescript'
 import { getStyle } from './style'
 

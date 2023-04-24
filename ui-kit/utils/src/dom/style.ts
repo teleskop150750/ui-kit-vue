@@ -1,8 +1,9 @@
 import type { CSSProperties } from 'vue'
 
+import { isClient } from '../browser'
 import { debugWarn } from '../error'
 import { entriesOf, keysOf } from '../objects'
-import { isClient, isNumber, isObject, isString, isStringNumber } from '../shared'
+import { isNumber, isObject, isString, isStringNumber } from '../shared'
 import { camelize } from '../strings'
 
 const SCOPE = 'utils/dom/style'

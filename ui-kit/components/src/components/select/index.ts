@@ -11,4 +11,7 @@ export const NSelect = withInstall(Select, {
 export const NOption = withNoopInstall(Option)
 export const NOptionGroup = withNoopInstall(OptionGroup)
 
+export * from './src/option.model'
+export * from './src/option-group.model'
+export * from './src/select.model'
 export * from './src/token'

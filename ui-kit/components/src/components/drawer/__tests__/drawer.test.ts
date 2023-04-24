@@ -53,7 +53,7 @@ describe('Drawer', () => {
       <NDrawer :title='title' v-model='visible'>
         <span>this is a sentence</span>
         <NButton @click='dialogVisible = false'>cancel</NButton>
-        <NButton type='primary' @click='dialogVisible = false'>confirm</NButton>
+        <NButton appearance='primary' @click='dialogVisible = false'>confirm</NButton>
       </NDrawer>
       `,
       () => ({

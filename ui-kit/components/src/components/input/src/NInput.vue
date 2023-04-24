@@ -29,6 +29,7 @@ const rawAttrs = useRawAttrs()
 const slots = useSlots()
 
 // Ref
+const rootRef = shallowRef<HTMLDivElement>()
 const inputRef = shallowRef<HTMLInputElement>()
 const textareaRef = shallowRef<HTMLTextAreaElement>()
 const nativeRef = computed(() => inputRef.value || textareaRef.value)
@@ -323,6 +324,7 @@ onMounted(() => {
 })
 
 defineExpose({
+  rootRef,
   inputRef,
   textareaRef,
   nativeRef,
@@ -346,6 +348,7 @@ export default {
 <template>
   <div
     v-show="type !== 'hidden'"
+    ref="rootRef"
     v-bind="containerAttrs"
     :class="containerClasses"
     :style="containerStyle"
