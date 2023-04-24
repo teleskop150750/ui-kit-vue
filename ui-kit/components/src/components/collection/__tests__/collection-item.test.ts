@@ -3,41 +3,30 @@ import { afterEach, describe, expect, it } from 'vitest'
 import { type ComponentPublicInstance, h, nextTick } from 'vue'
 
 import type { NCollectionInjectionContext } from '../src/tokens'
-import { CollectionChildComponent, CollectionItemChildComponent, TestCollection } from '../test-helper'
+import { Collection, Item, TestCollection } from '../test-helper'
 
 const { NCollection, NCollectionItem } = TestCollection
 const AXIOM = 'rem is the best girl'
 
+const COUNT = 3
+
 describe('<NCollectionItem />', () => {
-  function factory(props = {}, count = 3) {
+  function factory() {
     return mount(NCollection, {
-      props,
       slots: {
         default: () =>
-          h(
-            CollectionChildComponent as any,
-            {},
-            {
-              default: () =>
-                Array.from({ length: count }).map((idx) =>
-                  h(
-                    NCollectionItem as any,
-                    {},
-                    {
-                      default: () => [
-                        h(
-                          CollectionItemChildComponent,
-                          {},
-                          {
-                            default: () => `${AXIOM} ${idx}`,
-                          },
-                        ),
-                      ],
-                    },
-                  ),
-                ),
-            },
-          ),
+          h(Collection, undefined, {
+            default: () =>
+              Array.from({ length: COUNT }).map((idx) =>
+                h(NCollectionItem, undefined, {
+                  default: () => [
+                    h(Item, undefined, {
+                      default: () => `${AXIOM} ${idx}`,
+                    }),
+                  ],
+                }),
+              ),
+          }),
       },
     })
   }
@@ -59,15 +48,14 @@ describe('<NCollectionItem />', () => {
   it('register child instance', () => {
     wrapper = factory()
 
-    const childItemComponent = wrapper.findComponent(CollectionChildComponent)
-    const childVm = childItemComponent.vm as ComponentPublicInstance<NCollectionInjectionContext>
+    const collectionVm = wrapper.findComponent(Collection).vm as ComponentPublicInstance<NCollectionInjectionContext>
+    const collectionItems = wrapper.findAllComponents(Item)
 
-    const collectionItems = wrapper.findAllComponents(CollectionItemChildComponent)
+    expect(collectionVm.itemMap.size).toBe(COUNT)
+    expect(collectionVm.getItems()).toHaveLength(COUNT)
 
-    expect(childVm.itemMap.size).toBe(3)
-    const items = childVm.getItems()
+    const items = collectionVm.getItems()
 
-    expect(childVm.getItems()).toHaveLength(3)
     expect(items[0]!.ref).toBe(collectionItems.at(0)?.element)
   })
 })

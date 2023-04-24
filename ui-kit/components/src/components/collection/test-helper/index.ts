@@ -4,7 +4,7 @@ import { COLLECTION_ITEM_SIGN, createCollectionWithScope } from '../src/createCo
 
 export const TestCollection = createCollectionWithScope('Test')
 
-export const CollectionChildComponent = {
+export const Collection = {
   setup() {
     const { getItems, collectionRef, itemMap } = inject(TestCollection.COLLECTION_INJECTION_KEY, undefined)!
 
@@ -17,7 +17,7 @@ export const CollectionChildComponent = {
   template: `<div ref="collectionRef"><slot/></div>`,
 }
 
-export const CollectionItemChildComponent = {
+export const Item = {
   setup() {
     const { collectionItemRef } = inject(TestCollection.COLLECTION_ITEM_INJECTION_KEY, undefined)!
 

@@ -1,8 +1,6 @@
 import type { SetupContext } from '@vue/runtime-core'
-import { inject, type InjectionKey, onBeforeUnmount, onMounted, provide, ref, unref } from 'vue'
+import { defineComponent, inject, type InjectionKey, onBeforeUnmount, onMounted, provide, ref, unref } from 'vue'
 
-import Collection from './NCollection.vue'
-import CollectionItem from './NCollectionItem.vue'
 import type { NCollectionInjectionContext, NCollectionItemInjectionContext } from './tokens'
 
 export const COLLECTION_ITEM_SIGN = `data-n-collection-item`
@@ -14,10 +12,11 @@ export function createCollectionWithScope(name: string) {
   const COLLECTION_INJECTION_KEY: InjectionKey<NCollectionInjectionContext> = Symbol(COLLECTION_NAME)
   const COLLECTION_ITEM_INJECTION_KEY: InjectionKey<NCollectionItemInjectionContext> = Symbol(COLLECTION_ITEM_NAME)
 
-  const NCollection = {
-    ...Collection,
+  // eslint-disable-next-line vue/one-component-per-file
+  const NCollection = defineComponent({
     name: COLLECTION_NAME,
-    setup() {
+    inheritAttrs: false,
+    setup(_: unknown, { slots }: SetupContext) {
       const collectionRef = ref<HTMLElement>()
       const itemMap: NCollectionInjectionContext['itemMap'] = new Map()
 
@@ -40,13 +39,16 @@ export function createCollectionWithScope(name: string) {
         getItems,
         collectionRef,
       })
-    },
-  }
 
-  const NCollectionItem = {
-    ...CollectionItem,
+      return () => slots.default && slots.default()
+    },
+  })
+
+  // eslint-disable-next-line vue/one-component-per-file
+  const NCollectionItem = defineComponent({
     name: COLLECTION_ITEM_NAME,
-    setup(_: unknown, { attrs }: SetupContext) {
+    inheritAttrs: false,
+    setup(_: unknown, { attrs, slots }: SetupContext) {
       const collectionItemRef = ref<HTMLElement>()
       const collectionInjection = inject(COLLECTION_INJECTION_KEY)!
 
@@ -70,8 +72,10 @@ export function createCollectionWithScope(name: string) {
 
         collectionInjection.itemMap.delete(collectionItemEl)
       })
+
+      return () => slots.default && slots.default()
     },
-  }
+  })
 
   return {
     COLLECTION_INJECTION_KEY,

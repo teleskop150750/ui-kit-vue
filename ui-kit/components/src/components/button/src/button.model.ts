@@ -54,6 +54,7 @@ export const nButtonProps = buildProps({
     default: 'center',
   },
 } as const)
+
 export const nButtonEmits = {
   click: (evt: MouseEvent) => evt instanceof MouseEvent,
 }
