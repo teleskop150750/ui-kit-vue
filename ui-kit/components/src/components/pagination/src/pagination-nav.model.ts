@@ -1,7 +1,7 @@
 import { buildProps, iconPropType, isNumber } from '@nado/ui-kit-utils'
 import type { ExtractPropTypes } from 'vue'
 
-import type Pager from './NPaginationNav.vue'
+import type NPaginationNav from './NPaginationNav.vue'
 import { nPaginationQueryProps } from './pagination.model'
 
 export const nPaginationNavQueryProps = buildProps({
@@ -69,4 +69,4 @@ export type NPaginationNavQueryProps = ExtractPropTypes<typeof nPaginationNavQue
 
 export type NPaginationNavEmits = typeof nPaginationNavEmits
 
-export type NPaginationNavInstance = InstanceType<typeof Pager>
+export type NPaginationNavInstance = InstanceType<typeof NPaginationNav>

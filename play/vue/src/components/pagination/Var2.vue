@@ -39,7 +39,14 @@ const total = ref(100)
       </div>
     </div>
     <div>
-      <NPagination v-model:page-size="pageSize" query-type="offset" :total="total" />
+      <NPagination
+        query-type="offset"
+        :total="total"
+        :template="{
+          size: true,
+          nav: true,
+        }"
+      />
     </div>
   </div>
 </template>

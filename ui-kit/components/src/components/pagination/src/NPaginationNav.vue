@@ -18,13 +18,13 @@ const ns = useNamespace('pagination-nav')
 const { t } = useLocale()
 
 const { showPrevMore, showNextMore, pagers } = useNavPagers(props)
-const { paginationRoute: routeNav } = usePaginationRoute(props)
+const { paginationRoute } = usePaginationRoute(props)
 
 const queryType = computed(() => props.queryType)
 const pageNumberOrOffsetQueryParamName = computed(() => props.pageNumberOrOffsetQueryParamName)
 const pageSizeQueryParamName = computed(() => props.pageSizeQueryParamName)
 
-const { makeLocation } = useRouteLocation(routeNav, {
+const { makeLocation } = useRouteLocation(paginationRoute, {
   queryType,
   pageNumberOrOffsetQueryParamName,
   pageSizeQueryParamName,
@@ -33,7 +33,7 @@ const { makeLocation } = useRouteLocation(routeNav, {
 function handlePrev(val: number) {
   emit('prevClick', val)
 
-  if (routeNav.value === undefined) {
+  if (paginationRoute.value === undefined) {
     emit('click', val)
   }
 }
@@ -41,13 +41,13 @@ function handlePrev(val: number) {
 function handleNext(val: number) {
   emit('nextClick', val)
 
-  if (routeNav.value === undefined) {
+  if (paginationRoute.value === undefined) {
     emit('click', val)
   }
 }
 
 function handleChangerCurrentPage(val: number) {
-  if (routeNav.value === undefined) {
+  if (paginationRoute.value === undefined) {
     emit('click', val)
   }
 }

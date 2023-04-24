@@ -1,6 +1,12 @@
+import { componentSizes } from '@nado/ui-kit-constants'
 import { NIconArrowLeft, NIconArrowRight } from '@nado/ui-kit-icons-vue'
-import { buildProps, iconPropType, isNumber } from '@nado/ui-kit-utils'
+import { buildProps, definePropType, iconPropType, isNumber, mutable } from '@nado/ui-kit-utils'
 import type { ExtractPropTypes } from 'vue'
+
+export interface PaginationTemplate {
+  nav: boolean
+  size: boolean
+}
 
 export const nPaginationQueryProps = buildProps({
   queryType: {
@@ -33,6 +39,14 @@ export const nPaginationRageProps = buildProps({
 export const nPaginationBaseProps = buildProps({
   ...nPaginationQueryProps,
   ...nPaginationRageProps,
+
+  template: {
+    type: definePropType<PaginationTemplate>(Object),
+    default: () => ({
+      nav: true,
+      size: false,
+    }),
+  },
 
   total: Number,
   pageCount: Number,
@@ -74,6 +88,22 @@ export const nPaginationProps = buildProps({
   disabled: {
     type: Boolean,
     default: false,
+  },
+
+  // size
+  pageSize: {
+    type: Number,
+  },
+  pageSizes: {
+    type: definePropType<number[]>(Array),
+    default: () => mutable([10, 50, 100] as const),
+  },
+  popperClass: {
+    type: String,
+  },
+  size: {
+    type: String,
+    values: componentSizes,
   },
 } as const)
 export type NPaginationProps = ExtractPropTypes<typeof nPaginationProps>
