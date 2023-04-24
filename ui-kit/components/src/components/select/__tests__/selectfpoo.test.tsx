@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/explicit-length-check */
 // import { EVENT_CODE } from '@nado/ui-kit-constants'
 // import { usePopperContainerId } from '@nado/ui-kit-hooks'
 import { NIconArrowDown, NIconCaretTop, NIconCircleClose } from '@nado/ui-kit-icons-vue'
