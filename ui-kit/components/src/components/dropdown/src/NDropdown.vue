@@ -21,7 +21,6 @@ const ns = useNamespace('dropdown')
 const { t } = useLocale()
 
 const triggeringElementRef = ref()
-const referenceElementRef = ref()
 const popperRef = ref<NTooltipInstance>()
 const contentRef = ref<HTMLElement>()
 const scrollbarRef = ref<NScrollbarInstance>()
@@ -167,14 +166,13 @@ export default {
       :manual-mode="true"
       :placement="placement"
       :popper-class="[ns.e('popper'), popperClass]"
-      :reference-element="referenceElementRef?.$el"
       :trigger="trigger"
       :trigger-keys="triggerKeys"
       :trigger-target-el="contentRef!"
       :show-after="trigger === 'hover' ? showTimeout : 0"
       :stop-popper-mouse-event="false"
       :virtual-ref="triggeringElementRef"
-      :virtual-triggering="splitButton"
+      :is-virtual-triggering="splitButton"
       :disabled="disabled"
       :transition="`${ns.namespace}-zoom-in-top`"
       :teleported="teleported"
@@ -208,7 +206,6 @@ export default {
     <template v-if="splitButton">
       <NButtonGroup>
         <NButton
-          ref="referenceElementRef"
           v-bind="buttonProps"
           :size="dropdownSize"
           appearance="danger"
