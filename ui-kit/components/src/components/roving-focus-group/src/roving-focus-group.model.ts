@@ -4,11 +4,15 @@ import type { ExtractPropTypes, HTMLAttributes, StyleValue } from 'vue'
 import { createCollectionWithScope } from '../../collection'
 
 export const nPovingFocusGroupProps = buildProps({
-  style: { type: definePropType<StyleValue>([String, Array, Object]) },
+  style: {
+    type: definePropType<StyleValue>([String, Array, Object]),
+  },
   currentTabId: {
     type: definePropType<string | undefined>(String),
   },
-  defaultCurrentTabId: String,
+  defaultCurrentTabId: {
+    type: definePropType<string | undefined>(String),
+  },
   loop: Boolean,
   dir: {
     type: String, // left for direction support
@@ -27,18 +31,18 @@ export const nPovingFocusGroupProps = buildProps({
 
 export const nPovingFocusGroupEmits = {
   currentTabIdChange: (_tabbedId: string) => true,
-  entryFocus: (..._val: any[]) => true,
+  entryFocus: (..._val: Event[]) => true,
 } as const
 
 export type NRovingFocusGroupProps = ExtractPropTypes<typeof nPovingFocusGroupProps>
 export type NPovingFocusGroupEmits = typeof nPovingFocusGroupEmits
 
 const { NCollection, NCollectionItem, COLLECTION_INJECTION_KEY, COLLECTION_ITEM_INJECTION_KEY } =
-  createCollectionWithScope('NRovingFocusGroup')
+  createCollectionWithScope('RovingFocusGroup')
 
 export {
   NCollection,
   NCollectionItem,
   COLLECTION_INJECTION_KEY as ROVING_FOCUS_COLLECTION_INJECTION_KEY,
-  COLLECTION_ITEM_INJECTION_KEY as ROVING_FOCUS_ITEM_COLLECTION_INJECTION_KEY,
+  COLLECTION_ITEM_INJECTION_KEY as ROVING_FOCUS_COLLECTION_ITEM_INJECTION_KEY,
 }

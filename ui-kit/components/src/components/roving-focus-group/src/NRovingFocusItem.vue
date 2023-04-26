@@ -11,9 +11,9 @@ import { focusFirst, getFocusIntent, reorderArray } from './utils'
 
 const props = defineProps(nPovingFocusItemProps)
 const emit = defineEmits(nPovingFocusItemEmits)
-const { currentTabbedId, loop, onItemFocus, onItemShiftTab } = inject(ROVING_FOCUS_GROUP_INJECTION_KEY, undefined)!
+const { currentTabbedId, loop, onItemFocus, onItemShiftTab } = inject(ROVING_FOCUS_GROUP_INJECTION_KEY)!
 
-const { getItems } = inject(ROVING_FOCUS_COLLECTION_INJECTION_KEY, undefined)!
+const { getItems } = inject(ROVING_FOCUS_COLLECTION_INJECTION_KEY)!
 
 const id = useId()
 const rovingFocusGroupItemRef = ref<HTMLElement>()
@@ -25,9 +25,11 @@ const handleMousedown = composeEventHandlers(
   (event) => {
     if (!props.focusable) {
       event.preventDefault()
-    } else {
-      onItemFocus(unref(id))
+
+      return
     }
+
+    onItemFocus(unref(id))
   },
 )
 
@@ -68,25 +70,16 @@ const handleKeydown = composeEventHandlers(
 
     let elements = items.map((item) => item.ref!)
 
-    switch (focusIntent) {
-      case 'last': {
+    if (focusIntent === 'last') {
+      elements.reverse()
+    } else if (focusIntent === 'prev' || focusIntent === 'next') {
+      if (focusIntent === 'prev') {
         elements.reverse()
-        break
       }
-      case 'prev':
-      case 'next': {
-        if (focusIntent === 'prev') {
-          elements.reverse()
-        }
 
-        const currentIdx = elements.indexOf(currentTarget as HTMLElement)
+      const currentIdx = elements.indexOf(currentTarget as HTMLElement)
 
-        elements = loop.value ? reorderArray(elements, currentIdx + 1)! : elements.slice(currentIdx + 1)
-        break
-      }
-      default: {
-        break
-      }
+      elements = loop.value ? reorderArray(elements, currentIdx + 1)! : elements.slice(currentIdx + 1)
     }
 
     nextTick(() => {

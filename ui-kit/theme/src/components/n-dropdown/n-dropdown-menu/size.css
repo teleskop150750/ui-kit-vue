@@ -1,0 +1,29 @@
+.n-dropdown-menu--small {
+  padding: 3px 0;
+}
+
+.n-dropdown-menu--large {
+  padding: 7px 0;
+}
+
+.n-dropdown-menu--small .n-dropdown-menu__item--divided {
+  margin: 4px 0;
+}
+
+.n-dropdown-menu--large .n-dropdown-menu__item--divided {
+  margin: 8px 0;
+}
+
+.n-dropdown-menu--small .n-dropdown-menu__item {
+  padding: 2px 12px;
+
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.n-dropdown-menu--large .n-dropdown-menu__item {
+  padding: 7px 20px;
+
+  font-size: 14px;
+  line-height: 22px;
+}

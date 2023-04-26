@@ -16,8 +16,8 @@ const MAP_KEY_TO_FOCUS_INTENT: Record<string, FocusIntent> = {
   End: 'last',
 }
 
-function getDirectionAwareKey(key: string, dir?: Direction) {
-  if (dir !== 'rtl') {
+function getDirectionAwareKey(key: string, dir: Direction = 'ltr') {
+  if (dir === 'ltr') {
     return key
   }
 

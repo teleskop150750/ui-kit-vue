@@ -20,6 +20,8 @@ const _bem = (_namespace: string, block: string, blockSuffix: string, element: s
   return cls
 }
 
+type ClassName = string | undefined | null
+
 export function useNamespace(block: string) {
   function b(blockSuffix = '') {
     return _bem(namespace, block, blockSuffix, '', '')
@@ -29,82 +31,82 @@ export function useNamespace(block: string) {
     return state ? _bem(namespace, block, blockSuffix, '', '') : ''
   }
 
-  function e(element: string, state = true) {
+  function e(element: ClassName, state = true) {
     return element && state ? _bem(namespace, block, '', element, '') : ''
   }
 
-  function m(modifier: string, state = true) {
+  function m(modifier?: ClassName, state = true) {
     return modifier && state ? _bem(namespace, block, '', '', modifier) : ''
   }
 
-  function se(blockSuffix: string, element: string, state = true) {
+  function se(blockSuffix: ClassName, element: ClassName, state = true) {
     return blockSuffix && element && state ? _bem(namespace, block, blockSuffix, element, '') : ''
   }
 
-  function sm(blockSuffix: string, modifier: string, state = true) {
+  function sm(blockSuffix: ClassName, modifier?: ClassName, state = true) {
     return blockSuffix && modifier && state ? _bem(namespace, block, blockSuffix, '', modifier) : ''
   }
 
-  function em(element: string, modifier: string, state = true) {
+  function em(element: ClassName, modifier: ClassName, state = true) {
     return element && modifier && state ? _bem(namespace, block, '', element, modifier) : ''
   }
 
-  function sem(blockSuffix: string, element: string, modifier: string, state = true) {
+  function sem(blockSuffix: ClassName, element: ClassName, modifier: ClassName, state = true) {
     return blockSuffix && element && modifier && state ? _bem(namespace, block, blockSuffix, element, modifier) : ''
   }
 
   // is
-  function is(name: string, state = true) {
+  function is(name: ClassName, state = true) {
     return name && state ? _bem(namespace, block, '', '', `${statePrefix}${name}`) : undefined
   }
 
-  function sIs(blockSuffix: string, name: string, state = true) {
+  function sIs(blockSuffix: ClassName, name: ClassName, state = true) {
     return blockSuffix && name && state ? _bem(namespace, block, blockSuffix, '', `${statePrefix}${name}`) : undefined
   }
 
-  function eIs(element: string, name: string, state = true) {
+  function eIs(element: ClassName, name: ClassName, state = true) {
     return element && name && state ? _bem(namespace, block, '', element, `${statePrefix}${name}`) : undefined
   }
 
-  function seIs(blockSuffix: string, element: string, name: string, state = true) {
+  function seIs(blockSuffix: ClassName, element: ClassName, name: ClassName, state = true) {
     return blockSuffix && element && name && state
       ? _bem(namespace, block, blockSuffix, element, `${statePrefix}${name}`)
       : undefined
   }
 
   // has
-  function has(name: string, state = true) {
+  function has(name: ClassName, state = true) {
     return name && state ? _bem(namespace, block, '', '', `${hasPrefix}${name}`) : undefined
   }
 
-  function sHas(blockSuffix: string, name: string, state = true) {
+  function sHas(blockSuffix: ClassName, name: ClassName, state = true) {
     return blockSuffix && name && state ? _bem(namespace, block, blockSuffix, '', `${hasPrefix}${name}`) : undefined
   }
 
-  function eHas(element: string, name: string, state = true) {
+  function eHas(element: ClassName, name: ClassName, state = true) {
     return element && name && state ? _bem(namespace, block, '', element, `${hasPrefix}${name}`) : undefined
   }
 
-  function seHas(blockSuffix: string, element: string, name: string, state = true) {
+  function seHas(blockSuffix: ClassName, element: ClassName, name: ClassName, state = true) {
     return blockSuffix && element && name && state
       ? _bem(namespace, block, blockSuffix, element, `${hasPrefix}${name}`)
       : undefined
   }
 
   // Type
-  function type(name: string, val?: string, state = true) {
+  function type(name: ClassName, val?: ClassName, state = true) {
     return name && val && state ? _bem(namespace, block, '', '', `${name}-${val}`) : undefined
   }
 
-  function sType(blockSuffix: string, name: string, val: string, state = true) {
+  function sType(blockSuffix: ClassName, name: ClassName, val: ClassName, state = true) {
     return blockSuffix && name && val && state ? _bem(namespace, block, blockSuffix, '', `${name}-${val}`) : undefined
   }
 
-  function eType(element: string, name: string, val: string, state = true) {
+  function eType(element: ClassName, name: ClassName, val: ClassName, state = true) {
     return element && name && val && state ? _bem(namespace, block, '', element, `${name}-${val}`) : undefined
   }
 
-  function seType(blockSuffix: string, element: string, name: string, val: string, state = true) {
+  function seType(blockSuffix: ClassName, element: ClassName, name: ClassName, val: ClassName, state = true) {
     return blockSuffix && element && name && val && state
       ? _bem(namespace, block, blockSuffix, element, `${name}-${val}`)
       : undefined

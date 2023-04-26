@@ -2,7 +2,7 @@ import type { InjectionKey, Ref, StyleValue } from 'vue'
 
 import type { NRovingFocusGroupProps } from './roving-focus-group.model'
 
-type EventHandler<T = Event> = (e: T) => void
+type EventHandler<T = Event> = (event: T) => void
 
 export interface RovingGroupInjectionContext {
   currentTabbedId: Ref<string | undefined>

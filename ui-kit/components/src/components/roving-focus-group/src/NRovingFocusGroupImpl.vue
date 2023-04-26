@@ -21,23 +21,19 @@ const currentTabbedId = ref<Nillable<string>>((props.currentTabId || props.defau
 const isBackingOut = ref(false)
 const isClickFocus = ref(false)
 const rovingFocusGroupRef = ref<HTMLElement>()
-const { getItems } = inject(ROVING_FOCUS_COLLECTION_INJECTION_KEY, undefined)!
-const rovingFocusGroupRootStyle = computed(() =>
-  // casting to any for fix compiler error since HTMLElement.StyleValue does not
-  // support CSSProperties
-  [
-    {
-      outline: 'none',
-    },
-    props.style!,
-  ],
-)
+const { getItems } = inject(ROVING_FOCUS_COLLECTION_INJECTION_KEY)!
+const rovingFocusGroupRootStyle = computed(() => [
+  {
+    outline: 'none',
+  },
+  props.style!,
+])
 
-const onItemFocus = (tabbedId: string) => {
+function onItemFocus(tabbedId: string) {
   emit('currentTabIdChange', tabbedId)
 }
 
-const onItemShiftTab = () => {
+function onItemShiftTab() {
   isBackingOut.value = true
 }
 
@@ -91,8 +87,7 @@ const onBlur = composeEventHandlers(
   },
 )
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function handleEntryFocus(...args: Array<any>) {
+function handleEntryFocus(...args: Array<Event>) {
   emit('entryFocus', ...args)
 }
 

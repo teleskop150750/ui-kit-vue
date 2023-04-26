@@ -7,7 +7,7 @@ import { defineComponent, inject, nextTick, ref } from 'vue'
 import NRovingFocusItem from '../src/NRovingFocusItem.vue'
 import {
   ROVING_FOCUS_COLLECTION_INJECTION_KEY,
-  ROVING_FOCUS_ITEM_COLLECTION_INJECTION_KEY,
+  ROVING_FOCUS_COLLECTION_ITEM_INJECTION_KEY,
 } from '../src/roving-focus-group.model'
 import { ROVING_FOCUS_GROUP_INJECTION_KEY, ROVING_FOCUS_GROUP_ITEM_INJECTION_KEY } from '../src/tokens'
 
@@ -18,7 +18,7 @@ let counter = 0
 const FocusItem = defineComponent({
   setup() {
     const { rovingFocusGroupItemRef, ...itemInjection } = inject(ROVING_FOCUS_GROUP_ITEM_INJECTION_KEY, undefined)!
-    const collectionItemInjection = inject(ROVING_FOCUS_ITEM_COLLECTION_INJECTION_KEY, undefined)!
+    const collectionItemInjection = inject(ROVING_FOCUS_COLLECTION_ITEM_INJECTION_KEY, undefined)!
     const itemRef = composeRefs(rovingFocusGroupItemRef, collectionItemInjection.collectionItemRef)
 
     return {

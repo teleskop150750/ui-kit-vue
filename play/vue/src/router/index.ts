@@ -105,6 +105,11 @@ const router = createRouter({
       name: 'drawer',
       component: () => import('../views/DrawerView.vue'),
     },
+    {
+      path: '/dropdown',
+      name: 'dropdown',
+      component: () => import('../views/DropdownView.vue'),
+    },
   ],
 })
 

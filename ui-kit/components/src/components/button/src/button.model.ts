@@ -57,7 +57,7 @@ export const nButtonProps = buildProps({
 
 export const nButtonEmits = {
   click: (evt: MouseEvent) => evt instanceof MouseEvent,
-}
+} as const
 
 export type NButtonProps = ExtractPropTypes<typeof nButtonProps>
 export type NButtonEmits = typeof nButtonEmits
