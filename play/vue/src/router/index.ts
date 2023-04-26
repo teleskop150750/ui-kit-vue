@@ -110,6 +110,11 @@ const router = createRouter({
       name: 'filter',
       component: () => import('../views/FilterView.vue'),
     },
+    {
+      path: '/dropdown',
+      name: 'dropdown',
+      component: () => import('../views/DropdownView.vue'),
+    },
   ],
 })
 

@@ -1,24 +1,12 @@
-import { EVENT_CODE } from '@nado/ui-kit-constants'
-import { buildProps, definePropType, iconPropType, type Nullable } from '@nado/ui-kit-utils'
-import type { Options, Placement } from '@popperjs/core'
-// import { createCollectionWithScope } from '@ui/components/collection'
-import type { ComponentInternalInstance, ComputedRef } from 'vue'
+import { buildProps, definePropType } from '@nado/ui-kit-utils'
+import type { Options } from '@popperjs/core'
+import type { ExtractPropTypes } from 'vue'
 
-import type { NButtonProps, NButtonType } from '../../button'
+import type { nButtonAppearances, NButtonProps } from '../../button'
+import { createCollectionWithScope } from '../../collection'
+import { type Placement, roleTypes } from '../../popper'
 import { useTooltipContentProps, useTooltipTriggerProps } from '../../tooltip'
-
-export interface INDropdownInstance {
-  instance?: ComponentInternalInstance
-  dropdownSize?: ComputedRef<string>
-  handleClick?: () => void
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  commandHandler?: (...arg: any[]) => void
-  show?: () => void
-  hide?: () => void
-  trigger?: ComputedRef<string>
-  hideOnClick?: ComputedRef<boolean>
-  triggerElm?: ComputedRef<Nullable<HTMLButtonElement>>
-}
+import type NDropdown from './NDropdown.vue'
 
 export const dropdownProps = buildProps({
   trigger: useTooltipTriggerProps.trigger,
@@ -27,7 +15,7 @@ export const dropdownProps = buildProps({
     default: 'light',
   },
   type: {
-    type: definePropType<NButtonType>(String),
+    type: definePropType<typeof nButtonAppearances>(String),
   },
   placement: {
     type: definePropType<Placement>(String),
@@ -77,6 +65,7 @@ export const dropdownProps = buildProps({
   },
   role: {
     type: String,
+    values: roleTypes,
     default: 'menu',
   },
   buttonProps: {
@@ -85,35 +74,15 @@ export const dropdownProps = buildProps({
   teleported: useTooltipContentProps.teleported,
 } as const)
 
-export const dropdownItemProps = buildProps({
-  command: {
-    type: [Object, String, Number],
-    default: () => ({}),
-  },
-  disabled: Boolean,
-  divided: Boolean,
-  textValue: String,
-  icon: {
-    type: iconPropType,
-  },
-} as const)
+const { NCollection, NCollectionItem, COLLECTION_INJECTION_KEY, COLLECTION_ITEM_INJECTION_KEY } =
+  createCollectionWithScope('Dropdown')
 
-export const dropdownMenuProps = buildProps({
-  onKeydown: { type: definePropType<(e: KeyboardEvent) => void>(Function) },
-})
+export {
+  COLLECTION_INJECTION_KEY as DROPDOWN_COLLECTION_INJECTION_KEY,
+  COLLECTION_ITEM_INJECTION_KEY as DROPDOWN_COLLECTION_ITEM_INJECTION_KEY,
+  NCollection,
+  NCollectionItem,
+}
 
-export const FIRST_KEYS = [EVENT_CODE.down, EVENT_CODE.pageDown, EVENT_CODE.home]
-
-export const LAST_KEYS = [EVENT_CODE.up, EVENT_CODE.pageUp, EVENT_CODE.end]
-
-export const FIRST_LAST_KEYS = [...FIRST_KEYS, ...LAST_KEYS]
-
-// const { ElCollection, ElCollectionItem, COLLECTION_INJECTION_KEY, COLLECTION_ITEM_INJECTION_KEY } =
-//   createCollectionWithScope('Dropdown')
-
-// export {
-//   COLLECTION_INJECTION_KEY as DROPDOWN_COLLECTION_INJECTION_KEY,
-//   COLLECTION_ITEM_INJECTION_KEY as DROPDOWN_COLLECTION_ITEM_INJECTION_KEY,
-//   ElCollection,
-//   ElCollectionItem,
-// }
+export type NDropdownProps = ExtractPropTypes<typeof dropdownProps>
+export type NDropdownInstance = InstanceType<typeof NDropdown>

@@ -1,5 +1,7 @@
+import type { Nillable } from '../typescript'
+
 export function composeEventHandlers<E>(
-  theirsHandler?: (event: E) => boolean | void,
+  theirsHandler?: (event: E) => Nillable<boolean> | void,
   oursHandler?: (event: E) => void,
   { checkForDefaultPrevented = true } = {},
 ) {

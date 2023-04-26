@@ -2208,6 +2208,12 @@ describe('Select', () => {
       },
     })
 
+    Object.defineProperty(inputEl, 'clientHeight', {
+      get() {
+        return Number.parseInt(getComputedStyle(inputEl).height)
+      },
+    })
+
     for (const size in sizeMap) {
       // eslint-disable-next-line no-await-in-loop
       await wrapper.setProps({

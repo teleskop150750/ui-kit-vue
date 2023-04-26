@@ -700,7 +700,8 @@ export function useSelect(props: NSelectProps, state: SelectState, emit: SetupCo
       const tagsWrapperEl = tagsWrapperRef.value
       const gotSize = getComponentSize(selectSize.value || form?.size)
 
-      const sizeInMap = gotSize === originClientHeight || originClientHeight <= 0 ? gotSize : originClientHeight
+      const sizeInMap =
+        selectSize.value || gotSize === originClientHeight || originClientHeight <= 0 ? gotSize : originClientHeight
 
       const isElHidden = input.offsetParent === null
 
