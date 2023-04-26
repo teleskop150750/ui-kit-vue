@@ -105,6 +105,11 @@ const router = createRouter({
       name: 'drawer',
       component: () => import('../views/DrawerView.vue'),
     },
+    {
+      path: '/filter',
+      name: 'filter',
+      component: () => import('../views/FilterView.vue'),
+    },
   ],
 })
 
