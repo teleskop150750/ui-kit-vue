@@ -169,3 +169,7 @@ export default {
     <slot />
   </form>
 </template>
+
+<style>
+@import url('@nado/ui-kit-theme/src/components/n-form/index.css');
+</style>

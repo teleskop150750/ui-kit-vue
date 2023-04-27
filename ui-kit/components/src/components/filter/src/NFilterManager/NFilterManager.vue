@@ -1,23 +1,56 @@
 <script setup lang="ts">
 import { useNamespace } from '@nado/ui-kit-hooks'
-import { NIconClose, NIconFilter } from '@nado/ui-kit-icons-vue'
+import { NIconClose, NIconDelete, NIconEditPen, NIconFilter, NIconPlus } from '@nado/ui-kit-icons-vue'
+import { ref } from 'vue'
+
+import { NButton } from '../../../button'
+import { NDialog } from '../../../dialog'
+import { NDropdown, NDropdownItem, NDropdownMenu } from '../../../dropdown'
+import { NIcon } from '../../../icon'
+import NFilterManagerFormCreateFilter from '../NFilterManagerFormCreateFilter/NFilterManagerFormCreateFilter.vue'
 
 const ns = useNamespace('filter-manager')
+const dialogVisible = ref(false)
+
+function handleCommand() {
+  dialogVisible.value = true
+}
 </script>
 
 <script lang="ts">
 export default {
-  name: 'NFilterManagerButton',
+  name: 'NFilterManager',
 }
 </script>
 
 <template>
   <div :class="ns.b()">
-    <button :class="ns.e('filter')" type="button" aria-label="Open">
-      <span :class="ns.e('filter-content')">
-        <NIconFilter :class="ns.e('filter-icon')" />
-      </span>
-    </button>
+    <NDropdown trigger="click" :class="ns.e('filter-dropdown')">
+      <button :class="ns.e('filter')" type="button" aria-label="Open">
+        <span :class="ns.e('filter-content')">
+          <NIconFilter :class="ns.e('filter-icon')" />
+        </span>
+      </button>
+      <template #dropdown>
+        <NDropdownMenu :class="ns.e('filter-dropdown-content')">
+          <NDropdownItem
+            :class="ns.e('filter-dropdown-item')"
+            @keydown.enter="handleCommand"
+            @keydown.space="handleCommand"
+            @click="handleCommand"
+          >
+            <NIcon><NIconPlus /></NIcon> Новый фильтр
+          </NDropdownItem>
+          <NDropdownItem :class="ns.e('filter-dropdown-item')">
+            <div :class="ns.e('filter-dropdown-item-label')">Foo</div>
+            <div :class="ns.e('filter-dropdown-item-actions')">
+              <NButton size="small" mode="outline" :icon="NIconEditPen" />
+              <NButton size="small" mode="outline" :icon="NIconDelete" />
+            </div>
+          </NDropdownItem>
+        </NDropdownMenu>
+      </template>
+    </NDropdown>
     <div :class="[ns.e('filter'), ns.em('filter', 'current')]">
       <span :class="ns.e('filter-content')">
         <span :class="ns.e('filter-label')"> Hello </span>
@@ -27,6 +60,16 @@ export default {
       </span>
     </div>
   </div>
+
+  <NDialog v-model="dialogVisible" title="Tips" width="30%" align-center close-on-click-modal>
+    <NFilterManagerFormCreateFilter />
+    <template #footer>
+      <span class="dialog-footer">
+        <NButton @click="dialogVisible = false">Cancel</NButton>
+        <NButton appearance="primary" @click="dialogVisible = false"> OK </NButton>
+      </span>
+    </template>
+  </NDialog>
 </template>
 
 <style>
@@ -145,5 +188,15 @@ export default {
 
   outline: var(--n-sys-outline-primary);
   outline-offset: 0;
+}
+
+.n-filter-manager__filter-dropdown-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.n-filter-manager__filter-dropdown-item-actions {
+  display: flex;
+  gap: 8px;
 }
 </style>

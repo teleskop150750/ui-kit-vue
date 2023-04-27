@@ -12,11 +12,8 @@ export function keysOf<T extends object>(arr: T): Array<keyof T> {
 export function entriesOf<T extends object>(arr: T): Entries<T> {
   return Object.entries(arr) as Entries<T>
 }
-
-const { hasOwnProperty } = Object.prototype
-
 export function hasOwn(val: object, key: string | symbol): key is never {
-  return hasOwnProperty.call(val, key)
+  return Object.hasOwn(val, key)
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

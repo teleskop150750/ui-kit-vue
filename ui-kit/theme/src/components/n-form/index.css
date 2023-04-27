@@ -1,0 +1,5 @@
+@layer components {
+  .n-form__line + .n-form__line {
+    margin-top: 16px;
+  }
+}

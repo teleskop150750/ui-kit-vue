@@ -13,7 +13,7 @@ const emit = defineEmits(popoverEmits)
 const ns = useNamespace('popover')
 const updateEventKeyRaw = 'onUpdate:visible' as const
 
-const handleUpdateVisible = computed(() => props[updateEventKeyRaw])
+const handleUpdateVisible = computed(() => props[updateEventKeyRaw]!)
 
 const tooltipRef = ref<NTooltipInstance>()
 
