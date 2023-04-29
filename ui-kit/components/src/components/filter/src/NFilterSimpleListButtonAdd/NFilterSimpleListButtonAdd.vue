@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { NIconPlus } from '@nado/ui-kit-icons-vue'
-import { computed } from 'vue'
+import type { Nillable } from '@nado/ui-kit-utils'
+import { computed, ref } from 'vue'
 
 import { NButton } from '../../../button'
 import { NDropdown, NDropdownItem, NDropdownMenu } from '../../../dropdown'
-import type { FilterField } from '../types'
+import type { FieldFilter } from '../types'
 import { nFilterSimpleListButtonAddEmits, nFilterSimpleListButtonAddProps } from './filter-simple-list.model'
 
 const props = defineProps(nFilterSimpleListButtonAddProps)
 const emit = defineEmits(nFilterSimpleListButtonAddEmits)
 
+const addedFilter = ref<Nillable<FieldFilter>>(undefined)
 const filteredFields = computed(() => {
   const selectedList = new Set(props.selectedFields.map((item) => item.name))
 
@@ -18,8 +20,17 @@ const filteredFields = computed(() => {
 
 const hasItems = computed(() => filteredFields.value.length > 0)
 
-function handleCommand(field: FilterField) {
-  emit('add', field)
+function preAddField(payload: FieldFilter) {
+  addedFilter.value = payload
+}
+
+function addField() {
+  if (!addedFilter.value) {
+    return
+  }
+
+  emit('add', addedFilter.value)
+  addedFilter.value = undefined
 }
 </script>
 
@@ -30,7 +41,7 @@ export default {
 </script>
 
 <template>
-  <NDropdown v-if="hasItems" @command="handleCommand">
+  <NDropdown v-if="hasItems" @command="preAddField" @hide="addField">
     <NButton :icon="NIconPlus" mode="soft" />
     <template #dropdown>
       <NDropdownMenu>

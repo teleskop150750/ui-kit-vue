@@ -149,23 +149,19 @@
   padding: var(--n-comp-dialog-padding-primary);
   padding-top: 10px;
   box-sizing: border-box;
-
-  text-align: right;
 }
 
-.n-dialog--center {
+/* .n-dialog--center {
   text-align: center;
 }
 
 .n-dialog--center .n-dialog__body {
   padding: 25px calc(var(--n-comp-dialog-padding-primary) + 5px) 30px;
-
-  text-align: initial;
 }
 
 .n-dialog--center .n-dialog__footer {
   text-align: inherit;
-}
+} */
 
 .n-overlay-dialog {
   position: fixed;

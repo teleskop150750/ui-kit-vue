@@ -1,22 +1,22 @@
 import { buildProps, definePropType } from '@nado/ui-kit-utils'
 import type { ExtractPropTypes } from 'vue'
 
-import type { FilterField } from '../types'
+import type { FieldFilter } from '../types'
 import type NFilterSimpleListButtonAdd from './NFilterSimpleListButtonAdd.vue'
 
 export const nFilterSimpleListButtonAddProps = buildProps({
   fields: {
-    type: definePropType<FilterField[]>(Array),
+    type: definePropType<FieldFilter[]>(Array),
     default: () => [],
   },
   selectedFields: {
-    type: definePropType<FilterField[]>(Array),
+    type: definePropType<FieldFilter[]>(Array),
     default: () => [],
   },
 })
 
 export const nFilterSimpleListButtonAddEmits = {
-  add: (field: FilterField) => !!field,
+  add: (field: FieldFilter) => !!field,
 }
 
 export type NFilterSimpleListButtonAddProps = ExtractPropTypes<typeof nFilterSimpleListButtonAddProps>

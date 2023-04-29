@@ -10,7 +10,7 @@ interface Props {
 }
 
 export function useRouteLocation(
-  routeNav: ComputedRef<RouteLocation | undefined>,
+  route: ComputedRef<RouteLocation | undefined>,
   { queryType, pageNumberOrOffsetQueryParamName, pageSizeQueryParamName }: Props,
 ) {
   function makeLocation(page: number, size: number): RouteLocationRaw | undefined {
@@ -18,7 +18,7 @@ export function useRouteLocation(
       return undefined
     }
 
-    if (!routeNav.value) {
+    if (!route.value) {
       return undefined
     }
 
@@ -31,13 +31,13 @@ export function useRouteLocation(
     }
 
     return {
-      path: routeNav.value.path,
+      path: route.value.path,
       query: {
-        ...routeNav.value.query,
+        ...route.value.query,
         [pageNumberOrOffsetQueryParamName.value]: getQueryPageNumber(queryType.value, page, size),
         [pageSizeQueryParamName.value]: getQueryPageSize(size),
       },
-      hash: routeNav.value.hash,
+      hash: route.value.hash,
     }
   }
 

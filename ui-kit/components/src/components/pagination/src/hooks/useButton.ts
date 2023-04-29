@@ -1,13 +1,11 @@
 import { computed } from 'vue'
 
 import { useRouterLink } from '../../../config-provider'
-import { useFormDisabled } from '../../../form'
 import type { NPaginationNavButtonProps } from '../pagination-nav-button.model'
 
 export function useButton(props: NPaginationNavButtonProps) {
   const { tagComputed, linkAttributesComputed, isLinkTag } = useRouterLink(props)
-  const _formDisabled = useFormDisabled()
-  const _disabled = computed(() => (tagComputed.value === 'button' ? _formDisabled.value : false))
+  const _disabled = computed(() => (tagComputed.value === 'button' ? props.disabled : false))
 
   const typeComputed = computed(() => (isLinkTag.value ? undefined : 'button'))
   const buttonAttributesComputed = computed(() => {

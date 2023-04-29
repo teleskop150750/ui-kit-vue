@@ -1,23 +1,23 @@
 import { useLocale } from '@nado/ui-kit-hooks'
-import { debugWarn, isEqual } from '@nado/ui-kit-utils'
+import { debugWarn, isEqual, isNil } from '@nado/ui-kit-utils'
 import { computed, getCurrentInstance, ref, type SetupContext, watch } from 'vue'
 
 import type { NPaginationEmits, NPaginationProps } from '../pagination.model'
 import { isAbsent } from '../utils'
 import { usePaginationQuery } from './usePaginationQuery'
-import { usePaginationRoute } from './usePaginationRoute'
+import { useRoute } from './useRoute'
 import { useRouteLocation } from './useRouteLocation'
 import { useRouter } from './useRouter'
 
 export function usePagination(props: NPaginationProps, emit: SetupContext<NPaginationEmits>['emit']) {
-  const { paginationRoute } = usePaginationRoute(props)
+  const { route } = useRoute(props)
 
   const { queryType, pageNumberOrOffsetQueryParamName, pageSizeQueryParamName, getPageInQuery } = usePaginationQuery(
-    paginationRoute,
+    route,
     props,
   )
 
-  const { makeLocation } = useRouteLocation(paginationRoute, {
+  const { makeLocation } = useRouteLocation(route, {
     queryType,
     pageNumberOrOffsetQueryParamName,
     pageSizeQueryParamName,
@@ -29,8 +29,7 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
   function assertValidUsage() {
     const vNodeProps = getCurrentInstance()!.vnode.props || {}
 
-    const hasCurrentPageListener =
-      'onUpdate:currentPage' in vNodeProps || 'onUpdate:current-page' in vNodeProps || 'onCurrentChange' in vNodeProps
+    const hasCurrentPageListener = 'onUpdate:currentPage' in vNodeProps || 'onUpdate:current-page' in vNodeProps
 
     const isValid = computed(() => {
       if (isAbsent(props.total) && isAbsent(props.pageCount)) {
@@ -137,7 +136,7 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
           return
         }
 
-        if (newValue === undefined || newValue === null) {
+        if (isNil(newValue)) {
           return
         }
 
@@ -193,7 +192,7 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
     }
 
     function changeCurrentPage(val: number) {
-      if (!paginationRoute.value) {
+      if (!route.value) {
         currentPageBridge.value = val
 
         return
@@ -209,7 +208,7 @@ export function usePagination(props: NPaginationProps, emit: SetupContext<NPagin
     }
 
     function changePageSize(val: number) {
-      if (!paginationRoute.value) {
+      if (!route.value) {
         pageSizeBridge.value = val
 
         return

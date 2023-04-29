@@ -1,19 +1,54 @@
 <script setup lang="ts">
 import { useNamespace } from '@nado/ui-kit-hooks'
 import { NIconClose, NIconDelete, NIconEditPen, NIconFilter, NIconPlus } from '@nado/ui-kit-icons-vue'
-import { ref } from 'vue'
+import type { Nillable } from '@nado/ui-kit-utils'
+import { computed, ref } from 'vue'
 
 import { NButton } from '../../../button'
-import { NDialog } from '../../../dialog'
 import { NDropdown, NDropdownItem, NDropdownMenu } from '../../../dropdown'
 import { NIcon } from '../../../icon'
-import NFilterManagerFormCreateFilter from '../NFilterManagerFormCreateFilter/NFilterManagerFormCreateFilter.vue'
+import NFilterManagerFormCreateFilter from '../NFilterManagerForm/NFilterManagerFormCreateFilter.vue'
+import NFilterManagerFormUpdateFilter from '../NFilterManagerForm/NFilterManagerFormUpdateFilter.vue'
+import type { Filter } from '../types'
+import { getListFieldNames } from '../utils'
+import { filterManagerEmits, filterManagerProps } from './filter-manager'
+
+const props = defineProps(filterManagerProps)
+const emit = defineEmits(filterManagerEmits)
 
 const ns = useNamespace('filter-manager')
-const dialogVisible = ref(false)
+const visibleCreateFilter = ref(false)
+const visibleUpdateFilter = ref(false)
+const filterForUpdate = ref<Nillable<Filter>>(undefined)
+const listFields = computed(() => getListFieldNames(props.fields))
 
-function handleCommand() {
-  dialogVisible.value = true
+function openFormCreateFilter() {
+  visibleCreateFilter.value = true
+}
+
+function openFormUpdateFilter(payload: Filter) {
+  filterForUpdate.value = { ...payload }
+  visibleUpdateFilter.value = true
+}
+
+function saveFilter(payload: Filter) {
+  emit('saveFilter', payload)
+}
+
+function updateFilter(payload: Filter) {
+  emit('updateFilter', payload)
+}
+
+function deleteFilter(payload: Filter) {
+  emit('deleteFilter', payload)
+}
+
+function clearFilter() {
+  emit('clearFilter')
+}
+
+function selectFilter(payload: Filter) {
+  emit('selectFilter', payload)
 }
 </script>
 
@@ -35,41 +70,61 @@ export default {
         <NDropdownMenu :class="ns.e('filter-dropdown-content')">
           <NDropdownItem
             :class="ns.e('filter-dropdown-item')"
-            @keydown.enter="handleCommand"
-            @keydown.space="handleCommand"
-            @click="handleCommand"
+            @keydown.enter="openFormCreateFilter"
+            @keydown.space="openFormCreateFilter"
+            @click="openFormCreateFilter"
           >
             <NIcon><NIconPlus /></NIcon> Новый фильтр
           </NDropdownItem>
-          <NDropdownItem :class="ns.e('filter-dropdown-item')">
-            <div :class="ns.e('filter-dropdown-item-label')">Foo</div>
+          <NDropdownItem
+            v-for="item in filters"
+            :key="item.id"
+            :class="[ns.e('filter-dropdown-item'), ns.em('filter-dropdown-item', 'active', filter?.id === item.id)]"
+          >
+            <button :class="ns.e('filter-dropdown-item-label')" type="button" @click="selectFilter(item)">
+              {{ item.isSaved ? item.name : 'Несохраненный фильтр' }}
+            </button>
             <div :class="ns.e('filter-dropdown-item-actions')">
-              <NButton size="small" mode="outline" :icon="NIconEditPen" />
-              <NButton size="small" mode="outline" :icon="NIconDelete" />
+              <NButton size="small" mode="outline" :icon="NIconEditPen" @click="openFormUpdateFilter(item)" />
+              <NButton size="small" mode="outline" :icon="NIconDelete" @click="deleteFilter(item)" />
             </div>
           </NDropdownItem>
         </NDropdownMenu>
       </template>
     </NDropdown>
-    <div :class="[ns.e('filter'), ns.em('filter', 'current')]">
+    <div v-if="filter" :class="[ns.e('filter'), ns.em('filter', 'current')]">
       <span :class="ns.e('filter-content')">
-        <span :class="ns.e('filter-label')"> Hello </span>
-        <button :class="ns.e('filter-delete')" type="button">
+        <span :class="ns.e('filter-label')"> {{ filter.isSaved ? filter.name : 'Несохраненный фильтр' }} </span>
+        <button :class="ns.e('filter-delete')" type="button" @click="clearFilter">
           <NIconClose />
         </button>
       </span>
     </div>
   </div>
 
-  <NDialog v-model="dialogVisible" title="Tips" width="30%" align-center close-on-click-modal>
-    <NFilterManagerFormCreateFilter />
-    <template #footer>
-      <span class="dialog-footer">
-        <NButton @click="dialogVisible = false">Cancel</NButton>
-        <NButton appearance="primary" @click="dialogVisible = false"> OK </NButton>
-      </span>
+  <NFilterManagerFormCreateFilter
+    v-model:visible="visibleCreateFilter"
+    :fields="fields"
+    :visible-in-form="visibleInForm"
+    @save="saveFilter"
+  >
+    <template v-for="field in listFields" :key="field" #[`select-${field}`]="slotProps">
+      <slot :name="`select-${field}`" v-bind="slotProps" />
     </template>
-  </NDialog>
+  </NFilterManagerFormCreateFilter>
+
+  <NFilterManagerFormUpdateFilter
+    v-if="filterForUpdate"
+    v-model:visible="visibleUpdateFilter"
+    :fields="fields"
+    :filter="filterForUpdate"
+    :visible-in-form="visibleInForm"
+    @update="updateFilter"
+  >
+    <template v-for="field in listFields" :key="field" #[`select-${field}`]="slotProps">
+      <slot :name="`select-${field}`" v-bind="slotProps" />
+    </template>
+  </NFilterManagerFormUpdateFilter>
 </template>
 
 <style>
@@ -192,7 +247,29 @@ export default {
 
 .n-filter-manager__filter-dropdown-item {
   display: flex;
+  gap: 22px;
   justify-content: space-between;
+}
+
+.n-filter-manager__filter-dropdown-item-label {
+  flex-grow: 1;
+
+  margin: 0;
+  padding: 0;
+
+  color: inherit;
+  font: inherit;
+  text-align: start;
+
+  border: 0;
+
+  background-color: transparent;
+
+  cursor: pointer;
+}
+
+.n-filter-manager__filter-dropdown-item--active .n-filter-manager__filter-dropdown-item-label {
+  color: var(--n-sys-color-primary);
 }
 
 .n-filter-manager__filter-dropdown-item-actions {

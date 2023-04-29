@@ -2,13 +2,13 @@
 import NFilterSimpleListButtonAdd from '../NFilterSimpleListButtonAdd/NFilterSimpleListButtonAdd.vue'
 import NFilterSimpleListButtonSave from '../NFilterSimpleListButtonSave/NFilterSimpleListButtonSave.vue'
 import NFilterSimpleListItem from '../NFilterSimpleListItem/NFilterSimpleListItem.vue'
-import type { FilterField } from '../types'
+import { type FieldFilter } from '../types'
 import { nFilterFilterListEmits, nFilterSimpleListProps } from './filter-simple-list.model'
 
 const props = defineProps(nFilterSimpleListProps)
 const emit = defineEmits(nFilterFilterListEmits)
 
-function handleAddField(payload: FilterField) {
+function handleAddField(payload: FieldFilter) {
   if ([...props.selectedFields].findIndex((el) => el.name === payload.name) >= 0) {
     return
   }
@@ -16,7 +16,7 @@ function handleAddField(payload: FilterField) {
   emit('update:selectedFields', [...props.selectedFields, payload])
 }
 
-function handleUpdateField(payload: FilterField) {
+function handleUpdateField(payload: FieldFilter) {
   const result = [...props.selectedFields].map((el) => {
     if (el.name === payload.name) {
       return payload
@@ -28,16 +28,9 @@ function handleUpdateField(payload: FilterField) {
   emit('update:selectedFields', result)
 }
 
-function handleDeleteField(payload: FilterField) {
-  const fieldIndex = props.selectedFields.findIndex((el) => el.name === payload.name)
+function handleDeleteField(payload: FieldFilter) {
+  const newList = [...props.selectedFields].filter((el) => el.name !== payload.name)
 
-  if (fieldIndex < 0) {
-    return
-  }
-
-  const newList = [...props.selectedFields]
-
-  newList.splice(fieldIndex, 1)
   emit('update:selectedFields', newList)
 }
 </script>
@@ -50,14 +43,14 @@ export default {
 
 <template>
   <NFilterSimpleListItem
-    v-for="item in selectedFields"
-    :key="item.name"
-    :field="item"
+    v-for="field in selectedFields"
+    :key="field.name"
+    :field="field"
     @delete="handleDeleteField"
     @update="handleUpdateField"
   >
-    <template #[item.name]>
-      <slot :name="item.name" />
+    <template #[`select-${field.name}`]="slotProps">
+      <slot :name="`select-${field.name}`" v-bind="slotProps" />
     </template>
   </NFilterSimpleListItem>
   <NFilterSimpleListButtonAdd :fields="fields" :selected-fields="selectedFields" @add="handleAddField" />

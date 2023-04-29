@@ -2,7 +2,7 @@
 import { useLocale } from '@nado/ui-kit-hooks'
 import { computed } from 'vue'
 
-import { usePaginationRoute, useRouteLocation } from './hooks'
+import { useRoute, useRouteLocation } from './hooks'
 import Button from './NPaginationNavButton.vue'
 import { nPaginationNavPrevEmits, nPaginationPrevProps } from './pagination-nav-prev.model'
 
@@ -10,13 +10,13 @@ const props = defineProps(nPaginationPrevProps)
 const emit = defineEmits(nPaginationNavPrevEmits)
 
 const { t } = useLocale()
-const { paginationRoute } = usePaginationRoute(props)
+const { route } = useRoute(props)
 
 const queryType = computed(() => props.queryType)
 const pageNumberOrOffsetQueryParamName = computed(() => props.pageNumberOrOffsetQueryParamName)
 const pageSizeQueryParamName = computed(() => props.pageSizeQueryParamName)
 
-const { makeLocation } = useRouteLocation(paginationRoute, {
+const { makeLocation } = useRouteLocation(route, {
   queryType,
   pageNumberOrOffsetQueryParamName,
   pageSizeQueryParamName,

@@ -1,7 +1,7 @@
 import { isNil } from '@nado/ui-kit-utils'
 import { computed } from 'vue'
 
-import { FilterOperator } from '../../types'
+// import { FilterOperator } from '../../constants'
 import type { NFilterSimpleListItemProps } from '../filter-simple-list-item.model'
 
 export function useLabel(props: NFilterSimpleListItemProps) {
@@ -10,9 +10,9 @@ export function useLabel(props: NFilterSimpleListItemProps) {
       return undefined
     }
 
-    if (FilterOperator.LIKE in props.field.value) {
-      return props.field.value[FilterOperator.LIKE]
-    }
+    // if (FilterOperator.LIKE in props.field.value) {
+    //   return props.field.value[FilterOperator.LIKE]
+    // }
 
     // if ('' in props.field.value) {
     //   return props.field.value.LIKE

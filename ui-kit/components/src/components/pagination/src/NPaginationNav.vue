@@ -2,7 +2,7 @@
 import { useLocale, useNamespace } from '@nado/ui-kit-hooks'
 import { computed } from 'vue'
 
-import { useNavPagers, usePaginationRoute, useRouteLocation } from './hooks'
+import { useNavPagers, useRoute, useRouteLocation } from './hooks'
 import NPaginationNavButton from './NPaginationNavButton.vue'
 import NPaginationNavMoreNext from './NPaginationNavMoreNext.vue'
 import NPaginationNavMorePrev from './NPaginationNavMorePrev.vue'
@@ -18,13 +18,13 @@ const ns = useNamespace('pagination-nav')
 const { t } = useLocale()
 
 const { showPrevMore, showNextMore, pagers } = useNavPagers(props)
-const { paginationRoute } = usePaginationRoute(props)
+const { route } = useRoute(props)
 
 const queryType = computed(() => props.queryType)
 const pageNumberOrOffsetQueryParamName = computed(() => props.pageNumberOrOffsetQueryParamName)
 const pageSizeQueryParamName = computed(() => props.pageSizeQueryParamName)
 
-const { makeLocation } = useRouteLocation(paginationRoute, {
+const { makeLocation } = useRouteLocation(route, {
   queryType,
   pageNumberOrOffsetQueryParamName,
   pageSizeQueryParamName,
@@ -33,7 +33,7 @@ const { makeLocation } = useRouteLocation(paginationRoute, {
 function handlePrev(val: number) {
   emit('prevClick', val)
 
-  if (paginationRoute.value === undefined) {
+  if (route.value === undefined) {
     emit('click', val)
   }
 }
@@ -41,13 +41,13 @@ function handlePrev(val: number) {
 function handleNext(val: number) {
   emit('nextClick', val)
 
-  if (paginationRoute.value === undefined) {
+  if (route.value === undefined) {
     emit('click', val)
   }
 }
 
 function handleChangerCurrentPage(val: number) {
-  if (paginationRoute.value === undefined) {
+  if (route.value === undefined) {
     emit('click', val)
   }
 }

@@ -1,12 +1,10 @@
+import type { Nillable } from '@nado/ui-kit-utils'
 import { computed, type ComputedRef } from 'vue'
 import type { RouteLocation } from 'vue-router'
 
 import type { NPaginationQueryProps } from '../pagination.model'
 
-export function usePaginationQuery(
-  paginationRoute: ComputedRef<RouteLocation | undefined>,
-  props: NPaginationQueryProps,
-) {
+export function usePaginationQuery(route: ComputedRef<Nillable<RouteLocation>>, props: NPaginationQueryProps) {
   const queryType = computed(() => props.queryType)
 
   const pageNumberOrOffsetQueryParamName = computed(() => {
@@ -35,7 +33,7 @@ export function usePaginationQuery(
 
   function getPageInQuery() {
     const pageSizeQueryVal = computed(() => {
-      if (!paginationRoute.value) {
+      if (!route.value) {
         return undefined
       }
 
@@ -43,7 +41,7 @@ export function usePaginationQuery(
         return undefined
       }
 
-      const res = paginationRoute.value.query[pageSizeQueryParamName.value] as string | undefined
+      const res = route.value.query[pageSizeQueryParamName.value] as Nillable<string>
 
       if (!res) {
         return undefined
@@ -53,7 +51,7 @@ export function usePaginationQuery(
     })
 
     const pageNumberOrOffsetQueryVal = computed(() => {
-      if (!paginationRoute.value) {
+      if (!route.value) {
         return undefined
       }
 
@@ -61,7 +59,7 @@ export function usePaginationQuery(
         return undefined
       }
 
-      const res = paginationRoute.value.query[pageNumberOrOffsetQueryParamName.value] as string | undefined
+      const res = route.value.query[pageNumberOrOffsetQueryParamName.value] as Nillable<string>
 
       if (!res) {
         return undefined

@@ -1,4 +1,4 @@
-import { buildProps, definePropType } from '@nado/ui-kit-utils'
+import { buildProps, definePropType, isBoolean, type Nillable } from '@nado/ui-kit-utils'
 import type { Options } from '@popperjs/core'
 import type { ExtractPropTypes } from 'vue'
 
@@ -74,6 +74,15 @@ export const dropdownProps = buildProps({
   teleported: useTooltipContentProps.teleported,
 } as const)
 
+export const dropdownEmits = {
+  visibleChange: (value: Boolean) => isBoolean(value),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  command: (..._value: any) => true,
+  click: (evt: MouseEvent) => evt instanceof MouseEvent,
+  hide: (_event: Nillable<Event>) => true,
+  show: (_event: Nillable<Event>) => true,
+} as const
+
 const { NCollection, NCollectionItem, COLLECTION_INJECTION_KEY, COLLECTION_ITEM_INJECTION_KEY } =
   createCollectionWithScope('Dropdown')
 
@@ -85,4 +94,5 @@ export {
 }
 
 export type NDropdownProps = ExtractPropTypes<typeof dropdownProps>
+export type NDropdownEmits = typeof dropdownEmits
 export type NDropdownInstance = InstanceType<typeof NDropdown>

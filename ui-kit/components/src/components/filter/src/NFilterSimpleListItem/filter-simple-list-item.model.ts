@@ -1,19 +1,19 @@
 import { buildProps, definePropType } from '@nado/ui-kit-utils'
 import type { ExtractPropTypes } from 'vue'
 
-import type { FilterField } from '../types'
+import type { FieldFilter } from '../types'
 import type NFilterSimpleListItem from './NFilterSimpleListItem.vue'
 
 export const nFilterSimpleListItemProps = buildProps({
   field: {
-    type: definePropType<FilterField>(Object),
+    type: definePropType<FieldFilter>(Object),
     default: () => [],
   },
 })
 
 export const nFilterFilterListItemEmits = {
-  delete: (field: FilterField) => !!field,
-  update: (_val: FilterField) => true,
+  delete: (field: FieldFilter) => !!field,
+  update: (_val: FieldFilter) => true,
 }
 
 export type NFilterSimpleListItemProps = ExtractPropTypes<typeof nFilterSimpleListItemProps>

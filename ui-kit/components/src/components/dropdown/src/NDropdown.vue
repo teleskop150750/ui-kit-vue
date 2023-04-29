@@ -12,11 +12,11 @@ import { NOnlyChild } from '../../only-child'
 import { NRovingFocusGroup } from '../../roving-focus-group'
 import { NScrollbar, type NScrollbarInstance } from '../../scrollbar'
 import { NTooltip, type NTooltipInstance } from '../../tooltip'
-import { dropdownProps, NCollection } from './dropdown.model'
+import { dropdownEmits, dropdownProps, NCollection } from './dropdown.model'
 import { DROPDOWN_INJECTION_KEY } from './tokens'
 
 const props = defineProps(dropdownProps)
-const emit = defineEmits(['visibleChange', 'click', 'command'])
+const emit = defineEmits(dropdownEmits)
 const ns = useNamespace('dropdown')
 const { t } = useLocale()
 
@@ -118,6 +118,12 @@ function handleShowTooltip(event?: Event) {
   if (event?.type === 'keydown') {
     contentRef.value?.focus()
   }
+
+  emit('show', event)
+}
+
+function handleHideTooltip(event?: Event) {
+  emit('hide', event)
 }
 
 function handleBeforeHideTooltip() {
@@ -181,6 +187,7 @@ export default {
       @before-show="handleBeforeShowTooltip"
       @show="handleShowTooltip"
       @before-hide="handleBeforeHideTooltip"
+      @hide="handleHideTooltip"
     >
       <template #content>
         <NScrollbar ref="scrollbarRef" :wrap-style="wrapStyle" tag="div" :view-class="ns.e('list')">

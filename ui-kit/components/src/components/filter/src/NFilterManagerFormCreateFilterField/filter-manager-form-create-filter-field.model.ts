@@ -1,18 +1,19 @@
 import { buildProps, definePropType } from '@nado/ui-kit-utils'
 import type { ExtractPropTypes } from 'vue'
 
-import type { FilterField } from '../types'
+import type { FieldFilter } from '../types'
 import type NFilterManagerFormCreateFilterField from './NFilterManagerFormCreateFilterField.vue'
 
 export const nFilterManagerFormCreateFilterFieldProps = buildProps({
   field: {
-    type: definePropType<FilterField>(Object),
+    type: definePropType<FieldFilter>(Object),
     required: true,
   },
 } as const)
 
 export const nFilterManagerFormCreateFilterFieldEmits = {
-  // 'update:selectedFields': (val: FilterField[]) => isArray(val),
+  delete: (val: FieldFilter) => !!val,
+  updateValue: (_val: FieldFilter['value']) => true,
 }
 
 export type NFilterManagerFormCreateFilterFieldProps = ExtractPropTypes<typeof nFilterManagerFormCreateFilterFieldProps>

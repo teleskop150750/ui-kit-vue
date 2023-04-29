@@ -3,7 +3,7 @@ import { useLocale, useNamespace } from '@nado/ui-kit-hooks'
 import { NIconDArrowLeft, NIconMoreFilled } from '@nado/ui-kit-icons-vue'
 import { computed } from 'vue'
 
-import { useMoreButton, usePaginationRoute, useRouteLocation } from './hooks'
+import { useMoreButton, useRoute, useRouteLocation } from './hooks'
 import NPaginationNavButton from './NPaginationNavButton.vue'
 import { nPaginationNavMorePrevEmits, nPaginationNavMorePrevProps } from './pagination-nav-more-prev.model'
 
@@ -14,31 +14,19 @@ const ns = useNamespace('pagination-nav')
 const { t } = useLocale()
 const { quickHover, quickFocus, pagerCountOffset, onMouseEnter } = useMoreButton(props)
 
-const { paginationRoute } = usePaginationRoute(props)
+const { route } = useRoute(props)
 
 const queryType = computed(() => props.queryType)
 const pageNumberOrOffsetQueryParamName = computed(() => props.pageNumberOrOffsetQueryParamName)
 const pageSizeQueryParamName = computed(() => props.pageSizeQueryParamName)
 
-const { makeLocation } = useRouteLocation(paginationRoute, {
+const { makeLocation } = useRouteLocation(route, {
   queryType,
   pageNumberOrOffsetQueryParamName,
   pageSizeQueryParamName,
 })
 
-const newPage = computed(() => {
-  let page = props.currentPage - pagerCountOffset.value
-
-  if (page < 1) {
-    page = 1
-  }
-
-  if (page > props.pageCount) {
-    page = props.pageCount
-  }
-
-  return page
-})
+const newPage = computed(() => Math.min(Math.max(props.currentPage - pagerCountOffset.value, 1), props.pageCount))
 
 function handleClick() {
   emit('change', newPage.value)

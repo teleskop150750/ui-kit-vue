@@ -10,7 +10,6 @@ import { TOOLTIP_INJECTION_KEY } from './tokens'
 import { tooltipEmits, useTooltipModelToggle, useTooltipProps } from './tooltip.model'
 
 const props = defineProps(useTooltipProps)
-
 const emit = defineEmits(tooltipEmits)
 
 usePopperContainer()

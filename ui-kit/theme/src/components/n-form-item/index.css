@@ -39,7 +39,7 @@
   .n-form-item__content {
     position: relative;
 
-    display: flex;
+    display: grid;
     flex: 1;
     flex-wrap: wrap;
     align-items: center;
