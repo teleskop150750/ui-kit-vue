@@ -7,11 +7,11 @@ const headerRef = ref<HTMLElement>()
 const scrollContext = inject(SYNC_SCROLL_INJECTION_KEY, undefined)!
 
 onMounted(() => {
-  scrollContext.addEl(headerRef.value!)
+  scrollContext.addElement(headerRef.value!)
 })
 
 onBeforeUnmount(() => {
-  scrollContext.removeEl(headerRef.value!)
+  scrollContext.removeElement(headerRef.value!)
 })
 </script>
 

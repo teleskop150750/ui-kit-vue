@@ -6,11 +6,11 @@ import type NScrollbar from './NScrollbar.vue'
 export const nScrollbarProps = {
   height: {
     type: [String, Number] as PropType<string | number>,
-    default: '',
+    default: undefined,
   },
   maxHeight: {
     type: [String, Number] as PropType<string | number>,
-    default: '',
+    default: undefined,
   },
   native: {
     type: Boolean,
@@ -18,19 +18,19 @@ export const nScrollbarProps = {
   },
   wrapStyle: {
     type: [String, Object, Array] as PropType<StyleValue>,
-    default: '',
+    default: undefined,
   },
   wrapClass: {
     type: [String, Array] as PropType<ClassValue>,
-    default: '',
+    default: undefined,
   },
   viewClass: {
     type: [String, Array] as PropType<ClassValue>,
-    default: '',
+    default: undefined,
   },
   viewStyle: {
     type: [String, Array, Object] as PropType<StyleValue>,
-    default: '',
+    default: undefined,
   },
   noResize: {
     type: Boolean,

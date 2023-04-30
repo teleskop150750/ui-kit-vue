@@ -1,1 +1,5 @@
-export * from './use-table-column'
+export * from './useTableColumn'
+export * from './useTableColumnOrder'
+export * from './useTableColumnResize'
+export * from './useTableOrderSort'
+export * from './useTablePagination'

@@ -34,8 +34,8 @@ const ratioX = ref(1)
 const wrapClasses = [props.wrapClass, ns.e('wrap'), ns.eIs('wrap', 'hidden-default', !props.native)]
 const resizeClasses = [ns.e('view'), props.viewClass]
 
-const style = computed<StyleValue>(() => {
-  const acc = {} as Record<string, string | number | undefined>
+const wrapperStyles = computed<StyleValue>(() => {
+  const acc: StyleValue = {}
 
   if (props.height) {
     acc.height = addUnit(props.height)
@@ -45,7 +45,7 @@ const style = computed<StyleValue>(() => {
     acc.maxHeight = addUnit(props.maxHeight)
   }
 
-  return [props.wrapStyle, acc]
+  return [props.wrapStyle!, acc]
 })
 
 function handleScroll() {
@@ -213,7 +213,7 @@ export default {
 
 <template>
   <div ref="scrollbarRef" :class="ns.b()">
-    <div ref="wrapRef" :class="wrapClasses" :style="style" @scroll="handleScroll">
+    <div ref="wrapRef" :class="wrapClasses" :style="wrapperStyles" @scroll="handleScroll">
       <component :is="tag" ref="resizeRef" :class="resizeClasses" :style="viewStyle">
         <slot />
       </component>

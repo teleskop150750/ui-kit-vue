@@ -1,6 +1,6 @@
 import { withInstall, withNoopInstall } from '@nado/ui-kit-utils'
 
-import { Table } from './src/NTable'
+import Table from './src/NTable.vue'
 import Td from './src/NTd.vue'
 import Th from './src/NTh.vue'
 

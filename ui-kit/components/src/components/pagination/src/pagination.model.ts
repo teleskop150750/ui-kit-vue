@@ -36,7 +36,7 @@ export const nPaginationRageProps = buildProps({
   pageSize: Number,
 } as const)
 
-export const nPaginationProps = buildProps({
+export const nPaginationBaseProps = buildProps({
   ...nPaginationQueryProps,
   ...nPaginationRageProps,
 
@@ -77,12 +77,15 @@ export const nPaginationProps = buildProps({
     type: iconPropType,
     default: () => NIconArrowRight,
   },
-
-  disabled: {
+  hideOnSinglePage: {
     type: Boolean,
     default: false,
   },
-  hideOnSinglePage: {
+} as const)
+
+export const nPaginationProps = buildProps({
+  ...nPaginationBaseProps,
+  disabled: {
     type: Boolean,
     default: false,
   },
@@ -108,7 +111,7 @@ export type NPaginationQueryProps = ExtractPropTypes<typeof nPaginationQueryProp
 
 export const nPaginationEmits = {
   'update:current-page': (val: number) => isNumber(val),
-  currentChange: (val: number) => isNumber(val),
+  'update:page-size': (val: number) => isNumber(val),
   prevClick: (val: number) => isNumber(val),
   nextClick: (val: number) => isNumber(val),
 }

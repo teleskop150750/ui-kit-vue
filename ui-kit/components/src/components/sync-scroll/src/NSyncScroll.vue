@@ -1,74 +1,127 @@
 <script setup lang="ts">
-import { provide, reactive } from 'vue'
+import { isArray } from '@nado/ui-kit-utils'
+import type { Arrayable } from 'vitest'
+import { onBeforeUnmount, provide } from 'vue'
 
 import { SYNC_SCROLL_INJECTION_KEY } from './tokens'
 
-const panelList: Element[] = []
-
-function addEl(el: Element) {
-  addEvents(el)
-  panelList.push(el)
+interface Panel {
+  el: Element
+  x: number
+  y: number
+  handler?: undefined | (() => void)
 }
 
-function removeEl(el: Element) {
-  removeEvents(el)
-  panelList.splice(panelList.indexOf(el), 1)
-}
+const panelList: Panel[] = []
 
-function handleScroll(event: Event) {
-  const panel = event.target as Element
+function addElement(elements: Arrayable<Element>) {
+  const list = isArray(elements) ? elements : [elements]
 
-  syncScrollPositions(panel)
-}
-
-function syncScrollPositions(scrolledPane: Element) {
-  const { scrollLeft, scrollWidth, clientWidth } = scrolledPane
-
-  panelList.forEach((pane) => {
-    /* For all panes beside the currently scrolling one */
-    if (scrolledPane !== pane) {
-      /* Remove event listeners from the node that we'll manipulate */
-      removeEvents(pane)
-      syncScrollPosition({ scrollLeft, scrollWidth, clientWidth }, pane)
-      /* Re-attach event listeners after we're done scrolling */
-      window.requestAnimationFrame(() => {
-        addEvents(pane)
-      })
+  list.forEach((el) => {
+    const newPanel: Panel = {
+      x: 0,
+      y: 0,
+      el,
     }
+
+    newPanel.handler = getHandleScroll(newPanel)
+
+    newPanel.el.addEventListener('scroll', newPanel.handler, false)
+    panelList.push(newPanel)
   })
 }
 
-interface Props {
-  scrollLeft: number
-  scrollWidth: number
-  clientWidth: number
+function removeElement(el: Element) {
+  const foundPanel = panelList.find((panel) => panel.el === el)
+
+  if (!foundPanel) {
+    return
+  }
+
+  if (foundPanel.handler) {
+    foundPanel.el.removeEventListener('scroll', foundPanel.handler, false)
+  }
+
+  panelList.splice(panelList.indexOf(foundPanel), 1)
 }
 
-function syncScrollPosition({ scrollLeft, scrollWidth, clientWidth }: Props, pane: Element) {
-  const scrollLeftOffset = scrollWidth - clientWidth
+function clearPanelList() {
+  panelList.forEach((el) => {
+    el.x = 0
+    el.y = 0
 
-  const paneWidth = pane.scrollWidth - clientWidth
+    if (el.handler) {
+      el.el.removeEventListener('scroll', el.handler, false)
+    }
 
-  if (scrollLeftOffset > 0) {
-    pane.scrollLeft = (paneWidth * scrollLeft) / scrollLeftOffset
+    el.handler = undefined
+  })
+  panelList.length = 0
+}
+
+function getHandleScroll(currentPanel: Panel) {
+  return () => {
+    const { scrollWidth, scrollHeight, clientWidth, clientHeight, scrollLeft, scrollTop } = currentPanel.el
+
+    let scrollX = scrollLeft
+    let scrollY = scrollTop
+    const xRate = scrollX / (scrollWidth - clientWidth)
+    const yRate = scrollY / (scrollHeight - clientHeight)
+
+    const updateX = scrollX !== currentPanel.x
+    const updateY = scrollY !== currentPanel.y
+
+    currentPanel.x = scrollX
+    currentPanel.y = scrollY
+
+    if (!updateX && !updateY) {
+      return
+    }
+
+    panelList.forEach((otherEl) => {
+      window.requestAnimationFrame(() => {
+        if (otherEl.el !== currentPanel.el) {
+          const {
+            scrollLeft: otherScrollX,
+            scrollTop: otherScrollY,
+            scrollWidth: otherScrollWidth,
+            scrollHeight: otherScrollHeight,
+            clientWidth: otherClientWidth,
+            clientHeight: otherClientHeight,
+          } = otherEl.el
+
+          scrollX = Math.round(xRate * (otherScrollWidth - otherClientWidth))
+          otherEl.x = scrollX
+
+          if (updateX && Math.round(otherScrollX - scrollX)) {
+            otherEl.el.scrollLeft = scrollX
+          }
+
+          scrollY = Math.round(yRate * (otherScrollHeight - otherClientHeight))
+          otherEl.y = scrollY
+
+          if (updateY && Math.round(otherScrollY - scrollY)) {
+            otherEl.el.scrollTop = scrollY
+          }
+        }
+      })
+    })
   }
 }
 
-function addEvents(el: Element) {
-  el.addEventListener('scroll', handleScroll)
-}
+provide(SYNC_SCROLL_INJECTION_KEY, {
+  addElement,
+  removeElement,
+})
 
-function removeEvents(el: Element) {
-  el.removeEventListener('scroll', handleScroll)
-}
+defineExpose({
+  addElement,
+  removeElement,
+})
 
-provide(
-  SYNC_SCROLL_INJECTION_KEY,
-  reactive({
-    addEl,
-    removeEl,
-  }),
-)
+onBeforeUnmount(() => {
+  clearPanelList()
+})
 </script>
 
 <template>

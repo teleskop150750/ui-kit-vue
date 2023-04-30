@@ -3,7 +3,7 @@ import { NScrollbar } from '@nado/ui-kit-vue'
 </script>
 
 <template>
-  <NScrollbar height="400px">
+  <NScrollbar max-height="400px">
     <p v-for="item in 20" :key="item" class="scrollbar-demo-item">{{ item }}</p>
   </NScrollbar>
 </template>

@@ -1,6 +1,7 @@
 import { buildProps, definePropType } from '@nado/ui-kit-utils'
 import type { ExtractPropTypes } from 'vue'
 
+import type NTd from './NTd.vue'
 import type { NTableColumn, NTableColumnMap } from './types'
 
 export const nTdProps = buildProps({
@@ -19,3 +20,4 @@ export const nTdProps = buildProps({
 })
 
 export type NTdProps = ExtractPropTypes<typeof nTdProps>
+export type NTdInstance = InstanceType<typeof NTd>
