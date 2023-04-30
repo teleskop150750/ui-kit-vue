@@ -13,7 +13,7 @@ const emit = defineEmits(nFilterSimpleListButtonAddEmits)
 
 const addedFilter = ref<Nillable<FieldFilter>>(undefined)
 const filteredFields = computed(() => {
-  const selectedList = new Set(props.selectedFields.map((item) => item.name))
+  const selectedList = new Set(props.filterFields.map((item) => item.name))
 
   return props.fields.filter((item) => !selectedList.has(item.name))
 })

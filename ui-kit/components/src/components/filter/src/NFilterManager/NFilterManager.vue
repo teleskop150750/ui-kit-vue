@@ -7,6 +7,7 @@ import { computed, ref } from 'vue'
 import { NButton } from '../../../button'
 import { NDropdown, NDropdownItem, NDropdownMenu } from '../../../dropdown'
 import { NIcon } from '../../../icon'
+import { NPortal } from '../../../portal'
 import NFilterManagerFormCreateFilter from '../NFilterManagerForm/NFilterManagerFormCreateFilter.vue'
 import NFilterManagerFormUpdateFilter from '../NFilterManagerForm/NFilterManagerFormUpdateFilter.vue'
 import type { Filter } from '../types'
@@ -32,6 +33,17 @@ function openFormUpdateFilter(payload: Filter) {
 }
 
 function saveFilter(payload: Filter) {
+  if (!payload.isSaved) {
+    const foundFilter = props.filters.find((el) => !el.isSaved)
+
+    if (foundFilter) {
+      payload.id = foundFilter.id
+      emit('updateFilter', payload)
+
+      return
+    }
+  }
+
   emit('saveFilter', payload)
 }
 
@@ -102,29 +114,33 @@ export default {
     </div>
   </div>
 
-  <NFilterManagerFormCreateFilter
-    v-model:visible="visibleCreateFilter"
-    :fields="fields"
-    :visible-in-form="visibleInForm"
-    @save="saveFilter"
-  >
-    <template v-for="field in listFields" :key="field" #[`select-${field}`]="slotProps">
-      <slot :name="`select-${field}`" v-bind="slotProps" />
-    </template>
-  </NFilterManagerFormCreateFilter>
+  <NPortal>
+    <NFilterManagerFormCreateFilter
+      v-model:visible="visibleCreateFilter"
+      :fields="fields"
+      :visible-in-form="visibleInForm"
+      @save="saveFilter"
+    >
+      <template v-for="field in listFields" :key="field" #[`select-${field}`]="slotProps">
+        <slot :name="`select-${field}`" v-bind="slotProps" />
+      </template>
+    </NFilterManagerFormCreateFilter>
+  </NPortal>
 
-  <NFilterManagerFormUpdateFilter
-    v-if="filterForUpdate"
-    v-model:visible="visibleUpdateFilter"
-    :fields="fields"
-    :filter="filterForUpdate"
-    :visible-in-form="visibleInForm"
-    @update="updateFilter"
-  >
-    <template v-for="field in listFields" :key="field" #[`select-${field}`]="slotProps">
-      <slot :name="`select-${field}`" v-bind="slotProps" />
-    </template>
-  </NFilterManagerFormUpdateFilter>
+  <NPortal>
+    <NFilterManagerFormUpdateFilter
+      v-if="filterForUpdate"
+      v-model:visible="visibleUpdateFilter"
+      :fields="fields"
+      :filter="filterForUpdate"
+      :visible-in-form="visibleInForm"
+      @update="updateFilter"
+    >
+      <template v-for="field in listFields" :key="field" #[`select-${field}`]="slotProps">
+        <slot :name="`select-${field}`" v-bind="slotProps" />
+      </template>
+    </NFilterManagerFormUpdateFilter>
+  </NPortal>
 </template>
 
 <style>

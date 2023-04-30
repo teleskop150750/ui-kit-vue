@@ -1,47 +1,43 @@
 <script setup lang="ts">
 import { useNamespace } from '@nado/ui-kit-hooks'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 
 import { NInput } from '../../../input'
 import { NOption, NSelect } from '../../../select'
 import NFilterManager from '../NFilterManager/NFilterManager.vue'
 import NFilterSimpleList from '../NFilterSimpleList/NFilterSimpleList.vue'
-import type { FieldFilter, Filter } from '../types'
+import type { Filter } from '../types'
 import { getListFieldNames } from '../utils'
-import { nFilterEmits, nFilterProps } from './filter.model'
+import { filterEmits, filterProps } from './filter.model'
+import { useSearch } from './hooks'
 
-const props = defineProps(nFilterProps)
-const emit = defineEmits(nFilterEmits)
+const props = defineProps(filterProps)
+const emit = defineEmits(filterEmits)
+
 const ns = useNamespace('filter')
-
-const searchValue = ref('')
-const searchFilterValue = ref([])
+const { updateSearch, updateSearchFields } = useSearch(emit)
 const listFields = computed(() => getListFieldNames(props.fields))
 
-function updateHandle(payload: FieldFilter[]) {
-  emit('update:simpleFields', payload)
-}
-
 function saveFilter(payload: Filter) {
-  let filtersCopy = [...props.filters]
+  let newFilters = [...props.filters]
 
-  const filtersNotSaved = filtersCopy.find((el) => !el.isSaved)
+  const oldNotSavedFilter = newFilters.find((el) => !el.isSaved)
 
-  filtersCopy = filtersCopy.filter((el) => el.isSaved)
+  newFilters = newFilters.filter((el) => el.isSaved)
 
-  if (filtersNotSaved) {
-    emit('deleteFilter', filtersNotSaved)
+  if (oldNotSavedFilter) {
+    emit('deleteFilter', oldNotSavedFilter)
   }
 
-  filtersCopy.push(payload)
+  newFilters.push(payload)
 
   emit('saveFilter', payload)
   emit('update:filter', payload)
-  emit('update:filters', filtersCopy)
+  emit('update:filters', newFilters)
 }
 
 function updateFilter(payload: Filter) {
-  const filtersCopy = [...props.filters].map((el) => {
+  const newFilters = [...props.filters].map((el) => {
     if (el.id !== payload.id) {
       return el
     }
@@ -54,30 +50,30 @@ function updateFilter(payload: Filter) {
   }
 
   emit('updateFilter', payload)
-  emit('update:filters', filtersCopy)
+  emit('update:filters', newFilters)
 }
 
 function deleteFilter(payload: Filter) {
-  const filtersCopy = [...props.filters].filter((el) => el.id !== payload.id)
+  const newFilters = [...props.filters].filter((el) => el.id !== payload.id)
 
   emit('deleteFilter', payload)
-  emit('update:filters', filtersCopy)
+  emit('update:filters', newFilters)
 
-  if (filtersCopy.length === 0) {
+  if (newFilters.length === 0) {
     emit('update:filter', undefined)
   }
 }
 
 function selectFilter(payload: Filter) {
   if (payload.isSaved) {
-    let filtersCopy = [...props.filters]
-    const filtersNotSaved = filtersCopy.find((el) => !el.isSaved)
+    let newFilters = [...props.filters]
+    const notSavedFilter = newFilters.find((el) => !el.isSaved)
 
-    filtersCopy = filtersCopy.filter((el) => el.isSaved)
+    newFilters = newFilters.filter((el) => el.isSaved)
 
-    if (filtersNotSaved) {
-      emit('deleteFilter', filtersNotSaved)
-      emit('update:filters', filtersCopy)
+    if (notSavedFilter) {
+      emit('deleteFilter', notSavedFilter)
+      emit('update:filters', newFilters)
     }
   }
 
@@ -97,9 +93,16 @@ export default {
 
 <template>
   <div :class="ns.b()">
-    <NInput v-model="searchValue" :class="ns.e('search')" placeholder="Search" />
-    <NSelect v-model="searchFilterValue" :class="ns.e('search-fields')" multiple collapse-tags placeholder="Fields">
-      <NOption v-for="item in searchFields" :key="item.value" :label="item.label" :value="item.value" />
+    <NInput :model-value="search" :class="ns.e('search')" placeholder="Search" @update:model-value="updateSearch" />
+    <NSelect
+      :model-value="searchFields"
+      :class="ns.e('search-fields')"
+      multiple
+      collapse-tags
+      placeholder="Fields"
+      @update:model-value="updateSearchFields"
+    >
+      <NOption v-for="item in searchFieldsOptions" :key="item.value" :label="item.label" :value="item.value" />
     </NSelect>
     <NFilterManager
       :filter="filter"
@@ -116,7 +119,7 @@ export default {
         <slot :name="`select-${field}`" v-bind="slotProps" />
       </template>
     </NFilterManager>
-    <NFilterSimpleList :fields="fields" :selected-fields="simpleFields" @update:selected-fields="updateHandle">
+    <NFilterSimpleList :fields="fields" :filter="filter" @save-filter="saveFilter" @update-filter="updateFilter">
       <template v-for="field in listFields" :key="field" #[`select-${field}`]="slotProps">
         <slot :name="`select-${field}`" v-bind="slotProps" />
       </template>

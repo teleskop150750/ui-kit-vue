@@ -1,4 +1,4 @@
-import { buildProps, definePropType } from '@nado/ui-kit-utils'
+import { buildProps, definePropType, isObject } from '@nado/ui-kit-utils'
 import type { ExtractPropTypes } from 'vue'
 
 import type { FieldFilter } from '../types'
@@ -12,8 +12,8 @@ export const nFilterSimpleListItemProps = buildProps({
 })
 
 export const nFilterFilterListItemEmits = {
-  delete: (field: FieldFilter) => !!field,
-  update: (_val: FieldFilter) => true,
+  delete: (field: FieldFilter) => isObject(field),
+  update: (field: FieldFilter) => isObject(field),
 }
 
 export type NFilterSimpleListItemProps = ExtractPropTypes<typeof nFilterSimpleListItemProps>

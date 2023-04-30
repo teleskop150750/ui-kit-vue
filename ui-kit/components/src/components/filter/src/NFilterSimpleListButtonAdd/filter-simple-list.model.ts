@@ -9,7 +9,7 @@ export const nFilterSimpleListButtonAddProps = buildProps({
     type: definePropType<FieldFilter[]>(Array),
     default: () => [],
   },
-  selectedFields: {
+  filterFields: {
     type: definePropType<FieldFilter[]>(Array),
     default: () => [],
   },

@@ -30,7 +30,7 @@ const options = [
   },
 ]
 
-const searchFields = ref<SearchField[]>([
+const searchFieldsOptions = ref<SearchField[]>([
   {
     value: 'all',
     label: 'All',
@@ -44,8 +44,6 @@ const searchFields = ref<SearchField[]>([
     label: 'Age',
   },
 ])
-
-const simpleFilterFields = ref<FieldFilter[]>([])
 
 const filterFields = ref<FieldFilter[]>([
   {
@@ -70,6 +68,8 @@ const filterFields = ref<FieldFilter[]>([
   },
 ])
 
+const search = ref('')
+const searchFields = ref([])
 const filters = ref<Filter[]>([])
 const filter = ref<Filter | undefined>(undefined)
 
@@ -91,10 +91,11 @@ function deleteFilter() {
     <h2 class="n-title-2">NFilter</h2>
     <div>
       <NFilter
-        v-model:simple-fields="simpleFilterFields"
+        v-model:search="search"
         v-model:filter="filter"
         v-model:filters="filters"
-        :search-fields="searchFields"
+        v-model:search-fields="searchFields"
+        :search-fields-options="searchFieldsOptions"
         :fields="filterFields"
         :visible-in-form="['name', 'age']"
         @save-filter="saveFilter"
@@ -124,6 +125,12 @@ function deleteFilter() {
   <!-- <div>
     <pre>Docs | {{ simpleFilterFields }}</pre>
   </div> -->
+  <div>
+    <pre>Search | {{ search }}</pre>
+  </div>
+  <div>
+    <pre>Search Fields | {{ searchFields }}</pre>
+  </div>
   <div>
     <pre>Filter | {{ filter }}</pre>
   </div>

@@ -1,22 +1,23 @@
-import { buildProps, definePropType, isArray } from '@nado/ui-kit-utils'
+import { buildProps, definePropType, isObject, type Nillable } from '@nado/ui-kit-utils'
 import type { ExtractPropTypes } from 'vue'
 
-import type { FieldFilter } from '../types'
+import type { FieldFilter, Filter, FilterNotSaved } from '../types'
 import type NFilterSimpleList from './NFilterSimpleList.vue'
 
 export const nFilterSimpleListProps = buildProps({
-  fields: {
-    type: definePropType<FieldFilter[]>(Array),
-    default: () => [],
+  filter: {
+    type: definePropType<Nillable<Filter>>(Object),
+    default: undefined,
   },
-  selectedFields: {
+  fields: {
     type: definePropType<FieldFilter[]>(Array),
     default: () => [],
   },
 })
 
 export const nFilterFilterListEmits = {
-  'update:selectedFields': (val: FieldFilter[]) => isArray(val),
+  saveFilter: (field: FilterNotSaved) => isObject(field),
+  updateFilter: (field: Filter) => isObject(field),
 }
 
 export type NFilterSimpleListProps = ExtractPropTypes<typeof nFilterSimpleListProps>
