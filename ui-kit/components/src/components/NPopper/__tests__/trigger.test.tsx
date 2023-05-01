@@ -1,8 +1,8 @@
 import { mount, type VueWrapper } from '@vue/test-utils'
 import { nextTick, ref } from 'vue'
 
-import NPopperTrigger from '../src/NPopperTrigger.vue'
 import type { NPopperTriggerInstance } from '../src/NPopperTrigger.model'
+import NPopperTrigger from '../src/NPopperTrigger.vue'
 import { POPPER_INJECTION_KEY } from '../src/tokens'
 
 const AXIOM = 'rem is the best girl'

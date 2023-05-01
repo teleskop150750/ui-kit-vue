@@ -1,8 +1,8 @@
 import { mount, type VueWrapper } from '@vue/test-utils'
 import { nextTick, ref } from 'vue'
 
-import NPopperArrow from '../src/NPopperArrow.vue'
 import type { NPopperArrowInstance } from '../src/NPopperArrow.model'
+import NPopperArrow from '../src/NPopperArrow.vue'
 import { POPPER_CONTENT_INJECTION_KEY } from '../src/tokens'
 
 const popperContentInjection = {
