@@ -24,11 +24,11 @@ type ElementType = Nillable<HTMLElement>
 type ReferenceElement = ElementType | VirtualElement | Measurable
 export type PartialOptions = Partial<Options>
 
-export const usePopper = (
+export function usePopper(
   referenceElementRef: Ref<ReferenceElement>,
   popperElementRef: Ref<ElementType>,
   opts: Ref<PartialOptions> | PartialOptions = {} as PartialOptions,
-) => {
+) {
   const stateUpdater = {
     name: 'updateState',
     enabled: true,

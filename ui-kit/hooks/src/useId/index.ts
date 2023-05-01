@@ -1,7 +1,7 @@
 import { debugWarn, isClient, type MaybeRef } from '@nado/ui-kit-utils'
 import { computed, getCurrentInstance, inject, type InjectionKey, type Ref, unref } from 'vue'
 
-import { namespace } from '../use-namespace'
+import { namespace } from '../useNamespace'
 
 export interface NIdInjectionContext {
   prefix: number
@@ -19,7 +19,7 @@ export function useIdInjection(): NIdInjectionContext {
   return getCurrentInstance() ? inject(ID_INJECTION_KEY, defaultIdInjection) : defaultIdInjection
 }
 
-export const useId = (deterministicId?: MaybeRef<string>): Ref<string> => {
+export function useId(deterministicId?: MaybeRef<string>): Ref<string> {
   const idInjection = useIdInjection()
 
   if (!isClient && idInjection === defaultIdInjection) {

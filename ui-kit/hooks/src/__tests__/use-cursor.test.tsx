@@ -1,7 +1,7 @@
 import { isNil } from '@nado/ui-kit-utils'
 import { nextTick, shallowRef } from 'vue'
 
-import { useCursor } from '../use-cursor'
+import { useCursor } from '../useCursor'
 
 describe('useCursor', () => {
   it('record and set cursor correctly', async () => {

@@ -2,7 +2,7 @@
 import { mount, type VueWrapper } from '@vue/test-utils'
 import { defineComponent, nextTick } from 'vue'
 
-import { useNamespace } from '..'
+import { useNamespace } from '../useNamespace'
 
 const TestComp = defineComponent({
   setup() {

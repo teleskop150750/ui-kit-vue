@@ -1,8 +1,8 @@
 import { isClient } from '@nado/ui-kit-utils'
 import { computed, onBeforeMount } from 'vue'
 
-import { useIdInjection } from '../use-id'
-import { namespace } from '../use-namespace'
+import { useIdInjection } from '../useId'
+import { namespace } from '../useNamespace'
 
 let cachedContainer: HTMLElement
 

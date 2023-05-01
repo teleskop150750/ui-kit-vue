@@ -1,7 +1,7 @@
 import { buildProps, isNumber } from '@nado/ui-kit-utils'
 import { type ExtractPropTypes, type ToRefs, unref } from 'vue'
 
-import { useTimeout } from '../use-timeout'
+import { useTimeout } from '../useTimeout'
 
 export const useDelayedToggleProps = buildProps({
   /**

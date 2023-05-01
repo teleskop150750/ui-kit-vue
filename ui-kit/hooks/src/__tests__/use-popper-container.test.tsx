@@ -1,12 +1,12 @@
 import { config, mount, shallowMount } from '@vue/test-utils'
 import { defineComponent, nextTick } from 'vue'
 
-import { ID_INJECTION_KEY } from '../use-id'
-import { usePopperContainer, usePopperContainerId } from '../use-popper-container'
+import { ID_INJECTION_KEY } from '../useId'
+import { usePopperContainer, usePopperContainerId } from '../usePopperContainer'
 
 const AXIOM = 'rem is the best girl'
 
-const mountComponent = () =>
+const factory = () =>
   shallowMount(
     defineComponent({
       setup(_, { expose }) {
@@ -25,7 +25,7 @@ describe('usePopperContainer', () => {
   })
 
   it('should append container to the DOM root', async () => {
-    const { vm } = mountComponent() as any
+    const { vm } = factory()
 
     await nextTick()
     const { selector } = vm
@@ -34,7 +34,7 @@ describe('usePopperContainer', () => {
   })
 
   it('should not append container to the DOM root', async () => {
-    const { vm } = mountComponent() as any
+    const { vm } = factory()
 
     await nextTick()
     const { selector } = vm
@@ -54,6 +54,7 @@ describe('no injection value', () => {
 
         return data
       },
+      render: () => <div></div>,
     })
 
     expect(wrapper.vm.id).toMatch(/^n-popper-container-\d{0,4}$/)
@@ -84,6 +85,7 @@ describe('with injection value', () => {
 
         return data
       },
+      render: () => <div></div>,
     })
 
     expect(wrapper.vm.id).toBe('n-popper-container-1024')

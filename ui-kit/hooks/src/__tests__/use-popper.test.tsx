@@ -2,7 +2,7 @@ import type { State } from '@popperjs/core'
 import { mount } from '@vue/test-utils'
 import { defineComponent, nextTick, ref } from 'vue'
 
-import { type PartialOptions, usePopper } from '../use-popper'
+import { type PartialOptions, usePopper } from '../usePopper'
 
 describe('usePopper', () => {
   const optionsRef = ref<PartialOptions>({} as PartialOptions)

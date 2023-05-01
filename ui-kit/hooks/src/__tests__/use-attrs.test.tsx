@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { computed, type ComputedRef, defineComponent } from 'vue'
 
-import { useAttrs } from '../use-attrs'
+import { useAttrs } from '../useAttrs'
 
 const CLASS = 'a'
 const WIDTH = '50px'

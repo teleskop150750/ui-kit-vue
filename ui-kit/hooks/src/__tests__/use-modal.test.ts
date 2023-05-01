@@ -1,7 +1,7 @@
 import { EVENT_CODE } from '@nado/ui-kit-constants'
 import { nextTick, ref } from 'vue'
 
-import { useModal } from '../use-modal'
+import { useModal } from '../useModal'
 
 describe('useModal', () => {
   it('should work when ref value changed', async () => {

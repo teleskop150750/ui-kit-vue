@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-import { useDelayedToggle } from '../use-delayed-toggle'
+import { useDelayedToggle } from '../useDelayedToggle'
 
 describe('use-delayed-toggle', () => {
   beforeEach(() => {

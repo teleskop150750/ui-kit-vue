@@ -1,6 +1,8 @@
+/* eslint-disable vue/one-component-per-file */
 import { config, mount } from '@vue/test-utils'
+import { defineComponent } from 'vue'
 
-import { ID_INJECTION_KEY, useId, useIdInjection } from '../use-id'
+import { ID_INJECTION_KEY, useId, useIdInjection } from '../useId'
 
 describe('no injection value', () => {
   afterEach(() => {
@@ -8,27 +10,32 @@ describe('no injection value', () => {
   })
 
   it('useIdInjection', () => {
-    const wrapper = mount({
-      setup() {
-        const idInjection = useIdInjection()
+    const wrapper = mount(
+      defineComponent({
+        setup() {
+          const idInjection = useIdInjection()
 
-        return idInjection
-      },
-      template: '<div></div>',
-    })
+          return idInjection
+        },
+        render: () => <div></div>,
+      }),
+    )
 
     expect(wrapper.vm.prefix).toMatch(/^\d{0,4}$/)
     expect(wrapper.vm.current).toBe(0)
   })
 
   it('useId', () => {
-    const wrapper = mount({
-      setup() {
-        const id = useId()
+    const wrapper = mount(
+      defineComponent({
+        setup() {
+          const id = useId()
 
-        return { id }
-      },
-    })
+          return { id }
+        },
+        render: () => <div></div>,
+      }),
+    )
 
     expect(wrapper.vm.id).toMatch(/^n-id-\d{0,4}-\d+$/)
   })
@@ -50,26 +57,32 @@ describe('with injection value', () => {
   })
 
   it('useIdInjection', () => {
-    const wrapper = mount({
-      setup() {
-        const idInjection = useIdInjection()
+    const wrapper = mount(
+      defineComponent({
+        setup() {
+          const idInjection = useIdInjection()
 
-        return idInjection
-      },
-    })
+          return idInjection
+        },
+        render: () => <div></div>,
+      }),
+    )
 
     expect(wrapper.vm.prefix).toBe(1024)
     expect(wrapper.vm.current).toBe(0)
   })
 
   it('useId', () => {
-    const wrapper = mount({
-      setup() {
-        const id = useId()
+    const wrapper = mount(
+      defineComponent({
+        setup() {
+          const id = useId()
 
-        return { id }
-      },
-    })
+          return { id }
+        },
+        render: () => <div></div>,
+      }),
+    )
 
     expect(wrapper.vm.id).toBe('n-id-1024-0')
   })

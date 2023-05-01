@@ -1,7 +1,7 @@
 import { addClass, getScrollBarWidth, getStyle, hasClass, isClient, removeClass, throwError } from '@nado/ui-kit-utils'
 import { computed, isRef, onScopeDispose, type Ref, watch } from 'vue'
 
-import { useNamespace, type UseNamespaceReturn } from '../use-namespace'
+import { useNamespace, type UseNamespaceReturn } from '../useNamespace'
 
 export interface UseLockScreenOptions {
   ns?: UseNamespaceReturn
