@@ -1,5 +1,12 @@
 {
-    "recommendations": [
-        "antfu.goto-alias"
-    ]
+  "recommendations": [
+    "antfu.goto-alias",
+    "vue.volar",
+    "vue.vscode-typescript-vue-plugin",
+    "stylelint.vscode-stylelint",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "streetsidesoftware.code-spell-checker-russian"
+  ]
 }

@@ -1,7 +1,3 @@
 {
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "cSpell.words": [
-        "Eleme",
-        "vnode"
-    ]
+  "stylelint.validate": ["vue", "css", "postcss"]
 }
