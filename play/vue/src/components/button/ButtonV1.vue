@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { NIconPlus } from '@nado/ui-kit-icons-vue'
-import { NButton, nButtonAppearances, nButtonMods } from '@nado/ui-kit-vue'
+import { buttonAppearances, buttonMods, NButton } from '@nado/ui-kit-vue'
 
 function buttonOnClick() {
   console.log('CLICK')
@@ -16,30 +16,30 @@ function buttonOnClick() {
     <NButton label="Кнопка" size="large" :icon-right="NIconPlus" @click="buttonOnClick" />
   </div>
 
-  <template v-for="mode in nButtonMods" :key="mode">
+  <template v-for="mode in buttonMods" :key="mode">
     <div class="row">
-      <template v-for="appearance in nButtonAppearances" :key="appearance">
+      <template v-for="appearance in buttonAppearances" :key="appearance">
         <div class="col">
           <NButton label="Кнопка" :appearance="appearance" :mode="mode" @click="buttonOnClick" />
         </div>
       </template>
     </div>
     <div class="row">
-      <template v-for="appearance in nButtonAppearances" :key="appearance">
+      <template v-for="appearance in buttonAppearances" :key="appearance">
         <div class="col">
           <NButton label="Кнопка" :appearance="appearance" :mode="mode" loading @click="buttonOnClick" />
         </div>
       </template>
     </div>
     <div class="row">
-      <template v-for="appearance in nButtonAppearances" :key="appearance">
+      <template v-for="appearance in buttonAppearances" :key="appearance">
         <div class="col">
           <NButton label="Кнопка" :appearance="appearance" :mode="mode" disabled @click="buttonOnClick" />
         </div>
       </template>
     </div>
     <div class="row">
-      <template v-for="appearance in nButtonAppearances" :key="appearance">
+      <template v-for="appearance in buttonAppearances" :key="appearance">
         <div class="col">
           <NButton label="Кнопка" :appearance="appearance" :mode="mode" round @click="buttonOnClick" />
         </div>

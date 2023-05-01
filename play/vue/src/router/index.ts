@@ -88,7 +88,7 @@ const router = createRouter({
     {
       path: '/focus-trap',
       name: 'focus-trap',
-      component: () => import('../views/MessageView.vue'),
+      component: () => import('../views/FocusTrapView.vue'),
     },
     {
       path: '/message',

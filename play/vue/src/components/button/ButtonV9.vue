@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { NIconPlus } from '@nado/ui-kit-icons-vue'
-import { NButton, nButtonAppearances, NButtonGroup } from '@nado/ui-kit-vue'
+import { buttonAppearances, NButton, NButtonGroup } from '@nado/ui-kit-vue'
 
 const buttonMods = ['solid', 'soft', 'outline'] as const
 
@@ -14,7 +14,7 @@ function buttonOnClick() {
 
   <template v-for="mode in buttonMods" :key="mode">
     <div class="row">
-      <template v-for="appearance in nButtonAppearances" :key="appearance">
+      <template v-for="appearance in buttonAppearances" :key="appearance">
         <div class="col">
           <NButtonGroup>
             <NButton :appearance="appearance" :mode="mode" label="Кнопка" @click="buttonOnClick" />
