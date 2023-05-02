@@ -1,11 +1,10 @@
 <script lang="ts" setup>
-import { type RuleItem, useAsyncValidator } from '@nado/async-validator'
 import { arrWrap, cloneObject, getProp, isFunction } from '@nado/ui-kit-utils'
 import { computed, inject, nextTick, onBeforeUnmount, onMounted, provide, reactive, ref, toRefs, watch } from 'vue'
+import { object, type Schema, type ValidationError } from 'yup'
 
 import { useFormSize } from '../../NForm/src/shared'
 import { FORM_CONTEXT_INJECTION_KEY, FORM_ITEM_INJECTION_KEY, type NFormItemContext } from '../../NForm/src/tokens'
-import type { NFormValidateFailure } from '../../NForm/src/types'
 import {
   useFieldRules,
   useFieldValue,
@@ -41,7 +40,9 @@ let isResettingField = false
 // ===========
 const { fieldRules, filterRulesByTrigger } = useFieldRules(props)
 const { hasLabel, currentLabel, labelFor, labelId, inputIds, addInputId, removeInputId } = useLabelId(props)
-const isRequired = computed(() => fieldRules.value.some((rule) => rule.required))
+const isRequired = computed(() =>
+  fieldRules.value.some((rule) => rule.rule.spec.nullable === false && rule.rule.spec.optional === false),
+)
 const { ns, formItemClasses } = useStyleClasses({
   props,
   isRequired,
@@ -88,35 +89,49 @@ const validate: NFormItemContext['validate'] = async (trigger, callback) => {
 
       return true as const
     })
-    .catch((error: NFormValidateFailure) => {
-      const { fields } = error
-
+    .catch((error: ValidationError) => {
       // eslint-disable-next-line promise/no-callback-in-promise
-      callback?.(false, fields)
+      callback?.(false, error)
 
-      return shouldThrow ? false : Promise.reject(fields)
+      return shouldThrow ? false : Promise.reject(error)
     })
 }
 
-async function doValidate(rules: RuleItem[]): Promise<true> {
+async function doValidate(rules: Schema[]): Promise<true> {
   const modelName = propName.value
-  const { useSchema } = useAsyncValidator()
-  const validator = useSchema({
-    [modelName]: rules,
+
+  // const rule = rules[0]!
+
+  // rules.forEach((el) => {
+  //   rule?.concat(el)
+  // })
+
+  const promises = rules.map((rule) =>
+    object({
+      [modelName]: rule,
+    }).validate({ [modelName]: fieldValue.value }),
+  )
+
+  const errors: ValidationError[] = []
+
+  // eslint-disable-next-line promise/always-return
+  await Promise.allSettled(promises).then((results) => {
+    results.forEach((el) => {
+      if (el.status === 'rejected') {
+        errors.push(el.reason)
+      }
+    })
   })
 
-  return validator
-    .validateWithOptions({ [modelName]: fieldValue.value }, { firstFields: false })
-    .then(() => {
-      onValidationSucceeded()
+  if (errors) {
+    onValidationFailed(errors)
 
-      return true as const
-    })
-    .catch((error: NFormValidateFailure) => {
-      onValidationFailed(error)
+    throw Error
+  }
 
-      throw error
-    })
+  onValidationSucceeded()
+
+  return true as const
 }
 
 function onValidationSucceeded() {
@@ -124,16 +139,16 @@ function onValidationSucceeded() {
   formContext?.emit('validate', props.prop!, true, [])
 }
 
-function onValidationFailed(error: NFormValidateFailure) {
-  const { errors, fields } = error
+function onValidationFailed(error: any) {
+  const { errors, path } = error
 
-  if (!errors || !fields) {
+  if (!errors || !path) {
     console.error(error)
   }
 
   setValidationState('danger')
 
-  validateMessages.value = (errors || []).map((el) => el?.message || `${props.prop} is required`)
+  validateMessages.value = errors
 
   formContext?.emit('validate', props.prop!, false, validateMessages.value)
 }

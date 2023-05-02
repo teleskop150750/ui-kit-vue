@@ -35,7 +35,8 @@
     "@popperjs/core": "npm:@sxzz/popperjs-es@^2.11.7",
     "@vueuse/core": "^9.13.0",
     "memoize-one": "^6.0.0",
-    "ulid": "^2.3.0"
+    "ulid": "^2.3.0",
+    "yup": "^1.1.1"
   },
   "devDependencies": {
     "@nado/eslint-config-vue": "workspace:*",

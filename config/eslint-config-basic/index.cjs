@@ -1342,6 +1342,7 @@ module.exports = {
     'simple-import-sort/exports': 'error',
 
     // unicorn
+    'unicorn/prefer-top-level-await': 'off',
     'unicorn/no-null': 'error',
     'unicorn/prefer-text-content': 'error',
     'unicorn/no-keyword-prefix': 'off',

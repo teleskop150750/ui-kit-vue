@@ -22,7 +22,8 @@
     "@nado/ui-kit-theme": "workspace:*",
     "@nado/ui-kit-vue": "workspace:*",
     "vue": "^3.2.47",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "yup": "^1.1.1"
   },
   "devDependencies": {
     "@nado/eslint-config-vue": "workspace:*",
