@@ -1,16 +1,17 @@
-<script lang="ts" setup>
-import type { ValidateFieldsError } from '@nado/async-validator'
+<script setup lang="ts">
 import { useNamespace } from '@nado/ui-kit-hooks'
 import { type Arrayable, debugWarn, isFunction } from '@nado/ui-kit-utils'
 import { computed, provide, reactive, toRefs, watch } from 'vue'
 
-import type { NFormItemProp } from '../../NFormItem'
+import type { FieldsValidationError, FormValidationError } from '../errors'
+import { useFormSize } from '../hooks'
+import type { NFormItemProp } from '../NFormItem/NFormItem.model'
+import type { NFormItemContext } from '../NFormItem/tokens'
+import type { NFormValidateCallback, NFormValidationResult } from '../types'
+import { filterFields } from '../utils'
 import { useFormItemList } from './hooks'
 import { formEmits, formProps } from './NForm.model'
-import { useFormSize } from './shared'
-import { FORM_CONTEXT_INJECTION_KEY, type NFormContext, type NFormItemContext } from './tokens'
-import type { NFormValidateCallback, NFormValidationResult } from './types'
-import { filterFields } from './utils'
+import { FORM_CONTEXT_INJECTION_KEY, type NFormContext } from './tokens'
 
 const props = defineProps(formProps)
 const emit = defineEmits(formEmits)
@@ -51,11 +52,7 @@ const validateField: NFormContext['validateField'] = async (modelProps = [], cal
 
     return result
   } catch (error) {
-    if (error instanceof Error) {
-      throw error
-    }
-
-    const invalidFields = error as ValidateFieldsError
+    const invalidFields = error as FieldsValidationError
 
     if (props.scrollToError) {
       const first = Object.keys(invalidFields)[0]
@@ -65,7 +62,11 @@ const validateField: NFormContext['validateField'] = async (modelProps = [], cal
 
     callback?.(false, invalidFields)
 
-    return shouldThrow && Promise.reject(invalidFields)
+    if (shouldThrow) {
+      throw invalidFields
+    }
+
+    return false
   }
 }
 
@@ -80,7 +81,7 @@ async function doValidateField(fieldNames: Arrayable<NFormItemProp> = []): Promi
     return true
   }
 
-  let validationErrors: ValidateFieldsError = {}
+  let validationErrors: FormValidationError = {} as FormValidationError
 
   const promises: NFormValidationResult[] = formItems.map((el) => el.validate(''))
 
@@ -90,7 +91,7 @@ async function doValidateField(fieldNames: Arrayable<NFormItemProp> = []): Promi
       if (el.status === 'rejected') {
         validationErrors = {
           ...validationErrors,
-          ...(el.reason as ValidateFieldsError),
+          ...(el.reason as FormValidationError),
         }
       }
     })

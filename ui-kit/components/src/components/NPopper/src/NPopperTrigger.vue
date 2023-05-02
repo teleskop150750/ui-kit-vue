@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { useForwardRef } from '@nado/ui-kit-hooks'
 import { isElement, isNil, type Nillable } from '@nado/ui-kit-utils'
 import { unrefElement } from '@vueuse/core'

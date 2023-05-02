@@ -5,6 +5,8 @@
   "compilerOptions": {
     "composite": true,
     "outDir": "./dist",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "types": ["node", "jsdom"]
   }
 }

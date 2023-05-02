@@ -1,7 +1,7 @@
 import type { ComponentSize } from '@nado/ui-kit-constants'
 import type { InjectionKey } from 'vue'
 
-import type { NFormValidateCallback, NFormValidationResult } from '../../NForm/src/types'
+import type { NFormValidateCallback, NFormValidationResult } from '../types'
 import type { NFormItemProps, NFormItemValidateState } from './NFormItem.model'
 
 export interface NFormItemContext extends NFormItemProps {

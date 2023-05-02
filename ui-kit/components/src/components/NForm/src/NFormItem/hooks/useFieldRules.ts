@@ -1,8 +1,8 @@
-import type { RuleItem } from '@nado/async-validator'
 import { type Arrayable, castArray, getProp } from '@nado/ui-kit-utils'
 import { computed, type ComputedRef, inject } from 'vue'
+import type { Schema } from 'yup'
 
-import { FORM_CONTEXT_INJECTION_KEY } from '../../../NForm/src/tokens'
+import { FORM_CONTEXT_INJECTION_KEY } from '../../NForm/tokens'
 import type { NFormItemProps } from '../NFormItem.model'
 import type { FormItemRule } from '../types'
 
@@ -34,22 +34,16 @@ export function useFieldRules(props: NFormItemProps) {
 
     const requiredRules = getRequiredRules(rules)
 
-    if (requiredRules.length === 0) {
-      rules.push({ required })
-
-      return rules
-    }
-
     requiredRules.forEach(([rule, i]) => {
-      if (rule.required !== required) {
-        rules[i] = { ...rule, required }
+      if (getIsRequiredRules(rule) !== required) {
+        rules[i] = required ? rule.rule.required() : rule.rule.optional()
       }
     })
 
     return rules
   })
 
-  function filterRulesByTrigger(rules: ComputedRef<FormItemRule[]>, trigger: string) {
+  function filterRulesByTrigger(rules: ComputedRef<FormItemRule[]>, trigger: string): Schema[] {
     return rules.value
       .filter((rule) => {
         if (!rule.trigger || !trigger) {
@@ -62,7 +56,7 @@ export function useFieldRules(props: NFormItemProps) {
 
         return rule.trigger === trigger
       })
-      .map(({ trigger: _trigger, ...rule }): RuleItem => rule)
+      .map((el) => el.rule)
   }
 
   return {
@@ -72,5 +66,9 @@ export function useFieldRules(props: NFormItemProps) {
 }
 
 function getRequiredRules(rules: FormItemRule[]) {
-  return rules.map((rule, i) => [rule, i] as const).filter(([rule]) => Object.keys(rule).includes('required'))
+  return rules.map((rule, i) => [rule, i] as const).filter(([rule]) => getIsRequiredRules(rule))
+}
+
+function getIsRequiredRules(rule: FormItemRule) {
+  return rule.rule.spec.nullable === false && rule.rule.spec.optional === false
 }

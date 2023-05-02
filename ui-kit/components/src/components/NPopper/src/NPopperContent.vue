@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { useFocusTrap } from '@nado/ui-kit-hooks'
 import { isElement, isNil, NOOP } from '@nado/ui-kit-utils'
 import { inject, onBeforeUnmount, onMounted, provide, ref, unref, watch, type WatchStopHandle } from 'vue'

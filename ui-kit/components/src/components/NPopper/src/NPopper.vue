@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import type { Instance as PopperInstance } from '@popperjs/core'
 import { computed, provide, ref } from 'vue'
 

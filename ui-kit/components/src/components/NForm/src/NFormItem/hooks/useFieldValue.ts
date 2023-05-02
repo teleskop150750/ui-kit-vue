@@ -1,7 +1,7 @@
 import { getProp } from '@nado/ui-kit-utils'
 import { computed, inject } from 'vue'
 
-import { FORM_CONTEXT_INJECTION_KEY } from '../../../NForm/src/tokens'
+import { FORM_CONTEXT_INJECTION_KEY } from '../../NForm/tokens'
 import type { NFormItemProps } from '../NFormItem.model'
 
 export function useFieldValue(props: NFormItemProps) {

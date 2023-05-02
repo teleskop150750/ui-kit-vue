@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { useNamespace } from '@nado/ui-kit-hooks'
 import { NIconClose } from '@nado/ui-kit-icons-vue'
 import { computed } from 'vue'

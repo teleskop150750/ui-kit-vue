@@ -2,9 +2,9 @@ import { componentSizes } from '@nado/ui-kit-constants'
 import { buildProps, definePropType, isArray, isBoolean, isString } from '@nado/ui-kit-utils'
 import type { ExtractPropTypes } from 'vue'
 
-import type { NFormItemProp } from '../../NFormItem'
+import type { NFormItemProp } from '../NFormItem/NFormItem.model'
+import type { NFormRules } from '../types'
 import type Form from './NForm.vue'
-import type { NFormRules } from './types'
 
 const formMetaProps = buildProps({
   size: {

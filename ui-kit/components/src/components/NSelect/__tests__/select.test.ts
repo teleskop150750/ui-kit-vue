@@ -9,7 +9,7 @@ import { hasClass } from '@nado/ui-kit-utils'
 import { mount } from '@vue/test-utils'
 import { markRaw, nextTick } from 'vue'
 
-import { NFormItem } from '../../NFormItem'
+import { NFormItem } from '../../NForm'
 import NOption from '../src/NOption.vue'
 import NOptionGroup from '../src/NOptionGroup.vue'
 import NSelect from '../src/NSelect.vue'

@@ -12,7 +12,7 @@ import {
   type WatchStopHandle,
 } from 'vue'
 
-import type { NFormItemContext } from '../tokens'
+import type { NFormItemContext } from '../NFormItem/tokens'
 
 export interface IUseFormItemInputCommonProps {
   id?: string

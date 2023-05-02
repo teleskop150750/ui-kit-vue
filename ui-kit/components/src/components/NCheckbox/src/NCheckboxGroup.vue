@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { UPDATE_MODEL_EVENT } from '@nado/ui-kit-constants'
 import { useNamespace } from '@nado/ui-kit-hooks'
 import { debugWarn, pick } from '@nado/ui-kit-utils'

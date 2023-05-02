@@ -1,7 +1,7 @@
 import { refDebounced } from '@vueuse/core'
 import { computed, inject, type Ref } from 'vue'
 
-import { FORM_CONTEXT_INJECTION_KEY } from '../../../NForm/src/tokens'
+import { FORM_CONTEXT_INJECTION_KEY } from '../../NForm/tokens'
 import type { NFormItemProps, NFormItemValidateState } from '../NFormItem.model'
 
 export function useShouldShowError(props: NFormItemProps, validateState: Ref<NFormItemValidateState>) {
