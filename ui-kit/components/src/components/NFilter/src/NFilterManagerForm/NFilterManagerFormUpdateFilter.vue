@@ -7,7 +7,7 @@ import { NButton } from '../../../NButton'
 import { type CheckboxValueType, NCheckbox } from '../../../NCheckbox'
 import { NDialog } from '../../../NDialog'
 import { NDropdown, NDropdownItem, NDropdownMenu } from '../../../NDropdown'
-import { NFormItem } from '../../../NFormItem'
+import { NFormItem } from '../../../NForm'
 import NFilterManagerFormCreateFilterField from '../NFilterManagerFormCreateFilterField/NFilterManagerFormCreateFilterField.vue'
 import type { FieldFilter, Filter } from '../types'
 import {

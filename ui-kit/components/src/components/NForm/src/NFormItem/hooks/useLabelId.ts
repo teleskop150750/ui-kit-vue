@@ -2,8 +2,9 @@ import { useId } from '@nado/ui-kit-hooks'
 import type { Nillable } from '@nado/ui-kit-utils'
 import { computed, type ComputedRef, inject, type Ref, ref, useSlots } from 'vue'
 
-import { FORM_CONTEXT_INJECTION_KEY, type NFormItemContext } from '../../../NForm/src/tokens'
+import { FORM_CONTEXT_INJECTION_KEY } from '../../NForm/tokens'
 import type { NFormItemProps } from '../NFormItem.model'
+import type { NFormItemContext } from '../tokens'
 
 interface Return {
   hasLabel: ComputedRef<boolean>

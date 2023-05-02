@@ -2,9 +2,9 @@ import { defineGetter } from '@nado/ui-kit-test-utils'
 import { mount } from '@vue/test-utils'
 import { type CSSProperties, nextTick, ref } from 'vue'
 
-import { NFormItem as FormItem } from '../../NFormItem'
+import { NFormItem } from '../../NForm'
 import type { NInputAutoSize, NInputInstance, NInputProps } from '../src/NInput.model'
-import Input from '../src/NInput.vue'
+import NInput from '../src/NInput.vue'
 
 describe('Input.vue', () => {
   afterEach(() => {
@@ -15,7 +15,7 @@ describe('Input.vue', () => {
     const input = ref('input')
     const handleFocus = vi.fn()
     const wrapper = mount(() => (
-      <Input minlength={3} maxlength={5} placeholder="请输入内容" onFocus={handleFocus} modelValue={input.value} />
+      <NInput minlength={3} maxlength={5} placeholder="请输入内容" onFocus={handleFocus} modelValue={input.value} />
     ))
 
     const inputElm = wrapper.find('input')
@@ -35,14 +35,14 @@ describe('Input.vue', () => {
   })
 
   test('default to empty', () => {
-    const wrapper = mount(() => <Input />)
+    const wrapper = mount(() => <NInput />)
     const inputElm = wrapper.find('input')
 
     expect(inputElm.element.value).toBe('')
   })
 
   test('disabled', () => {
-    const wrapper = mount(() => <Input disabled />)
+    const wrapper = mount(() => <NInput disabled />)
     const inputElm = wrapper.find('input')
 
     expect(inputElm.element.disabled).not.toBeNull()
@@ -51,7 +51,7 @@ describe('Input.vue', () => {
   describe('test emoji', () => {
     test('el-input should minimize value between emoji length and maxLength', async () => {
       const inputVal = ref('12🌚')
-      const wrapper = mount(() => <Input class="test-exceed" maxlength="4" showWordLimit v-model={inputVal.value} />)
+      const wrapper = mount(() => <NInput class="test-exceed" maxlength="4" showWordLimit v-model={inputVal.value} />)
       const { vm } = wrapper
       const inputElm = wrapper.find('input')
       const nativeInput = inputElm.element
@@ -77,7 +77,7 @@ describe('Input.vue', () => {
 
     test('textarea should minimize value between emoji length and maxLength', async () => {
       const inputVal = ref('啊好😄')
-      const wrapper = mount(() => <Input type="textarea" maxlength="4" showWordLimit v-model={inputVal.value} />)
+      const wrapper = mount(() => <NInput type="textarea" maxlength="4" showWordLimit v-model={inputVal.value} />)
       const { vm } = wrapper
       const inputElm = wrapper.find('textarea')
       const nativeInput = inputElm.element
@@ -98,33 +98,33 @@ describe('Input.vue', () => {
   })
 
   test('suffixIcon', () => {
-    const wrapper = mount(() => <Input suffix-icon="time" />)
+    const wrapper = mount(() => <NInput suffix-icon="time" />)
     const icon = wrapper.find('.n-input__icon')
 
     expect(icon.exists()).toBe(true)
   })
 
   test('size', () => {
-    const wrapper = mount(() => <Input size="large" />)
+    const wrapper = mount(() => <NInput size="large" />)
 
     expect(wrapper.classes('n-input--size-large')).toBe(true)
   })
 
   test('type', () => {
-    const wrapper = mount(() => <Input type="textarea" />)
+    const wrapper = mount(() => <NInput type="textarea" />)
 
     expect(wrapper.classes('n-textarea')).toBe(true)
   })
 
   test('rows', () => {
-    const wrapper = mount(() => <Input type="textarea" rows={3} />)
+    const wrapper = mount(() => <NInput type="textarea" rows={3} />)
 
     expect(wrapper.find('textarea').element.rows).toEqual(3)
   })
 
   test('resize', async () => {
     const resize = ref<NInputProps['resize']>('none')
-    const wrapper = mount(() => <Input type="textarea" resize={resize.value} />)
+    const wrapper = mount(() => <NInput type="textarea" resize={resize.value} />)
     const textarea = wrapper.find('textarea').element
 
     await nextTick()
@@ -138,7 +138,7 @@ describe('Input.vue', () => {
     const type = ref('text')
     const val = ref('123')
 
-    const wrapper = mount(() => <Input type={type.value} v-model={val.value} />)
+    const wrapper = mount(() => <NInput type={type.value} v-model={val.value} />)
     const { vm } = wrapper
 
     expect(vm.$el.querySelector('input').value).toMatchSnapshot('"123"')
@@ -163,10 +163,10 @@ describe('Input.vue', () => {
 
     const wrapper = mount(() => (
       <div>
-        <Input class="test-text" type="text" v-model={input1.value} maxlength="10" showWordLimit={show.value} />
-        <Input class="test-textarea" type="textarea" v-model={input2.value} maxlength="10" showWordLimit />
-        <Input class="test-password" type="password" v-model={input3.value} maxlength="10" showWordLimit />
-        <Input class="test-initial-exceed" type="text" v-model={input4.value} maxlength="2" showWordLimit />
+        <NInput class="test-text" type="text" v-model={input1.value} maxlength="10" showWordLimit={show.value} />
+        <NInput class="test-textarea" type="textarea" v-model={input2.value} maxlength="10" showWordLimit />
+        <NInput class="test-password" type="password" v-model={input3.value} maxlength="10" showWordLimit />
+        <NInput class="test-initial-exceed" type="text" v-model={input4.value} maxlength="2" showWordLimit />
       </div>
     ))
 
@@ -193,7 +193,7 @@ describe('Input.vue', () => {
   describe('Input Methods', () => {
     test('method:select', async () => {
       const testContent = ref('test')
-      const wrapper = mount(() => <Input v-model={testContent.value} />)
+      const wrapper = mount(() => <NInput v-model={testContent.value} />)
 
       const input = wrapper.find('input').element
       // mock selectionRange behaviour, due to jsdom's reason this case cannot run well, may be fixed later using headlesschrome or puppeteer
@@ -222,7 +222,7 @@ describe('Input.vue', () => {
       const text = ref('TEXT:resizeTextarea')
       const wrapper = mount({
         setup: () => () =>
-          <Input ref="textarea" autosize={{ minRows: 1, maxRows: 1 }} type="textarea" v-model={text.value} />,
+          <NInput ref="textarea" autosize={{ minRows: 1, maxRows: 1 }} type="textarea" v-model={text.value} />,
       })
       const refTextarea = wrapper.vm.$refs.textarea as NInputInstance
 
@@ -245,7 +245,7 @@ describe('Input.vue', () => {
     test('event:focus & blur', async () => {
       const content = ref('')
       const wrapper = mount(() => (
-        <Input placeholder="请输入内容" modelValue={content.value} onFocus={handleFocus} onBlur={handleBlur} />
+        <NInput placeholder="请输入内容" modelValue={content.value} onFocus={handleFocus} onBlur={handleBlur} />
       ))
 
       const input = wrapper.find('input')
@@ -266,7 +266,9 @@ describe('Input.vue', () => {
       }
 
       // NOTE: should be same as native's change behavior
-      const wrapper = mount(() => <Input placeholder="请输入内容" modelValue={content.value} onChange={handleChange} />)
+      const wrapper = mount(() => (
+        <NInput placeholder="请输入内容" modelValue={content.value} onChange={handleChange} />
+      ))
 
       const el = wrapper.find('input').element
 
@@ -290,7 +292,13 @@ describe('Input.vue', () => {
       const content = ref('a')
 
       const wrapper = mount(() => (
-        <Input placeholder="请输入内容" clearable v-model={content.value} onClear={handleClear} onInput={handleInput} />
+        <NInput
+          placeholder="请输入内容"
+          clearable
+          v-model={content.value}
+          onClear={handleClear}
+          onInput={handleInput}
+        />
       ))
 
       const input = wrapper.find('input')
@@ -310,7 +318,7 @@ describe('Input.vue', () => {
       const handleInput = vi.fn()
       const content = ref('a')
       const wrapper = mount(() => (
-        <Input placeholder="请输入内容" clearable modelValue={content.value} onInput={handleInput} />
+        <NInput placeholder="请输入内容" clearable modelValue={content.value} onInput={handleInput} />
       ))
       const inputWrapper = wrapper.find('input')
       const nativeInput = inputWrapper.element
@@ -332,7 +340,7 @@ describe('Input.vue', () => {
   test('non-emit event such as keyup should work', async () => {
     const handleKeyup = vi.fn()
 
-    const wrapper = mount(() => <Input onKeyup={handleKeyup} />)
+    const wrapper = mount(() => <NInput onKeyup={handleKeyup} />)
 
     await wrapper.find('input').trigger('keyup')
     expect(handleKeyup).toBeCalledTimes(1)
@@ -341,8 +349,8 @@ describe('Input.vue', () => {
   test('input-style', async () => {
     const wrapper = mount(() => (
       <>
-        <Input placeholder="请输入内容" input-style={{ color: 'red' }} />
-        <Input placeholder="请输入内容" input-style={{ color: 'red' }} type="textarea" />
+        <NInput placeholder="请输入内容" input-style={{ color: 'red' }} />
+        <NInput placeholder="请输入内容" input-style={{ color: 'red' }} type="textarea" />
       </>
     ))
 
@@ -358,7 +366,7 @@ describe('Input.vue', () => {
     test('event:keydown', async () => {
       const handleKeydown = vi.fn()
       const content = ref('')
-      const wrapper = mount(() => <Input type="textarea" modelValue={content.value} onKeydown={handleKeydown} />)
+      const wrapper = mount(() => <NInput type="textarea" modelValue={content.value} onKeydown={handleKeydown} />)
 
       await wrapper.find('textarea').trigger('keydown')
       expect(handleKeydown).toBeCalledTimes(1)
@@ -367,7 +375,7 @@ describe('Input.vue', () => {
 
   test('show-password icon', async () => {
     const password = ref('123456')
-    const wrapper = mount(() => <Input type="password" modelValue={password.value} show-password />)
+    const wrapper = mount(() => <NInput type="password" modelValue={password.value} show-password />)
 
     const icon = wrapper.find('.n-input__password')
     const d = icon.find('path').element.getAttribute('d')
@@ -381,9 +389,9 @@ describe('Input.vue', () => {
   describe('form item accessibility integration', () => {
     test('automatic id attachment', async () => {
       const wrapper = mount(() => (
-        <FormItem label="Foobar" data-test-ref="item">
-          <Input data-test-ref="input" />
-        </FormItem>
+        <NFormItem label="Foobar" data-test-ref="item">
+          <NInput data-test-ref="input" />
+        </NFormItem>
       ))
 
       await nextTick()
@@ -397,9 +405,9 @@ describe('Input.vue', () => {
 
     test('specified id attachment', async () => {
       const wrapper = mount(() => (
-        <FormItem label="Foobar" data-test-ref="item">
-          <Input id="foobar" data-test-ref="input" />
-        </FormItem>
+        <NFormItem label="Foobar" data-test-ref="item">
+          <NInput id="foobar" data-test-ref="input" />
+        </NFormItem>
       ))
 
       await nextTick()
@@ -413,10 +421,10 @@ describe('Input.vue', () => {
     })
     test('form item role is group when multiple inputs', async () => {
       const wrapper = mount(() => (
-        <FormItem label="Foobar" data-test-ref="item">
-          <Input data-test-ref="input1" />
-          <Input data-test-ref="input2" />
-        </FormItem>
+        <NFormItem label="Foobar" data-test-ref="item">
+          <NInput data-test-ref="input1" />
+          <NInput data-test-ref="input2" />
+        </NFormItem>
       ))
 
       await nextTick()

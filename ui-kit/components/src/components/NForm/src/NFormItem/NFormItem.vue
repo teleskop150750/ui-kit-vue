@@ -1,10 +1,11 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { arrWrap, cloneObject, getProp, isFunction } from '@nado/ui-kit-utils'
 import { computed, inject, nextTick, onBeforeUnmount, onMounted, provide, reactive, ref, toRefs, watch } from 'vue'
 import { object, type Schema, type ValidationError } from 'yup'
 
-import { useFormSize } from '../../NForm/src/shared'
-import { FORM_CONTEXT_INJECTION_KEY, FORM_ITEM_INJECTION_KEY, type NFormItemContext } from '../../NForm/src/tokens'
+import { FormValidationError } from '../errors/ValidateError'
+import { useFormSize } from '../hooks/useFormSize'
+import { FORM_CONTEXT_INJECTION_KEY } from '../NForm/tokens'
 import {
   useFieldRules,
   useFieldValue,
@@ -15,11 +16,11 @@ import {
   useValidationState,
 } from './hooks'
 import { formItemProps } from './NFormItem.model'
+import { FORM_ITEM_INJECTION_KEY, type NFormItemContext } from './tokens'
 
 const props = defineProps(formItemProps)
 
 const formContext = inject(FORM_CONTEXT_INJECTION_KEY, undefined)
-
 const size = useFormSize(undefined, { formItem: false })
 
 const { validateState, setValidationState } = useValidationState()
@@ -37,7 +38,7 @@ const shouldShowHint = computed(() => props.hint && !shouldShowError.value && sl
 // special inline value.
 let initialValue: unknown = undefined
 let isResettingField = false
-// ===========
+
 const { fieldRules, filterRulesByTrigger } = useFieldRules(props)
 const { hasLabel, currentLabel, labelFor, labelId, inputIds, addInputId, removeInputId } = useLabelId(props)
 const isRequired = computed(() =>
@@ -64,7 +65,7 @@ const validate: NFormItemContext['validate'] = async (trigger, callback) => {
     return false
   }
 
-  const shouldThrow = isFunction(callback)
+  const shouldThrow = !isFunction(callback)
 
   if (!hasRules.value) {
     callback?.(false)
@@ -89,22 +90,22 @@ const validate: NFormItemContext['validate'] = async (trigger, callback) => {
 
       return true as const
     })
-    .catch((error: ValidationError) => {
-      // eslint-disable-next-line promise/no-callback-in-promise
-      callback?.(false, error)
+    .catch((error: FormValidationError) => {
+      const { fields } = error
 
-      return shouldThrow ? false : Promise.reject(error)
+      // eslint-disable-next-line promise/no-callback-in-promise
+      callback?.(false, fields)
+
+      if (shouldThrow) {
+        throw fields
+      }
+
+      return false
     })
 }
 
 async function doValidate(rules: Schema[]): Promise<true> {
   const modelName = propName.value
-
-  // const rule = rules[0]!
-
-  // rules.forEach((el) => {
-  //   rule?.concat(el)
-  // })
 
   const promises = rules.map((rule) =>
     object({
@@ -124,9 +125,13 @@ async function doValidate(rules: Schema[]): Promise<true> {
   })
 
   if (errors) {
-    onValidationFailed(errors)
+    const formValidationError = new FormValidationError(errors, {
+      [modelName]: errors,
+    })
 
-    throw Error
+    onValidationFailed(formValidationError)
+
+    throw formValidationError
   }
 
   onValidationSucceeded()
@@ -139,16 +144,15 @@ function onValidationSucceeded() {
   formContext?.emit('validate', props.prop!, true, [])
 }
 
-function onValidationFailed(error: any) {
-  const { errors, path } = error
+function onValidationFailed(error: FormValidationError) {
+  const { errors, fields } = error
 
-  if (!errors || !path) {
-    console.error(error)
+  if (!errors || !fields) {
+    // console.error(error)
   }
 
   setValidationState('danger')
-
-  validateMessages.value = errors
+  validateMessages.value = (errors || []).flatMap((el) => el?.errors || `${props.prop} is required`)
 
   formContext?.emit('validate', props.prop!, false, validateMessages.value)
 }

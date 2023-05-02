@@ -1,8 +1,9 @@
 import { type Arrayable, debugWarn } from '@nado/ui-kit-utils'
 
-import type { NFormItemProp } from '../../../NFormItem'
-import type { NFormContext, NFormItemContext } from '../tokens'
-import { filterFields } from '../utils'
+import type { NFormItemProp } from '../../NFormItem/NFormItem.model'
+import type { NFormItemContext } from '../../NFormItem/tokens'
+import { filterFields } from '../../utils'
+import type { NFormContext } from '../tokens'
 
 interface Result {
   addField: NFormContext['addField']

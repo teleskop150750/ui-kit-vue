@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { nextTick, ref } from 'vue'
 
-import { NFormItem } from '../../NFormItem'
+import { NFormItem } from '../../NForm'
 import type { NRadioProps } from '../src/NRadio.model'
 import NRadio from '../src/NRadio.vue'
 import NRadioButton from '../src/NRadioButton.vue'

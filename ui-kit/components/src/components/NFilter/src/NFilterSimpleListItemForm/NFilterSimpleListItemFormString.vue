@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NFormItem } from '../../../NFormItem'
+import { NFormItem } from '../../../NForm'
 import { NInput } from '../../../NInput'
 import { useFieldString } from '../hooks'
 import {

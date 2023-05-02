@@ -1,6 +1,7 @@
 import { inject } from 'vue'
 
-import { FORM_CONTEXT_INJECTION_KEY, FORM_ITEM_INJECTION_KEY } from '../tokens'
+import { FORM_CONTEXT_INJECTION_KEY } from '../NForm/tokens'
+import { FORM_ITEM_INJECTION_KEY } from '../NFormItem/tokens'
 
 export function useFormItem() {
   const form = inject(FORM_CONTEXT_INJECTION_KEY, undefined)

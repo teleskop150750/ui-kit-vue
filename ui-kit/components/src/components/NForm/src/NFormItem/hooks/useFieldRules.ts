@@ -2,7 +2,7 @@ import { type Arrayable, castArray, getProp } from '@nado/ui-kit-utils'
 import { computed, type ComputedRef, inject } from 'vue'
 import type { Schema } from 'yup'
 
-import { FORM_CONTEXT_INJECTION_KEY } from '../../../NForm/src/tokens'
+import { FORM_CONTEXT_INJECTION_KEY } from '../../NForm/tokens'
 import type { NFormItemProps } from '../NFormItem.model'
 import type { FormItemRule } from '../types'
 

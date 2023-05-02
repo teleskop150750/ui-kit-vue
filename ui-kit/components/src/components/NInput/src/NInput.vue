@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { UPDATE_MODEL_EVENT, ValidateComponentsMap } from '@nado/ui-kit-constants'
 import { useAttrs, useNamespace } from '@nado/ui-kit-hooks'
 import { NIconCircleClose, NIconHide, NIconView } from '@nado/ui-kit-icons-vue'

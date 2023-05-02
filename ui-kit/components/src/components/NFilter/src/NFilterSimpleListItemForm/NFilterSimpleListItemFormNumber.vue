@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { isNil, type Nillable } from '@nado/ui-kit-utils'
 
-import { NFormItem } from '../../../NFormItem'
+import { NFormItem } from '../../../NForm'
 import { NInput } from '../../../NInput'
 import { NOption, NSelect } from '../../../NSelect'
 import { useFieldNumber } from '../hooks'

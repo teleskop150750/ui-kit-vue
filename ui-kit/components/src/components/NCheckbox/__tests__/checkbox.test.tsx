@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { nextTick, ref } from 'vue'
 
-import { NFormItem } from '../../NFormItem'
+import { NFormItem } from '../../NForm'
 import type { CheckboxValueType } from '../src/NCheckbox.model'
 import NCheckbox from '../src/NCheckbox.vue'
 import NCheckboxButton from '../src/NCheckboxButton.vue'

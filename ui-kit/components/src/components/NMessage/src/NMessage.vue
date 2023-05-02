@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { EVENT_CODE, TypeComponents, TypeComponentsMap } from '@nado/ui-kit-constants'
 import { useEventListener, useResizeObserver, useTimeoutFn } from '@vueuse/core'
 import { computed, type CSSProperties, onMounted, ref, watch } from 'vue'

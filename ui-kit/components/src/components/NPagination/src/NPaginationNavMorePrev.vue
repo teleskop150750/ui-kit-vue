@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { useLocale, useNamespace } from '@nado/ui-kit-hooks'
 import { NIconDArrowLeft, NIconMoreFilled } from '@nado/ui-kit-icons-vue'
 import { computed } from 'vue'

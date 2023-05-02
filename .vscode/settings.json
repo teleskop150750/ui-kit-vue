@@ -1,3 +1,4 @@
 {
-  "stylelint.validate": ["vue", "css", "postcss"]
+  "stylelint.validate": ["vue", "css", "postcss"],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

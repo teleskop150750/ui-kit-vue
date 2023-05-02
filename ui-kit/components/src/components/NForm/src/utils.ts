@@ -1,7 +1,7 @@
 import { type Arrayable, castArray } from '@nado/ui-kit-utils'
 
-import type { NFormItemProp } from '../../NFormItem'
-import type { NFormItemContext } from './tokens'
+import type { NFormItemProp } from './NFormItem/NFormItem.model'
+import type { NFormItemContext } from './NFormItem/tokens'
 
 export function filterFields(fields: NFormItemContext[], fieldNames: Arrayable<NFormItemProp>) {
   const normalized = castArray(fieldNames)

@@ -3,7 +3,8 @@ import { useGlobalSize, useProp } from '@nado/ui-kit-hooks'
 import type { MaybeRef } from '@nado/ui-kit-utils'
 import { computed, inject, ref, unref } from 'vue'
 
-import { FORM_CONTEXT_INJECTION_KEY, FORM_ITEM_INJECTION_KEY } from '../tokens'
+import { FORM_CONTEXT_INJECTION_KEY } from '../NForm/tokens'
+import { FORM_ITEM_INJECTION_KEY } from '../NFormItem/tokens'
 
 export function useFormSize(
   fallback?: MaybeRef<ComponentSize | undefined>,

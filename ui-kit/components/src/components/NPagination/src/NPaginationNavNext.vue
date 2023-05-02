@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { useLocale } from '@nado/ui-kit-hooks'
 import { computed } from 'vue'
 

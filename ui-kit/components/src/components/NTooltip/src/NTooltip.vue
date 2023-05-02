@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { useDelayedToggle, useId, usePopperContainer } from '@nado/ui-kit-hooks'
 import { isBoolean, type Nillable } from '@nado/ui-kit-utils'
 import { computed, onDeactivated, provide, readonly, ref, toRef, unref, watch } from 'vue'

@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { useNamespace, usePopperContainerId } from '@nado/ui-kit-hooks'
 import { composeEventHandlers, type Nillable } from '@nado/ui-kit-utils'
 import { onClickOutside } from '@vueuse/core'

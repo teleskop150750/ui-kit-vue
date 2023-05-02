@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { useNamespace } from '@nado/ui-kit-hooks'
 import { addUnit, isUndefined } from '@nado/ui-kit-utils'
 import { computed, type CSSProperties } from 'vue'

@@ -10,8 +10,8 @@ const rules = reactive<NFormRules>({
   name: [{ rule: Yup.string().required(), trigger: 'blur' }],
   desc: [
     { rule: Yup.string().length(2), trigger: 'blur' },
-    // { rule: Yup.string().min(3).max(5), trigger: 'blur' },
-    // { rule: Yup.string().min(2).max(5), trigger: 'blur' },
+    { rule: Yup.string().min(3).max(5), trigger: 'blur' },
+    { rule: Yup.string().min(2).max(5), trigger: 'blur' },
   ],
 })
 
