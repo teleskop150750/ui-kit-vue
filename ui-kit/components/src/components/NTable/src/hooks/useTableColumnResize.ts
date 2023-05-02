@@ -41,6 +41,8 @@ export function useTableColumnResize(
     rangeDistance.min = 0
     document.removeEventListener('pointermove', processResize)
     document.addEventListener('click', handleColumnClick, { once: true })
+
+    emit('updateSize', [...tableColumnList.value])
   }
 
   function handleColumnClick() {

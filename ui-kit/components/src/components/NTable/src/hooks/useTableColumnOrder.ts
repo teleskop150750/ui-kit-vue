@@ -141,6 +141,7 @@ export function useTableColumnOrder(
       .sort((a, b) => a.index - b.index)
 
     emit('update:columns', newList)
+    emit('updateOrder', newList)
   }
 
   function processMoveColumn(distance: number) {
@@ -188,7 +189,6 @@ export function useTableColumnOrder(
 
   function processMoveCurrentColumn(isPrev: boolean) {
     const currentColumn = columnList.value.find((el) => el.isCurrent)!
-
     const lastMoved = isPrev
       ? prevColumnList.value.find((el) => el.isMoved)
       : afterColumnList.value.findLast((el) => el.isMoved)

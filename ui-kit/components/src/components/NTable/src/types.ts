@@ -1,3 +1,5 @@
+import type { Nillable } from '@nado/ui-kit-utils'
+
 import type { NTableColumnSortOrder } from './hooks/useTableOrderSort'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type NTableRowVal = any
@@ -48,6 +50,6 @@ export interface NTableRequest {
     name: string
     order: 'ASC' | 'DESC'
   }[]
-  page: number
-  limit: number
+  page: Nillable<number>
+  pageSize: Nillable<number>
 }

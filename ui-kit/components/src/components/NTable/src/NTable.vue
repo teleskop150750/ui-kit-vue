@@ -12,6 +12,7 @@ import {
   useTableColumnResize,
   useTableOrderSort,
   useTablePagination,
+  useTableRequest,
 } from './hooks'
 import NColgroup from './NColgroup.vue'
 import { tableEmits, tableProps } from './NTable.model'
@@ -25,7 +26,12 @@ const { t } = useLocale()
 const ns = useNamespace('table')
 const slots = useSlots()
 const { columnList, visibleColumnList, computedColsMap } = useTableColumn(props)
-const { rowsStart, rowsEnd, totalRows, pageRows, setCurrentPage, setPageSize } = useTablePagination(props, emit)
+const { sendRequest } = useTableRequest(columnList, emit)
+const { rowsStart, rowsEnd, totalRows, pageRows, setCurrentPage, setPageSize } = useTablePagination({
+  sendRequest,
+  props,
+  emit,
+})
 
 const { handleColumnResizerDown, isColumnResizeActive } = useTableColumnResize(columnList, emit)
 const { handleColumnDown, isColumnOrdering, isColumnOrderingActive } = useTableColumnOrder(
@@ -33,7 +39,11 @@ const { handleColumnDown, isColumnOrdering, isColumnOrderingActive } = useTableC
   visibleColumnList,
   emit,
 )
-const { sort } = useTableOrderSort(columnList, emit)
+const { sort } = useTableOrderSort({
+  sendRequest,
+  columnList,
+  emit,
+})
 
 const syncScrollRef = ref<NSyncScrollInstance>()
 const tableHeaderRef = ref<HTMLDivElement>()

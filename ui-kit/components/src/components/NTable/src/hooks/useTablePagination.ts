@@ -5,6 +5,7 @@ import { ref, type SetupContext } from 'vue'
 import { paginationProps } from '../../../NPagination'
 import type { NTableEmits, NTableProps } from '../NTable.model'
 import type { NTableRow } from '../types'
+import type { SendRequest } from './useTableRequest'
 
 // function samePagination(oldPag: number, newPag: number) {
 //   for (const prop in newPag) {
@@ -34,7 +35,13 @@ export const useTablePaginationProps = {
   'onUpdate:pagination': [Function, Array],
 }
 
-export function useTablePagination(props: NTableProps, emit: SetupContext<NTableEmits>['emit']) {
+export interface Props {
+  sendRequest: SendRequest
+  props: NTableProps
+  emit: SetupContext<NTableEmits>['emit']
+}
+
+export function useTablePagination({ sendRequest, props, emit }: Props) {
   const innerCurrentPage = ref(getInitCurrentPage())
   const innerPageSize = ref(getInitPageSize())
 
@@ -79,6 +86,10 @@ export function useTablePagination(props: NTableProps, emit: SetupContext<NTable
 
     innerCurrentPage.value = val
     emit('update:current-page', val)
+    sendRequest({
+      page: innerCurrentPage.value,
+      pageSize: innerPageSize.value,
+    })
   }
 
   function setPageSize(val: number) {
@@ -88,6 +99,10 @@ export function useTablePagination(props: NTableProps, emit: SetupContext<NTable
 
     innerPageSize.value = val
     emit('update:page-size', val)
+    sendRequest({
+      page: innerCurrentPage.value,
+      pageSize: innerPageSize.value,
+    })
   }
 
   function getInitCurrentPage() {

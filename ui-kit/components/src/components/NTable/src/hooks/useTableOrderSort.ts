@@ -3,17 +3,35 @@ import { type ComputedRef, type SetupContext } from 'vue'
 
 import type { NTableEmits } from '../NTable.model'
 import type { NTableColumn, NTableColumnInner } from '../types'
+import type { SendRequest, SortColumn } from './useTableRequest'
 
 export const SORT_ORDER_LIST = ['', 'ASC', 'DESC'] as const
 
 export type NTableColumnSortOrder = (typeof SORT_ORDER_LIST)[number]
 
-export function useTableOrderSort(
-  columnList: ComputedRef<NTableColumnInner[]>,
-  emit: SetupContext<NTableEmits>['emit'],
-) {
+interface Props {
+  sendRequest: SendRequest
+  columnList: ComputedRef<NTableColumnInner[]>
+  emit: SetupContext<NTableEmits>['emit']
+}
+
+export function useTableOrderSort({ sendRequest, columnList, emit }: Props) {
   function sort(column: NTableColumn | NTableColumn['name'], sortOrder?: NTableColumnInner['sortOrder']) {
-    emit('update:columns', changeSortColumnInList(column, columnList, sortOrder))
+    const newColumns = changeSortColumnInList(column, columnList, sortOrder)
+
+    emit('update:columns', newColumns)
+    emit('updateSort', newColumns)
+
+    const sortColumns = newColumns
+      .filter((el) => el.sortOrder !== '')
+      .map((item) => ({
+        name: item.name,
+        order: item.sortOrder as SortColumn['order'],
+      }))
+
+    sendRequest({
+      sort: sortColumns,
+    })
   }
 
   return {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NTable, type NTableColumn, NTd } from '@nado/ui-kit-vue'
+import { NTable, type NTableColumn, type NTableRequest, NTd } from '@nado/ui-kit-vue'
 import { ref } from 'vue'
 
 const columns = ref<NTableColumn[]>([
@@ -72,6 +72,10 @@ const rows = Array.from({ length: 34 }).map((_, idx) => ({
 }))
 
 const page = ref(3)
+
+function handleRequest(payload: NTableRequest) {
+  console.log('handleRequest', payload)
+}
 </script>
 
 <template>
@@ -81,7 +85,13 @@ const page = ref(3)
     <hr />
 
     <div class="body">
-      <NTable v-model:columns="columns" v-model:current-page="page" :rows="rows" query-type="number">
+      <NTable
+        v-model:columns="columns"
+        v-model:current-page="page"
+        :rows="rows"
+        query-type="number"
+        @request="handleRequest"
+      >
         <template #body-cell-name>
           <NTd>
             <div class="my-table-details">1</div>
