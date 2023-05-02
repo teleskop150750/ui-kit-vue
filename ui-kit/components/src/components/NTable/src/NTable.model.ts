@@ -40,7 +40,6 @@ export const tableEmits = {
   updateOrder: (val: Array<NTableColumnInner>) => isArray(val),
   updateSort: (val: Array<NTableColumnInner>) => isArray(val),
   request: (_val: NTableRequest) => true,
-  test: (_val: any) => true,
   rowClick: (evt: Event, row: NTableRow, rowIndexOnPage: number) => !!evt && !!row && !!rowIndexOnPage,
   rowDblclick: (evt: Event, row: NTableRow, rowIndexOnPage: number) => !!evt && !!row && !!rowIndexOnPage,
   rowContextmenu: (evt: Event, row: NTableRow, rowIndexOnPage: number) => !!evt && !!row && !!rowIndexOnPage,

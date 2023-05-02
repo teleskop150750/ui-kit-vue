@@ -1,0 +1,21 @@
+.n-steps {
+  display: flex;
+}
+
+.n-steps--is-simple {
+  padding: 13px 8%;
+
+  border-radius: 4px;
+
+  background: var(--n-sys-color-white);
+}
+
+.n-steps--is-horizontal {
+  white-space: nowrap;
+}
+
+.n-steps--is-vertical {
+  flex-flow: column;
+
+  height: 100%;
+}

@@ -1,5 +1,4 @@
 import { EVENT_CODE } from '@nado/ui-kit-constants'
-import { describe, expect, it } from 'vitest'
 
 import * as Util from '../src/utils'
 

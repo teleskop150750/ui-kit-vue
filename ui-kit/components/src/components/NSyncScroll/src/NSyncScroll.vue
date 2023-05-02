@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { isArray } from '@nado/ui-kit-utils'
-import type { Arrayable } from 'vitest'
+import { type Arrayable, isArray } from '@nado/ui-kit-utils'
 import { onBeforeUnmount, provide } from 'vue'
 
 import { SYNC_SCROLL_INJECTION_KEY } from './tokens'

@@ -1,0 +1,73 @@
+/* head */
+.n-step--status-process .n-step__head {
+  color: var(--n-sys-text-color-regular);
+
+  border-color: var(--n-sys-text-color-regular);
+}
+
+.n-step--status-wait .n-step__head {
+  color: var(--n-sys-text-color-placeholder);
+
+  border-color: var(--n-sys-text-color-placeholder);
+}
+
+.n-step--status-success .n-step__head {
+  color: var(--n-sys-color-primary);
+
+  border-color: var(--n-sys-color-primary);
+}
+
+.n-step--status-danger .n-step__head {
+  color: var(--n-sys-color-danger);
+
+  border-color: var(--n-sys-color-danger);
+}
+
+.n-step--status-finish .n-step__head {
+  color: var(--n-color-primary);
+
+  border-color: var(--n-color-primary);
+}
+
+/* title */
+.n-step--status-process .n-step__title {
+  color: var(--n-sys-text-color-regular);
+  font-weight: 700;
+}
+
+.n-step--status-wait .n-step__title {
+  color: var(--n-sys-text-color-placeholder);
+}
+
+.n-step--status-success .n-step__title {
+  color: var(--n-sys-color-success);
+}
+
+.n-step--status-danger .n-step__title {
+  color: var(--n-sys-color-danger);
+}
+
+.n-step--status-finish .n-step__title {
+  color: var(--n-sys-color-primary);
+}
+
+/* description */
+.n-step--status-process .n-step__description {
+  color: var(--n-sys-text-color-regular);
+}
+
+.n-step--status-wait .n-step__description {
+  color: var(--n-sys-text-color-placeholder);
+}
+
+.n-step--status-success .n-step__description {
+  color: var(--n-sys-color-success);
+}
+
+.n-step--status-danger .n-step__description {
+  color: var(--n-sys-color-danger);
+}
+
+.n-step--status-finish .n-step__description {
+  color: var(--n-sys-color-primary);
+}

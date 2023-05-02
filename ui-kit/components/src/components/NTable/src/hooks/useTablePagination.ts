@@ -1,6 +1,5 @@
 import { isNil } from '@nado/ui-kit-utils'
-import { computed } from '@vue/reactivity'
-import { ref, type SetupContext } from 'vue'
+import { computed, ref, type SetupContext } from 'vue'
 
 import { paginationProps } from '../../../NPagination'
 import type { NTableEmits, NTableProps } from '../NTable.model'

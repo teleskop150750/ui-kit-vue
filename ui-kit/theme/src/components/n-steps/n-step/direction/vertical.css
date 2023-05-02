@@ -1,0 +1,33 @@
+.n-step--is-vertical {
+  display: flex;
+}
+
+.n-step--is-vertical .n-step__head {
+  flex-grow: 0;
+
+  width: 24px;
+}
+
+.n-step--is-vertical .n-step__main {
+  flex-grow: 1;
+
+  padding-left: 10px;
+}
+
+.n-step--is-vertical .n-step__title {
+  padding-bottom: 8px;
+
+  line-height: 24px;
+}
+
+.n-step--is-vertical .n-step__line {
+  top: 0;
+  left: 11px;
+  bottom: 0;
+
+  width: 2px;
+}
+
+.n-step--is-vertical .n-step__icon--is-icon {
+  width: 24px;
+}

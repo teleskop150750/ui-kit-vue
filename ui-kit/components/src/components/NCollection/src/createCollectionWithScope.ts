@@ -1,5 +1,14 @@
-import type { SetupContext } from '@vue/runtime-core'
-import { defineComponent, inject, type InjectionKey, onBeforeUnmount, onMounted, provide, ref, unref } from 'vue'
+import {
+  defineComponent,
+  inject,
+  type InjectionKey,
+  onBeforeUnmount,
+  onMounted,
+  provide,
+  ref,
+  type SetupContext,
+  unref,
+} from 'vue'
 
 import type { NCollectionInjectionContext, NCollectionItemInjectionContext } from './tokens'
 

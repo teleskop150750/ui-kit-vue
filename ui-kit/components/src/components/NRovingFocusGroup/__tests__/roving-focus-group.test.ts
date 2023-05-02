@@ -2,7 +2,6 @@
 /* eslint-disable unicorn/no-object-as-default-parameter */
 import { composeRefs } from '@nado/ui-kit-utils'
 import { mount } from '@vue/test-utils'
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { defineComponent, h, inject, nextTick } from 'vue'
 
 import { COLLECTION_ITEM_SIGN } from '../../NCollection'

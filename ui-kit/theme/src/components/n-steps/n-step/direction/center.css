@@ -1,0 +1,17 @@
+.n-step--is-center .n-step__head {
+  text-align: center;
+}
+
+.n-step--is-center .n-step__main {
+  text-align: center;
+}
+
+.n-step--is-center .n-step__description {
+  padding-right: 20%;
+  padding-left: 20%;
+}
+
+.n-step--is-center .n-step__line {
+  left: 50%;
+  right: -50%;
+}

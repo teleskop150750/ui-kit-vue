@@ -1,7 +1,6 @@
 import { isNil, type Nillable } from '@nado/ui-kit-utils'
-import { computed } from '@vue/reactivity'
 import { throttle } from 'lodash-es'
-import { type ComputedRef, ref, type SetupContext } from 'vue'
+import { computed, type ComputedRef, ref, type SetupContext } from 'vue'
 
 import type { NTableEmits } from '../NTable.model'
 import type { NTableColumnInner } from '../types'

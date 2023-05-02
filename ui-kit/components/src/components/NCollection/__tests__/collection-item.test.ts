@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils'
-import { afterEach, describe, expect, it } from 'vitest'
 import { type ComponentPublicInstance, h, nextTick } from 'vue'
 
 import type { NCollectionInjectionContext } from '../src/tokens'

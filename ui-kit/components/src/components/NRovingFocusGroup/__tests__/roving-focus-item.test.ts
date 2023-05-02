@@ -1,7 +1,6 @@
 import { EVENT_CODE } from '@nado/ui-kit-constants'
 import { composeRefs } from '@nado/ui-kit-utils'
 import { mount } from '@vue/test-utils'
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { defineComponent, inject, nextTick, ref } from 'vue'
 
 import {

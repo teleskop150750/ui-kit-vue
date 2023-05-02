@@ -1,0 +1,11 @@
+.n-step--is-horizontal {
+  display: inline-block;
+}
+
+.n-step--is-horizontal .n-step__line {
+  top: 11px;
+  left: 0;
+  right: 0;
+
+  height: 2px;
+}
